@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareGo+ Services &amp; Packages - Home Nursing</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-teal': '#006B44',
+            'brand-teal-light': '#E6F0EC',
+            'brand-teal-dark': '#005234',
+            'text-dark': '#1A2E35',
+            'bg-light': '#F8FAFB',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Table Handling and Layout -->
+<style data-purpose="custom-layout">
+    /* Custom scrollbar for horizontal table on small screens */
+    .table-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .table-container::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 3px;
+    }
+    /* Sticky first column for mobile readability if needed, but here we focus on a clean scroll */
+    .sticky-col {
+      position: sticky;
+      left: 0;
+      background-color: white;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-bg-light text-text-dark font-sans antialiased">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-100 py-3 px-4 md:px-8 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<!-- CareGo+ Logo Placeholder -->
+<div class="flex items-center" data-purpose="logo-container">
+<svg class="w-8 h-8 text-brand-teal" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<span class="text-xl font-bold text-brand-teal ml-1">CareGo<span class="text-orange-400">+</span></span>
+</div>
+</div>
+<!-- Mobile Menu Button (Icon only) -->
+<div class="md:hidden">
+<button class="p-2 text-gray-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+<a class="hover:text-brand-teal" href="#">Home</a>
+<a class="text-brand-teal border-b-2 border-brand-teal pb-1" href="#">Services</a>
+<a class="hover:text-brand-teal" href="#">About Us</a>
+<a class="hover:text-brand-teal" href="#">How It Works</a>
+<a class="hover:text-brand-teal" href="#">For Providers</a>
+<a class="hover:text-brand-teal" href="#">Contact Us</a>
+</nav>
+<div class="hidden md:flex items-center gap-4">
+<div class="flex items-center gap-1 text-sm">
+<span>🌐 English</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+</div>
+<button class="p-2"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg></button>
+<a class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold" href="#">Sign In</a>
+<a class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold" href="#">Sign Up</a>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroSection -->
+<section class="py-10 px-4 text-center">
+<h1 class="text-3xl md:text-4xl font-bold text-[#111827] mb-2">Services &amp; Packages</h1>
+<p class="text-gray-500 text-sm md:text-base">Compare our home nursing packages and choose the right care for your loved one.</p>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: ServiceTabs -->
+<div class="max-w-7xl mx-auto px-4 mb-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 bg-white p-1 rounded-lg border border-gray-200 shadow-sm">
+<button class="flex items-center justify-center gap-2 py-3 px-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Home Caregiver
+      </button>
+<button class="flex items-center justify-center gap-2 py-3 px-2 text-sm font-bold text-white bg-brand-teal rounded-md shadow-md">
+        Home Nursing
+      </button>
+<button class="flex items-center justify-center gap-2 py-3 px-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50">
+        Nanny Service
+      </button>
+<button class="flex items-center justify-center gap-2 py-3 px-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-50 relative">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Physiotherapy
+        <span class="absolute -top-1 -right-1 bg-gray-200 text-[10px] px-1.5 py-0.5 rounded-full text-gray-500 scale-75">Coming Soon</span>
+</button>
+</div>
+</div>
+<!-- END: ServiceTabs -->
+<!-- BEGIN: ComparisonTableSection -->
+<main class="max-w-7xl mx-auto px-4 pb-20">
+<div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+<!-- Horizontal Scrolling Container for Mobile -->
+<div class="overflow-x-auto table-container">
+<table class="w-full text-left border-collapse min-w-[900px]">
+<thead>
+<tr class="bg-white">
+<th class="p-4 md:p-6 w-1/4 uppercase text-xs font-bold text-brand-teal tracking-wider border-b border-gray-100">Clinical Intervention Feature</th>
+<th class="p-4 md:p-6 w-1/4 uppercase text-xs font-bold text-gray-700 tracking-wider text-center border-b border-gray-100">Basic Care</th>
+<th class="p-4 md:p-6 w-1/4 uppercase text-xs font-bold text-gray-700 tracking-wider text-center border-b border-gray-100">Standard Care</th>
+<th class="p-4 md:p-6 w-1/4 uppercase text-xs font-bold text-gray-700 tracking-wider text-center border-b border-gray-100">Premium Care (Live-in)</th>
+</tr>
+</thead>
+<tbody class="text-[13px] md:text-sm leading-relaxed">
+<!-- Staffing Allocation -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Staffing Allocation</td>
+<td class="p-4 text-center">1 Licensed BSc / Diploma Registered Nurse (RN)</td>
+<td class="p-4 text-center">1 Licensed BSc/Diploma Nurse (RN) + 1 Caregiver Assistant</td>
+<td class="p-4 text-center">1 Licensed BSc/Diploma Nurse (RN) + 1 Caregiver Assistant</td>
+</tr>
+<!-- Allowed Horizon Values -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Allowed Horizon Values (Days)</td>
+<td class="p-4 text-center">1, 7, or 30 Days</td>
+<td class="p-4 text-center">1, 7, or 30 Days</td>
+<td class="p-4 text-center">7, 15, or 30 Days</td>
+</tr>
+<!-- Shift Intervals -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Allowed Shift Intervals (Hours/Day)</td>
+<td class="p-4 text-center">8, 12, or 24 Hours</td>
+<td class="p-4 text-center">8, 12, or 24 Hours</td>
+<td class="p-4 text-center">24 Hours (Full Live-In Conditions)</td>
+</tr>
+<!-- Vitals Tracking -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Vitals Tracking</td>
+<td class="p-4 text-center text-gray-600">Included (RBS, BP, Pulse, O<sub>2</sub> Saturation monitoring)</td>
+<td class="p-4 text-center text-gray-600">Included (RBS, BP, Pulse, O<sub>2</sub> Saturation monitoring)</td>
+<td class="p-4 text-center text-gray-600">Included (RBS, BP, Pulse, O<sub>2</sub> Saturation monitoring)</td>
+</tr>
+<!-- IV Cannula -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">IV Cannula Insertion &amp; Care</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Injections -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Injections &amp; Saline Infusions</td>
+<td class="p-4 text-center">Included (Strictly per doctor's prescription)</td>
+<td class="p-4 text-center">Included (Strictly per doctor's prescription)</td>
+<td class="p-4 text-center">Included (Strictly per doctor's prescription)</td>
+</tr>
+<!-- Nebulization -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Nebulization Support</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Oxygen -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Oxygen Inhalation Support</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Medication Management -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Medication Management</td>
+<td class="p-4 text-center">Included (Timely scheduling and alerts)</td>
+<td class="p-4 text-center">Included (Timely scheduling and alerts)</td>
+<td class="p-4 text-center">Included (Timely scheduling and alerts)</td>
+</tr>
+<!-- Urinary Catheter -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Urinary Catheter Care</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- NG Tube -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">NG Tube Feeding &amp; Care</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Wound Dressing -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Wound Dressing Execution</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Post-Hospital Clinical Care -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Post-Hospital Clinical Care</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Physiotherapy Aid -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Basic Physiotherapy Aid</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-600">Included (Mobility &amp; physical positioning assistance)</td>
+<td class="p-4 text-center text-gray-600">Included (Mobility &amp; physical positioning assistance)</td>
+</tr>
+<!-- Personal Care -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Personal Care &amp; Bath Support</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-600">Included (Bathing, grooming, dressing, and feeding assistance)</td>
+<td class="p-4 text-center text-gray-600">Included (Bathing, grooming, dressing, and feeding assistance)</td>
+</tr>
+<!-- Toilet Care -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Toilet / Incontinence Care</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center">Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Critical Patient Support -->
+<tr class="border-b border-gray-50">
+<td class="p-4 font-bold text-gray-700">Critical Patient Support</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center">Included</td>
+</tr>
+<!-- Monthly Reporting -->
+<tr class="bg-gray-50 border-b border-gray-100">
+<td class="p-4 font-bold text-gray-700">Monthly Health Reporting</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-600">Included (Comprehensive digital clinical records generated monthly)</td>
+</tr>
+<!-- Physician Visit -->
+<tr class="border-b border-gray-200">
+<td class="p-4 font-bold text-gray-700">Physician Follow-Up Visit</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-400">Not Included</td>
+<td class="p-4 text-center text-gray-600">Included: 1 Monthly Doctor Follow-Up visit (Minimum 15-day booking)</td>
+</tr>
+<!-- Action Buttons Footer -->
+<tr class="bg-white">
+<td class="p-4"></td>
+<td class="p-6 text-center">
+<button class="w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</button>
+</td>
+<td class="p-6 text-center">
+<button class="w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</button>
+</td>
+<td class="p-6 text-center">
+<button class="w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- BEGIN: Footnotes -->
+<div class="mt-8 flex flex-col md:flex-row items-start md:items-center gap-6 text-[11px] md:text-xs text-gray-500 border-t border-gray-100 pt-6">
+<div class="flex items-start gap-2 max-w-sm">
+<div class="w-4 h-4 rounded-full border border-gray-400 flex items-center justify-center flex-shrink-0 text-[10px] mt-0.5">i</div>
+<p>* 24-Hour Assisted Coverage (with scheduled rest periods).</p>
+</div>
+<div class="hidden md:block w-px h-4 bg-gray-300"></div>
+<p>** Live-in services include reasonable rest/sleep periods for assigned staff.</p>
+</div>
+<!-- END: Footnotes -->
+</main>
+<!-- END: ComparisonTableSection -->
+</body></html>
