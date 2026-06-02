@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareGo+ - My Bookings</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'carego-green': '#00A859',
+            'carego-bg': '#F8F9FA',
+            'carego-sidebar': '#FFFFFF',
+            'status-pending': '#F59E0B',
+            'status-confirmed': '#10B981',
+            'status-progress': '#3B82F6',
+            'status-completed': '#10B981',
+            'status-cancelled': '#EF4444',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Lucide Icons (Simulated via CDN for visual representation) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style data-purpose="custom-layout">
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #F8F9FA;
+    }
+    .sidebar-active {
+      background-color: #E6F4ED;
+      color: #00A859;
+      border-right: 4px solid #00A859;
+    }
+    .booking-card {
+      transition: box-shadow 0.2s;
+    }
+    .booking-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    /* Hide scrollbar for cleaner look */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- BEGIN: LeftSidebar -->
+<aside class="w-64 bg-white border-r border-gray-100 flex flex-col justify-between" data-purpose="main-navigation">
+<div class="p-6">
+<div class="flex items-center gap-2 mb-10">
+<span class="text-2xl font-bold text-gray-900">CareGo<span class="text-carego-green">+</span></span>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 rounded-lg transition-colors" href="#">
+<i class="fa-solid fa-house text-lg"></i>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="sidebar-active flex items-center gap-3 px-4 py-3 rounded-lg transition-colors" href="#">
+<i class="fa-solid fa-calendar-check text-lg"></i>
+<span class="font-medium">My Bookings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 rounded-lg transition-colors" href="#">
+<i class="fa-solid fa-users text-lg"></i>
+<span class="font-medium">My Patients</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 rounded-lg transition-colors" href="#">
+<i class="fa-solid fa-credit-card text-lg"></i>
+<span class="font-medium">Payment &amp; Billing</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 rounded-lg transition-colors" href="#">
+<i class="fa-solid fa-headset text-lg"></i>
+<span class="font-medium">Support</span>
+</a>
+</nav>
+</div>
+<!-- User Profile Bottom Section -->
+<div class="p-6 border-t border-gray-100" data-purpose="user-account-switcher">
+<div class="flex items-center justify-between p-2 rounded-xl bg-gray-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
+<img alt="Irfan Hossain" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoTkJm1UvWGKnXKjRo8RjZURRpMDvWRwHrPzcLWmYG4ElhAJSvzL5Qfg2TiR07EDvvda6BHb6cb9gZJpfXaDO5xyhOqfs5Vf2vyd5JedpHsyZby0AslEIfODpeoNiFaYWbPIEGykox8H-O5jfxtUlqVqH4CeZT8aiLsNYcumNrtgHYiZwCvXP4RBNM9bslMM8hmfCepZiRcQ9anv0XNlIYd5bgC7_-YVizEeRifk7HJqg_sRoKvZfDomNs0YHaBHDtb5M4AwT0IJM"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-900">Irfan Hossain</p>
+<p class="text-xs text-gray-500">View Profile</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-gray-600">
+<i class="fa-solid fa-gear"></i>
+</button>
+</div>
+</div>
+</aside>
+<!-- END: LeftSidebar -->
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- BEGIN: TopHeader -->
+<header class="bg-white px-8 py-4 flex items-center justify-between border-b border-gray-100" data-purpose="page-header">
+<div>
+<h1 class="text-2xl font-bold text-gray-900">My Bookings</h1>
+<p class="text-sm text-gray-500">View and manage all your service bookings.</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-6">
+<a class="text-sm font-medium text-gray-600 hover:text-gray-900" href="#">Services</a>
+<a class="text-sm font-medium text-gray-600 hover:text-gray-900" href="#">Become a Caregiver</a>
+</div>
+<div class="relative">
+<i class="fa-regular fa-bell text-xl text-gray-600"></i>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center text-[10px] text-white">1</span>
+</div>
+<button class="bg-carego-green text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-medium hover:bg-green-700 transition-colors">
+<i class="fa-solid fa-plus"></i>
+          Book a New Service
+        </button>
+</div>
+</header>
+<!-- END: TopHeader -->
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto bg-carego-bg p-8 no-scrollbar">
+<!-- BEGIN: FiltersTabs -->
+<div class="flex items-center justify-between mb-6" data-purpose="booking-filters">
+<div class="flex items-center bg-white p-1 rounded-xl shadow-sm border border-gray-100 overflow-x-auto no-scrollbar">
+<button class="px-4 py-2 text-sm font-semibold rounded-lg bg-carego-green text-white whitespace-nowrap">All Bookings</button>
+<button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 whitespace-nowrap">Pending <span class="bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded ml-1 text-xs">1</span></button>
+<button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 whitespace-nowrap">Confirmed <span class="bg-green-100 text-green-600 px-1.5 py-0.5 rounded ml-1 text-xs">2</span></button>
+<button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 whitespace-nowrap">In Progress <span class="bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded ml-1 text-xs">1</span></button>
+<button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 whitespace-nowrap">Completed <span class="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded ml-1 text-xs">3</span></button>
+<button class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 whitespace-nowrap">Cancelled <span class="bg-red-100 text-red-600 px-1.5 py-0.5 rounded ml-1 text-xs">1</span></button>
+</div>
+<button class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50">
+<i class="fa-solid fa-sliders"></i>
+          Filter
+        </button>
+</div>
+<!-- END: FiltersTabs -->
+<!-- BEGIN: BookingList -->
+<div class="space-y-4" data-purpose="bookings-container">
+<!-- PENDING CARD -->
+<div class="booking-card bg-white rounded-2xl p-6 border border-gray-100 flex items-center justify-between">
+<div class="flex gap-6 items-center">
+<div class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-400">
+<i class="fa-regular fa-clock text-3xl"></i>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-orange-100 text-orange-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Pending</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900">Home Caregiver</h3>
+<p class="inline-block bg-green-50 text-carego-green text-xs font-semibold px-2 py-0.5 rounded mb-1">Basic Care</p>
+<p class="text-xs text-gray-400">Booking ID: <span class="font-semibold text-gray-700">CG-250525-00123</span></p>
+<p class="text-[10px] text-gray-400">Booked on 24 May 2025, 09:15 AM</p>
+</div>
+</div>
+<div class="flex gap-12">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Start Date &amp; Time</p>
+<p class="text-sm font-bold text-gray-800">25 May 2025</p>
+<p class="text-xs font-semibold text-gray-600">10:00 AM</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Duration</p>
+<p class="text-sm font-bold text-gray-800">30 Days</p>
+<p class="text-xs font-semibold text-gray-600">24 Hours / Day</p>
+</div>
+<div class="w-48 text-right">
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Amount</p>
+<p class="text-lg font-bold text-gray-900">৳ 47,250.00</p>
+<p class="text-[10px] text-gray-400 mt-1 uppercase font-bold">Paid</p>
+<p class="text-sm font-bold text-red-500 mb-1">৳ 0.00</p>
+<span class="bg-orange-50 text-orange-600 text-[10px] px-2 py-0.5 rounded">Awaiting admin confirmation</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-100 hover:bg-gray-100">View Details</button>
+<i class="fa-solid fa-chevron-right text-gray-300"></i>
+</div>
+</div>
+<!-- CONFIRMED CARD -->
+<div class="booking-card bg-white rounded-2xl p-6 border border-gray-100 flex items-center justify-between">
+<div class="flex gap-6 items-center">
+<div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-carego-green">
+<i class="fa-regular fa-circle-check text-3xl"></i>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-green-100 text-green-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Confirmed</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900">Home Caregiver</h3>
+<p class="inline-block bg-green-50 text-carego-green text-xs font-semibold px-2 py-0.5 rounded mb-1">Basic Care</p>
+<p class="text-xs text-gray-400">Booking ID: <span class="font-semibold text-gray-700">CG-250515-00098</span></p>
+<p class="text-[10px] text-gray-400">Booked on 15 May 2025, 11:30 AM</p>
+</div>
+</div>
+<div class="flex gap-12">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Start Date &amp; Time</p>
+<p class="text-sm font-bold text-gray-800">16 May 2025</p>
+<p class="text-xs font-semibold text-gray-600">09:00 AM</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Duration</p>
+<p class="text-sm font-bold text-gray-800">15 Days</p>
+<p class="text-xs font-semibold text-gray-600">24 Hours / Day</p>
+</div>
+<div class="w-48 text-right">
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Amount</p>
+<p class="text-lg font-bold text-gray-900">৳ 23,655.00</p>
+<p class="text-[10px] text-gray-400 mt-1 uppercase font-bold">Paid</p>
+<p class="text-sm font-bold text-carego-green mb-1">৳ 7,096.50 (30%)</p>
+<span class="bg-green-50 text-carego-green text-[10px] px-2 py-0.5 rounded">30% payment received</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-100 hover:bg-gray-100">View Details</button>
+<i class="fa-solid fa-chevron-right text-gray-300"></i>
+</div>
+</div>
+<!-- IN PROGRESS CARD -->
+<div class="booking-card bg-white rounded-2xl p-6 border border-gray-100 flex items-center justify-between">
+<div class="flex gap-6 items-center">
+<div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400">
+<i class="fa-regular fa-user text-3xl"></i>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-blue-100 text-blue-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">In Progress</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900">Home Caregiver</h3>
+<p class="inline-block bg-green-50 text-carego-green text-xs font-semibold px-2 py-0.5 rounded mb-1">Basic Care</p>
+<p class="text-xs text-gray-400">Booking ID: <span class="font-semibold text-gray-700">CG-250505-00076</span></p>
+<p class="text-[10px] text-gray-400">Booked on 05 May 2025, 02:40 PM</p>
+</div>
+</div>
+<div class="flex gap-12">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Start Date &amp; Time</p>
+<p class="text-sm font-bold text-gray-800">05 May 2025</p>
+<p class="text-xs font-semibold text-gray-600">03:00 PM</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Duration</p>
+<p class="text-sm font-bold text-gray-800">20 Days</p>
+<p class="text-xs font-semibold text-gray-600">24 Hours / Day</p>
+</div>
+<div class="w-48 text-right">
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Amount</p>
+<p class="text-lg font-bold text-gray-900">৳ 31,400.00</p>
+<p class="text-[10px] text-gray-400 mt-1 uppercase font-bold">Paid</p>
+<p class="text-sm font-bold text-carego-green mb-1">৳ 9,420.00 (30%)</p>
+<span class="bg-blue-50 text-blue-600 text-[10px] px-2 py-0.5 rounded">Caregiver is providing service</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-100 hover:bg-gray-100">View Details</button>
+<i class="fa-solid fa-chevron-right text-gray-300"></i>
+</div>
+</div>
+<!-- COMPLETED CARD -->
+<div class="booking-card bg-white rounded-2xl p-6 border border-gray-100 flex items-center justify-between">
+<div class="flex gap-6 items-center">
+<div class="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center text-carego-green">
+<i class="fa-regular fa-circle-check text-3xl"></i>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-green-100 text-green-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Completed</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900">Home Caregiver</h3>
+<p class="inline-block bg-green-50 text-carego-green text-xs font-semibold px-2 py-0.5 rounded mb-1">Basic Care</p>
+<p class="text-xs text-gray-400">Booking ID: <span class="font-semibold text-gray-700">CG-250401-00056</span></p>
+<p class="text-[10px] text-gray-400">Booked on 01 Apr 2025, 04:20 PM</p>
+</div>
+</div>
+<div class="flex gap-12">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Start Date &amp; Time</p>
+<p class="text-sm font-bold text-gray-800">03 Apr 2025</p>
+<p class="text-xs font-semibold text-gray-600">08:00 AM</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Duration</p>
+<p class="text-sm font-bold text-gray-800">7 Days</p>
+<p class="text-xs font-semibold text-gray-600">12 Hours / Day</p>
+</div>
+<div class="w-48 text-right">
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Amount</p>
+<p class="text-lg font-bold text-gray-900">৳ 10,290.00</p>
+<p class="text-[10px] text-gray-400 mt-1 uppercase font-bold">Paid</p>
+<p class="text-sm font-bold text-carego-green mb-1">৳ 10,290.00</p>
+<span class="bg-green-50 text-carego-green text-[10px] px-2 py-0.5 rounded">Service completed</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-100 hover:bg-gray-100">View Details</button>
+<i class="fa-solid fa-chevron-right text-gray-300"></i>
+</div>
+</div>
+<!-- CANCELLED CARD -->
+<div class="booking-card bg-white rounded-2xl p-6 border border-gray-100 flex items-center justify-between">
+<div class="flex gap-6 items-center">
+<div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-red-400">
+<i class="fa-regular fa-circle-xmark text-3xl"></i>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-red-100 text-red-600 text-[10px] uppercase font-bold px-2 py-0.5 rounded">Cancelled</span>
+</div>
+<h3 class="text-lg font-bold text-gray-900">Home Caregiver</h3>
+<p class="inline-block bg-green-50 text-carego-green text-xs font-semibold px-2 py-0.5 rounded mb-1">Basic Care</p>
+<p class="text-xs text-gray-400">Booking ID: <span class="font-semibold text-gray-700">CG-250410-00065</span></p>
+<p class="text-[10px] text-gray-400">Booked on 10 Apr 2025, 02:10 PM</p>
+</div>
+</div>
+<div class="flex gap-12">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Start Date &amp; Time</p>
+<p class="text-sm font-bold text-gray-800">12 Apr 2025</p>
+<p class="text-xs font-semibold text-gray-600">10:00 AM</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-2 flex items-center gap-1"><i class="fa-regular fa-clock"></i> Duration</p>
+<p class="text-sm font-bold text-gray-800">10 Days</p>
+<p class="text-xs font-semibold text-gray-600">24 Hours / Day</p>
+</div>
+<div class="w-48 text-right">
+<p class="text-[10px] text-gray-400 uppercase font-bold mb-1">Amount</p>
+<p class="text-lg font-bold text-gray-900">৳ 15,750.00</p>
+<p class="text-[10px] text-gray-400 mt-1 uppercase font-bold">Paid</p>
+<p class="text-sm font-bold text-red-500 mb-1">৳ 0.00</p>
+<span class="bg-red-50 text-red-500 text-[10px] px-2 py-0.5 rounded">Booking cancelled</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-semibold border border-gray-100 hover:bg-gray-100">View Details</button>
+<i class="fa-solid fa-chevron-right text-gray-300"></i>
+</div>
+</div>
+</div>
+<!-- END: BookingList -->
+<!-- BEGIN: SupportBanner -->
+<div class="mt-8 bg-white rounded-2xl p-6 border border-gray-100 flex items-center justify-between" data-purpose="help-banner">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-carego-green">
+<i class="fa-regular fa-lightbulb text-2xl"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-gray-900">Need help with your bookings?</h4>
+<p class="text-xs text-gray-500">You can contact our support team for any assistance.</p>
+</div>
+</div>
+<button class="bg-white border border-gray-200 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">
+<i class="fa-solid fa-headset"></i>
+          Contact Support
+        </button>
+</div>
+<!-- END: SupportBanner -->
+</div>
+</main>
+</body></html>
