@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareGo+ - Book a New Service: Payment Structure</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-colors">
+    :root {
+      --carego-primary: #008148;
+      --carego-primary-dark: #006b3c;
+      --carego-bg: #F9FAFB;
+      --carego-sidebar: #FFFFFF;
+    }
+    .text-carego-green { color: var(--carego-primary); }
+    .bg-carego-green { background-color: var(--carego-primary); }
+    .border-carego-green { border-color: var(--carego-primary); }
+  </style>
+</head>
+<body class="bg-gray-50 text-slate-800">
+<div class="flex min-h-screen">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full" data-purpose="sidebar-navigation">
+<div class="p-6">
+<h1 class="text-2xl font-bold text-carego-green italic">CareGo+</h1>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg group" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Dashboard
+        </a>
+<a class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg group" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          My Bookings
+        </a>
+<a class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg group" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          My Patients
+        </a>
+<a class="flex items-center px-4 py-3 text-carego-green bg-green-50 font-medium rounded-lg group" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Payment &amp; Billing
+        </a>
+<a class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg group" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Support
+        </a>
+</nav>
+<div class="p-4 border-t border-gray-100">
+<div class="flex items-center space-x-3 p-2 bg-gray-50 rounded-xl">
+<img alt="Irfan Hussain" class="w-10 h-10 rounded-lg bg-gray-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC1gNRcMzGnWsgUxc70r-yNegzkCrLDJHsfvco1d-ZasXmm33edeJYh0rUl74u6P2lQR8EhudxR_F_jtoKZS1ul0T6K_gPEVvP4aT0fNpCZOVVrhdIzoMo4k1813o6MYQa_rIL4kd7mkTh59nrlM000z-LMr1WrArteEV4prqR5E3HCYi7U2NqGAqT6yDxmR9cAqvn1JYaZl__yxrZ7uVw-yGu-I_izsr1DDlEpV144nijM_Rtte0DHciQBba2_b4umCPJNYBzPow"/>
+<div class="flex-1">
+<p class="text-sm font-semibold truncate">Irfan Hussain</p>
+</div>
+<button class="text-gray-400 hover:text-gray-600">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Container -->
+<main class="flex-1 ml-64 p-8 overflow-y-auto" data-purpose="main-layout">
+<!-- BEGIN: Header -->
+<header class="flex justify-between items-center mb-8">
+<h2 class="text-2xl font-bold text-slate-900">Book a New Service</h2>
+<div class="flex items-center space-x-6 text-sm font-medium">
+<a class="text-gray-600 hover:text-carego-green" href="#">Services</a>
+<a class="text-gray-600 hover:text-carego-green" href="#">Become a Caregiver</a>
+<button class="relative p-2 text-gray-400 hover:text-gray-600">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+</div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Stepper Component -->
+<div class="mb-10" data-purpose="booking-stepper">
+<div class="flex items-center justify-between relative max-w-4xl mx-auto">
+<!-- Connector Lines -->
+<div class="absolute top-4 left-0 w-full h-0.5 bg-gray-200 -z-0">
+<div class="h-full bg-carego-green w-[83%]"></div>
+</div>
+<!-- Step 1 -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-carego-green flex items-center justify-center text-white mb-2">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-carego-green uppercase text-center w-16">Service &amp; Package</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-carego-green flex items-center justify-center text-white mb-2">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-carego-green uppercase">Schedule</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-carego-green flex items-center justify-center text-white mb-2">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-carego-green uppercase">Patient Info</span>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-carego-green flex items-center justify-center text-white mb-2">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-carego-green uppercase">Add ons</span>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-carego-green flex items-center justify-center text-white mb-2">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-carego-green uppercase">Consent</span>
+</div>
+<!-- Step 6 (Active) -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-carego-green border-2 border-carego-green flex items-center justify-center text-white mb-2">
+              6
+            </div>
+<span class="text-[10px] font-bold text-carego-green uppercase text-center">Payment Structure</span>
+</div>
+<!-- Step 7 -->
+<div class="flex flex-col items-center relative z-10">
+<div class="w-8 h-8 rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-gray-400 mb-2">
+              7
+            </div>
+<span class="text-[10px] font-bold text-gray-400 uppercase text-center w-16">Review &amp; Confirm</span>
+</div>
+</div>
+</div>
+<!-- END: Stepper Component -->
+<div class="grid grid-cols-12 gap-8">
+<!-- BEGIN: Left Column - Payment Details -->
+<div class="col-span-8 space-y-8">
+<div data-purpose="step-intro">
+<h3 class="text-xl font-bold text-slate-900 mb-2">6. Payment Structure</h3>
+<p class="text-sm text-gray-500">Review the itemized bill and choose a payment structure that works for you.</p>
+</div>
+<!-- BEGIN: Itemized Bill Section -->
+<section class="bg-white border border-gray-200 rounded-xl p-6" data-purpose="itemized-bill">
+<h4 class="font-bold text-slate-900 mb-4">Itemized Bill</h4>
+<table class="w-full text-sm">
+<thead>
+<tr class="text-gray-400 font-medium border-b border-gray-50">
+<th class="text-left pb-4 w-2/5 font-medium">Item</th>
+<th class="text-left pb-4 font-medium">Details</th>
+<th class="text-left pb-4 font-medium">Rate</th>
+<th class="text-left pb-4 font-medium">Qty / Days</th>
+<th class="text-right pb-4 font-medium">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-50">
+<tr>
+<td class="py-4 text-slate-900 font-medium">Home Caregiver (Basic Care)</td>
+<td class="py-4 text-gray-500">24 Hours / Day</td>
+<td class="py-4 text-gray-900">৳ 1,000.00</td>
+<td class="py-4 text-gray-900">30 Days</td>
+<td class="py-4 text-right text-slate-900 font-medium">৳ 30,000.00</td>
+</tr>
+<tr>
+<td class="py-4">
+<span class="text-slate-900 font-medium">Add-on: Report Collection</span>
+<span class="ml-2 px-2 py-0.5 bg-green-100 text-carego-green text-[10px] rounded uppercase font-bold">Caregiver</span>
+</td>
+<td class="py-4 text-gray-500"></td>
+<td class="py-4 text-gray-900">৳ 500.00</td>
+<td class="py-4 text-gray-900">30 Days</td>
+<td class="py-4 text-right text-slate-900 font-medium">৳ 15,000.00</td>
+</tr>
+<tr>
+<td class="py-4 text-slate-900 font-medium">Service Fee (5%)</td>
+<td class="py-4"></td>
+<td class="py-4"></td>
+<td class="py-4"></td>
+<td class="py-4 text-right text-slate-900 font-medium">৳ 2,250.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr class="border-t border-gray-100">
+<td class="py-4 text-slate-900 font-bold" colspan="4">Subtotal (Before Service Fee)</td>
+<td class="py-4 text-right text-slate-900 font-bold">৳ 45,000.00</td>
+</tr>
+<tr>
+<td class="py-2 text-slate-900 font-medium" colspan="4">Service Fee (5%)</td>
+<td class="py-2 text-right text-slate-900 font-medium">৳ 2,250.00</td>
+</tr>
+<tr class="border-t border-gray-100">
+<td class="py-6 text-slate-900 font-bold text-lg" colspan="4">Total Amount</td>
+<td class="py-6 text-right text-carego-green font-bold text-xl">৳ 47,250.00</td>
+</tr>
+</tfoot>
+</table>
+</section>
+<!-- END: Itemized Bill Section -->
+<!-- BEGIN: Payment Structure Selection -->
+<section class="space-y-6" data-purpose="payment-structure-selection">
+<h4 class="font-bold text-slate-900">Select Payment Structure</h4>
+<!-- Upfront Selection -->
+<div>
+<p class="text-sm font-bold mb-3">Upfront Payment (Mandatory 30%)</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white border border-gray-100 rounded-xl p-6 flex justify-between items-center shadow-sm">
+<div>
+<p class="text-xs text-gray-400 font-medium uppercase mb-1">30% of Total Amount</p>
+<p class="text-xl font-bold text-carego-green">৳ 14,175.00</p>
+</div>
+<div class="text-right">
+<span class="text-[11px] text-orange-500 font-bold bg-orange-50 px-2 py-1 rounded">To be paid after confirmation</span>
+</div>
+</div>
+<div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start space-x-3">
+<div class="p-1 bg-blue-100 rounded-full text-blue-600 mt-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path></svg>
+</div>
+<div>
+<p class="text-sm font-bold text-blue-900 mb-1">Note:</p>
+<p class="text-xs text-blue-700 leading-relaxed">The remaining amount can be paid as per your selected structure.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Remaining Amount Options -->
+<div>
+<p class="text-sm font-bold mb-3">Choose How You Want to Pay the Remaining Amount (70%)</p>
+<p class="text-[11px] font-medium text-gray-400 uppercase mb-4">Payment Frequency</p>
+<div class="grid grid-cols-3 gap-4">
+<!-- Option: Together -->
+<div class="bg-white border border-gray-200 p-4 rounded-xl cursor-pointer hover:border-gray-300 transition-colors">
+<div class="flex items-center space-x-2 mb-4">
+<div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
+<span class="text-xs font-bold">AI</span>
+</div>
+<span class="text-sm font-bold text-slate-900">ITogether</span>
+</div>
+<p class="text-[10px] text-gray-400 mb-2">Pay remaining once</p>
+<p class="text-lg font-bold text-slate-800">৳ 33,075.00</p>
+</div>
+<!-- Option: Weekly (Selected) -->
+<div class="bg-green-50 border-2 border-carego-green p-4 rounded-xl cursor-pointer relative">
+<div class="absolute top-2 right-2">
+<div class="bg-carego-green text-white rounded-full p-0.5">
+<svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+</div>
+</div>
+<div class="flex items-center space-x-2 mb-4">
+<div class="w-8 h-8 bg-white border border-gray-100 rounded-full flex items-center justify-center text-carego-green">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-sm font-bold text-slate-900">Weekly</span>
+</div>
+<p class="text-[10px] text-gray-500 mb-2">Pay every week</p>
+<p class="text-lg font-bold text-carego-green">৳ 8,268.75 <span class="text-[10px] text-gray-400 font-normal">per week</span></p>
+</div>
+<!-- Option: Daily -->
+<div class="bg-white border border-gray-200 p-4 rounded-xl cursor-pointer hover:border-gray-300 transition-colors">
+<div class="flex items-center space-x-2 mb-4">
+<div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
+<span class="text-[10px] font-bold">Daily</span>
+</div>
+<span class="text-sm font-bold text-slate-900">Daily</span>
+</div>
+<p class="text-[10px] text-gray-400 mb-2">Pay every day</p>
+<p class="text-lg font-bold text-slate-800">৳ 1,102.50 <span class="text-[10px] font-normal">per day</span></p>
+</div>
+</div>
+<div class="mt-4 flex items-center space-x-2 text-gray-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[10px]">Amounts shown above are indicative and may vary slightly based on the service start date.</span>
+</div>
+</div>
+</section>
+<!-- END: Payment Structure Selection -->
+<!-- BEGIN: Form Navigation -->
+<div class="flex justify-between items-center pt-8 border-t border-gray-100">
+<button class="px-6 py-2 border border-gray-200 rounded-lg text-sm font-semibold flex items-center space-x-2 hover:bg-gray-50">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Back</span>
+</button>
+<button class="px-10 py-2 bg-carego-green text-white rounded-lg text-sm font-semibold flex items-center space-x-2 hover:bg-carego-primary-dark shadow-lg shadow-green-100">
+<span>Next</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<!-- END: Form Navigation -->
+</div>
+<!-- END: Left Column -->
+<!-- BEGIN: Right Column - Sidebar Summary -->
+<aside class="col-span-4 space-y-6" data-purpose="booking-summary-panel">
+<!-- Booking Summary Card -->
+<div class="bg-white border border-gray-200 rounded-xl overflow-hidden">
+<div class="p-5 flex justify-between items-center border-b border-gray-50">
+<h4 class="font-bold text-slate-900">Booking Summary</h4>
+<button class="text-xs font-bold text-slate-900 border border-gray-200 px-3 py-1 rounded-md flex items-center space-x-1">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Edit</span>
+</button>
+</div>
+<div class="p-5 space-y-4">
+<!-- Service Details -->
+<div>
+<p class="text-[10px] font-bold text-gray-400 uppercase mb-3">Service Details</p>
+<div class="space-y-2 text-sm">
+<div class="flex justify-between">
+<span class="text-gray-500">Service Category</span>
+<span class="font-medium text-slate-900">Home Caregiver</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Package</span>
+<span class="font-medium text-slate-900">Basic Care</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Duration per Day</span>
+<span class="font-medium text-slate-900">24 Hours</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Total Days</span>
+<span class="font-medium text-slate-900">30 Days</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Add-ons</span>
+<span class="font-medium text-slate-900">1 selected</span>
+</div>
+</div>
+</div>
+<!-- Calculation Details -->
+<div class="pt-4 border-t border-gray-50 space-y-2 text-sm">
+<div class="flex justify-between">
+<span class="text-gray-500">Base Price (৳ 1,000.00 / 24 Hours)</span>
+<span class="font-medium text-slate-900">৳ 1,000.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Duration Multiplier (24 Hours / 24 Hours)</span>
+<span class="font-medium text-slate-900">x 1</span>
+</div>
+<div class="flex justify-between py-1 bg-gray-50 -mx-2 px-2 rounded">
+<span class="text-gray-900 font-bold">Adjusted Price per Day</span>
+<span class="font-bold text-slate-900">৳ 1,000.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Total Days</span>
+<span class="font-medium text-slate-900">x 30</span>
+</div>
+<div class="flex justify-between font-bold pt-2">
+<span class="text-slate-900">Subtotal (Before Add-ons)</span>
+<span class="text-slate-900">৳ 30,000.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Add-ons Total (৳ 500.00 x 30 Days)</span>
+<span class="font-medium text-slate-900">৳ 15,000.00</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center space-x-1">
+<span class="text-gray-500">Service Fee (5%)</span>
+<svg class="w-3 h-3 text-gray-300" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path></svg>
+</div>
+<span class="font-medium text-slate-900">৳ 2,250.00</span>
+</div>
+</div>
+<!-- Grand Total -->
+<div class="pt-4 border-t border-gray-50 flex justify-between items-end">
+<span class="text-slate-900 font-bold text-base">Total Amount</span>
+<span class="text-carego-green font-bold text-xl leading-none">৳ 47,250.00</span>
+</div>
+</div>
+</div>
+<!-- Payment Structure Visual Timeline -->
+<div class="bg-white border border-gray-200 rounded-xl p-5" data-purpose="payment-timeline">
+<h4 class="font-bold text-slate-900 mb-6">Payment Structure</h4>
+<div class="space-y-0 relative">
+<!-- Timeline Vertical Line -->
+<div class="absolute left-3 top-2 bottom-2 w-0.5 bg-gray-100"></div>
+<!-- Item 1 (Selected/Today) -->
+<div class="flex items-start space-x-4 relative pb-8">
+<div class="w-6 h-6 rounded-full bg-carego-green text-white flex items-center justify-center text-[10px] font-bold z-10 relative mt-1">1</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-carego-green">30% Upfront Down-Payment Deposit</p>
+<p class="text-[10px] text-carego-green">Due Today (After Confirmation)</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-carego-green">৳ 14,175.00</p>
+<p class="text-[9px] text-carego-green opacity-70">(30%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start space-x-4 relative pb-8">
+<div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-bold z-10 relative mt-1">2</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-slate-800">Remaining Balance - Week 1</p>
+<p class="text-[10px] text-gray-400">Due on 26 May 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-slate-800">৳ 8,268.75</p>
+<p class="text-[9px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start space-x-4 relative pb-8">
+<div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-bold z-10 relative mt-1">3</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-slate-800">Remaining Balance - Week 2</p>
+<p class="text-[10px] text-gray-400">Due on 02 Jun 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-slate-800">৳ 8,268.75</p>
+<p class="text-[9px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-start space-x-4 relative pb-8">
+<div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-bold z-10 relative mt-1">4</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-slate-800">Remaining Balance - Week 3</p>
+<p class="text-[10px] text-gray-400">Due on 09 Jun 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-slate-800">৳ 8,268.75</p>
+<p class="text-[9px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex items-start space-x-4 relative">
+<div class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-[10px] font-bold z-10 relative mt-1">5</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[11px] font-bold text-slate-800">Remaining Balance - Week 4</p>
+<p class="text-[10px] text-gray-400">Due on 16 Jun 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-slate-800">৳ 8,268.75</p>
+<p class="text-[9px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center space-x-2 text-gray-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-[10px]">Dates are indicative and may vary based on service start date.</span>
+</div>
+</div>
+</aside>
+<!-- END: Right Column -->
+</div>
+</main>
+<!-- END: Main Content Container -->
+</div>
+</body></html>

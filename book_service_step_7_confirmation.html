@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareGo+ | Review &amp; Confirm Booking</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts for better typography -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+<style data-purpose="custom-colors">
+    /* Custom brand colors based on the image */
+    .text-brand-green { color: #008148; }
+    .bg-brand-green { background-color: #008148; }
+    .border-brand-green { border-color: #008148; }
+    .text-brand-dark { color: #001A23; }
+    .bg-brand-light { background-color: #F8FAFC; }
+  </style>
+</head>
+<body class="bg-gray-50 text-brand-dark min-h-screen flex">
+<!-- BEGIN: Left Sidebar -->
+<aside class="w-64 bg-white border-r border-gray-200 flex flex-col fixed h-full" data-purpose="navigation-sidebar">
+<div class="p-8">
+<h1 class="text-2xl font-bold text-brand-green flex items-center gap-1">
+        CareGo<span class="text-brand-green">+</span>
+</h1>
+</div>
+<nav class="flex-1 px-6 space-y-2">
+<a class="flex items-center gap-3 p-3 text-gray-500 hover:bg-gray-50 rounded-lg" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Dashboard
+      </a>
+<a class="flex items-center gap-3 p-3 text-gray-500 hover:bg-gray-50 rounded-lg" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        My Bookings
+      </a>
+<a class="flex items-center gap-3 p-3 text-gray-500 hover:bg-gray-50 rounded-lg" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        My Patients
+      </a>
+<a class="flex items-center gap-3 p-3 text-gray-500 hover:bg-gray-50 rounded-lg" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V5a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Payment &amp; Billing
+      </a>
+<a class="flex items-center gap-3 p-3 text-gray-500 hover:bg-gray-50 rounded-lg" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+        Support
+      </a>
+</nav>
+<!-- User Profile Bottom -->
+<div class="p-6 border-t border-gray-200">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-gray-200 rounded-lg overflow-hidden">
+<img alt="Irfan Hossain" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkkiAaF36rSzzdJhH_PVAmzY0wJXkyPKay7KalidErFzKOWPTnWoj6prRc1CQAS6mySfdu_m9E7q4dfLwOTfqjJOzKw62oX3v7Cx9jntqWZRV164KwRXn7jCzH_7TURy6UFFk_wEY2bEQH-J9kd6ONpUQbDC4cMDBmibpncGON6C-egrDLX22LefoCESnE0y9ZaPkGemx17vFSiggIvRzbm4TdKZ6tXBXZrSy4nz4f1jTJglkU0RoFJ7QNQo0c1xjihXn723Un_F4"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Irfan Hossain</p>
+</div>
+<button class="text-gray-400">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+</aside>
+<!-- END: Left Sidebar -->
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 p-8 bg-gray-50">
+<!-- BEGIN: Top Header -->
+<header class="flex justify-between items-center mb-10">
+<h2 class="text-3xl font-bold text-brand-dark">Book a New Service</h2>
+<div class="flex items-center gap-6 text-sm font-medium">
+<a class="text-gray-500" href="#">Services</a>
+<a class="text-gray-500" href="#">Become a Caregiver</a>
+<button class="text-gray-500 relative">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- END: Top Header -->
+<!-- BEGIN: Stepper Progress Bar -->
+<div class="flex justify-between items-center mb-12 relative px-10" data-purpose="booking-stepper">
+<!-- Background Line -->
+<div class="absolute top-4 left-20 right-20 h-0.5 bg-brand-green z-0"></div>
+<!-- Steps -->
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Service &amp;<br/>Package</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Schedule</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Patient Info</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Add ons</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Consent</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Payment<br/>Structure</span>
+</div>
+<div class="flex flex-col items-center gap-2 z-10">
+<div class="w-9 h-9 rounded-full bg-brand-green text-white flex items-center justify-center font-bold">7</div>
+<span class="text-[10px] font-bold text-brand-green text-center">Review &amp;<br/>Confirm</span>
+</div>
+</div>
+<!-- END: Stepper Progress Bar -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Details -->
+<div class="col-span-8 space-y-6">
+<div class="mb-2">
+<h3 class="text-xl font-bold mb-1">7. Review &amp; Confirm</h3>
+<p class="text-gray-500 text-sm">Please review all the details below and confirm your booking.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- BEGIN: Card 1 - Service & Package -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="summary-card">
+<div class="flex items-center gap-2 mb-4">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">1. Service &amp; Package</h4>
+</div>
+<div class="space-y-3 text-xs">
+<div class="flex justify-between"><span class="text-gray-500">Service Category</span><span class="font-medium text-right">Home Caregiver</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Package</span><span class="font-medium text-right">Basic Care</span></div>
+<div class="flex justify-between"><span class="text-gray-500 shrink-0">Description</span><span class="font-medium text-right ml-4">24 Hours caregiver support with basic care assistance.</span></div>
+</div>
+</div>
+<!-- END: Card 1 -->
+<!-- BEGIN: Card 2 - Schedule -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="summary-card">
+<div class="flex items-center gap-2 mb-4">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">2. Schedule</h4>
+</div>
+<div class="space-y-3 text-xs">
+<div class="flex justify-between"><span class="text-gray-500">Total Days</span><span class="font-medium">30 Days</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Duration per Day</span><span class="font-medium">24 Hours</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Service Start Date</span><span class="font-medium">25 May 2025</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Start Time</span><span class="font-medium">10:00 AM</span></div>
+</div>
+</div>
+<!-- END: Card 2 -->
+<!-- BEGIN: Card 3 - Patient Info -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="summary-card">
+<div class="flex items-center gap-2 mb-4">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">3. Patient Information</h4>
+</div>
+<div class="space-y-3 text-xs">
+<div class="flex justify-between"><span class="text-gray-500">Name</span><span class="font-medium">Rahima Begum</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Age / Gender</span><span class="font-medium">68 Years / Female</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Weight</span><span class="font-medium">55 kg</span></div>
+<div class="flex justify-between"><span class="text-gray-500">Status</span><span class="font-medium">Mobile</span></div>
+<div class="flex justify-between"><span class="text-gray-500 shrink-0">Address</span><span class="font-medium text-right ml-4">House 15, Road 8, Dhanmondi, Dhaka-1205</span></div>
+<div class="text-right mt-2"><a class="text-brand-green font-bold hover:underline" href="#">View More</a></div>
+</div>
+</div>
+<!-- END: Card 3 -->
+<div class="flex flex-col gap-4">
+<!-- BEGIN: Card 4 - Add-ons -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="summary-card">
+<div class="flex items-center gap-2 mb-4">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">4. Add-ons (1 Selected)</h4>
+</div>
+<div class="flex items-center justify-between text-xs font-medium">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-brand-green" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+<span>Report Collection</span>
+</div>
+<span class="text-brand-green bg-green-50 px-2 py-0.5 rounded text-[10px]">Caregiver</span>
+<span class="text-gray-500">৳ 500 / day</span>
+</div>
+</div>
+<!-- END: Card 4 -->
+<!-- BEGIN: Card 5 - Consent -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="summary-card">
+<div class="flex items-center gap-2 mb-4">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">5. Consent</h4>
+</div>
+<p class="text-[10px] text-gray-500 mb-3">All consent forms have been read and accepted.</p>
+<div class="flex items-center gap-2 text-xs font-bold mb-2">
+<svg class="w-4 h-4 text-brand-green" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+<span>7 sections accepted</span>
+</div>
+<a class="text-brand-green font-bold text-[10px] hover:underline" href="#">View Consent Details</a>
+</div>
+<!-- END: Card 5 -->
+</div>
+</div>
+<!-- BEGIN: Card 6 - Payment Structure Details -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="payment-structure-card">
+<div class="flex items-center gap-2 mb-6">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">6. Payment Structure</h4>
+</div>
+<div class="grid grid-cols-2 gap-10">
+<!-- Left Side: Upfront -->
+<div>
+<p class="text-xs font-bold mb-4 uppercase tracking-wider text-gray-700">Upfront Payment (Mandatory 30%)</p>
+<div class="border border-orange-100 bg-orange-50/20 p-4 rounded-xl relative">
+<p class="text-[10px] text-gray-500 mb-1">30% of Total Amount</p>
+<p class="text-xl font-bold text-brand-green">৳ 14,175.00</p>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-bold text-orange-500 text-right">
+                  To be paid after confirmation
+                </div>
+</div>
+<div class="mt-6">
+<p class="text-xs font-bold mb-4 uppercase tracking-wider text-gray-700">Remaining Payment (70%)</p>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-[10px] text-gray-500 mb-1">Payment Frequency</p>
+<p class="text-xs font-bold">Weekly</p>
+<p class="text-[10px] text-gray-500 mt-3 mb-1">Total Installments</p>
+<p class="text-xs font-bold">4 Weeks</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-500 mb-1">Amount per Installment</p>
+<p class="text-xs font-bold text-brand-green">৳ 8,268.75</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Installment Schedule -->
+<div>
+<p class="text-xs font-bold mb-4 uppercase tracking-wider text-gray-700">Installment Schedule (After Confirmation)</p>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-xs">
+<span class="text-gray-700">Week 1</span>
+<span class="text-gray-500">26 May 2025</span>
+<span class="font-bold">৳ 8,268.75</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-gray-700">Week 2</span>
+<span class="text-gray-500">02 Jun 2025</span>
+<span class="font-bold">৳ 8,268.75</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-gray-700">Week 3</span>
+<span class="text-gray-500">09 Jun 2025</span>
+<span class="font-bold">৳ 8,268.75</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-gray-700">Week 4</span>
+<span class="text-gray-500">16 Jun 2025</span>
+<span class="font-bold">৳ 8,268.75</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Card 6 -->
+<!-- BEGIN: Summary Footer -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm flex justify-between items-center" data-purpose="bottom-summary">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-green-50 rounded-lg">
+<svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h4 class="font-bold text-sm">7. Summary</h4>
+</div>
+<div class="flex gap-16">
+<div>
+<p class="text-[10px] text-gray-500">Service Start Date</p>
+<p class="text-xs font-bold">25 May 2025, 10:00 AM</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-500">Service Duration</p>
+<p class="text-xs font-bold">30 Days (24 Hours / Day)</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-gray-500">Total Amount</p>
+<p class="text-xl font-bold text-brand-green">৳ 47,250.00</p>
+</div>
+</div>
+</div>
+<!-- END: Summary Footer -->
+<!-- Action Buttons -->
+<div class="flex justify-between items-center pt-4">
+<button class="px-6 py-2 border border-gray-200 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-gray-100 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Back
+          </button>
+<div class="flex flex-col items-end gap-3">
+<button class="bg-brand-green text-white px-10 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-green-700 transition-colors">
+              Book Service
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<p class="text-[10px] text-gray-400 flex items-center gap-1">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              You will be able to make the upfront payment after our confirmation call.
+            </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar Summary -->
+<div class="col-span-4 space-y-6">
+<!-- BEGIN: Sidebar Booking Summary -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="sidebar-summary">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-bold text-lg">Booking Summary</h4>
+<button class="text-xs font-bold border border-gray-200 px-3 py-1 rounded-md flex items-center gap-1 hover:bg-gray-50">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+              Edit
+            </button>
+</div>
+<div class="space-y-4">
+<p class="text-xs font-bold uppercase tracking-widest text-gray-400">Service Details</p>
+<div class="space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-gray-500">Service Category</span>
+<span class="font-medium">Home Caregiver</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Package</span>
+<span class="font-medium">Basic Care</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Duration per Day</span>
+<span class="font-medium">24 Hours</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Total Days</span>
+<span class="font-medium">30 Days</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Add-ons</span>
+<span class="font-medium">1 selected</span>
+</div>
+</div>
+<hr class="border-gray-100"/>
+<div class="space-y-2 text-xs">
+<div class="flex justify-between">
+<span class="text-gray-500">Base Price (৳ 1,000.00 / 24 Hours)</span>
+<span class="font-medium">৳ 1,000.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-500">Duration Multiplier (24 Hours / 24 Hours)</span>
+<span class="font-medium">× 1</span>
+</div>
+<div class="flex justify-between py-1 border-y border-gray-50 font-bold">
+<span class="text-gray-700">Adjusted Price per Day</span>
+<span class="">৳ 1,000.00</span>
+</div>
+<div class="flex justify-between pt-1">
+<span class="text-gray-500">Total Days</span>
+<span class="font-medium">× 30</span>
+</div>
+<div class="flex justify-between font-bold text-sm pt-1">
+<span>Subtotal (Before Add-ons)</span>
+<span>৳ 30,000.00</span>
+</div>
+<div class="flex justify-between pt-2">
+<span class="text-gray-500">Add-ons Total (৳ 500.00 × 30 Days)</span>
+<span class="font-medium">৳ 15,000.00</span>
+</div>
+<div class="flex justify-between pt-1">
+<span class="text-gray-500 flex items-center gap-1">
+                  Service Fee (5%)
+                  <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<span class="font-medium">৳ 2,250.00</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-gray-100">
+<span class="font-bold text-lg">Total Amount</span>
+<span class="text-brand-green font-bold text-xl">৳ 47,250.00</span>
+</div>
+</div>
+</div>
+<!-- END: Sidebar Booking Summary -->
+<!-- BEGIN: Sidebar Payment Structure -->
+<div class="bg-white border border-gray-100 rounded-xl p-6 shadow-sm" data-purpose="sidebar-payment-list">
+<h4 class="font-bold text-sm mb-6">Payment Structure</h4>
+<div class="relative space-y-8">
+<!-- Vertical Timeline Line -->
+<div class="absolute left-3 top-2 bottom-2 w-px bg-gray-200 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-brand-green text-white text-[10px] font-bold flex items-center justify-center shrink-0">1</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-bold text-brand-green">30% Upfront Down-Payment Deposit</p>
+<p class="text-[10px] text-brand-green">Due Today (After Confirmation)</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-brand-green">৳ 14,175.00</p>
+<p class="text-[10px] text-brand-green opacity-70">(30%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-gray-300 text-white text-[10px] font-bold flex items-center justify-center shrink-0">2</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-medium text-gray-700">Remaining Balance – Week 1</p>
+<p class="text-[10px] text-gray-500">Due on 26 May 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-gray-700">৳ 8,268.75</p>
+<p class="text-[10px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-gray-300 text-white text-[10px] font-bold flex items-center justify-center shrink-0">3</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-medium text-gray-700">Remaining Balance – Week 2</p>
+<p class="text-[10px] text-gray-500">Due on 02 Jun 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-gray-700">৳ 8,268.75</p>
+<p class="text-[10px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-gray-300 text-white text-[10px] font-bold flex items-center justify-center shrink-0">4</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-medium text-gray-700">Remaining Balance – Week 3</p>
+<p class="text-[10px] text-gray-500">Due on 09 Jun 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-gray-700">৳ 8,268.75</p>
+<p class="text-[10px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="relative z-10 flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-gray-300 text-white text-[10px] font-bold flex items-center justify-center shrink-0">5</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-xs font-medium text-gray-700">Remaining Balance – Week 4</p>
+<p class="text-[10px] text-gray-500">Due on 16 Jun 2025</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-gray-700">৳ 8,268.75</p>
+<p class="text-[10px] text-gray-400">(17.5%)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p class="mt-6 text-[10px] text-gray-400 flex items-center gap-1">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Dates are indicative and may vary based on service start date.
+          </p>
+</div>
+<!-- END: Sidebar Payment Structure -->
+</div>
+</div>
+</main>
+</body></html>
