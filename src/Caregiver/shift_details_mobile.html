@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shift Details - CareGo+</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F8FAFC;
+    }
+  </style>
+<style data-purpose="utility-classes">
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.125rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background-color: #DCFCE7;
+      color: #166534;
+    }
+    .card-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 0.75rem;
+    }
+    .detail-label {
+      font-size: 0.75rem;
+      color: #64748B;
+      width: 100px;
+      flex-shrink: 0;
+    }
+    .detail-value {
+      font-size: 0.75rem;
+      color: #1E293B;
+      font-weight: 500;
+    }
+    .detail-row {
+      display: flex;
+      padding: 0.375rem 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-10">
+<!-- BEGIN: Top Navigation -->
+<nav class="sticky top-0 bg-white border-b border-slate-200 z-50 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button aria-label="Go back" class="p-1 -ml-1 text-slate-600">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<h1 class="text-lg font-bold text-slate-800">Shift Details</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 relative">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<button class="text-blue-600 font-semibold text-sm">Switch</button>
+</div>
+</nav>
+<!-- END: Top Navigation -->
+<main class="p-4 space-y-4">
+<!-- BEGIN: Header Status Section -->
+<header class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+<div class="flex items-start justify-between">
+<div class="flex gap-3">
+<div class="bg-blue-600 text-white p-2 rounded-lg" data-purpose="icon-container">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h2 class="text-base font-bold text-slate-900 leading-tight">Shift Details</h2>
+<p class="text-xs text-slate-500 mt-1">Thursday, June 4, 2026</p>
+<div class="mt-2">
+<span class="status-badge">Active — Checked In</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<button class="flex-1 text-center py-2 px-3 border border-blue-600 text-blue-600 rounded-lg text-sm font-semibold hover:bg-blue-50 transition-colors">Request Handover</button>
+<button class="flex-1 text-center py-2 px-3 border border-slate-200 text-slate-600 rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">Edit Note</button>
+</div>
+</header>
+<!-- END: Header Status Section -->
+<!-- BEGIN: Shift Overview -->
+<section class="bg-white rounded-xl p-4 shadow-sm border border-slate-100" data-purpose="shift-overview">
+<h3 class="card-title">Shift Overview</h3>
+<div class="divide-y divide-slate-50">
+<div class="detail-row">
+<span class="detail-label">Service</span>
+<span class="detail-value">Home Nursing</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Package ID</span>
+<span class="detail-value">CGP-992</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Shift Time</span>
+<span class="detail-value">08:00 AM - 08:00 PM (12 hrs)</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Check-in Time</span>
+<span class="detail-value">08:02 AM</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Status</span>
+<span class="detail-value text-green-600">Active — Checked In</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Co-present With</span>
+<span class="detail-value">Rupa A.</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Team Status</span>
+<div class="detail-value">
+<p>2-Caregiver Concurrent Shift</p>
+<p class="text-[10px] text-slate-400 mt-0.5 font-normal">Active today with Rupa A.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Shift Overview -->
+<!-- BEGIN: Patient Information -->
+<section class="bg-white rounded-xl p-4 shadow-sm border border-slate-100" data-purpose="patient-info">
+<h3 class="card-title">Patient Information</h3>
+<div class="flex items-center gap-4 mb-4 pb-4 border-b border-slate-50">
+<!-- Patient Avatar -->
+<img alt="Mrs. Tahmina Begum" class="w-16 h-16 rounded-full object-cover border border-slate-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Hy3u6_c297gDPoU1ZtYFeVn2rZBgpSmgtXI5cV13yAQyELraTXutypnrgwnA6fbaC5PLTTQz2j5XSUELIPTYuWsBBoM6h8C57e86YmgdevRmdpGEcwFy8D6lhFeAsFPRApKG9DsXNMKnIcVguAVg7r6awI5Sbhoxvf0jmNBb0ve2vL9s5j85kICv1aAlfUyy7BnvPJeWBNZD8GEHgJMjbuyAdrdbsjtGN0T0kBiO5f_H0ksFOpy9REY33sciEBAApOjH7TjTHdw_"/>
+<div>
+<p class="text-sm font-bold text-slate-800">Mrs. Tahmina Begum</p>
+<p class="text-xs text-slate-500">68 Years / Female</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="detail-row items-start">
+<span class="detail-label">Phone</span>
+<span class="detail-value text-blue-600 underline">+880 1712 345 678</span>
+</div>
+<div class="detail-row items-start">
+<span class="detail-label">Address</span>
+<span class="detail-value leading-relaxed">House 12, Road 5, Dhanmondi, Dhaka 1205</span>
+</div>
+</div>
+</section>
+<!-- END: Patient Information -->
+<!-- BEGIN: Schedule Note Alert -->
+<div class="bg-blue-50 rounded-xl p-4 border border-blue-100 flex gap-3" data-purpose="schedule-note">
+<div class="text-blue-600 mt-0.5">
+<svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<p class="text-xs text-blue-800 font-medium leading-relaxed">
+        You are part of a concurrent shift today. Handover to Shazid Ahmed at 08:00 PM.
+      </p>
+</div>
+<!-- END: Schedule Note Alert -->
+<!-- BEGIN: Clinical & Care Details -->
+<section class="bg-white rounded-xl p-4 shadow-sm border border-slate-100" data-purpose="clinical-details">
+<h3 class="card-title">Clinical &amp; Care Details</h3>
+<div class="space-y-4">
+<div>
+<span class="detail-label block mb-1">Primary Diagnosis</span>
+<span class="detail-value">Post Stroke Care</span>
+</div>
+<div>
+<span class="detail-label block mb-1">Care Directives</span>
+<span class="detail-value leading-relaxed">Mobility support, BP monitoring, Medication on time</span>
+</div>
+<div>
+<span class="detail-label block mb-1">Special Instructions</span>
+<span class="detail-value leading-relaxed">Assist with walking exercises. Monitor BP twice daily.</span>
+</div>
+<div>
+<span class="detail-label block mb-1">Emergency Contact</span>
+<div class="detail-value">
+<p>Rashed Begum (Daughter)</p>
+<p class="text-blue-600 underline mt-1">+880 1712 987 654</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Clinical & Care Details -->
+<!-- BEGIN: Shift Notes -->
+<section class="bg-white rounded-xl p-4 shadow-sm border border-slate-100" data-purpose="shift-notes">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-sm font-bold text-slate-800">Shift Notes</h3>
+<button class="text-blue-600 text-xs font-bold flex items-center gap-1 border border-blue-600 px-2 py-1 rounded-md">
+<svg class="h-3 w-3" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          Add Note
+        </button>
+</div>
+<div class="bg-slate-50 rounded-lg p-8 flex flex-col items-center justify-center border-2 border-dashed border-slate-200">
+<svg class="h-8 w-8 text-slate-300 mb-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+<p class="text-xs text-slate-400">No notes added for this shift.</p>
+</div>
+</section>
+<!-- END: Shift Notes -->
+<!-- BEGIN: Session & Logs -->
+<section class="bg-white rounded-xl p-4 shadow-sm border border-slate-100" data-purpose="session-logs">
+<h3 class="card-title">Session &amp; Logs</h3>
+<div class="space-y-2 mb-4">
+<div class="detail-row">
+<span class="detail-label">Session Status</span>
+<span class="status-badge">Active — Checked In</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Check-in Time</span>
+<span class="detail-value">08:02 AM</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Today's Cash Logs</span>
+<span class="detail-value">৳ 0.00</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Session Duration</span>
+<span class="detail-value">—</span>
+</div>
+<div class="detail-row">
+<span class="detail-label">Check-out Time</span>
+<span class="detail-value">—</span>
+</div>
+</div>
+<button class="w-full py-3 px-4 border border-blue-600 text-blue-600 rounded-xl text-sm font-bold flex items-center justify-center hover:bg-blue-50 transition-colors">
+        Log Cash Received (৳)
+      </button>
+</section>
+<!-- END: Session & Logs -->
+<!-- BEGIN: Attendance & Actions Status Bar -->
+<section class="space-y-3" data-purpose="attendance-status">
+<p class="text-xs font-bold text-slate-800 uppercase tracking-wider">Attendance &amp; Actions</p>
+<div class="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center gap-3">
+<div class="bg-green-500 rounded-full p-0.5 text-white">
+<svg class="h-3 w-3" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<p class="text-xs text-green-800 font-medium">You have successfully checked in to this shift at 08:02 AM.</p>
+</div>
+<p class="text-[10px] text-slate-400 italic">Please complete your tasks and check-out at the end of your shift.</p>
+</section>
+<!-- END: Attendance & Actions Status Bar -->
+</main>
+<!-- BEGIN: Bottom Tab Navigation (Contextual) -->
+<footer class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 flex justify-around items-center py-2 px-4 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-[10px]">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-600">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-[10px] font-bold">Schedule</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-[10px]">Bookings</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="text-[10px]">Earning</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<div class="h-5 w-5 rounded-full bg-slate-200 border border-slate-300 overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXCV0eRHEvK_0mJDQBgraJQRzkNnjmH2TR-N-OsD66DuEnl0vfePkuZHf6EaSXylj4hzaFmL3Am9tuBz2VDqb4P_FBFGr7GHPsyTohiA2pdVY69-U9H1fgwJfZkW4YDeKkysK35oCTRfNce33itkGDABFs6EPbjQOPFjaTovYJOCZkDQaZfzfs8dd1AValsjLhgjc1lKW-fwWPCFLw1P2Ek6RF9IZl1Zj4de_SezZUDrOyc8XA-E_THGqZcK5xIOCsLUNBpOEkpZ2t"/>
+</div>
+<span class="text-[10px]">Profile</span>
+</button>
+</footer>
+<!-- END: Bottom Tab Navigation -->
+</body></html>
