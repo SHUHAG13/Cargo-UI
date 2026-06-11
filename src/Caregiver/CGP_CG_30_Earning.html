@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareGo+ | Earnings Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error-container": "#ffdad6",
+                "on-background": "#191c1d",
+                "inverse-surface": "#2e3132",
+                "surface-variant": "#e1e3e4",
+                "on-error": "#ffffff",
+                "surface-container-high": "#e7e8e9",
+                "on-primary": "#ffffff",
+                "secondary-fixed": "#6efcb9",
+                "on-tertiary-fixed": "#341100",
+                "background": "#f8f9fa",
+                "on-surface": "#191c1d",
+                "surface-container-low": "#f3f4f5",
+                "tertiary-fixed-dim": "#ffb690",
+                "on-secondary-fixed": "#002113",
+                "on-primary-container": "#799dd6",
+                "tertiary-container": "#592300",
+                "on-secondary-fixed-variant": "#005234",
+                "surface-bright": "#f8f9fa",
+                "surface": "#f8f9fa",
+                "on-secondary-container": "#00734c",
+                "tertiary-fixed": "#ffdbca",
+                "on-primary-fixed": "#001b3c",
+                "tertiary": "#381300",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#6efcb9",
+                "outline": "#737780",
+                "primary": "#001e40",
+                "border-subtle": "#E9ECEF",
+                "on-secondary": "#ffffff",
+                "primary-fixed": "#d5e3ff",
+                "primary-container": "#003366",
+                "on-tertiary": "#ffffff",
+                "surface-container": "#edeeef",
+                "outline-variant": "#c3c6d1",
+                "primary-fixed-dim": "#a7c8ff",
+                "secondary-fixed-dim": "#4edf9f",
+                "text-main": "#1A1C1E",
+                "on-tertiary-container": "#d8885c",
+                "surface-card": "#FFFFFF",
+                "inverse-on-surface": "#f0f1f2",
+                "inverse-primary": "#a7c8ff",
+                "error": "#ba1a1a",
+                "surface-tint": "#3a5f94",
+                "on-surface-variant": "#43474f",
+                "on-tertiary-fixed-variant": "#723610",
+                "text-muted": "#6C757D",
+                "on-primary-fixed-variant": "#1f477b",
+                "surface-dim": "#d9dadb",
+                "surface-container-highest": "#e1e3e4",
+                "secondary": "#006c47",
+                "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "spacing": {
+                "stack-lg": "32px",
+                "container-max": "1200px",
+                "gutter": "24px",
+                "margin-mobile": "16px",
+                "sidebar-width": "280px",
+                "stack-sm": "8px",
+                "stack-md": "16px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Inter", "sans-serif"],
+                "headline-md": ["Inter", "sans-serif"],
+                "body-lg": ["Inter", "sans-serif"],
+                "body-md": ["Inter", "sans-serif"],
+                "label-caps": ["Inter", "sans-serif"],
+                "display-earnings": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-glow {
+            box-shadow: 0 0 15px rgba(110, 252, 185, 0.2);
+        }
+        .chart-bar {
+            transition: height 1s ease-in-out;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-primary-container text-on-primary-container border-r border-border-subtle shadow-sm flex flex-col py-stack-lg z-50">
+<div class="px-gutter mb-10">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-primary-container">CareGo+</h1>
+<p class="text-on-primary-container/60 font-body-md text-body-md">Caregiver Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-stack-md text-on-primary-container/60 hover:text-on-primary-container px-gutter py-stack-md transition-colors hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<!-- Schedule -->
+<a class="flex items-center gap-stack-md text-on-primary-container/60 hover:text-on-primary-container px-gutter py-stack-md transition-colors hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-caps text-label-caps">Schedule</span>
+</a>
+<!-- Bookings -->
+<a class="flex items-center gap-stack-md text-on-primary-container/60 hover:text-on-primary-container px-gutter py-stack-md transition-colors hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps">Bookings</span>
+</a>
+<!-- Earnings (ACTIVE) -->
+<a class="flex items-center gap-stack-md text-on-primary-container font-bold border-l-4 border-secondary-container bg-surface-container-highest/10 px-gutter py-stack-md active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps">Earnings</span>
+</a>
+<!-- Ledger -->
+<a class="flex items-center gap-stack-md text-on-primary-container/60 hover:text-on-primary-container px-gutter py-stack-md transition-colors hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-caps text-label-caps">Accounts &amp; Ledger</span>
+</a>
+<!-- Support -->
+<a class="flex items-center gap-stack-md text-on-primary-container/60 hover:text-on-primary-container px-gutter py-stack-md transition-colors hover:bg-primary/20" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</nav>
+<div class="mt-auto px-gutter space-y-4">
+<button class="w-full py-2 px-4 rounded-lg bg-on-primary-container/10 border border-on-primary-container/20 text-on-primary-container font-label-caps text-label-caps hover:bg-on-primary-container/20 transition-all">
+                Switch to User
+            </button>
+<div class="pt-6 border-t border-on-primary-container/10">
+<div class="flex items-center gap-3 mb-4">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-secondary-container" data-alt="A professional portrait of a South Asian woman caregiver named Afia Islam, smiling warmly in a clinical yet approachable setting. She is wearing a professional medical tunic, and the lighting is bright and airy, reflecting a trust-based healthcare environment. The overall aesthetic is clean, modern, and professional with a focus on reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH96w6BXNUeGdc1KTKT2fD7noAkrzks6GWfKC6q4gOkbqGmKYDuknIwhEKxeH1vyoGGPid-2fNifwpQdefHNFtzxUIpPM-msPw6kuMXRhsOZ_KNJlUdobm5gejJ-R3OKcaIjDDFS6pVjO-cnVvpR5XMO2LQlHk8HqRnNwvFwrJQhQ9hKKk-f9j8FsGIdvLuZ_5IaDTRlBDOpKf-BUYFK5vWsNcWXpOnqVxa2Blsc-Bs654DlETOr5wW81Y-aoqaktNP-6tulTXfkY"/>
+<div>
+<p class="font-headline-md text-[14px] font-bold text-on-primary-container">Afia Islam</p>
+<p class="text-[12px] text-on-primary-container/60">Caregiver</p>
+</div>
+</div>
+<a class="flex items-center gap-stack-md text-on-primary-container/60 hover:text-on-primary-container transition-colors py-1" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-[280px] min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-end items-center h-16 px-gutter bg-surface/80 backdrop-blur-md border-b border-border-subtle sticky top-0 z-40">
+<div class="flex items-center gap-stack-md">
+<button class="relative p-2 text-text-muted hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-6 w-[1px] bg-border-subtle mx-2"></div>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-caps text-label-caps hover:opacity-90 transition-all active:opacity-80">
+                    Switch to User
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-stack-lg max-w-[1200px] w-full mx-auto">
+<!-- Header Section -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-text-main">My Earnings</h2>
+<p class="text-body-md text-text-muted mt-1">Track your completed shifts, payouts, and pending balances.</p>
+</div>
+<!-- Summary Cards Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Available to Withdraw -->
+<div class="bg-surface-card p-stack-md rounded-xl border border-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between min-h-[160px]">
+<div>
+<p class="font-label-caps text-label-caps text-text-muted uppercase">Available to Withdraw</p>
+<p class="font-display-earnings text-display-earnings text-secondary mt-2">৳12,500.00</p>
+</div>
+<button class="w-full mt-4 py-3 bg-secondary text-on-secondary rounded-lg font-label-caps text-label-caps font-bold hover:brightness-110 transition-all active:scale-[0.98]">
+                        Withdraw Funds
+                    </button>
+</div>
+<!-- Pending Clearance -->
+<div class="bg-surface-card p-stack-md rounded-xl border border-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] min-h-[160px] relative">
+<div class="absolute top-4 right-4 text-tertiary-container bg-tertiary-fixed-dim/20 p-2 rounded-full">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<p class="font-label-caps text-label-caps text-text-muted uppercase">Pending Clearance</p>
+<p class="font-display-earnings text-display-earnings text-text-main mt-2">৳4,830.00</p>
+<p class="text-body-md text-text-muted mt-4">Expected in 3-5 business days</p>
+</div>
+<!-- Total Earnings (Month) -->
+<div class="bg-surface-card p-stack-md rounded-xl border border-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] min-h-[160px] relative overflow-hidden">
+<div class="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-secondary-container/30 text-on-secondary-container rounded-full text-[12px] font-bold">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                        12%
+                    </div>
+<p class="font-label-caps text-label-caps text-text-muted uppercase">Total Earnings (This Month)</p>
+<p class="font-display-earnings text-display-earnings text-text-main mt-2">৳34,200.00</p>
+<a class="inline-block text-body-md text-primary font-semibold mt-4 hover:underline" href="#">View Monthly Report</a>
+</div>
+</div>
+<!-- Analytics Section -->
+<div class="bg-surface-card p-stack-lg rounded-xl border border-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] mb-stack-lg">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md text-text-main">Earnings Overview</h3>
+<p class="text-body-md text-text-muted">Net earnings growth over the last 6 months</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-subtle rounded-lg text-body-md bg-background hover:bg-surface-container transition-colors">Line</button>
+<button class="px-4 py-2 border border-border-subtle rounded-lg text-body-md bg-primary text-on-primary transition-colors">Bar</button>
+</div>
+</div>
+<div class="h-64 flex items-end justify-between gap-4 px-4 relative">
+<!-- Simple CSS Bar Chart Representation -->
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/10 rounded-t-lg relative group-hover:bg-primary-container/20 transition-all h-[40%]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">৳18k</div>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted">JAN</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/10 rounded-t-lg relative group-hover:bg-primary-container/20 transition-all h-[55%]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">৳22k</div>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted">FEB</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/10 rounded-t-lg relative group-hover:bg-primary-container/20 transition-all h-[70%]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">৳28k</div>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted">MAR</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/10 rounded-t-lg relative group-hover:bg-primary-container/20 transition-all h-[65%]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">৳26k</div>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted">APR</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-primary-container/10 rounded-t-lg relative group-hover:bg-primary-container/20 transition-all h-[85%]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">৳32k</div>
+</div>
+<span class="font-label-caps text-label-caps text-text-muted">MAY</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 group">
+<div class="w-full bg-secondary rounded-t-lg relative h-[95%] shadow-[0_-4px_12px_rgba(0,182,122,0.2)]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-background text-white text-[10px] py-1 px-2 rounded opacity-100">৳34.2k</div>
+</div>
+<span class="font-label-caps text-label-caps text-text-main font-bold">JUN</span>
+</div>
+<!-- Y-Axis Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none pb-8">
+<div class="border-b border-border-subtle w-full h-0 opacity-50"></div>
+<div class="border-b border-border-subtle w-full h-0 opacity-50"></div>
+<div class="border-b border-border-subtle w-full h-0 opacity-50"></div>
+<div class="border-b border-border-subtle w-full h-0 opacity-50"></div>
+</div>
+</div>
+</div>
+<!-- Recent Transactions Table -->
+<div class="bg-surface-card rounded-xl border border-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="p-stack-md border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-text-main">Recent Transactions &amp; Completed Shifts</h3>
+<div class="flex gap-stack-sm">
+<button class="px-3 py-1.5 border border-border-subtle rounded-lg text-body-md flex items-center gap-2 hover:bg-background transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filter
+                        </button>
+<button class="px-3 py-1.5 border border-border-subtle rounded-lg text-body-md flex items-center gap-2 hover:bg-background transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export CSV
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-subtle">
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">Date</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">Service &amp; Booking ID</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">Duration / Shift</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">Gross Earning</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">CareGo+ Fee</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">Net Earning</th>
+<th class="px-gutter py-4 font-label-caps text-label-caps text-text-muted">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">Jun 04, 2026</td>
+<td class="px-gutter py-4">
+<p class="font-body-md text-body-md text-text-main font-semibold">Caregiver Service</p>
+<p class="text-[12px] text-text-muted">BK-2026-0604-001</p>
+</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">24 Hours</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">৳3,500.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-error">-৳350.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-secondary font-bold">৳3,150.00</td>
+<td class="px-gutter py-4">
+<span class="px-2 py-1 rounded-full text-[11px] font-bold bg-secondary-container/30 text-on-secondary-container uppercase">Completed</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">Jun 02, 2026</td>
+<td class="px-gutter py-4">
+<p class="font-body-md text-body-md text-text-main font-semibold">Senior Home Support</p>
+<p class="text-[12px] text-text-muted">BK-2026-0602-014</p>
+</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">12 Hours</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">৳1,800.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-error">-৳180.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-secondary font-bold">৳1,620.00</td>
+<td class="px-gutter py-4">
+<span class="px-2 py-1 rounded-full text-[11px] font-bold bg-secondary-container/30 text-on-secondary-container uppercase">Completed</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">May 28, 2026</td>
+<td class="px-gutter py-4">
+<p class="font-body-md text-body-md text-text-main font-semibold">Post-Surgery Care</p>
+<p class="text-[12px] text-text-muted">BK-2026-0528-092</p>
+</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">30 Days</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">৳45,000.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-error">-৳4,500.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-secondary font-bold">৳40,500.00</td>
+<td class="px-gutter py-4">
+<span class="px-2 py-1 rounded-full text-[11px] font-bold bg-surface-container-highest text-text-muted uppercase">Withdrawn</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">Jun 06, 2026</td>
+<td class="px-gutter py-4">
+<p class="font-body-md text-body-md text-text-main font-semibold">Emergency Night Shift</p>
+<p class="text-[12px] text-text-muted">BK-2026-0606-102</p>
+</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">8 Hours</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-text-main">৳2,000.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-error">-৳200.00</td>
+<td class="px-gutter py-4 font-body-md text-body-md text-secondary font-bold">৳1,800.00</td>
+<td class="px-gutter py-4">
+<span class="px-2 py-1 rounded-full text-[11px] font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant uppercase">Pending</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-stack-md bg-surface-container-low flex justify-between items-center border-t border-border-subtle">
+<p class="text-body-md text-text-muted">Showing 4 of 28 transactions</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-subtle bg-white text-text-muted disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-subtle bg-primary text-on-primary">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-subtle bg-white text-text-main hover:bg-background transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-subtle bg-white text-text-main hover:bg-background transition-colors">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-subtle bg-white text-text-main hover:bg-background transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto p-gutter border-t border-border-subtle bg-white">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-4">
+<p class="text-body-md text-text-muted">© 2024 CareGo+ Caregiver Portal. All rights reserved.</p>
+<div class="h-4 w-[1px] bg-border-subtle hidden md:block"></div>
+<a class="text-body-md text-primary hover:underline" href="#">Privacy Policy</a>
+<a class="text-body-md text-primary hover:underline" href="#">Terms of Service</a>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-body-md font-semibold text-text-main">Secured &amp; Encrypted Payments</span>
+</div>
+</div>
+</footer>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple interactivity for the 'Withdraw' button
+        const withdrawBtn = document.querySelector('button.bg-secondary');
+        withdrawBtn.addEventListener('click', () => {
+            withdrawBtn.innerHTML = '<span class="flex items-center justify-center gap-2"><svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing...</span>';
+            setTimeout(() => {
+                withdrawBtn.innerHTML = 'Withdraw Funds';
+                alert('Withdrawal request initiated successfully. Check your ledger for updates.');
+            }, 1500);
+        });
+
+        // Initialize Bar animations
+        window.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                const targetHeight = bar.style.height;
+                bar.style.height = '0px';
+                setTimeout(() => {
+                    bar.style.height = targetHeight;
+                }, 300);
+            });
+        });
+    </script>
+</body></html>
