@@ -3,7 +3,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CareGo+ Registration</title>
+<title>CareGo+ Login</title>
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Custom Fonts (Assuming standard sans-serif for demo, approximating with Inter) -->
@@ -72,12 +72,12 @@
 <section class="lg:w-1/2 flex flex-col justify-center" data-purpose="marketing-content">
 <div class="mb-8">
 <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-          Create your<br/>
-          <span class="text-carego-teal">CareGo<span class="text-carego-orange">+</span></span><br/>
-          account today.
+          Welcome back!<br/>
+          Login to your <span class="text-carego-teal">CareGo<span class="text-carego-orange">+</span></span><br/>
+          account.
         </h1>
 <p class="text-gray-500 mt-6 text-lg max-w-md">
-          Join thousands of families accessing quality care with ease. Start your journey with CareGo+ in just minutes.
+          Access your bookings, manage your services, and stay connected with your care team.
         </p>
 </div>
 <!-- Feature List -->
@@ -112,14 +112,14 @@
 </div>
 <!-- Illustration Area -->
 <div class="relative w-full max-w-lg mx-auto lg:mx-0">
-<img alt="Healthcare professional with elderly person" class="w-full h-auto rounded-2xl shadow-lg" src="registration.png"/>
-</div>
+<!-- Replicating the illustration background and person using the provided image or placeholder -->
+<img alt="Caregiver Illustration" class="w-full h-auto rounded-2xl shadow-lg" src="login.png"/>
 </section>
-<!-- RIGHT SIDE: Registration Card -->
+<!-- RIGHT SIDE: Login Card -->
 <section class="lg:w-1/2 flex items-center justify-center">
-<div class="w-full max-w-md bg-white p-8 rounded-2xl border border-gray-100 shadow-sm" data-purpose="registration-form-card">
-<h2 class="text-3xl font-bold text-gray-900 mb-2">Sign Up</h2>
-<p class="text-gray-500 mb-8">Create an account to get started with CareGo+.</p>
+<div class="w-full max-w-md bg-white p-8 rounded-2xl border border-gray-100 shadow-sm" data-purpose="login-form-card">
+<h2 class="text-3xl font-bold text-gray-900 mb-2">Log In</h2>
+<p class="text-gray-500 mb-8">Welcome back! Please log in to continue.</p>
 <form action="#" class="space-y-5">
 <!-- Phone/Email Field -->
 <div data-purpose="input-group">
@@ -131,16 +131,6 @@
 <input class="w-full pl-11 pr-4 py-3 rounded-xl border-gray-200 focus:border-carego-teal focus:ring-carego-teal text-sm" placeholder="Enter your phone number or email" type="text"/>
 </div>
 </div>
-<!-- Full Name Field -->
-<div data-purpose="input-group">
-<label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-<div class="relative">
-<span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</span>
-<input class="w-full pl-11 pr-4 py-3 rounded-xl border-gray-200 focus:border-carego-teal focus:ring-carego-teal text-sm" placeholder="Your full name" type="text"/>
-</div>
-</div>
 <!-- Password Field -->
 <div data-purpose="input-group">
 <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
@@ -148,33 +138,20 @@
 <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
-<input class="w-full pl-11 pr-11 py-3 rounded-xl border-gray-200 focus:border-carego-teal focus:ring-carego-teal text-sm" placeholder="Min. 8 characters" type="password"/>
+<input class="w-full pl-11 pr-11 py-3 rounded-xl border-gray-200 focus:border-carego-teal focus:ring-carego-teal text-sm" placeholder="Enter your password" type="password"/>
 <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400" type="button">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </button>
 </div>
 </div>
-<!-- Confirm Password Field -->
-<div data-purpose="input-group">
-<label class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
-<div class="relative">
-<span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</span>
-<input class="w-full pl-11 pr-11 py-3 rounded-xl border-gray-200 focus:border-carego-teal focus:ring-carego-teal text-sm" placeholder="Repeat your password" type="password"/>
-<button class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400" type="button">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-</div>
-</div>
-<!-- Terms & Conditions -->
-<div class="flex items-center">
+<div class="flex items-center justify-between">
 <label class="flex items-center">
 <input class="rounded border-gray-300 text-carego-teal focus:ring-carego-teal" type="checkbox"/>
-<span class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-carego-teal font-semibold hover:underline">Terms of Service</a> and <a href="#" class="text-carego-teal font-semibold hover:underline">Privacy Policy</a></span>
+<span class="ml-2 text-sm text-gray-600">Remember me</span>
 </label>
+<a class="text-sm font-bold text-carego-teal hover:underline" href="#">Forgot Password?</a>
 </div>
-<button class="w-full bg-carego-teal text-white py-3 rounded-xl font-bold hover:bg-opacity-90 transition-colors"><a href="../dashboards/my_bookings.html" class="text-white">Create Account</a></button>
+<button class="w-full bg-carego-teal text-white py-3 rounded-xl font-bold hover:bg-opacity-90 transition-colors" type="submit">Log In</button>
 </form>
 <!-- Divider -->
 <div class="relative my-8">
@@ -197,7 +174,7 @@
 </button>
 </div>
 <p class="mt-8 text-center text-sm text-gray-500">
-          Already have an account? <a class="text-carego-teal font-bold hover:underline" href="#">Sign In</a>
+          Don't have an account? <a class="text-carego-teal font-bold hover:underline" href="#">Sign Up</a>
 </p>
 </div>
 </section>
@@ -263,18 +240,4 @@
 </div>
 </footer>
 <!-- END: Footer -->
-<script>
-  // Password visibility toggle
-  document.querySelectorAll('button[type="button"]').forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      const input = this.parentElement.querySelector('input');
-      if (input.type === 'password') {
-        input.type = 'text';
-      } else {
-        input.type = 'password';
-      }
-    });
-  });
-</script>
 </body></html>
