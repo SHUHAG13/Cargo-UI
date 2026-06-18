@@ -48,7 +48,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <div class="text-brand-teal font-bold text-2xl flex items-center gap-1">
-          <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <!-- <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> -->
             <path
               d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
               fill="currentColor"></path>
@@ -59,22 +59,22 @@
       </div>
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
-        <a class="text-brand-teal border-b-2 border-brand-teal py-5" href="#">Home</a>
-        <a class="hover:text-brand-teal" href="#">Services</a>
-        <a class="hover:text-brand-teal" href="#">About Us</a>
-        <a class="hover:text-brand-teal" href="#">How It Works</a>
-        <a class="hover:text-brand-teal" href="#">For Providers</a>
-        <a class="hover:text-brand-teal" href="#">Contact Us</a>
+        <a class="text-brand-teal border-b-2 border-brand-teal py-5" href="../home/home.html">Home</a>
+        <a class="hover:text-brand-teal" href="../booking/step_1_select_service.html">Services</a>
+        <a class="hover:text-brand-teal" href="../about us.html">About Us</a>
+        <!-- <a class="hover:text-brand-teal" href="#">How It Works</a>
+        <a class="hover:text-brand-teal" href="#">For Providers</a> -->
+        <a class="hover:text-brand-teal" href="../contact.html">Contact Us</a>
       </nav>
         <div class="flex items-center gap-4">
-        <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <!-- <div class="hidden md:flex items-center gap-1 text-sm font-medium">
           <span class="text-gray-400">🌐</span> English ▾
-        </div>
-        <button class="p-2 text-gray-500 hidden md:block">
+        </div> -->
+        <!-- <button class="p-2 text-gray-500 hidden md:block">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
             <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
           </svg>
-        </button>
+        </button> -->
         <a href="../auth/login.html" class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign In</a>
         <a href="../auth/registration.html" class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign Up</a>
       </div>
@@ -123,7 +123,7 @@
             </div>
           </div>
           <div class="flex items-center gap-3">
-            <div class="bg-brand-teal-light p-2 rounded-full text-brand-teal">🔒</div>
+            <div class="bg-brand-teal-light p-2 rounded-full text-brand-teal"></div>
             <div class="text-sm">
               <p class="font-bold">Safe &amp;</p>
               <p class="text-gray-500">Secure</p>
@@ -134,9 +134,13 @@
       <!-- Hero Image Area -->
       <div class="lg:w-1/2 relative mt-12 lg:mt-0">
         <div class="relative w-full aspect-square md:aspect-video lg:aspect-square overflow-hidden">
-          <img alt="Healthcare professional with elderly person" class="w-full h-auto rounded-2xl shadow-lg" src="registration.png" width="600" height="400" />
+          <img
+  src="registration.png"
+  alt="Healthcare professional with elderly person"
+  class="w-[550px] h-auto rounded-2xl shadow-lg"
+/>
           <!-- Decorative Heart Element -->
-          <div
+          <!-- <div
             class="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-brand-teal/30 rounded-full flex items-center justify-center -rotate-12">
             <svg class="w-12 h-12 text-brand-teal opacity-40" fill="none" stroke="currentColor" stroke-width="1"
               viewbox="0 0 24 24">
@@ -144,7 +148,7 @@
                 d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
               </path>
             </svg>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -567,11 +571,6 @@
               thresholds</li>
           </ul>
         </div>
-        <!-- App Dashboard Preview -->
-        <div class="lg:col-span-3 mt-12 flex justify-center">
-          <img alt="Platform Dashboard Interface" class="max-w-4xl w-full rounded-2xl shadow-2xl"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEOfvh4hFudvYpnwGHcGPHL0aO3ndm0mj2xGokK_3JiR6N2ZDWsuY8sbEfnSCXfJXg04gvKJMGYaK-SmhfKE6ZtUhmikVma6YOFsTt7zPtZrIWgABdITp6l9-DmmXXNWfGp2e3wDSPXCMS96ZeLl8qO1M9PslwQqZjJ46CXwnZlxhm1e5UlFikJRIHkjiB-ha0iPvcnQOc2QIOL10AsrfWvTZdGPDtiw7Sj5i9jncRh6jeU0peScBEGn9ixRdTAc1vvWNzT_axypg" />
-        </div>
       </div>
     </div>
   </section>
@@ -735,98 +734,99 @@
   </section>
   <!-- END: CTA Section -->
   <!-- BEGIN: Footer -->
-  <footer class="bg-[#FDFEFE] pt-20 pb-10 border-t border-gray-100" data-purpose="main-footer">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
-      <!-- Logo & About -->
-      <div class="lg:col-span-2">
-        <div class="text-brand-teal font-bold text-2xl flex items-center gap-1 mb-6">
-          <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-              fill="currentColor"></path>
-          </svg>
-          CareGo<span class="text-brand-orange">+</span>
-        </div>
-        <p class="text-gray-500 text-sm leading-relaxed mb-8">
-          CareGo+ connects you with trusted and verified caregivers for all your home care needs. Professional care.
-          Right at home.
-        </p>
-        <div class="flex gap-4">
-          <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-teal hover:text-white transition"
-            href="#">f</a>
-          <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-teal hover:text-white transition"
-            href="#">i</a>
-          <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-teal hover:text-white transition"
-            href="#">in</a>
-          <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-brand-teal hover:text-white transition"
-            href="#">y</a>
-        </div>
+ <!-- BEGIN: MainFooter -->
+<footer class="bg-[#FDFEFE] pt-20 pb-10 border-t border-gray-100 font-sans" data-purpose="main-footer">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
+    
+    <!-- Logo & About -->
+    <div class="lg:col-span-2">
+      <div class="text-[#008561] font-bold text-2xl flex items-center gap-1 mb-6">
+        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"></path>
+        </svg>
+        <span>CareGo</span><span class="text-[#FF8A00]">+</span>
       </div>
-      <!-- Quick Links -->
-      <div>
-        <h4 class="font-bold text-gray-800 mb-6">Quick Links</h4>
-        <ul class="space-y-4 text-sm text-gray-500">
-          <li><a class="hover:text-brand-teal" href="#">Home</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Services</a></li>
-          <li><a class="hover:text-brand-teal" href="#">About Us</a></li>
-          <li><a class="hover:text-brand-teal" href="#">How It Works</a></li>
-          <li><a class="hover:text-brand-teal" href="#">For Providers</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Contact Us</a></li>
-        </ul>
-      </div>
-      <!-- Services -->
-      <div>
-        <h4 class="font-bold text-gray-800 mb-6">Services</h4>
-        <ul class="space-y-4 text-sm text-gray-500">
-          <li><a class="hover:text-brand-teal" href="#">Care Giver</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Physiotherapy</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Nanny Service</a></li>
-        </ul>
-      </div>
-      <!-- Company -->
-      <div>
-        <h4 class="font-bold text-gray-800 mb-6">Company</h4>
-        <ul class="space-y-4 text-sm text-gray-500">
-          <li><a class="hover:text-brand-teal" href="#">About Us</a></li>
-          <li><a class="hover:text-brand-teal" href="#">How It Works</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Careers</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Blog</a></li>
-          <li><a class="hover:text-brand-teal" href="#">Contact Us</a></li>
-        </ul>
-      </div>
-      <!-- Contact Us -->
-      <div class="lg:col-span-1">
-        <h4 class="font-bold text-gray-800 mb-6">Contact Us</h4>
-        <ul class="space-y-4 text-sm">
-          <li class="flex items-start gap-3">
-            <span class="text-brand-teal text-lg">📞</span>
-            <span class="text-brand-teal font-bold">09613-070707</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-brand-teal text-lg">📧</span>
-            <span class="text-brand-teal font-bold break-all">support@carego.plus</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-brand-teal text-lg">📍</span>
-            <span class="text-gray-500 leading-tight">House 01 (1st Floor), Road 02, Sector 03, Uttara,
-              Dhaka-1230</span>
-          </li>
-        </ul>
+      <p class="text-gray-500 text-sm leading-relaxed mb-8">
+        CareGo+ connects you with trusted and verified caregivers for all your home care needs. Professional care. Right at home.
+      </p>
+      <!-- Social Links -->
+      <div class="flex gap-4">
+        <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-[#008561] hover:text-white transition-colors" href="#">f</a>
+        <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-[#008561] hover:text-white transition-colors" href="#">i</a>
+        <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-[#008561] hover:text-white transition-colors" href="#">in</a>
+        <a class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-[#008561] hover:text-white transition-colors" href="#">y</a>
       </div>
     </div>
-    <!-- Copyright Bar -->
-    <div
-      class="max-w-7xl mx-auto px-4 pt-10 border-t border-gray-100 flex flex-wrap justify-between items-center gap-4 text-xs text-gray-400">
-      <p>© 2024 CareGo+. All rights reserved.</p>
-      <div class="flex gap-6">
-        <a class="hover:text-brand-teal" href="#">Terms of Service</a>
-        <span class="text-gray-200">|</span>
-        <a class="hover:text-brand-teal" href="#">Privacy Policy</a>
-        <span class="text-gray-200">|</span>
-        <a class="hover:text-brand-teal" href="#">Legal Declaration</a>
-      </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="font-bold text-gray-800 mb-6">Quick Links</h4>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Home</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Services</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">About Us</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">How It Works</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">For Providers</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Contact Us</a></li>
+      </ul>
     </div>
-  </footer>
+
+    <!-- Services -->
+    <div>
+      <h4 class="font-bold text-gray-800 mb-6">Services</h4>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Care Giver</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Physiotherapy</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Nanny Service</a></li>
+      </ul>
+    </div>
+
+    <!-- Company -->
+    <div>
+      <h4 class="font-bold text-gray-800 mb-6">Company</h4>
+      <ul class="space-y-4 text-sm text-gray-500">
+        <li><a class="hover:text-[#008561] transition-colors" href="#">About Us</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">How It Works</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Careers</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Blog</a></li>
+        <li><a class="hover:text-[#008561] transition-colors" href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Us -->
+    <div class="lg:col-span-1">
+      <h4 class="font-bold text-gray-800 mb-6">Contact Us</h4>
+      <ul class="space-y-4 text-sm">
+        <li class="flex items-start gap-3">
+          <span class="text-lg">📞</span>
+          <span class="text-[#008561] font-bold">09613-070707</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-lg">📧</span>
+          <span class="text-[#008561] font-bold break-all">support@carego.plus</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-lg">📍</span>
+          <span class="text-gray-500 leading-tight">House 01 (1st Floor), Road 02, Sector 03, Uttara, Dhaka-1230</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Copyright Bar -->
+  <div class="max-w-7xl mx-auto px-4 pt-10 border-t border-gray-100 flex flex-wrap justify-between items-center gap-4 text-xs text-gray-400">
+    <p>© 2026 CareGo+. All rights reserved.</p>
+    <div class="flex gap-6">
+      <a class="hover:text-[#008561] transition-colors" href="#">Terms of Service</a>
+      <span class="text-gray-200">|</span>
+      <a class="hover:text-[#008561] transition-colors" href="#">Privacy Policy</a>
+      <span class="text-gray-200">|</span>
+      <a class="hover:text-[#008561] transition-colors" href="#">Legal Declaration</a>
+    </div>
+  </div>
+</footer>
+<!-- END: MainFooter -->
   <!-- END: Footer -->
 </body>
 

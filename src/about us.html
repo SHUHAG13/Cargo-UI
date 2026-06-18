@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>About Us - CareGo+</title>
+  <!-- Tailwind CSS CDN with Plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            
+            primary: '#008561', // Teal
+            secondary: '#E6F3F0', // Light Teal
+            accent: '#FF8A00', // Orange
+            'accent-dark': '#E67E00',
+            'primary-dark': '#006D50',
+            dark: '#1F2937', // Footer Dark
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Custom Styles -->
+  <style data-purpose="custom-typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+  <style data-purpose="header-styles">
+    .nav-link {
+      @apply text-sm font-medium text-gray-700 hover:text-primary transition-colors duration-200;
+    }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800">
+  <!-- BEGIN: Top Info Bar -->
+  <!-- BEGIN: MainHeader -->
+<header class="bg-white border-b sticky top-0 z-50 font-sans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    
+    <!-- Logo Section -->
+    <div class="flex items-center gap-2">
+      <div class="text-[#008561] font-bold text-2xl flex items-center gap-1">
+        <svg class="w-8 h-8 inline-block" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#008561"></path>
+          <path d="M12 7v6M9 10h6" stroke="white" stroke-linecap="round" stroke-width="2"></path>
+        </svg>
+        <span>CareGo</span><span class="text-[#FF8A00]">+</span>
+      </div>
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+      <a class="text-[#008561] border-b-2 border-[#008561] py-5" href="../home/home.html">Home</a>
+      <a class="hover:text-[#008561] transition-colors" href="../booking/step_1_select_service.html">Services</a>
+      <a class="hover:text-[#008561] transition-colors" href="../about us.html">About Us</a>
+      <a class="hover:text-[#008561] transition-colors" href="../contact.html">Contact Us</a>
+    </nav>
+
+    <!-- Auth Buttons -->
+    <div class="flex items-center gap-4">
+      <a href="../auth/login.html" class="px-4 py-2 border border-[#008561] text-[#008561] rounded-md text-sm font-semibold hover:bg-[#E6F3F0] transition">
+        Sign In
+      </a>
+      <a href="../auth/registration.html" class="px-4 py-2 bg-[#008561] text-white rounded-md text-sm font-semibold hover:bg-[#008561] transition">
+        Sign Up
+      </a>
+    </div>
+
+  </div>
+</header>
+<!-- END: MainHeader -->
+  <!-- END: Top Info Bar -->
+  <!-- BEGIN: MainHeader -->
+ 
+  <!-- END: MainHeader -->
+  <!-- BEGIN: HeroSection -->
+  <section class="relative bg-primary py-20 px-4 text-center text-white overflow-hidden" data-purpose="page-hero">
+    <!-- Abstract pattern overlay background -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div
+        class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent">
+      </div>
+    </div>
+    <div class="relative z-10">
+      <nav class="text-xs mb-4 opacity-80">
+        Home » About Us
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold">About Us</h1>
+    </div>
+  </section>
+  <!-- END: HeroSection -->
+  <main>
+    <!-- BEGIN: CompanyOverview -->
+    <section class="py-16 px-4 max-w-5xl mx-auto text-center" data-purpose="intro-text">
+      <h2 class="text-3xl font-bold text-primary mb-6">CareGo+</h2>
+      <p class="text-gray-600 leading-relaxed mb-8">
+        <strong>CareGo+</strong> stands as a beacon of professional and compassionate healthcare within Bangladesh,
+        specializing in comprehensive home-based medical services. Our agency is dedicated to providing high-quality
+        nursing care, elderly assistance, and post-operative support to those who need it most.
+      </p>
+      <div class="mb-12">
+        <h3 class="text-2xl font-bold text-primary mb-4">Our Commitment To Health Care</h3>
+        <p class="text-gray-600 leading-relaxed italic">
+          At CareGo+, our commitment to healthcare is defined by our unwavering dedication to patient well-being and
+          clinical excellence. We believe that every individual deserves access to high-quality medical support within
+          the security of their own home.
+        </p>
+      </div>
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-primary mb-2">Our CareGo+ Services</h3>
+        <p class="text-gray-500 text-sm">Best Home Health Care Services in Bangladesh.</p>
+      </div>
+    </section>
+    <!-- END: CompanyOverview -->
+    <!-- BEGIN: ServicesGrid -->
+    <section class="py-16 bg-secondary px-4" data-purpose="services-showcase">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service Card 1 -->
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-gray-100">
+          <img alt="Nursing Service" class="w-full h-48 object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPKn49gRQap-j5SrRCzMdSm83-xflsmuWf5ViifsxSErSUeeVHwBnMuAuyv-tfK1qNL86ZcKmOV6Un6ssiZATZVJ76XRJmel6oxb9jgbQ3QcRCfISZWcpILtR3IyCMUFKLeOmWckmhswdjEJAaSE650pP2f1_aNuvBS67nsYMzwfECpmqkaCAh3pOG2gAgxiWxcHQY9ZjhivuZG376xfFrv5dMJgmtjNFsv9TFhuG4NsqX_---lIByd9ZgMN1YXeizk784gm_xfWFt" />
+          <div class="p-6 text-center flex-grow">
+            <h4 class="text-xl font-bold text-primary mb-4">Nursing Home Service</h4>
+            <p class="text-sm text-gray-600 mb-6">CareGo+ offers premium nursing home services that prioritize patient
+              safety and comfort. Our skilled medical professionals provide 24/7 monitoring and specialized wound care.
+            </p>
+            <button
+              class="bg-primary text-white px-8 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Contact
+              Now</button>
+          </div>
+        </div>
+        <!-- Service Card 2 -->
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-gray-100">
+          <img alt="Caregiver Service" class="w-full h-48 object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6kGWzRUFljj0oZguSIMsrn29v2hQ5khK6GPKZAP5vNsT47YNR7Fh7m-JjOUee2RXa72-w5NOm86cs2kENLxnXuftij4d2G4epfkqK_73EBx2EKGTDLABbZJ6GuZKmV5FN_qXiKl9qsZki0RhQGOU0q8VkW7TFJAF5mM65pX2kGC04aj4znte0b09Nwv4_cUX_yrZghE_5nDUINB3QqI550b2eQf-c9RCRiJqk1LJZ7OW2LXEA3FXFWsTpdV4W2zft1N7JRzwcYmXZ" />
+          <div class="p-6 text-center flex-grow">
+            <h4 class="text-xl font-bold text-primary mb-4">Caregiver Service</h4>
+            <p class="text-sm text-gray-600 mb-6">CareGo+ offers professional caregiver services focused on the comfort
+              and well-being of your loved ones. Our compassionate staff provides 24/7 support.</p>
+            <button
+              class="bg-primary text-white px-8 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Contact
+              Now</button>
+          </div>
+        </div>
+        <!-- Service Card 3 -->
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-gray-100">
+          <img alt="Oxygen Cylinder" class="w-full h-48 object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAVM1T6sgJJcAa0D6MAHrqZuJ0kUEf56vHw5sIz_HE36_lLL8OoSLCPio-MfJIyMnHs7Hz8jDovTzPP4Z5PRIdC2KDKoaOPmEQPpvtE5jDI7Sf1BCrLfNt_ZdpatIcGB0zbfnGFOHsR-8HT03dr9h-ymXswK8mI2eHSBTC6UcPBF3jai5cdJjHUvNSN2iCbHfkGvbXMrCNctfxxLCQm9--_S58q7TdVIGf589IdYqDVCqcNtQB2tcCp5Mn9g90PzR7PXwSgse3JB8O" />
+          <div class="p-6 text-center flex-grow">
+            <h4 class="text-xl font-bold text-primary mb-4">Oxygen Cylinder</h4>
+            <p class="text-sm text-gray-600 mb-6">CareGo+ provides reliable oxygen cylinder services to ensure immediate
+              respiratory support for patients at home. We offer high-quality cylinders with all accessories.</p>
+            <button
+              class="bg-primary text-white px-8 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Contact
+              Now</button>
+          </div>
+        </div>
+        <!-- Service Card 4 -->
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-gray-100">
+          <img alt="Physiotherapy" class="w-full h-48 object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCGtdLSpjVlmJ6jOwfzZpzThM-xbk4txR1nCScQ1jUnloIEc8S49pTzn7byHZPNDrkQ-PeY67vbUpR2ZkzEMq08PkEdQ0AsSjoMljbWURFJBLfWOBKvZPDQjtl6nAi_hJfiCRwEPXmLbDLMp7Vhb3fhnmySZkS_KG8iU9SCcXRMii7YFpXp-7eAs0rR7H6biHZVmdwgaPXZ3fT-Pq-JEGKuZerczjM2PqCVBGeEcY6sb789VNN4dq_daQ0_gO_rLlzm7ra6NDp2PsC" />
+          <div class="p-6 text-center flex-grow">
+            <h4 class="text-xl font-bold text-primary mb-4">Physiotherapy Home Service</h4>
+            <p class="text-sm text-gray-600 mb-6">CareGo+ provides professional physiotherapy home services to help
+              patients regain mobility and strength. Our certified specialists design personalized plans.</p>
+            <button
+              class="bg-primary text-white px-8 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Contact
+              Now</button>
+          </div>
+        </div>
+        <!-- Service Card 5 -->
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-gray-100">
+          <img alt="Medical Equipment" class="w-full h-48 object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2LA2-OpbKdRs3Nd00yTRvwC5u5HM3Y0KOr_h2z_0CDZpY3H75DUFhjlXzYcpL6W8aFPLxTRN-ZgNbluUbdLioFp-YeySGxJfPRNcfbNzVGW-1xANN5VvjG9s8BAZyNfd61x93spP93iWs048qNsQ-fcX8cuthBKeV9qO7F4UHry6TzlpqOboHwCxxkTUmR1zA-F_VNQdkPBXIS-IV0Pe72IEAME2TRx4lw-OjUJJIeWeyy4fXTwDd8WpQJIjYfAi4sSMPyEc_GJqv" />
+          <div class="p-6 text-center flex-grow">
+            <h4 class="text-xl font-bold text-primary mb-4">Medical Equipment</h4>
+            <p class="text-sm text-gray-600 mb-6">CareGo+ provides a comprehensive range of high-quality medical
+              equipment for home use, including hospital beds, wheelchairs, and monitors.</p>
+            <button
+              class="bg-primary text-white px-8 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Contact
+              Now</button>
+          </div>
+        </div>
+        <!-- Service Card 6 -->
+        <div
+          class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col border border-gray-100">
+          <img alt="Doctor Home Visit" class="w-full h-48 object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5XhrlQ59BFre8zbrtW8j1dYZFfKjbQ6Af0NUcDLXfHhiEUl70xZ45pCR4mA63VZ_JXPgIiIwNZ8P9GG3eGJiWLTL2IAbaSupo5P841H44zXqQdf0mdPBlQp78LOv8ORLRV8_lYkdVtDbsrCZDSKcTzfz4Gm9h48pstD1IEwY050N4Jeoo7FFEKY5kWpBo06plYH1YEXZjvScSAUm9QY_HZ-fD8RrgU4PLaTWdZRf4jjdWiNIIlEcxriwrsMTjcigkXlu824br1_mA" />
+          <div class="p-6 text-center flex-grow">
+            <h4 class="text-xl font-bold text-primary mb-4">Doctor Home Visit</h4>
+            <p class="text-sm text-gray-600 mb-6">CareGo+ offers professional doctor home visit services, ensuring
+              expert medical consultations in the comfort of your home. We bring reliable healthcare to your doorstep.
+            </p>
+            <button
+              class="bg-primary text-white px-8 py-2 rounded-lg text-sm font-semibold hover:bg-primary-dark transition-colors">Contact
+              Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: ServicesGrid -->
+    <!-- BEGIN: WhyChooseUs -->
+    <section class="py-16 px-4 bg-white" data-purpose="why-choose-us">
+      <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl font-bold text-primary mb-6">Why Choose CareGo+?</h2>
+          <ul class="space-y-4 text-sm text-gray-600">
+            <li><strong class="text-gray-800">• Experience and Expertise:</strong> Our healthcare professionals are
+              experienced, well-trained, and deeply committed to delivering the highest level of care.</li>
+            <li><strong class="text-gray-800">• Tailored Care:</strong> We understand that every individual's needs are
+              unique, and we customize our services to address those needs effectively.</li>
+            <li><strong class="text-gray-800">• Convenience:</strong> We eliminate the hassle of traveling to clinics or
+              hospitals by bringing healthcare directly to your doorstep. Best Nursing Home Service BD.</li>
+            <li><strong class="text-gray-800">• Compassion:</strong> Our approach is characterized by empathy and
+              compassion, ensuring that our clients receive care with dignity and respect.</li>
+            <li><strong class="text-gray-800">• Safety:</strong> We prioritize the safety and well-being of our clients
+              by adhering to strict safety protocols and industry standards.</li>
+          </ul>
+          <button
+            class="mt-8 bg-accent text-white px-8 py-3 rounded-lg font-bold hover:bg-accent-dark transition-colors shadow-lg">Learn
+            More</button>
+        </div>
+        <div class="lg:w-1/2">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-secondary">
+            <img alt="Caregiver Team" class="w-full"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXun-X4harSUxVMjqlXG1gVGadXxja0-SvyXBR3S1OX3976M5GNoebjSxotwbXD9B6eNxqsrGJVp1h-zoi0nuwcu_8MzVEjdpri938q8sKJ9-bA68OwXiTZjfzCDIaQ0AoxA5cTG2ZtwYgZyJlI2gKvOmFg2Xu33ISX0z1SZ6culRoa1fEvqw2RF7dZmL_kF1rc4jzGxs5MjMBmKcLdWwLnN7CY2RrE7FgY-4YI1SD16rYiXzfwii_9ETfkEU-71XaU4hV_eTpSw3o" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: WhyChooseUs -->
+    <!-- BEGIN: ContactUsSection -->
+    <section class="py-16 px-4 bg-secondary" data-purpose="contact-section">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold text-primary text-center mb-12">Contact Us</h2>
+        <!-- Map Container -->
+        <div class="w-full h-96 bg-gray-200 rounded-xl mb-12 overflow-hidden shadow-inner border border-white">
+          <div class="w-full h-full flex items-center justify-center bg-teal-50">
+            <span class="text-teal-600 italic">Interactive Map Area Placeholder</span>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Contact Info -->
+          <div class="lg:w-1/3 bg-white p-8 rounded-2xl border border-teal-100 shadow-sm"
+            data-purpose="contact-details">
+            <h3 class="text-sm font-bold text-accent uppercase tracking-widest mb-2">Get In Touch</h3>
+            <h4 class="text-2xl font-bold text-gray-800 mb-6">Contact Us For Professional Caregiver Services In
+              Bangladesh</h4>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="bg-primary p-3 rounded-lg text-white">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h5 class="font-bold">Address:</h5>
+                  <p class="text-sm text-gray-600">Ka/7, Jagannathpur, Super Market, Bashundhara Rd, Dhaka</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="bg-primary p-3 rounded-lg text-white">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                    </path>
+                  </svg>
+                </div>
+                <div>
+                  <h5 class="font-bold">Email Support:</h5>
+                  <p class="text-sm text-gray-600">caregiveragencybd@gmail.com</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="bg-primary p-3 rounded-lg text-white">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                    <path
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                    </path>
+                  </svg>
+                </div>
+                <div>
+                  <h5 class="font-bold">Let's Talk:</h5>
+                  <p class="text-sm text-gray-600">Phone: +8801315-092095</p>
+                  <p class="text-sm text-gray-600">WhatsApp: +8801739-508350</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Contact Form -->
+          <div class="lg:w-2/3 p-8 bg-white border border-gray-100 rounded-2xl shadow-sm" data-purpose="contact-form">
+            <h3 class="text-sm font-bold text-accent uppercase tracking-widest mb-2">Send Us A Message</h3>
+            <h4 class="text-2xl font-bold text-gray-800 mb-6">Let's start talking With Us</h4>
+            <form class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Name</label>
+                  <input class="w-full rounded-md border-gray-200 bg-gray-50 focus:ring-primary focus:border-primary"
+                    placeholder="Name" type="text" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Company</label>
+                  <input class="w-full rounded-md border-gray-200 bg-gray-50 focus:ring-primary focus:border-primary"
+                    placeholder="Company" type="text" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Phone</label>
+                  <input class="w-full rounded-md border-gray-200 bg-gray-50 focus:ring-primary focus:border-primary"
+                    placeholder="Phone" type="tel" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-gray-700 mb-1">Email</label>
+                  <input class="w-full rounded-md border-gray-200 bg-gray-50 focus:ring-primary focus:border-primary"
+                    placeholder="Email" type="email" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Subject</label>
+                <input class="w-full rounded-md border-gray-200 bg-gray-50 focus:ring-primary focus:border-primary"
+                  placeholder="Subject" type="text" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Message</label>
+                <textarea class="w-full rounded-md border-gray-200 bg-gray-50 focus:ring-primary focus:border-primary"
+                  placeholder="Message" rows="4"></textarea>
+              </div>
+              <button
+                class="bg-primary text-white px-10 py-3 rounded-lg font-bold hover:bg-primary-dark transition-all shadow-md"
+                type="submit">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: ContactUsSection -->
+  </main>
+  <!-- BEGIN: Footer -->
+  <footer class="bg-dark text-gray-400 pt-16 pb-8 px-4" data-purpose="site-footer">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <!-- About Footer -->
+      <div class="space-y-6">
+        <img alt="CareGo+ Footer Logo" class="h-10 brightness-110"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOIG256v9kpTykL_kZD69WlGmlipceeB3vB80xyF1cCOhdnGoFcNjTAYickqA--i3pQT1Yu8d1j4PQBjNQ_4WJDm0fJK9Gjha9KdmiRLJdn4gaq5xdY9N1ZIwv73a9pqmhdLlgveM0Leg4OCfzQaNiBe5QtdfblfkZXOZMMRprCxbVxI2KH5XcJ1QlksHv7ZjgZ1Uw9zDq8evUX1RQcCKBPS0IetlQErf3i4JWvjuIUzwWvaaPHF2ljr4mnmH1yHs8bXvdZhDi8J6D" />
+        <p class="text-sm leading-relaxed">
+          <strong>CareGo+</strong> is a leading caregiver provider agency delivering trusted and professional home care
+          services in Dhaka and throughout Bangladesh. We provide highly trained caregivers, nurses, and patient
+          attendants.
+        </p>
+        <div class="flex gap-3">
+          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
+            href="#">f</a>
+          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
+            href="#">in</a>
+          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
+            href="#">ig</a>
+          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
+            href="#">yt</a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">Quick Links</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Home</a>
+          </li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Our
+              Services</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Our
+              Gallery</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Service
+              areas</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Blog</a>
+          </li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> About
+              Us</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Contact
+              Us</a></li>
+        </ul>
+      </div>
+      <!-- Services List -->
+      <div>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">Services</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Home
+              Nursing Care</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Caregiver
+              Service</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Baby Care
+              at Home</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Doctor
+              Home Visit</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span>
+              Physiotherapy Service</a></li>
+          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Oxygen
+              Cylinder Services</a></li>
+        </ul>
+      </div>
+      <!-- Contact Info -->
+      <div>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">Contact Us</h4>
+        <ul class="space-y-4 text-sm">
+          <li class="flex items-center gap-3">
+            <span class="text-primary text-xl">📞</span>
+            <span>+8801315-092095<br />+8801739-508350</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary text-xl">📍</span>
+            <span>Office: Ka/7, Jagannathpur, super market, Bashundhara Rd, Dhaka 1229</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-primary text-xl">📍</span>
+            <span>Head Office: Ka-38, J. B. Tower, Pragati Sarani Rd, Dhaka 1229</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Bottom Footer -->
+    <div
+      class="max-w-7xl mx-auto pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center text-xs gap-4">
+      <p>© Copyright 2024 CareGo+. All rights reserved. | Sitemap</p>
+      <div class="flex gap-4">
+        <a class="hover:text-white" href="#">Terms of services</a>
+        <a class="hover:text-white" href="#">Privacy Policy</a>
+      </div>
+      <p>Designed by: Md. Mehedi</p>
+    </div>
+  </footer>
+  <!-- END: Footer -->
+  
+   
+</body>
+
+</html>

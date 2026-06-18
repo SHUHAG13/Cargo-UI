@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Contact Us - CareGo+</title>
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#008561',
+            primaryLight: '#E6F3F0',
+            primaryDark: '#006B4D',
+            neutralDark: '#1F2937',
+            accentPurple: '#714B9D', /* Matching the button color from image for authenticity if desired, but prompt asked for Teal */
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '1rem',
+          }
+        }
+      }
+    }
+  </script>
+  <style data-purpose="custom-layout">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fcfcfc;
+    }
+
+    .map-container {
+      height: 300px;
+      width: 100%;
+      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDA_uiqyvnXTQOGmjpi6wjw6o3BN8cl2gxvQ1guu-yhjeVZjlm9EnX5CAMD70lz5fd8qw4s8mDoZwCQv0GcgnGL-yAV5iQjh31eXbLPncOvutJAwzHfALSxuQC57yl9fv0NdkhDglvPDzI9OKqzDrLU_wKe8OC8qLvqmnnGl_TmqG2fo6gVDQ0GR6sP_d_tCiJnQ7MhWpZHucZfCbGaIqUu-DHybmKznOWFPKJwW4HS62T1Q8n8Rijd5WLdthUPGDGdXW4-vjGKg2Kl');
+      background-position: center 15%;
+      background-size: cover;
+    }
+
+    /* Simple custom style for form inputs to match the image's soft look */
+    .form-input-custom {
+      background-color: #F1EFF5;
+      /* Light purple-ish gray from image */
+      border: none !important;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+    }
+
+    .form-input-custom:focus {
+      ring: 2px solid #008561;
+    }
+  </style>
+</head>
+
+<body class="text-neutralDark">
+  <!-- BEGIN: Navigation -->
+ <!-- BEGIN: MainHeader -->
+<header class="bg-white border-b sticky top-0 z-50 font-sans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    
+    <!-- Logo Section -->
+    <div class="flex items-center gap-2">
+      <div class="text-[#008561] font-bold text-2xl flex items-center gap-1">
+        <svg class="w-8 h-8 inline-block" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#008561"></path>
+          <path d="M12 7v6M9 10h6" stroke="white" stroke-linecap="round" stroke-width="2"></path>
+        </svg>
+        <span>CareGo</span><span class="text-[#FF8A00]">+</span>
+      </div>
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+      <a class="text-[#008561] border-b-2 border-[#008561] py-5" href="../home/home.html">Home</a>
+      <a class="hover:text-[#008561] transition-colors" href="../booking/step_1_select_service.html">Services</a>
+      <a class="hover:text-[#008561] transition-colors" href="../about us.html">About Us</a>
+      <a class="hover:text-[#008561] transition-colors" href="../contact.html">Contact Us</a>
+    </nav>
+
+    <!-- Auth Buttons -->
+    <div class="flex items-center gap-4">
+      <a href="../auth/login.html" class="px-4 py-2 border border-[#008561] text-[#008561] rounded-md text-sm font-semibold hover:bg-[#E6F3F0] transition">
+        Sign In
+      </a>
+      <a href="../auth/registration.html" class="px-4 py-2 bg-[#008561] text-white rounded-md text-sm font-semibold hover:bg-[#008561] transition">
+        Sign Up
+      </a>
+    </div>
+
+  </div>
+</header>
+<!-- END: MainHeader -->
+  <!-- END: Navigation -->
+  <!-- BEGIN: Map Section -->
+  <section class="w-full relative" data-purpose="location-map">
+    <div class="map-container"></div>
+    <!-- Floating 'Open in Maps' Button (Mobile Style) -->
+    <a class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-md text-xs font-semibold text-primary shadow-sm border border-gray-200"
+      href="#">
+      Open in Maps ↗
+    </a>
+  </section>
+  <!-- END: Map Section -->
+  <!-- BEGIN: Contact Content Grid -->
+  <main class="max-w-7xl mx-auto px-4 py-8 lg:py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- BEGIN: Left Column - Information -->
+      <section data-purpose="contact-info">
+        <span class="text-primary font-semibold text-sm uppercase tracking-wider underline underline-offset-4">Contact
+          Us</span>
+        <h1 class="mt-4 text-3xl font-bold text-accentPurple leading-tight">
+          Contact Us For Professional Caregiver Services In Bangladesh
+        </h1>
+        <p class="mt-6 text-gray-500 leading-relaxed">
+          Thank you for considering CareGo+ as your trusted healthcare partner. We are here to assist you with your
+          healthcare needs and provide the highest level of care and support to you or your loved ones. Please feel free
+          to reach out to us through the following contact channels:
+        </p>
+        <!-- Contact Info Cards -->
+        <div class="mt-10 space-y-6">
+          <!-- Address -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-accentPurple rounded-xl flex items-center justify-center text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold">Address:</h3>
+              <p class="text-gray-600">Ka/7, jagannathpur, super market, Bashundhara Rd, Dhaka</p>
+            </div>
+          </div>
+          <!-- Email Support -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-accentPurple rounded-xl flex items-center justify-center text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold">Email Support</h3>
+              <p class="text-gray-600">contact@carego-plus.com</p>
+            </div>
+          </div>
+          <!-- Let's Talk -->
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 w-12 h-12 bg-accentPurple rounded-xl flex items-center justify-center text-white">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold">Let's Talk</h3>
+              <p class="text-gray-600">Phone : +8801315-092095</p>
+              <p class="text-gray-600">WhatsApp : +8801739-508350</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END: Left Column -->
+      <!-- BEGIN: Right Column - Contact Form -->
+      <section class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm" data-purpose="contact-form">
+        <span class="text-primary font-semibold text-sm uppercase tracking-wider underline underline-offset-4">Send Us A
+          Message</span>
+        <h2 class="mt-4 text-3xl font-bold text-accentPurple leading-tight">
+          Let's start talking with us
+        </h2>
+        <p class="mt-4 text-gray-500 text-sm leading-relaxed mb-8">
+          Whether you have questions about our services, need assistance, or would like to discuss specific healthcare
+          requirements, our dedicated team is ready to assist you.
+        </p>
+        <form action="#" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Name Field -->
+            <div class="flex flex-col">
+              <label class="text-sm font-bold mb-1 ml-1">Name</label>
+              <input class="form-input-custom focus:ring-primary focus:ring-2" placeholder="Name" type="text" />
+            </div>
+            <!-- Company Field -->
+            <div class="flex flex-col">
+              <label class="text-sm font-bold mb-1 ml-1">Company</label>
+              <input class="form-input-custom focus:ring-primary focus:ring-2" placeholder="Company" type="text" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Phone Field -->
+            <div class="flex flex-col">
+              <label class="text-sm font-bold mb-1 ml-1">Phone</label>
+              <input class="form-input-custom focus:ring-primary focus:ring-2" placeholder="Phone" type="tel" />
+            </div>
+            <!-- Email Field -->
+            <div class="flex flex-col">
+              <label class="text-sm font-bold mb-1 ml-1">Email</label>
+              <input class="form-input-custom focus:ring-primary focus:ring-2" placeholder="Email" type="email" />
+            </div>
+          </div>
+          <!-- Subject Field -->
+          <div class="flex flex-col">
+            <label class="text-sm font-bold mb-1 ml-1">Subject</label>
+            <input class="form-input-custom focus:ring-primary focus:ring-2" placeholder="Subject" type="text" />
+          </div>
+          <!-- Message Field -->
+          <div class="flex flex-col">
+            <label class="text-sm font-bold mb-1 ml-1">Message</label>
+            <textarea class="form-input-custom focus:ring-primary focus:ring-2" placeholder="Message"
+              rows="4"></textarea>
+          </div>
+          <!-- Submit Button -->
+          <div class="pt-4">
+            <button
+              class="bg-primary hover:bg-primaryDark text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300 w-full sm:w-auto"
+              type="submit">
+              Send Message
+            </button>
+          </div>
+        </form>
+      </section>
+      <!-- END: Right Column -->
+    </div>
+  </main>
+  <!-- END: Contact Content Grid -->
+  <!-- BEGIN: Footer Placeholder -->
+  <footer class="bg-primaryLight py-12 mt-12 border-t border-primary/10">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold text-accentPurple mb-4">Our CareGo+ Services In Bangladesh</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">Providing compassionate care and healthcare expertise to your doorstep.
+      </p>
+      <div class="mt-8 pt-8 border-t border-gray-200 text-sm text-gray-500">
+        © 2023 CareGo+ Agency. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  <!-- END: Footer Placeholder -->
+  <script data-purpose="interactive-elements">
+    // Basic mobile menu toggle logic
+    const menuBtn = document.querySelector('[data-purpose="mobile-menu-button"]');
+    menuBtn.addEventListener('click', () => {
+      alert('Mobile menu clicked! In a full implementation, this would open a sidebar or dropdown.');
+    });
+  </script>
+</body>
+
+</html>
