@@ -8,13 +8,20 @@
   <title>About Us - CareGo+</title>
   <!-- Tailwind CSS CDN with Plugins -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            
+            brand: {
+              teal: '#008561',
+              'teal-light': '#E6F3F0',
+              'teal-dark': '#006B4D',
+              orange: '#FF8A00',
+              dark: '#1F2937'
+            },
             primary: '#008561', // Teal
             secondary: '#E6F3F0', // Light Teal
             accent: '#FF8A00', // Orange
@@ -43,42 +50,26 @@
 
 <body class="bg-white text-gray-800">
   <!-- BEGIN: Top Info Bar -->
-  <!-- BEGIN: MainHeader -->
-<header class="bg-white border-b sticky top-0 z-50 font-sans">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-    
-    <!-- Logo Section -->
-    <div class="flex items-center gap-2">
-      <div class="text-[#008561] font-bold text-2xl flex items-center gap-1">
-        <svg class="w-8 h-8 inline-block" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#008561"></path>
-          <path d="M12 7v6M9 10h6" stroke="white" stroke-linecap="round" stroke-width="2"></path>
-        </svg>
-        <span>CareGo</span><span class="text-[#FF8A00]">+</span>
+  <header class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="text-brand-teal font-bold text-2xl flex items-center gap-1">
+          <img src="../../assets/cg-logo.png" width=124 alt="">
+        </div>
+      </div>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a class="hover:text-brand-teal" href="../home/home.html">Home</a>
+        <a class="hover:text-brand-teal" href="../home/homeCareGiver.html">Services</a>
+        <a class="text-brand-teal border-b-2 border-brand-teal py-5" href="about_us.html">About Us</a>
+        <a class="hover:text-brand-teal" href="contact.html">Contact Us</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <a href="../auth/login.html" class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign In</a>
+        <a href="../auth/registration.html" class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign Up</a>
       </div>
     </div>
-
-    <!-- Desktop Nav Links -->
-    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
-      <a class="text-[#008561] border-b-2 border-[#008561] py-5" href="../home/home.html">Home</a>
-      <a class="hover:text-[#008561] transition-colors" href="../booking/step_1_select_service.html">Services</a>
-      <a class="hover:text-[#008561] transition-colors" href="../about us.html">About Us</a>
-      <a class="hover:text-[#008561] transition-colors" href="../contact.html">Contact Us</a>
-    </nav>
-
-    <!-- Auth Buttons -->
-    <div class="flex items-center gap-4">
-      <a href="../auth/login.html" class="px-4 py-2 border border-[#008561] text-[#008561] rounded-md text-sm font-semibold hover:bg-[#E6F3F0] transition">
-        Sign In
-      </a>
-      <a href="../auth/registration.html" class="px-4 py-2 bg-[#008561] text-white rounded-md text-sm font-semibold hover:bg-[#008561] transition">
-        Sign Up
-      </a>
-    </div>
-
-  </div>
-</header>
-<!-- END: MainHeader -->
+  </header>
   <!-- END: Top Info Bar -->
   <!-- BEGIN: MainHeader -->
  
@@ -353,95 +344,221 @@
     <!-- END: ContactUsSection -->
   </main>
   <!-- BEGIN: Footer -->
-  <footer class="bg-dark text-gray-400 pt-16 pb-8 px-4" data-purpose="site-footer">
+  <footer class="text-white pt-16 pb-8 px-4 bg-brand-teal-dark" data-purpose="site-footer">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+
       <!-- About Footer -->
       <div class="space-y-6">
-        <img alt="CareGo+ Footer Logo" class="h-10 brightness-110"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOIG256v9kpTykL_kZD69WlGmlipceeB3vB80xyF1cCOhdnGoFcNjTAYickqA--i3pQT1Yu8d1j4PQBjNQ_4WJDm0fJK9Gjha9KdmiRLJdn4gaq5xdY9N1ZIwv73a9pqmhdLlgveM0Leg4OCfzQaNiBe5QtdfblfkZXOZMMRprCxbVxI2KH5XcJ1QlksHv7ZjgZ1Uw9zDq8evUX1RQcCKBPS0IetlQErf3i4JWvjuIUzwWvaaPHF2ljr4mnmH1yHs8bXvdZhDi8J6D" />
-        <p class="text-sm leading-relaxed">
-          <strong>CareGo+</strong> is a leading caregiver provider agency delivering trusted and professional home care
-          services in Dhaka and throughout Bangladesh. We provide highly trained caregivers, nurses, and patient
-          attendants.
+        <img
+                alt="CareGo+ Footer Logo"
+                width="160"
+                src="../../assets/cg-logo-w.png"
+        />
+
+        <p class="text-sm leading-relaxed text-white">
+          <strong>CareGo+</strong> is a leading caregiver provider agency delivering trusted and professional home care services in Dhaka and throughout Bangladesh. We provide highly trained caregivers, nurses, and patient attendants.
         </p>
+
         <div class="flex gap-3">
-          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
-            href="#">f</a>
-          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
-            href="#">in</a>
-          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
-            href="#">ig</a>
-          <a class="w-8 h-8 bg-zinc-800 flex items-center justify-center rounded-full hover:bg-primary transition-colors text-white"
-            href="#">yt</a>
+
+          <a href="#"
+             class="w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-orange">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a href="#"
+             class="w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-orange">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+
+          <a href="#"
+             class="w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-orange">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a href="#"
+             class="w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-orange">
+            <i class="fab fa-youtube"></i>
+          </a>
+
         </div>
       </div>
+
       <!-- Quick Links -->
       <div>
-        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">Quick Links</h4>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">
+          Quick Links
+        </h4>
+
         <ul class="space-y-3 text-sm">
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Home</a>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Home
+            </a>
           </li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Our
-              Services</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Our
-              Gallery</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Service
-              areas</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Blog</a>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Our Services
+            </a>
           </li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> About
-              Us</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>⦿</span> Contact
-              Us</a></li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Our Gallery
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Service Areas
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Blog
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              About Us
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Contact Us
+            </a>
+          </li>
+
         </ul>
       </div>
-      <!-- Services List -->
+
+      <!-- Services -->
       <div>
-        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">Services</h4>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">
+          Services
+        </h4>
+
         <ul class="space-y-3 text-sm">
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Home
-              Nursing Care</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Caregiver
-              Service</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Baby Care
-              at Home</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Doctor
-              Home Visit</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span>
-              Physiotherapy Service</a></li>
-          <li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span>📍</span> Oxygen
-              Cylinder Services</a></li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Home Nursing Care
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Caregiver Service
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Baby Care at Home
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Doctor Home Visit
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Physiotherapy Service
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Oxygen Cylinder Services
+            </a>
+          </li>
+
         </ul>
       </div>
-      <!-- Contact Info -->
+
+      <!-- Contact -->
       <div>
-        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">Contact Us</h4>
-        <ul class="space-y-4 text-sm">
+
+        <h4 class="text-white font-bold mb-6 border-l-4 border-accent pl-4 uppercase text-sm">
+          Contact Us
+        </h4>
+
+        <ul class="space-y-5 text-sm">
+
           <li class="flex items-center gap-3">
-            <span class="text-primary text-xl">📞</span>
-            <span>+8801315-092095<br />+8801739-508350</span>
+            <i class="fa-solid fa-phone text-brand-orange text-lg"></i>
+            <span>
+                    +8801315-092095<br>
+                    +8801739-508350
+                </span>
           </li>
+
           <li class="flex items-start gap-3">
-            <span class="text-primary text-xl">📍</span>
-            <span>Office: Ka/7, Jagannathpur, super market, Bashundhara Rd, Dhaka 1229</span>
+            <i class="fa-solid fa-location-dot text-brand-orange text-lg mt-1"></i>
+            <span>
+                    Office: Ka/7, Jagannathpur, Super Market, Bashundhara Rd, Dhaka 1229
+                </span>
           </li>
+
           <li class="flex items-start gap-3">
-            <span class="text-primary text-xl">📍</span>
-            <span>Head Office: Ka-38, J. B. Tower, Pragati Sarani Rd, Dhaka 1229</span>
+            <i class="fa-solid fa-building text-brand-orange text-lg mt-1"></i>
+            <span>
+                    Head Office: Ka-38, J. B. Tower, Pragati Sarani Rd, Dhaka 1229
+                </span>
           </li>
+
         </ul>
+
       </div>
+
     </div>
+
     <!-- Bottom Footer -->
-    <div
-      class="max-w-7xl mx-auto pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center text-xs gap-4">
-      <p>© Copyright 2024 CareGo+. All rights reserved. | Sitemap</p>
-      <div class="flex gap-4">
-        <a class="hover:text-white" href="#">Terms of services</a>
-        <a class="hover:text-white" href="#">Privacy Policy</a>
+    <div class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs gap-4">
+
+      <p class="text-white">
+        © Copyright 2026 CareGo+. All rights reserved. | CareGo+
+      </p>
+
+      <div class="flex gap-5">
+
+        <a href="#" class="hover:-translate-y-1 transition-transform duration-200">
+          Terms of Services
+        </a>
+
+        <a href="#" class="hover:-translate-y-1 transition-transform duration-200">
+          Privacy Policy
+        </a>
+
       </div>
-      <p>Designed by: Md. Mehedi</p>
+
+      <p class="text-white">
+        Designed by: Team_Frontier
+      </p>
+
     </div>
+
   </footer>
   <!-- END: Footer -->
   
