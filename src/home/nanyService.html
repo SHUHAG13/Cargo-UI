@@ -55,49 +55,39 @@
 
 <body class="bg-white font-sans text-brand-dark antialiased">
   <!-- BEGIN: MainHeader -->
-  <header class="border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <!-- Logo -->
-        <div class="flex items-center shrink-0">
-          <img alt="CareGo+" class="h-10 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuABJa1XNpJAYs34z3JNwxlH8zPPcO6k4rLncIvh5Nhf3gcH3nT-_0wF_qxRInuDEFgYOodBU8vDRb7CBj2RrGu8_gTK6Z88hmMAF6ETHGeUnNbb0Bcv0cKThCTJyY9LcQhJE3SfwzuzbQ22Y3_QJbtWoPpp-v06vgDh4xbG8qAQb4Vqil8V6E7RegAQex3wjxOu7-v5vBQufaVvYBliEQVSS2PeTGiilV68a6mxNKGbQhEOShco7ekdw2JHZ3tXHRtBHEAzZ_5hAZ4"
-            style="max-width: 150px; object-position: left;" />
+  <header class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="text-brand-teal font-bold text-2xl flex items-center gap-1">
+          <!-- <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="currentColor"></path>
+            <path d="M12 7v6M9 10h6" stroke="white" stroke-linecap="round" stroke-width="2"></path>
+          </svg> -->
+          CareGo<span class="text-brand-orange">+</span>
         </div>
-        <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex space-x-8 items-center">
-          <a class="text-sm font-medium hover:text-brand-green" href="#">Home</a>
-          <div class="relative">
-            <a class="text-sm font-semibold text-brand-green border-b-2 border-brand-green pb-1" href="#">Services</a>
-          </div>
-          <a class="text-sm font-medium hover:text-brand-green" href="#">About Us</a>
-          <a class="text-sm font-medium hover:text-brand-green" href="#">How It Works</a>
-          <a class="text-sm font-medium hover:text-brand-green" href="#">For Providers</a>
-          <a class="text-sm font-medium hover:text-brand-green" href="#">Contact Us</a>
-        </nav>
-        <!-- Right Side Actions -->
-        <div class="flex items-center space-x-4">
-          <button class="flex items-center text-sm font-medium text-gray-700">
-            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-              <path
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-            </svg>
-            English
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-              <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-            </svg>
-          </button>
-          <button class="p-2 text-gray-500 rounded-full border border-gray-200">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-              <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-            </svg>
-          </button>
-          <a class="hidden md:block text-brand-green border border-brand-green px-4 py-2 rounded-md font-medium text-sm"
-            href="#">Sign In</a>
-          <a class="bg-brand-green text-white px-4 py-2 rounded-md font-medium text-sm" href="#">Sign Up</a>
-        </div>
+      </div>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a class="text-brand-teal border-b-2 border-brand-teal py-5" href="../home/home.html">Home</a>
+        <a class="hover:text-brand-teal" href="../home/homeCareGiver.html">Services</a>
+        <a class="hover:text-brand-teal" href="../about us.html">About Us</a>
+        <!-- <a class="hover:text-brand-teal" href="#">How It Works</a>
+        <a class="hover:text-brand-teal" href="#">For Providers</a> -->
+        <a class="hover:text-brand-teal" href="../contact.html">Contact Us</a>
+      </nav>
+        <div class="flex items-center gap-4">
+        <!-- <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+          <span class="text-gray-400">🌐</span> English ▾
+        </div> -->
+        <!-- <button class="p-2 text-gray-500 hidden md:block">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button> -->
+        <a href="../auth/login.html" class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign In</a>
+        <a href="../auth/registration.html" class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign Up</a>
       </div>
     </div>
   </header>
@@ -111,38 +101,47 @@
     </div>
     <!-- BEGIN: ServiceTabs -->
     <div class="mb-8 overflow-x-auto hide-scrollbar">
-<div class="flex border border-gray-200 rounded-lg min-w-max">
-<!-- Home Caregiver Tab (Active) -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 rounded-l-lg">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5v-4a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V10M9 21h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold"><a href="../home/homeCareGiver.html">Home Caregiver</a></span>
-</button>
-<!-- Home Nursing Tab -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 border-r border-gray-200 text-carego-dark">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold"><a href="../home/homeNursing.html">Home Nursing</a></span>
-</button>
-<!-- Nanny Service Tab -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 border-r  bg-carego-teal text-white">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold"><a href="../home/nanyService.html">Nanny Service</a></span>
-</button>
-<!-- Physiotherapy Tab -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 text-carego-dark">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold">Physiotherapy</span>
-<span class="ml-2 px-2 py-0.5 bg-gray-100 text-[10px] uppercase font-bold rounded-full text-gray-500">Coming Soon</span>
-</button>
-</div>
-</div>
+      <div class="flex border border-gray-200 rounded-lg min-w-max">
+        <!-- Home Caregiver Tab (Active) -->
+        <button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 rounded-l-lg">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5v-4a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V10M9 21h6"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold"><a href="../home/homeCareGiver.html">Home Caregiver</a></span>
+        </button>
+        <!-- Home Nursing Tab -->
+        <button
+          class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 border-r border-gray-200 text-carego-dark">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold"><a href="../home/homeNursing.html">Home Nursing</a></span>
+        </button>
+        <!-- Nanny Service Tab -->
+        <button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 border-r  bg-carego-teal text-white">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold"><a href="../home/nanyService.html">Nanny Service</a></span>
+        </button>
+        <!-- Physiotherapy Tab -->
+        <button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 text-carego-dark">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold">Physiotherapy</span>
+          <span class="ml-2 px-2 py-0.5 bg-gray-100 text-[10px] uppercase font-bold rounded-full text-gray-500">Coming
+            Soon</span>
+        </button>
+      </div>
+    </div>
     <!-- END: ServiceTabs -->
     <!-- BEGIN: ComparisonTable -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

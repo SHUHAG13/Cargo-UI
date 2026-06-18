@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CareGo+ Services &amp; Packages</title>
-<!-- Tailwind CSS CDN with plugins -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>CareGo+ Services &amp; Packages</title>
+  <!-- Tailwind CSS CDN with plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
     tailwind.config = {
       theme: {
         extend: {
@@ -20,286 +22,329 @@
       }
     }
   </script>
-<style data-purpose="custom-scrollbar">
+  <style data-purpose="custom-scrollbar">
     /* Hide scrollbar for cleaner look on mobile while keeping functionality */
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
+
     .hide-scrollbar {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
   </style>
-<style data-purpose="table-layout">
+  <style data-purpose="table-layout">
     /* Table styling for mobile responsiveness */
     .comparison-table {
       border-collapse: separate;
       border-spacing: 0;
     }
-    .comparison-table th, .comparison-table td {
+
+    .comparison-table th,
+    .comparison-table td {
       border-bottom: 1px solid #E5E7EB;
       padding: 1rem 0.75rem;
     }
+
     .sticky-col {
       position: sticky;
       left: 0;
       background-color: white;
       z-index: 10;
-      box-shadow: 2px 0 5px -2px rgba(0,0,0,0.1);
+      box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
+
 <body class="bg-white text-carego-dark font-sans antialiased">
-<!-- BEGIN: MainHeader -->
-<header class="border-b border-gray-100 sticky top-0 bg-white z-50">
-<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-<!-- Logo Container -->
-<div class="flex items-center space-x-2">
-<div class="flex items-center">
-<img alt="CareGo+ Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM_U-imxJX5zaEh888DGVTP6qSjvfGJUAxJcOfuZSAEr09lSGAjw_kN57DSgnHFtlV50n75oqXg8rQ1RsMg_-_MiHRvHbgf1Fsm3Xg9XftZbVX6OoYjEYSdG3LVKJL0zXMCrg7j6G4afUfNoW3ZYoY-uzqfLaNw5WkoY9XjJ67gVBsjG8zkEISaD89aAYeFiuVr5IAJVfOxlwgZX5-uepQsnFfkSDWw4X-3NsnXMCNJkLRQT4f8n_EufcNwk9O914btVeZdnweu00" style="clip-path: inset(0 80% 0 0);"/>
-<span class="font-bold text-xl ml-[-120px] text-carego-teal">CareGo+</span>
-</div>
-</div>
-<!-- Mobile Menu Toggle (Simplified) -->
-<button class="lg:hidden text-carego-dark">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-<!-- Desktop Navigation -->
-<nav class="hidden lg:flex items-center space-x-6 text-sm font-medium">
-<a class="hover:text-carego-teal transition" href="#">Home</a>
-<a class="text-carego-teal border-b-2 border-carego-teal pb-1" href="#">Services</a>
-<a class="hover:text-carego-teal transition" href="#">About Us</a>
-<a class="hover:text-carego-teal transition" href="#">How It Works</a>
-<a class="hover:text-carego-teal transition" href="#">For Providers</a>
-<a class="hover:text-carego-teal transition" href="#">Contact Us</a>
-</nav>
-<!-- Header Actions -->
-<div class="hidden lg:flex items-center space-x-4">
-<button class="flex items-center text-sm font-medium">
-<svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9h18"></path></svg>
-          English
+  <!-- BEGIN: MainHeader -->
+ <header class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="text-brand-teal font-bold text-2xl flex items-center gap-1">
+          <!-- <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              fill="currentColor"></path>
+            <path d="M12 7v6M9 10h6" stroke="white" stroke-linecap="round" stroke-width="2"></path>
+          </svg> -->
+          CareGo<span class="text-brand-orange">+</span>
+        </div>
+      </div>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a class="text-brand-teal border-b-2 border-brand-teal py-5" href="../home/home.html">Home</a>
+        <a class="hover:text-brand-teal" href="../home/homeCareGiver.html">Services</a>
+        <a class="hover:text-brand-teal" href="../about us.html">About Us</a>
+        <!-- <a class="hover:text-brand-teal" href="#">How It Works</a>
+        <a class="hover:text-brand-teal" href="#">For Providers</a> -->
+        <a class="hover:text-brand-teal" href="../contact.html">Contact Us</a>
+      </nav>
+        <div class="flex items-center gap-4">
+        <!-- <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+          <span class="text-gray-400">🌐</span> English ▾
+        </div> -->
+        <!-- <button class="p-2 text-gray-500 hidden md:block">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button> -->
+        <a href="../auth/login.html" class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign In</a>
+        <a href="../auth/registration.html" class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign Up</a>
+      </div>
+    </div>
+  </header>
+  <!-- END: MainHeader -->
+  <!-- BEGIN: PageHeading -->
+  <main class="max-w-7xl mx-auto px-4 py-10">
+    <div class="text-center mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold text-carego-dark mb-3">Services &amp; Packages</h1>
+      <p class="text-carego-gray">Compare our home caregiver packages and choose the right care for your loved one.</p>
+    </div>
+    <!-- END: PageHeading -->
+    <!-- BEGIN: ServiceTabs -->
+    <div class="mb-8 overflow-x-auto hide-scrollbar">
+      <div class="flex border border-gray-200 rounded-lg min-w-max">
+        <!-- Home Caregiver Tab (Active) -->
+        <button
+          class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 bg-carego-teal text-white rounded-l-lg">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5v-4a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V10M9 21h6"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold"><a href="../home/homeCareGiver.html">Home Caregiver</a></span>
         </button>
-<button class="p-2 rounded-full hover:bg-gray-100">
-<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-</button>
-<a href="../auth/login.html" class="px-4 py-2 text-carego-teal border border-carego-teal rounded-md text-sm font-semibold hover:bg-carego-teal hover:text-white transition">Sign In</a>
-<a href="registration.html" class="px-4 py-2 bg-carego-teal text-white rounded-md text-sm font-semibold hover:bg-opacity-90 transition">Sign Up</a>
-</div>
-</div>
-</header>
-<!-- END: MainHeader -->
-<!-- BEGIN: PageHeading -->
-<main class="max-w-7xl mx-auto px-4 py-10">
-<div class="text-center mb-10">
-<h1 class="text-3xl md:text-4xl font-bold text-carego-dark mb-3">Services &amp; Packages</h1>
-<p class="text-carego-gray">Compare our home caregiver packages and choose the right care for your loved one.</p>
-</div>
-<!-- END: PageHeading -->
-<!-- BEGIN: ServiceTabs -->
-<div class="mb-8 overflow-x-auto hide-scrollbar">
-<div class="flex border border-gray-200 rounded-lg min-w-max">
-<!-- Home Caregiver Tab (Active) -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 bg-carego-teal text-white rounded-l-lg">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5v-4a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V10M9 21h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold"><a href="../home/homeCareGiver.html">Home Caregiver</a></span>
-</button>
-<!-- Home Nursing Tab -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 border-r border-gray-200 text-carego-dark">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold"><a href="../home/homeNursing.html">Home Nursing</a></span>
-</button>
-<!-- Nanny Service Tab -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 border-r border-gray-200 text-carego-dark">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold"><a href="../home/nanyService.html">Nanny Service</a></span>
-</button>
-<!-- Physiotherapy Tab -->
-<button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 text-carego-dark">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="font-semibold">Physiotherapy</span>
-<span class="ml-2 px-2 py-0.5 bg-gray-100 text-[10px] uppercase font-bold rounded-full text-gray-500">Coming Soon</span>
-</button>
-</div>
-</div>
-<!-- END: ServiceTabs -->
-<!-- BEGIN: ComparisonTableSection -->
-<div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm hide-scrollbar">
-<table class="w-full comparison-table text-sm md:text-base min-w-[800px]">
-<thead>
-<tr class="bg-white">
-<th class="sticky-col text-left font-bold text-carego-teal uppercase tracking-wider w-1/4">Specification / Attribute</th>
-<th class="text-center font-bold text-carego-dark uppercase w-1/4">Basic Care</th>
-<th class="text-center font-bold text-carego-dark uppercase w-1/4">Standard Care</th>
-<th class="text-center font-bold text-carego-dark uppercase w-1/4">Premium Care (Live-in)</th>
-</tr>
-</thead>
-<tbody>
-<!-- Staffing Allocation -->
-<tr>
-<td class="sticky-col font-semibold">Staffing Allocation</td>
-<td class="text-center">1 Assigned Field Caregiver</td>
-<td class="text-center font-medium">1 Primary Caregiver +<br/>1 Assistant Caregiver</td>
-<td class="text-center font-medium">1 Primary Caregiver +<br/>1 Assistant Caregiver</td>
-</tr>
-<!-- Allowed Horizon Values -->
-<tr>
-<td class="sticky-col font-semibold">Allowed Horizon Values (Days)</td>
-<td class="text-center">1, 7, or 30 Days</td>
-<td class="text-center">1, 7, or 30 Days</td>
-<td class="text-center">7, 15, or 30 Days</td>
-</tr>
-<!-- Allowed Shift Intervals -->
-<tr>
-<td class="sticky-col font-semibold">Allowed Shift Intervals (Hours/Day)</td>
-<td class="text-center font-bold">8, 12, or 24 Hours</td>
-<td class="text-center font-bold">8, 12, or 24 Hours<br/><span class="font-normal text-xs">(Assisted Coverage)*</span></td>
-<td class="text-center font-bold">24 Hours (Full Live-In Status)**</td>
-</tr>
-<!-- Basic Personal Care -->
-<tr>
-<td class="sticky-col font-semibold">Basic Personal Care</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Bathing, grooming, dressing, mobility, and feeding support)</span>
-</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Bathing, grooming, dressing, mobility, and feeding support)</span>
-</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Bathing, grooming, dressing, mobility, and feeding support)</span>
-</td>
-</tr>
-<!-- Companionship & Aid -->
-<tr>
-<td class="sticky-col font-semibold">Companionship &amp; Aid</td>
-<td class="text-center font-bold">Included</td>
-<td class="text-center font-bold">Included</td>
-<td class="text-center font-bold">Included</td>
-</tr>
-<!-- Medication Reminders -->
-<tr>
-<td class="sticky-col font-semibold">Medication Reminders</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Timely scheduling and alerts)</span>
-</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Timely scheduling and alerts)</span>
-</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Timely scheduling and alerts)</span>
-</td>
-</tr>
-<!-- Toilet Management -->
-<tr>
-<td class="sticky-col font-semibold">Toilet Management</td>
-<td class="text-center text-gray-400">Not Included</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Hygiene maintenance &amp; incontinence monitoring)</span>
-</td>
-<td class="text-center">
-<span class="font-bold block">Included</span>
-<span class="text-xs text-gray-500">(Hygiene maintenance &amp; incontinence monitoring)</span>
-</td>
-</tr>
-<!-- Dementia / Geriatric Support -->
-<tr>
-<td class="sticky-col font-semibold">Dementia / Geriatric Support</td>
-<td class="text-center text-gray-400">Not Included</td>
-<td class="text-center font-bold">Included</td>
-<td class="text-center font-bold">Included</td>
-</tr>
-<!-- Post-Hospital Recovery Aid -->
-<tr>
-<td class="sticky-col font-semibold">Post-Hospital Recovery Aid</td>
-<td class="text-center text-gray-400">Not Included</td>
-<td class="text-center font-bold">Included</td>
-<td class="text-center font-bold">Included</td>
-</tr>
-<!-- Basic Health Screening -->
-<tr>
-<td class="sticky-col font-semibold">Basic Health Screening</td>
-<td class="text-center text-gray-400">Not Included</td>
-<td class="text-center font-bold">Included</td>
-<td class="text-center font-bold">Included</td>
-</tr>
-<!-- Doctor Follow-Up Coordination -->
-<tr>
-<td class="sticky-col font-semibold">Doctor Follow-Up Coordination</td>
-<td class="text-center text-gray-400">Not Included</td>
-<td class="text-center text-gray-400">Not Included</td>
-<td class="text-center">
-<span class="font-bold block">Included: 1 Doctor Follow-Up visit per month</span>
-<span class="text-xs text-gray-500">(Minimum 15-day booking required)</span>
-</td>
-</tr>
-<!-- CTA Row -->
-<tr class="bg-gray-50/30">
-<td class="sticky-col border-b-0"></td>
-<td class="text-center border-b-0 py-6">
-<button class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition"><a href="../auth/registration.html" class="text-white">Book Now</a></button>
-</td>
-<td class="text-center border-b-0 py-6">
-<button class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition"><a href="../auth/registration.html" class="text-white">Book Now</a></button>
-</td>
-<td class="text-center border-b-0 py-6">
-<button class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition"><a href="../auth/registration.html" class="text-white">Book Now</a></button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- END: ComparisonTableSection -->
-<!-- BEGIN: TableFooter -->
-<div class="mt-8 flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-8 text-xs text-gray-600">
-<div class="flex items-center space-x-2">
-<svg class="h-5 w-5 text-carego-teal" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span>* 24-Hour Assisted Coverage (with scheduled rest periods).</span>
-</div>
-<div class="hidden md:block h-4 w-px bg-gray-300"></div>
-<div>
-<span>** Live-in services include reasonable rest/sleep periods for assigned staff.</span>
-</div>
-</div>
-<!-- END: TableFooter -->
-</main>
-<!-- BEGIN: BottomNavigation (Mobile Focused) -->
-<footer class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 flex justify-around items-center z-50">
-<button class="flex flex-col items-center p-2 text-carego-teal">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5v-4a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V10M9 21h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px] mt-1">Home</span>
-</button>
-<button class="flex flex-col items-center p-2 text-gray-500">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px] mt-1">Services</span>
-</button>
-<button class="flex flex-col items-center p-2 text-gray-500">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px] mt-1">Chat</span>
-</button>
-<button class="flex flex-col items-center p-2 text-gray-500">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px] mt-1">Profile</span>
-</button>
-</footer>
-<!-- END: BottomNavigation -->
-<!-- Extra padding for mobile bottom nav -->
-<div class="h-20 lg:hidden"></div>
-</body></html>
+        <!-- Home Nursing Tab -->
+        <button
+          class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 border-r border-gray-200 text-carego-dark">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold"><a href="../home/homeNursing.html">Home Nursing</a></span>
+        </button>
+        <!-- Nanny Service Tab -->
+        <button
+          class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 border-r border-gray-200 text-carego-dark">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold"><a href="../home/nanyService.html">Nanny Service</a></span>
+        </button>
+        <!-- Physiotherapy Tab -->
+        <button class="flex-1 flex items-center justify-center space-x-2 py-4 px-8 hover:bg-gray-50 text-carego-dark">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+          <span class="font-semibold">Physiotherapy</span>
+          <span class="ml-2 px-2 py-0.5 bg-gray-100 text-[10px] uppercase font-bold rounded-full text-gray-500">Coming
+            Soon</span>
+        </button>
+      </div>
+    </div>
+    <!-- END: ServiceTabs -->
+    <!-- BEGIN: ComparisonTableSection -->
+    <div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm hide-scrollbar">
+      <table class="w-full comparison-table text-sm md:text-base min-w-[800px]">
+        <thead>
+          <tr class="bg-white">
+            <th class="sticky-col text-left font-bold text-carego-teal uppercase tracking-wider w-1/4">Specification /
+              Attribute</th>
+            <th class="text-center font-bold text-carego-dark uppercase w-1/4">Basic Care</th>
+            <th class="text-center font-bold text-carego-dark uppercase w-1/4">Standard Care</th>
+            <th class="text-center font-bold text-carego-dark uppercase w-1/4">Premium Care (Live-in)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Staffing Allocation -->
+          <tr>
+            <td class="sticky-col font-semibold">Staffing Allocation</td>
+            <td class="text-center">1 Assigned Field Caregiver</td>
+            <td class="text-center font-medium">1 Primary Caregiver +<br />1 Assistant Caregiver</td>
+            <td class="text-center font-medium">1 Primary Caregiver +<br />1 Assistant Caregiver</td>
+          </tr>
+          <!-- Allowed Horizon Values -->
+          <tr>
+            <td class="sticky-col font-semibold">Allowed Horizon Values (Days)</td>
+            <td class="text-center">1, 7, or 30 Days</td>
+            <td class="text-center">1, 7, or 30 Days</td>
+            <td class="text-center">7, 15, or 30 Days</td>
+          </tr>
+          <!-- Allowed Shift Intervals -->
+          <tr>
+            <td class="sticky-col font-semibold">Allowed Shift Intervals (Hours/Day)</td>
+            <td class="text-center font-bold">8, 12, or 24 Hours</td>
+            <td class="text-center font-bold">8, 12, or 24 Hours<br /><span class="font-normal text-xs">(Assisted
+                Coverage)*</span></td>
+            <td class="text-center font-bold">24 Hours (Full Live-In Status)**</td>
+          </tr>
+          <!-- Basic Personal Care -->
+          <tr>
+            <td class="sticky-col font-semibold">Basic Personal Care</td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Bathing, grooming, dressing, mobility, and feeding support)</span>
+            </td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Bathing, grooming, dressing, mobility, and feeding support)</span>
+            </td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Bathing, grooming, dressing, mobility, and feeding support)</span>
+            </td>
+          </tr>
+          <!-- Companionship & Aid -->
+          <tr>
+            <td class="sticky-col font-semibold">Companionship &amp; Aid</td>
+            <td class="text-center font-bold">Included</td>
+            <td class="text-center font-bold">Included</td>
+            <td class="text-center font-bold">Included</td>
+          </tr>
+          <!-- Medication Reminders -->
+          <tr>
+            <td class="sticky-col font-semibold">Medication Reminders</td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Timely scheduling and alerts)</span>
+            </td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Timely scheduling and alerts)</span>
+            </td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Timely scheduling and alerts)</span>
+            </td>
+          </tr>
+          <!-- Toilet Management -->
+          <tr>
+            <td class="sticky-col font-semibold">Toilet Management</td>
+            <td class="text-center text-gray-400">Not Included</td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Hygiene maintenance &amp; incontinence monitoring)</span>
+            </td>
+            <td class="text-center">
+              <span class="font-bold block">Included</span>
+              <span class="text-xs text-gray-500">(Hygiene maintenance &amp; incontinence monitoring)</span>
+            </td>
+          </tr>
+          <!-- Dementia / Geriatric Support -->
+          <tr>
+            <td class="sticky-col font-semibold">Dementia / Geriatric Support</td>
+            <td class="text-center text-gray-400">Not Included</td>
+            <td class="text-center font-bold">Included</td>
+            <td class="text-center font-bold">Included</td>
+          </tr>
+          <!-- Post-Hospital Recovery Aid -->
+          <tr>
+            <td class="sticky-col font-semibold">Post-Hospital Recovery Aid</td>
+            <td class="text-center text-gray-400">Not Included</td>
+            <td class="text-center font-bold">Included</td>
+            <td class="text-center font-bold">Included</td>
+          </tr>
+          <!-- Basic Health Screening -->
+          <tr>
+            <td class="sticky-col font-semibold">Basic Health Screening</td>
+            <td class="text-center text-gray-400">Not Included</td>
+            <td class="text-center font-bold">Included</td>
+            <td class="text-center font-bold">Included</td>
+          </tr>
+          <!-- Doctor Follow-Up Coordination -->
+          <tr>
+            <td class="sticky-col font-semibold">Doctor Follow-Up Coordination</td>
+            <td class="text-center text-gray-400">Not Included</td>
+            <td class="text-center text-gray-400">Not Included</td>
+            <td class="text-center">
+              <span class="font-bold block">Included: 1 Doctor Follow-Up visit per month</span>
+              <span class="text-xs text-gray-500">(Minimum 15-day booking required)</span>
+            </td>
+          </tr>
+          <!-- CTA Row -->
+          <tr class="bg-gray-50/30">
+            <td class="sticky-col border-b-0"></td>
+            <td class="text-center border-b-0 py-6">
+              <button
+                class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition"><a
+                  href="../auth/registration.html" class="text-white">Book Now</a></button>
+            </td>
+            <td class="text-center border-b-0 py-6">
+              <button
+                class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition"><a
+                  href="../auth/registration.html" class="text-white">Book Now</a></button>
+            </td>
+            <td class="text-center border-b-0 py-6">
+              <button
+                class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition"><a
+                  href="../auth/registration.html" class="text-white">Book Now</a></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- END: ComparisonTableSection -->
+    <!-- BEGIN: TableFooter -->
+    <div
+      class="mt-8 flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-8 text-xs text-gray-600">
+      <div class="flex items-center space-x-2">
+        <svg class="h-5 w-5 text-carego-teal" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+        <span>* 24-Hour Assisted Coverage (with scheduled rest periods).</span>
+      </div>
+      <div class="hidden md:block h-4 w-px bg-gray-300"></div>
+      <div>
+        <span>** Live-in services include reasonable rest/sleep periods for assigned staff.</span>
+      </div>
+    </div>
+    <!-- END: TableFooter -->
+  </main>
+  <!-- BEGIN: BottomNavigation (Mobile Focused) -->
+  <footer
+    class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 flex justify-around items-center z-50">
+    <button class="flex flex-col items-center p-2 text-carego-teal">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5v-4a.5.5 0 01.5-.5h2a.5.5 0 01.5.5v4a1.5 1.5 0 001.5 1.5h3a1.5 1.5 0 001.5-1.5V10M9 21h6"
+          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="text-[10px] mt-1">Home</span>
+    </button>
+    <button class="flex flex-col items-center p-2 text-gray-500">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="text-[10px] mt-1">Services</span>
+    </button>
+    <button class="flex flex-col items-center p-2 text-gray-500">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="text-[10px] mt-1">Chat</span>
+    </button>
+    <button class="flex flex-col items-center p-2 text-gray-500">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+          stroke-linejoin="round" stroke-width="2"></path>
+      </svg>
+      <span class="text-[10px] mt-1">Profile</span>
+    </button>
+  </footer>
+  <!-- END: BottomNavigation -->
+  <!-- Extra padding for mobile bottom nav -->
+  <div class="h-20 lg:hidden"></div>
+</body>
+
+</html>
