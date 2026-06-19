@@ -1,522 +1,649 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Payment &amp; Billing - CareGo+</title>
-<!-- BEGIN: Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- END: Tailwind CSS CDN -->
-<style data-purpose="custom-scrollbar">
-    /* Custom scrollbar for a cleaner look */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #e2e8f0;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #cbd5e1;
-    }
-  </style>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Payment &amp; Billing - CareGo+</title>
+    <!-- BEGIN: Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- END: Tailwind CSS CDN -->
+    <style data-purpose="custom-scrollbar">
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+
+        .sidebar-item-active {
+            background-color: #ECFDF5;
+            color: #059669;
+            border-right: 4px solid #059669;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-800">
 <div class="flex min-h-screen">
-<!-- BEGIN: Sidebar Navigation -->
-<aside class="w-64 bg-white border-r border-slate-200 flex flex-col fixed h-full" data-purpose="sidebar">
-<div class="p-6">
-<!-- Logo -->
-<div class="flex items-center gap-2 mb-10">
-<span class="text-2xl font-bold text-[#005c53]">CareGo</span>
-<span class="text-2xl font-bold text-red-500">+</span>
-</div>
-<nav class="space-y-2">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="font-medium">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="font-medium">My Bookings</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="font-medium">My Patients</span>
-</a>
-<!-- Active State -->
-<a class="flex items-center gap-3 px-4 py-3 bg-[#e6f4f1] text-[#005c53] border-r-4 border-[#005c53] rounded-l-lg transition-colors" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="font-medium">Payment &amp; Billing</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="font-medium">Support</span>
-</a>
-</nav>
-</div>
-<!-- User Profile at bottom -->
-<div class="mt-auto p-4 border-t border-slate-100">
-<div class="flex items-center gap-3 p-2 bg-slate-50 rounded-xl border border-slate-200">
-<img alt="Irfan Hossain" class="w-10 h-10 rounded-full border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqjd6_TUnAnuMg2NMpWqXPT79zy1UrqM5sA2mjX0K4OfxNFzw-ksZsZYwOt3aPrqHrgQlWj4TnAzQNzfNfPcRoRqo7eieZkJKR3nOLJjRQEv2CMjKqtCt9iqdLZaVPy8BTXk7XztAgpn9hTfoe2h9JoJZejsWNL4MdcVYDb7tM3NC-t-4wMpPXw3RSrgoUUSY3OQ32oH9u_ed9kah-oa4mlqSfs6L8yqeQpMBxhb7pRPyQjbX4sshkMEqmtcc1HUf0CDk8HCpFmTpq"/>
-<div class="flex-1 overflow-hidden">
-<p class="text-sm font-semibold truncate">Irfan Hossain</p>
-<p class="text-xs text-blue-600">View Profile</p>
-</div>
-<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-</div>
-</aside>
-<!-- END: Sidebar Navigation -->
-<!-- BEGIN: Main Content Container -->
-<main class="flex-1 ml-64 p-8">
-<!-- BEGIN: Page Header -->
-<header class="flex justify-between items-center mb-8">
-<div>
-<h1 class="text-2xl font-bold text-slate-900">Payment &amp; Billing</h1>
-<p class="text-slate-500 text-sm">Track your payments, dues and transaction history</p>
-</div>
-<div class="flex items-center gap-8">
-<div class="flex gap-6">
-<a class="text-sm font-semibold text-slate-700" href="#">Services</a>
-<a class="text-sm font-semibold text-slate-700" href="#">Become a Caregiver</a>
-</div>
-<button class="relative p-2 bg-white rounded-full border border-slate-200 shadow-sm">
-<svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-</button>
-</div>
-</header>
-<!-- END: Page Header -->
-<!-- BEGIN: Saved Payment Methods -->
-<section class="bg-white rounded-2xl p-6 border border-slate-200 mb-8" data-purpose="saved-payments">
-<div class="flex justify-between items-center mb-6">
-<div>
-<h2 class="text-lg font-bold">Saved Payment Methods</h2>
-<p class="text-sm text-slate-500">Manage your saved payment options</p>
-</div>
-<button class="flex items-center gap-2 text-green-600 border border-green-200 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-50 transition-colors">
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-            Add New Card
-          </button>
-</div>
-<div class="grid grid-cols-4 gap-4">
-<!-- bKash -->
-<div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
-<div class="w-10 h-10 bg-pink-500 rounded flex items-center justify-center text-white font-bold">b</div>
-<div>
-<p class="text-xs font-bold">bKash</p>
-<p class="text-sm text-slate-500">0187 **** 2468</p>
-</div>
-<button class="absolute top-4 right-4 text-slate-400">
-<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-</button>
-</div>
-<!-- Nagad -->
-<div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
-<div class="w-10 h-10 bg-orange-500 rounded flex items-center justify-center text-white font-bold">N</div>
-<div>
-<p class="text-xs font-bold">Nagad</p>
-<p class="text-sm text-slate-500">0171 **** 1357</p>
-</div>
-<button class="absolute top-4 right-4 text-slate-400">
-<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-</button>
-</div>
-<!-- Visa -->
-<div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
-<div class="w-10 h-10 bg-blue-700 rounded flex items-center justify-center text-white italic font-serif text-lg">V</div>
-<div>
-<p class="text-xs font-bold">Visa Card</p>
-<p class="text-sm text-slate-500">**** **** **** 4242</p>
-</div>
-<button class="absolute top-4 right-4 text-slate-400">
-<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-</button>
-</div>
-<!-- Mastercard -->
-<div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
-<div class="w-10 h-10 bg-red-600 rounded flex items-center justify-center text-white font-bold">M</div>
-<div>
-<p class="text-xs font-bold">Mastercard</p>
-<p class="text-sm text-slate-500">**** **** **** 8888</p>
-</div>
-<button class="absolute top-4 right-4 text-slate-400">
-<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-</button>
-</div>
-</div>
-<div class="text-center mt-6">
-<button class="text-[#005c53] font-bold text-sm">Manage all payment methods</button>
-</div>
-</section>
-<!-- END: Saved Payment Methods -->
-<!-- BEGIN: Active Services -->
-<section class="mb-8" data-purpose="active-services">
-<div class="mb-4">
-<h2 class="text-lg font-bold">Active Services</h2>
-<p class="text-sm text-slate-500">Your ongoing services and payments</p>
-</div>
-<div class="space-y-4">
-<!-- Card 1: Home Nursing -->
-<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-<div class="flex items-start justify-between mb-6">
-<div class="flex gap-4">
-<div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<h3 class="font-bold text-slate-900">Home Nursing – 30-Day Package</h3>
-<p class="text-sm text-slate-500">Patient: Abdul Karim (Father)</p>
-</div>
-</div>
-<p class="text-xs text-slate-400 font-medium">Booking ID: CGP-99281</p>
-</div>
-<div class="grid grid-cols-5 items-end">
-<div>
-<p class="text-xs text-slate-500 mb-1">Next Payment</p>
-<p class="font-bold">25 May 2025</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Amount</p>
-<p class="font-bold">৳ 5,600.00</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Status</p>
-<span class="inline-block px-3 py-1 bg-green-50 text-green-600 rounded-md text-xs font-bold uppercase tracking-wider">Paid</span>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Package Period</p>
-<p class="font-bold">18 May – 16 Jun 2025</p>
-</div>
-<div class="text-right">
-<button class="px-5 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">View Details</button>
-</div>
-</div>
-</div>
-<!-- Card 2: Physiotherapy -->
-<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-<div class="flex items-start justify-between mb-6">
-<div class="flex gap-4">
-<div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<h3 class="font-bold text-slate-900">Physiotherapy – 15-Day Package</h3>
-<p class="text-sm text-slate-500">Patient: Mehedi Hasan</p>
-</div>
-</div>
-<p class="text-xs text-slate-400 font-medium">Booking ID: CGP-96210</p>
-</div>
-<div class="grid grid-cols-5 items-end">
-<div>
-<p class="text-xs text-slate-500 mb-1">Next Payment</p>
-<p class="font-bold">1 Jun 2025</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Amount</p>
-<p class="font-bold">৳ 4,200.00</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Status</p>
-<span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-md text-xs font-bold uppercase tracking-wider">Upcoming</span>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Package Period</p>
-<p class="font-bold">18 May – 1 Jun 2025</p>
-</div>
-<div class="text-right">
-<button class="px-5 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">View Details</button>
-</div>
-</div>
-</div>
-<!-- Card 3: Nanny Service (Active Action) -->
-<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-<div class="flex items-start justify-between mb-6">
-<div class="flex gap-4">
-<div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-orange-500">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<h3 class="font-bold text-slate-900">Nanny Service – 10-Day Package</h3>
-<p class="text-sm text-slate-500">Patient: Safiya (Child)</p>
-</div>
-</div>
-<p class="text-xs text-slate-400 font-medium">Booking ID: CGP-97122</p>
-</div>
-<div class="grid grid-cols-5 items-end">
-<div>
-<p class="text-xs text-slate-500 mb-1">Next Payment</p>
-<p class="font-bold">10 May 2025</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Amount</p>
-<p class="font-bold">৳ 2,500.00</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Status</p>
-<span class="inline-block px-3 py-1 bg-orange-50 text-orange-600 rounded-md text-xs font-bold uppercase tracking-wider">Pending</span>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Package Period</p>
-<p class="font-bold">1 May – 10 May 2025</p>
-</div>
-<div class="text-right">
-<button class="px-6 py-2 bg-[#00b087] text-white rounded-lg text-sm font-bold shadow-md hover:bg-[#009b77] transition-all">Pay Now</button>
-</div>
-</div>
-</div>
-<!-- Card 4: Cleaning Service -->
-<div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-<div class="flex items-start justify-between mb-6">
-<div class="flex gap-4">
-<div class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<h3 class="font-bold text-slate-900">Cleaning Service – Standard</h3>
-<p class="text-sm text-slate-500">Location: Banani, Dhaka</p>
-</div>
-</div>
-<p class="text-xs text-slate-400 font-medium">Booking ID: CGP-99301</p>
-</div>
-<div class="grid grid-cols-5 items-end">
-<div>
-<p class="text-xs text-slate-500 mb-1">Next Payment</p>
-<p class="font-bold">15 May 2025</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Amount</p>
-<p class="font-bold">৳ 2,000.00</p>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Status</p>
-<span class="inline-block px-3 py-1 bg-green-50 text-green-600 rounded-md text-xs font-bold uppercase tracking-wider">Paid</span>
-</div>
-<div>
-<p class="text-xs text-slate-500 mb-1">Service Date</p>
-<p class="font-bold">14 May 2025</p>
-</div>
-<div class="text-right">
-<button class="px-5 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">View Details</button>
-</div>
-</div>
-</div>
-</div>
-<div class="text-center mt-6">
-<button class="flex items-center gap-2 mx-auto text-[#005c53] font-bold text-sm">
-            View All Active Services
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-</div>
-</section>
-<!-- END: Active Services -->
-<!-- BEGIN: Transaction History -->
-<section class="mb-12" data-purpose="transaction-history">
-<div class="flex items-end justify-between mb-6">
-<div>
-<h2 class="text-lg font-bold">Transaction History</h2>
-<p class="text-sm text-slate-500">All your payment transactions in one place</p>
-</div>
-<div class="flex gap-3">
-<div class="relative">
-<input class="pl-4 pr-10 py-2 border border-slate-200 rounded-lg text-sm w-64 focus:ring-0 focus:border-slate-300 cursor-pointer" readonly="" type="text" value="01 May 2025 – 24 May 2025"/>
-<svg class="w-4 h-4 text-slate-400 absolute right-3 top-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<select class="pl-4 pr-10 py-2 border border-slate-200 rounded-lg text-sm focus:ring-0 focus:border-slate-300">
-<option>All Services</option>
-</select>
-<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
-<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-              Filters
-            </button>
-</div>
-</div>
-<div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-slate-50 text-slate-400 text-xs font-bold uppercase tracking-wider border-b border-slate-100">
-<th class="px-6 py-4">Date &amp; Time</th>
-<th class="px-6 py-4">Transaction / Invoice ID</th>
-<th class="px-6 py-4">Service &amp; Package</th>
-<th class="px-6 py-4">Payment Method</th>
-<th class="px-6 py-4">Status</th>
-<th class="px-6 py-4">Amount</th>
-<th class="px-6 py-4">Actions</th>
-</tr>
-</thead>
-<tbody class="text-sm">
-<!-- Row 1 -->
-<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">24 May 2025</p>
-<p class="text-xs text-slate-400">10:15 AM</p>
-</td>
-<td class="px-6 py-4 font-bold">#CGP-99281-03</td>
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">Home Nursing</p>
-<p class="text-xs text-slate-400">30-Day Package</p>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-orange-50 text-orange-600 rounded text-[10px] font-bold uppercase">Cash to Staff</span>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-orange-50 text-orange-400 rounded-full text-xs font-medium">Pending Verification</span>
-</td>
-<td class="px-6 py-4 font-bold">৳ 5,600.00</td>
-<td class="px-6 py-4">
-<button class="text-slate-400 hover:text-slate-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">18 May 2025</p>
-<p class="text-xs text-slate-400">02:30 PM</p>
-</td>
-<td class="px-6 py-4 font-bold">#CGP-99281-01</td>
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">Home Nursing</p>
-<p class="text-xs text-slate-400">30-Day Package</p>
-</td>
-<td class="px-6 py-4">
-<p class="text-xs font-bold text-green-600 mb-0.5">Digital Gateway</p>
-<p class="text-[10px] text-slate-400">SSLCommerz (Card)</p>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">Success</span>
-</td>
-<td class="px-6 py-4 font-bold">৳ 5,600.00</td>
-<td class="px-6 py-4">
-<button class="text-slate-400 hover:text-slate-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">12 May 2025</p>
-<p class="text-xs text-slate-400">11:20 AM</p>
-</td>
-<td class="px-6 py-4 font-bold">#CGP-96210-02</td>
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">Physiotherapy</p>
-<p class="text-xs text-slate-400">15-Day Package</p>
-</td>
-<td class="px-6 py-4">
-<p class="text-xs font-bold text-green-600 mb-0.5">Digital Gateway</p>
-<p class="text-[10px] text-slate-400">bKash</p>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">Success</span>
-</td>
-<td class="px-6 py-4 font-bold">৳ 4,200.00</td>
-<td class="px-6 py-4">
-<button class="text-slate-400 hover:text-slate-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-</td>
-</tr>
-<!-- Row 4 -->
-<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">10 May 2025</p>
-<p class="text-xs text-slate-400">09:05 AM</p>
-</td>
-<td class="px-6 py-4 font-bold">#CGP-96210-01</td>
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">Physiotherapy</p>
-<p class="text-xs text-slate-400">15-Day Package</p>
-</td>
-<td class="px-6 py-4">
-<p class="text-xs font-bold text-green-600 mb-0.5">Digital Gateway</p>
-<p class="text-[10px] text-slate-400">Nagad</p>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">Success</span>
-</td>
-<td class="px-6 py-4 font-bold">৳ 1,800.00</td>
-<td class="px-6 py-4">
-<button class="text-slate-400 hover:text-slate-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-</td>
-</tr>
-<!-- Row 5 -->
-<tr class="hover:bg-slate-50/50">
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">05 May 2025</p>
-<p class="text-xs text-slate-400">04:45 PM</p>
-</td>
-<td class="px-6 py-4 font-bold">#CGP-97122-01</td>
-<td class="px-6 py-4">
-<p class="font-bold text-slate-900">Nanny Service</p>
-<p class="text-xs text-slate-400">10-Day Package</p>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-orange-50 text-orange-600 rounded text-[10px] font-bold uppercase">Cash to Staff</span>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 bg-red-50 text-red-500 rounded-full text-xs font-medium">Failed / Disputed</span>
-</td>
-<td class="px-6 py-4 font-bold">৳ 2,500.00</td>
-<td class="px-6 py-4">
-<button class="text-slate-400 hover:text-slate-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="bg-slate-50 py-3 text-center">
-<button class="flex items-center gap-2 mx-auto text-[#005c53] font-bold text-xs uppercase tracking-wider">
-              View More Transactions
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-</div>
-</div>
-</section>
-<!-- END: Transaction History -->
-<!-- BEGIN: Payment Overview Summary -->
-<footer class="bg-white border border-slate-200 rounded-2xl p-6 mb-8" data-purpose="payment-summary">
-<h3 class="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider">Payment Overview <span class="text-slate-400 font-normal capitalize">(This Month)</span></h3>
-<div class="grid grid-cols-4 gap-8">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-600">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<p class="text-xs text-slate-500 font-medium">Total Paid</p>
-<p class="text-lg font-bold text-green-600">৳ 13,200.00</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center text-orange-500">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<p class="text-xs text-slate-500 font-medium">Total Outstanding</p>
-<p class="text-lg font-bold text-orange-500">৳ 16,800.00</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-600">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<p class="text-xs text-slate-500 font-medium">Successful Payments</p>
-<p class="text-lg font-bold text-slate-900">2</p>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-red-500">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-<div>
-<p class="text-xs text-slate-500 font-medium">Failed / Disputed</p>
-<p class="text-lg font-bold text-red-500">1</p>
-</div>
-</div>
-</div>
-</footer>
-<!-- END: Payment Overview Summary -->
-</main>
-<!-- END: Main Content Container -->
-</div>
-</body></html>
+    <!-- BEGIN: Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-border-light flex flex-col fixed h-full z-10" data-purpose="sidebar">
+        <div class="p-6">
+            <div class="flex items-center gap-2 mb-10">
+                <img src="../../assets/cg-logo.png" width="140" alt="">
+            </div>
+            <nav class="space-y-1">
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg" href="#">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Dashboard
+                </a>
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+                   href="../dashboards/my_bookings.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    My Bookings
+                </a>
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+                   href="../dashboards/my_patients.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                              stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    My Patients
+                </a>
+                <a class="flex items-center gap-3 p-3 sidebar-item-active font-medium rounded-r-none"
+                   href="../patients/payment_billing_overview.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Payment &amp; Billing
+                </a>
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+                   href="../home/contact.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Support
+                </a>
+            </nav>
+        </div>
+        <!-- User Profile in Sidebar Footer -->
+        <div class="mt-auto p-4 border-t border-border-light bg-gray-50" data-purpose="user-footer">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-600 overflow-hidden">
+                    <img alt="Irfan Hossain"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy5_sgd6JTlK9FJfBJ0CRfHWK9P04IIlq8P21-TQ2tWGZgqn4JhzCEMQ-nsAZ8eM-8kSYbDzyYLi9fnKvliDlpD31RAqcq5394nVkKEEoM-V31fu7Lmtr6yRQlAEAGOwv2J2ZDyhbjst6m54nqi3bU4gxty7vhw72kwBYMTQYNl6czRZEiElbQOcrNe10Xm0ZPuZAy9l2imDTW307-CenGWrRITSVV6kZGw97ayv2O2bsu7fNUIboapnv9snhFXIOjsQaXQNZeXC4"/>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold text-gray-900">Irfan Hossain</p>
+                    <a class="text-xs text-gray-500 hover:underline" href="#">View Profile</a>
+                </div>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </aside>
+    <!-- END: Sidebar Navigation -->
+    <!-- BEGIN: Main Content Container -->
+    <main class="flex-1 ml-64 p-8">
+        <!-- BEGIN: Page Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">Payment &amp; Billing</h1>
+                <p class="text-slate-500 text-sm">Track your payments, dues and transaction history</p>
+            </div>
+            <div class="flex items-center gap-8">
+                <div class="flex gap-6">
+                    <a class="text-sm font-semibold text-slate-700" href="#">Services</a>
+                    <a class="text-sm font-semibold text-slate-700" href="#">Become a Caregiver</a>
+                </div>
+                <button class="relative p-2 bg-white rounded-full border border-slate-200 shadow-sm">
+                    <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+            </div>
+        </header>
+        <!-- END: Page Header -->
+        <!-- BEGIN: Saved Payment Methods -->
+        <section class="bg-white rounded-2xl p-6 border border-slate-200 mb-8" data-purpose="saved-payments">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold">Saved Payment Methods</h2>
+                    <p class="text-sm text-slate-500">Manage your saved payment options</p>
+                </div>
+                <button class="flex items-center gap-2 text-green-600 border border-green-200 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-green-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Add New Card
+                </button>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <!-- bKash -->
+                <div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
+                    <div class="w-10 h-10 bg-pink-500 rounded flex items-center justify-center text-white font-bold">b
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">bKash</p>
+                        <p class="text-sm text-slate-500">0187 **** 2468</p>
+                    </div>
+                    <button class="absolute top-4 right-4 text-slate-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Nagad -->
+                <div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
+                    <div class="w-10 h-10 bg-orange-500 rounded flex items-center justify-center text-white font-bold">
+                        N
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Nagad</p>
+                        <p class="text-sm text-slate-500">0171 **** 1357</p>
+                    </div>
+                    <button class="absolute top-4 right-4 text-slate-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Visa -->
+                <div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
+                    <div class="w-10 h-10 bg-blue-700 rounded flex items-center justify-center text-white italic font-serif text-lg">
+                        V
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Visa Card</p>
+                        <p class="text-sm text-slate-500">**** **** **** 4242</p>
+                    </div>
+                    <button class="absolute top-4 right-4 text-slate-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Mastercard -->
+                <div class="p-4 border border-slate-100 rounded-xl bg-slate-50 flex items-center gap-4 relative">
+                    <div class="w-10 h-10 bg-red-600 rounded flex items-center justify-center text-white font-bold">M
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold">Mastercard</p>
+                        <p class="text-sm text-slate-500">**** **** **** 8888</p>
+                    </div>
+                    <button class="absolute top-4 right-4 text-slate-400">
+                        <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 20 20">
+                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="text-center mt-6">
+                <button class="text-[#005c53] font-bold text-sm">Manage all payment methods</button>
+            </div>
+        </section>
+        <!-- END: Saved Payment Methods -->
+        <!-- BEGIN: Active Services -->
+        <section class="mb-8" data-purpose="active-services">
+            <div class="mb-4">
+                <h2 class="text-lg font-bold">Active Services</h2>
+                <p class="text-sm text-slate-500">Your ongoing services and payments</p>
+            </div>
+            <div class="space-y-4">
+                <!-- Card 1: Home Nursing -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Home Nursing – 30-Day Package</h3>
+                                <p class="text-sm text-slate-500">Patient: Abdul Karim (Father)</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 font-medium">Booking ID: CGP-99281</p>
+                    </div>
+                    <div class="grid grid-cols-5 items-end">
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Next Payment</p>
+                            <p class="font-bold">25 May 2025</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Amount</p>
+                            <p class="font-bold">৳ 5,600.00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Status</p>
+                            <span class="inline-block px-3 py-1 bg-green-50 text-green-600 rounded-md text-xs font-bold uppercase tracking-wider">Paid</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Package Period</p>
+                            <p class="font-bold">18 May – 16 Jun 2025</p>
+                        </div>
+                        <div class="text-right">
+                            <button class="px-5 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2: Physiotherapy -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Physiotherapy – 15-Day Package</h3>
+                                <p class="text-sm text-slate-500">Patient: Mehedi Hasan</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 font-medium">Booking ID: CGP-96210</p>
+                    </div>
+                    <div class="grid grid-cols-5 items-end">
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Next Payment</p>
+                            <p class="font-bold">1 Jun 2025</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Amount</p>
+                            <p class="font-bold">৳ 4,200.00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Status</p>
+                            <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 rounded-md text-xs font-bold uppercase tracking-wider">Upcoming</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Package Period</p>
+                            <p class="font-bold">18 May – 1 Jun 2025</p>
+                        </div>
+                        <div class="text-right">
+                            <button class="px-5 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3: Nanny Service (Active Action) -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-orange-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Nanny Service – 10-Day Package</h3>
+                                <p class="text-sm text-slate-500">Patient: Safiya (Child)</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 font-medium">Booking ID: CGP-97122</p>
+                    </div>
+                    <div class="grid grid-cols-5 items-end">
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Next Payment</p>
+                            <p class="font-bold">10 May 2025</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Amount</p>
+                            <p class="font-bold">৳ 2,500.00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Status</p>
+                            <span class="inline-block px-3 py-1 bg-orange-50 text-orange-600 rounded-md text-xs font-bold uppercase tracking-wider">Pending</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Package Period</p>
+                            <p class="font-bold">1 May – 10 May 2025</p>
+                        </div>
+                        <div class="text-right">
+                            <button class="px-6 py-2 bg-[#00b087] text-white rounded-lg text-sm font-bold shadow-md hover:bg-[#009b77] transition-all">
+                                Pay Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4: Cleaning Service -->
+                <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900">Cleaning Service – Standard</h3>
+                                <p class="text-sm text-slate-500">Location: Banani, Dhaka</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 font-medium">Booking ID: CGP-99301</p>
+                    </div>
+                    <div class="grid grid-cols-5 items-end">
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Next Payment</p>
+                            <p class="font-bold">15 May 2025</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Amount</p>
+                            <p class="font-bold">৳ 2,000.00</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Status</p>
+                            <span class="inline-block px-3 py-1 bg-green-50 text-green-600 rounded-md text-xs font-bold uppercase tracking-wider">Paid</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 mb-1">Service Date</p>
+                            <p class="font-bold">14 May 2025</p>
+                        </div>
+                        <div class="text-right">
+                            <button class="px-5 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-6">
+                <button class="flex items-center gap-2 mx-auto text-[#005c53] font-bold text-sm">
+                    View All Active Services
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </button>
+            </div>
+        </section>
+        <!-- END: Active Services -->
+        <!-- BEGIN: Transaction History -->
+        <section class="mb-12" data-purpose="transaction-history">
+            <div class="flex items-end justify-between mb-6">
+                <div>
+                    <h2 class="text-lg font-bold">Transaction History</h2>
+                    <p class="text-sm text-slate-500">All your payment transactions in one place</p>
+                </div>
+                <div class="flex gap-3">
+                    <div class="relative">
+                        <input class="pl-4 pr-10 py-2 border border-slate-200 rounded-lg text-sm w-64 focus:ring-0 focus:border-slate-300 cursor-pointer"
+                               readonly="" type="text" value="01 May 2025 – 24 May 2025"/>
+                        <svg class="w-4 h-4 text-slate-400 absolute right-3 top-3" fill="none" stroke="currentColor"
+                             viewbox="0 0 24 24">
+                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <select class="pl-4 pr-10 py-2 border border-slate-200 rounded-lg text-sm focus:ring-0 focus:border-slate-300">
+                        <option>All Services</option>
+                    </select>
+                    <button class="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                        Filters
+                    </button>
+                </div>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                    <tr class="bg-slate-50 text-slate-400 text-xs font-bold uppercase tracking-wider border-b border-slate-100">
+                        <th class="px-6 py-4">Date &amp; Time</th>
+                        <th class="px-6 py-4">Transaction / Invoice ID</th>
+                        <th class="px-6 py-4">Service &amp; Package</th>
+                        <th class="px-6 py-4">Payment Method</th>
+                        <th class="px-6 py-4">Status</th>
+                        <th class="px-6 py-4">Amount</th>
+                        <th class="px-6 py-4">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                    <!-- Row 1 -->
+                    <tr class="border-b border-slate-50 hover:bg-slate-50/50">
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">24 May 2025</p>
+                            <p class="text-xs text-slate-400">10:15 AM</p>
+                        </td>
+                        <td class="px-6 py-4 font-bold">#CGP-99281-03</td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">Home Nursing</p>
+                            <p class="text-xs text-slate-400">30-Day Package</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-orange-50 text-orange-600 rounded text-[10px] font-bold uppercase">Cash to Staff</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-orange-50 text-orange-400 rounded-full text-xs font-medium">Pending Verification</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold">৳ 5,600.00</td>
+                        <td class="px-6 py-4">
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Row 2 -->
+                    <tr class="border-b border-slate-50 hover:bg-slate-50/50">
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">18 May 2025</p>
+                            <p class="text-xs text-slate-400">02:30 PM</p>
+                        </td>
+                        <td class="px-6 py-4 font-bold">#CGP-99281-01</td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">Home Nursing</p>
+                            <p class="text-xs text-slate-400">30-Day Package</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="text-xs font-bold text-green-600 mb-0.5">Digital Gateway</p>
+                            <p class="text-[10px] text-slate-400">SSLCommerz (Card)</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">Success</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold">৳ 5,600.00</td>
+                        <td class="px-6 py-4">
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Row 3 -->
+                    <tr class="border-b border-slate-50 hover:bg-slate-50/50">
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">12 May 2025</p>
+                            <p class="text-xs text-slate-400">11:20 AM</p>
+                        </td>
+                        <td class="px-6 py-4 font-bold">#CGP-96210-02</td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">Physiotherapy</p>
+                            <p class="text-xs text-slate-400">15-Day Package</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="text-xs font-bold text-green-600 mb-0.5">Digital Gateway</p>
+                            <p class="text-[10px] text-slate-400">bKash</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">Success</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold">৳ 4,200.00</td>
+                        <td class="px-6 py-4">
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Row 4 -->
+                    <tr class="border-b border-slate-50 hover:bg-slate-50/50">
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">10 May 2025</p>
+                            <p class="text-xs text-slate-400">09:05 AM</p>
+                        </td>
+                        <td class="px-6 py-4 font-bold">#CGP-96210-01</td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">Physiotherapy</p>
+                            <p class="text-xs text-slate-400">15-Day Package</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="text-xs font-bold text-green-600 mb-0.5">Digital Gateway</p>
+                            <p class="text-[10px] text-slate-400">Nagad</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium">Success</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold">৳ 1,800.00</td>
+                        <td class="px-6 py-4">
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- Row 5 -->
+                    <tr class="hover:bg-slate-50/50">
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">05 May 2025</p>
+                            <p class="text-xs text-slate-400">04:45 PM</p>
+                        </td>
+                        <td class="px-6 py-4 font-bold">#CGP-97122-01</td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-900">Nanny Service</p>
+                            <p class="text-xs text-slate-400">10-Day Package</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-orange-50 text-orange-600 rounded text-[10px] font-bold uppercase">Cash to Staff</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-red-50 text-red-500 rounded-full text-xs font-medium">Failed / Disputed</span>
+                        </td>
+                        <td class="px-6 py-4 font-bold">৳ 2,500.00</td>
+                        <td class="px-6 py-4">
+                            <button class="text-slate-400 hover:text-slate-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="bg-slate-50 py-3 text-center">
+                    <button class="flex items-center gap-2 mx-auto text-[#005c53] font-bold text-xs uppercase tracking-wider">
+                        View More Transactions
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- END: Transaction History -->
+        <!-- BEGIN: Payment Overview Summary -->
+        <footer class="bg-white border border-slate-200 rounded-2xl p-6 mb-8" data-purpose="payment-summary">
+            <h3 class="text-sm font-bold text-slate-900 mb-6 uppercase tracking-wider">Payment Overview <span
+                    class="text-slate-400 font-normal capitalize">(This Month)</span></h3>
+            <div class="grid grid-cols-4 gap-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 font-medium">Total Paid</p>
+                        <p class="text-lg font-bold text-green-600">৳ 13,200.00</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center text-orange-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 font-medium">Total Outstanding</p>
+                        <p class="text-lg font-bold text-orange-500">৳ 16,800.00</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 font-medium">Successful Payments</p>
+                        <p class="text-lg font-bold text-slate-900">2</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center text-red-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                            <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 font-medium">Failed / Disputed</p>
+                        <p class="text-lg font-bold text-red-500">1</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END: Payment Overview Summary -->
+    </main>
+    <!-- END: Main Content Container -->
+</div>
+</body>
+</html>
