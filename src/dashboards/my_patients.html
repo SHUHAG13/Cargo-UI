@@ -1,49 +1,48 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>CareGo+ - My Patients</title>
-    <!-- Tailwind CSS v3 CDN -->
+    <title>CareGo+ – My Patients</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                    fontFamily: {sans: ['Inter', 'sans-serif']},
                     colors: {
-                        primary: '#108548', // Emerald Green variant from logo
-                        secondary: '#F0FDF4', // Light green bg
-                        accent: '#0D9488',
+                        carego: {
+                            primary: '#0F5A3E',
+                            light: '#EDF7F2',
+                            border: '#E5E7EB',
+                            muted: '#6B7280',
+                            bg: '#F9FAFB'
+                        }
                     }
                 }
             }
         }
     </script>
-    <style data-purpose="custom-scrollbar">
-        ::-webkit-scrollbar {
-            width: 6px;
+    <style>
+        body {
+            background-color: #F8FAFC;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        .sidebar-active {
+            background-color: #EDF7F2;
+            color: #0F5A3E;
+            border-right: 3px solid #0F5A3E;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #ccc;
-            border-radius: 10px;
+            background: #d1d5db;
+            border-radius: 8px;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #aaa;
-        }
-
         .sidebar-item-active {
             background-color: #ECFDF5;
             color: #059669;
@@ -51,10 +50,9 @@
         }
     </style>
 </head>
-
-<body class="bg-gray-50 text-slate-800 font-sans antialiased">
-<!-- BEGIN: Main Layout -->
+<body class="font-sans text-slate-800 antialiased">
 <div class="flex min-h-screen">
+
     <!-- BEGIN: Sidebar Navigation -->
     <aside class="w-64 bg-white border-r border-border-light flex flex-col fixed h-full z-10" data-purpose="sidebar">
         <div class="p-6">
@@ -126,395 +124,350 @@
         </div>
     </aside>
     <!-- END: Sidebar Navigation -->
-    <!-- BEGIN: Main Content Area -->
+
+    <!-- Main -->
     <main class="ml-64 flex-1">
-        <!-- BEGIN: Top Header -->
-        <header class="flex items-center justify-end px-8 py-4 bg-white border-b border-gray-100 gap-8">
-            <nav class="flex items-center gap-8 font-semibold text-sm">
-                <a class="text-gray-800 hover:text-primary" href="#">Services</a>
-                <a class="text-gray-800 hover:text-primary" href="#">Become a Caregiver</a>
+        <!-- Top nav -->
+        <header class="flex items-center justify-end px-8 py-4 bg-white border-b border-slate-100 gap-8 sticky top-0 z-10">
+            <nav class="flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#" class="hover:text-carego-primary">Services</a>
+                <a href="../Caregiver/my_schedule_mobile.html" class="hover:text-carego-primary">Become a Caregiver</a>
             </nav>
-            <div class="relative">
-                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full relative">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                        <path
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                    </svg>
-                    <span class="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-                </button>
-            </div>
+            <button class="relative text-slate-500 p-1.5 hover:bg-slate-100 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                </svg>
+                <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
         </header>
-        <!-- END: Top Header -->
-        <!-- BEGIN: Page Content Container -->
-        <div class="p-10 max-w-7xl mx-auto">
-            <!-- Header Section with Title and CTA -->
-            <div class="flex justify-between items-start mb-10">
+
+        <div class="p-8 max-w-7xl mx-auto">
+
+            <!-- Page title + CTA -->
+            <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">My Patients</h1>
-                    <p class="text-gray-500 mt-1">Manage and view all your added patients.</p>
+                    <h1 class="text-2xl font-bold text-slate-900">My Patients</h1>
+                    <p class="text-slate-500 text-sm mt-0.5">Manage and view all your added patients.</p>
                 </div>
-                <button
-                        class="bg-white border border-primary text-primary px-5 py-2.5 rounded-lg flex items-center gap-2 font-semibold hover:bg-green-50 transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                        <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-carego-primary text-white text-sm font-semibold rounded-xl hover:bg-emerald-800 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                     </svg>
                     Add New Patient
                 </button>
             </div>
-            <!-- BEGIN: Stats Summary Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-                <!-- Total Patients -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-5 shadow-sm">
-                    <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center text-primary">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-500">Total Patients</p>
-                        <p class="text-2xl font-bold">3</p>
-                    </div>
-                </div>
-                <!-- Active Bookings -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-5 shadow-sm">
-                    <div class="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-500">Active Bookings</p>
-                        <p class="text-2xl font-bold">2</p>
-                    </div>
-                </div>
-                <!-- Upcoming Bookings -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-5 shadow-sm">
-                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-500">Upcoming Bookings</p>
-                        <p class="text-2xl font-bold">1</p>
-                    </div>
-                </div>
-                <!-- Completed Bookings -->
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-5 shadow-sm">
-                    <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-orange-400">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-500">Completed Bookings</p>
-                        <p class="text-2xl font-bold">3</p>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Stats Summary Cards -->
-            <!-- BEGIN: Filter Controls -->
-            <div class="flex flex-col md:flex-row gap-4 mb-8">
-                <div class="relative flex-1">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"></path>
-                        </svg>
-                    </div>
-                    <input
-                            class="block w-full pl-10 pr-3 py-2.5 border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm"
-                            placeholder="Search patients by name" type="text"/>
-                </div>
-                <div class="flex gap-4">
-                    <select
-                            class="pl-4 pr-10 py-2.5 border border-gray-200 rounded-lg bg-white text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary">
-                        <option>All Status</option>
-                        <option>Active</option>
-                        <option>Inactive</option>
-                    </select>
-                    <div class="flex items-center gap-3">
-                        <span class="text-sm font-medium text-gray-500 whitespace-nowrap">Sort by:</span>
-                        <select
-                                class="pl-4 pr-10 py-2.5 border border-gray-200 rounded-lg bg-white text-sm font-medium focus:outline-none focus:ring-1 focus:ring-primary">
-                            <option>Recently Added</option>
-                            <option>Name (A-Z)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Filter Controls -->
-            <!-- BEGIN: Patients Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Patient Card 1: Abdul Karim -->
-                <div
-                        class="bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative h-48">
-                        <img alt="Abdul Karim" class="w-full h-full object-cover"
-                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLdsZnEvaRLCDmzGKZ-RL2Ooj1_wH4luJ5l6bfAN1F8eXCA3PdzkotDiNO8wjtWR-kU9f0Ym5lQj8DtE3UqsjoBqh__zM8LWBEEO5LI1qKmul9xLCHMsHSc5KtW72P3oXM4C6sDhB8ytQysgVVi27CHtEp-34KCvD-NU8FUrsYY0cMeJFm_oIKMTu9DQ-T_oosWFOm5kfTBVwS-kYrnt4jndv0-0ZwELC1dGewLUsSLp_269Bz3S2C65LEj3GTaJPp8mPaLOF59EI"/>
-                        <span
-                                class="absolute top-4 right-4 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full border border-green-200">Active</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="text-xl font-bold text-gray-900">Abdul Karim</h3>
-                            <button class="text-gray-400 hover:text-gray-600">
-                                <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20">
-                                    <path
-                                            d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-sm text-gray-500 mb-2">Male, 72 Years</p>
-                        <div class="flex items-center gap-2 mb-4">
-                            <p class="text-sm font-semibold text-gray-600">Patient ID: <span class="text-gray-800">PT-1001</span>
-                            </p>
-                            <button class="text-gray-400 hover:text-primary">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                    <path
-                                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-[12px] text-gray-400 mb-6 font-medium">Added on 20 May 2025</p>
-                        <div class="space-y-4 border-t border-gray-50 pt-6 mb-8">
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Active
-                                        Booking</p>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-sm font-bold text-gray-800">Home Caregiver</span>
-                                        <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold">Standard
-                        Care</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1">CG-250525-00123</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-blue-50 rounded-lg text-blue-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
-                                              stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Next
-                                        Service</p>
-                                    <p class="text-sm font-bold text-gray-800 mt-1">25 May 2025, 10:00 AM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button
-                                class="w-full py-3 border border-green-200 rounded-xl text-primary font-bold flex items-center justify-center gap-2 hover:bg-green-50 transition-colors">
-                            <a href="../patients/details_overview.html" class="text-primary hover:text-primary">View
-                                Details</a>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <!-- Patient Card 2: Rokeya Begum -->
-                <div
-                        class="bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative h-48">
-                        <img alt="Rokeya Begum" class="w-full h-full object-cover"
-                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVTEdj1VyASSE0Vw0ULcmCVCNfMN-fz0PF85D9iX-Bx2G-0OmTMMBYAoAmE0mn0aTiOo9fg7mPLOgg8CLuiDnxPLG2Sq55aPXl31qYKohg9cByQ_pcyZV-uBweKt7-5zQkDgd1fRkAd79ARvsMQxa2CGGofYAyiYraOG5KkDAwDMaqslXrk8teVhzFiY-YVIPW6mh5EzvQntlSVwa8f7WFoz-INclmqPDUrRgQyLcs1N2ugob86ww5Uf0i0j_gF_Njv1DbgkBIEeo"/>
-                        <span
-                                class="absolute top-4 right-4 bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full border border-green-200">Active</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="text-xl font-bold text-gray-900">Rokeya Begum</h3>
-                            <button class="text-gray-400 hover:text-gray-600">
-                                <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20">
-                                    <path
-                                            d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-sm text-gray-500 mb-2">Female, 68 Years</p>
-                        <div class="flex items-center gap-2 mb-4">
-                            <p class="text-sm font-semibold text-gray-600">Patient ID: <span class="text-gray-800">PT-1002</span>
-                            </p>
-                            <button class="text-gray-400 hover:text-primary">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                    <path
-                                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-[12px] text-gray-400 mb-6 font-medium">Added on 18 May 2025</p>
-                        <div class="space-y-4 border-t border-gray-50 pt-6 mb-8">
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Active
-                                        Booking</p>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-sm font-bold text-gray-800">Physiotherapy</span>
-                                        <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold">Standard
-                        Care</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1">CG-250518-00098</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-blue-50 rounded-lg text-blue-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
-                                              stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Next
-                                        Service</p>
-                                    <p class="text-sm font-bold text-gray-800 mt-1">26 May 2025, 11:00 AM</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button
-                                class="w-full py-3 border border-green-200 rounded-xl text-primary font-bold flex items-center justify-center gap-2 hover:bg-green-50 transition-colors">
-                            <a href="../patients/details_overview.html" class="text-primary hover:text-primary">View
-                                Details</a>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <!-- Patient Card 3: Mofiz Uddin -->
-                <div
-                        class="bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative h-48">
-                        <img alt="Mofiz Uddin" class="w-full h-full object-cover"
-                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_z6hejmc16ORRFhJpgciZIvBVHkWBzsiIY77WqUeuMykpfdlu4-LmSgRmT8yKmAW5l_m9-hjVri0zAnaxltxB4nozbWtpPWEhWcwi0-XddZcWSL-lkWl-xamot_Ry6H5LXXiNiZAfevML8jwlvrPDwqKe8_Ah8JjRB0_qP5YiV4ZWXWpjwD_F_iDbtHMzKQBXE6bOEVOSQkEBt0jL_jG9vicsTvGTHU4CTHsQiEBS14FbVWTOkTrjwM2tGnB40C7Pm9ibcODAxoo"/>
-                        <span
-                                class="absolute top-4 right-4 bg-gray-100 text-gray-500 text-xs font-bold px-3 py-1 rounded-full border border-gray-200">Inactive</span>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="text-xl font-bold text-gray-900">Mofiz Uddin</h3>
-                            <button class="text-gray-400 hover:text-gray-600">
-                                <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 20 20">
-                                    <path
-                                            d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-sm text-gray-500 mb-2">Male, 65 Years</p>
-                        <div class="flex items-center gap-2 mb-4">
-                            <p class="text-sm font-semibold text-gray-600">Patient ID: <span class="text-gray-800">PT-1003</span>
-                            </p>
-                            <button class="text-gray-400 hover:text-primary">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                    <path
-                                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-[12px] text-gray-400 mb-6 font-medium">Added on 10 May 2025</p>
-                        <div class="space-y-4 border-t border-gray-50 pt-6 mb-8">
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Last
-                                        Booking</p>
-                                    <div class="flex items-center gap-2 mt-1">
-                                        <span class="text-sm font-bold text-gray-800">Home Caregiver</span>
-                                        <span class="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">Basic
-                        Care</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 mt-1">CG-250510-00056</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="p-2 bg-blue-50 rounded-lg text-blue-500">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
-                                              stroke-linejoin="round" stroke-width="2"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">Completed
-                                        on</p>
-                                    <p class="text-sm font-bold text-gray-800 mt-1">15 May 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button
-                                class="w-full py-3 border border-green-200 rounded-xl text-primary font-bold flex items-center justify-center gap-2 hover:bg-green-50 transition-colors">
-                            <a href="../patients/details_overview.html" class="text-primary hover:text-primary">View
-                                Details</a>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Patients Grid -->
-            <!-- BEGIN: Pagination -->
-            <div class="mt-12 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-gray-500 font-medium">Showing 1 to 3 of 3 patients</p>
-                <div class="flex items-center gap-2">
-                    <button class="p-2 border border-gray-200 rounded-lg hover:bg-gray-100 disabled:opacity-50"
-                            disabled="">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2"></path>
-                        </svg>
-                    </button>
-                    <button class="w-10 h-10 bg-primary text-white rounded-lg font-bold">1</button>
-                    <button class="p-2 border border-gray-200 rounded-lg hover:bg-gray-100 disabled:opacity-50"
-                            disabled="">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <!-- END: Pagination -->
-        </div>
-        <!-- END: Page Content Container -->
-    </main>
-    <!-- END: Main Content Area -->
-</div>
-<!-- END: Main Layout -->
-</body>
 
+            <!-- Stats row -->
+            <div class="grid grid-cols-4 gap-5 mb-8">
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-carego-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div><p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Total Patients</p>
+                        <p class="text-2xl font-bold text-slate-900">3</p></div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div><p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Active Bookings</p>
+                        <p class="text-2xl font-bold text-slate-900">2</p></div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div><p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Upcoming</p>
+                        <p class="text-2xl font-bold text-slate-900">1</p></div>
+                </div>
+                <div class="bg-white rounded-2xl border border-slate-100 p-5 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div><p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Completed</p>
+                        <p class="text-2xl font-bold text-slate-900">3</p></div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex gap-4 mb-8">
+                <div class="relative flex-1">
+                    <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round"
+                              stroke-linejoin="round" stroke-width="2"/>
+                    </svg>
+                    <input type="text" placeholder="Search patients by name…"
+                           class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"/>
+                </div>
+                <select class="px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                    <option>All Status</option>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                </select>
+                <div class="flex items-center gap-3">
+                    <span class="text-sm text-slate-400 font-medium whitespace-nowrap">Sort by:</span>
+                    <select class="px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                        <option>Recently Added</option>
+                        <option>Name (A–Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Patient cards -->
+            <div class="grid grid-cols-3 gap-6">
+
+                <!-- Card 1: Abdul Karim (Active) -->
+                <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="relative h-52">
+                        <img src="../../assets/patient.jpg"
+                             onerror="this.src='https://images.unsplash.com/photo-1583750741099-2e19e14acbbf?w=400&h=300&fit=crop'"
+                             alt="Abdul Karim" class="w-full h-full object-cover object-top"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200">Active</span>
+                        <div class="absolute bottom-3 left-4">
+                            <h3 class="text-white text-lg font-bold leading-tight">Abdul Karim</h3>
+                            <p class="text-white/80 text-xs font-medium">Male, 72 Years</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-slate-500 font-medium">Patient ID:</span>
+                                <span class="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded">PT-1001</span>
+                                <button class="text-slate-400 hover:text-carego-primary">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-medium">Added 20 May 2025</span>
+                        </div>
+                        <div class="space-y-3 border-t border-slate-50 pt-4 mb-5">
+                            <div class="flex items-start gap-3">
+                                <div class="p-1.5 bg-indigo-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Active
+                                        Booking</p>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <span class="text-sm font-bold text-slate-800">Home Caregiver</span>
+                                        <span class="text-[9px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold">Standard Care</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-0.5">CG-250525-00123</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-1.5 bg-blue-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                              stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Next
+                                        Service</p>
+                                    <p class="text-sm font-bold text-slate-800 mt-0.5">25 May 2025, 10:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="../patients/patient_details.html"
+                           class="w-full py-2.5 border border-emerald-200 text-carego-primary text-sm font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-50 transition-colors">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Rokeya Begum (Active) -->
+                <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="relative h-52">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Senior_Woman_Portrait.jpg/640px-Senior_Woman_Portrait.jpg"
+                             onerror="this.src='https://images.unsplash.com/photo-1609220136736-443140cffec6?w=400&h=300&fit=crop'"
+                             alt="Rokeya Begum" class="w-full h-full object-cover object-top"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        <span class="absolute top-3 right-3 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200">Active</span>
+                        <div class="absolute bottom-3 left-4">
+                            <h3 class="text-white text-lg font-bold leading-tight">Rokeya Begum</h3>
+                            <p class="text-white/80 text-xs font-medium">Female, 68 Years</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-slate-500 font-medium">Patient ID:</span>
+                                <span class="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded">PT-1002</span>
+                                <button class="text-slate-400 hover:text-carego-primary">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-medium">Added 18 May 2025</span>
+                        </div>
+                        <div class="space-y-3 border-t border-slate-50 pt-4 mb-5">
+                            <div class="flex items-start gap-3">
+                                <div class="p-1.5 bg-indigo-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Active
+                                        Booking</p>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <span class="text-sm font-bold text-slate-800">Physiotherapy</span>
+                                        <span class="text-[9px] bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold">Standard Care</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-0.5">CG-250518-00098</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-1.5 bg-blue-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                              stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Next
+                                        Service</p>
+                                    <p class="text-sm font-bold text-slate-800 mt-0.5">26 May 2025, 11:00 AM</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="../patients/patient_details.html"
+                           class="w-full py-2.5 border border-emerald-200 text-carego-primary text-sm font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-emerald-50 transition-colors">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: Mofiz Uddin (Inactive) -->
+                <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-md transition-shadow">
+                    <div class="relative h-52">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Profile_avatar_placeholder_large.png/480px-Profile_avatar_placeholder_large.png"
+                             onerror="this.src='https://images.unsplash.com/photo-1565843248736-8c9de0b7d5c0?w=400&h=300&fit=crop'"
+                             alt="Mofiz Uddin" class="w-full h-full object-cover object-top"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        <span class="absolute top-3 right-3 bg-slate-100 text-slate-500 text-[10px] font-bold px-2.5 py-1 rounded-full border border-slate-200">Inactive</span>
+                        <div class="absolute bottom-3 left-4">
+                            <h3 class="text-white text-lg font-bold leading-tight">Mofiz Uddin</h3>
+                            <p class="text-white/80 text-xs font-medium">Male, 65 Years</p>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs text-slate-500 font-medium">Patient ID:</span>
+                                <span class="text-xs font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded">PT-1003</span>
+                                <button class="text-slate-400 hover:text-carego-primary">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-medium">Added 10 May 2025</span>
+                        </div>
+                        <div class="space-y-3 border-t border-slate-50 pt-4 mb-5">
+                            <div class="flex items-start gap-3">
+                                <div class="p-1.5 bg-indigo-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Last
+                                        Booking</p>
+                                    <div class="flex items-center gap-1.5 mt-0.5">
+                                        <span class="text-sm font-bold text-slate-800">Home Caregiver</span>
+                                        <span class="text-[9px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold">Basic Care</span>
+                                    </div>
+                                    <p class="text-xs text-slate-400 mt-0.5">CG-250510-00056</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-1.5 bg-blue-50 rounded-lg">
+                                    <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                                              stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">Completed
+                                        on</p>
+                                    <p class="text-sm font-bold text-slate-800 mt-0.5">15 May 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="../patients/patient_details.html"
+                           class="w-full py-2.5 border border-slate-200 text-slate-600 text-sm font-semibold rounded-xl flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END cards -->
+
+            <!-- Pagination -->
+            <div class="mt-10 flex justify-between items-center">
+                <p class="text-sm text-slate-500">Showing 1 to 3 of 3 patients</p>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 border border-slate-200 rounded-lg text-slate-400 hover:bg-white transition-colors"
+                            disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </button>
+                    <button class="w-9 h-9 bg-carego-primary text-white rounded-lg text-sm font-bold">1</button>
+                    <button class="p-2 border border-slate-200 rounded-lg text-slate-400 hover:bg-white transition-colors"
+                            disabled>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+</body>
 </html>
