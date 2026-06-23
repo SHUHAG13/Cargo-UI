@@ -1,263 +1,301 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CareGo+ Bookings Dashboard</title>
-<!-- Tailwind CSS v3 CDN with plugins -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Font Configuration -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<style data-purpose="typography">
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
-    }
-  </style>
-<style data-purpose="custom-layout">
-    /* Hide scrollbar for the horizontal summary cards */
-    .hide-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .hide-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CareGo+ Bookings Dashboard</title>
+    <!-- Tailwind CSS v3 CDN with plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Font Configuration -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style data-purpose="typography">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
+    <style data-purpose="custom-layout">
+        /* Hide scrollbar for the horizontal summary cards */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
 </head>
 <body class="pb-20">
-<!-- BEGIN: Mobile Header -->
-<header class="sticky top-0 z-50 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
-<div class="flex items-center gap-2">
-<!-- Mobile Menu Button (Hamburger) -->
-<button class="p-2 text-gray-600">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-<img alt="CareGo+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdO3lAcLItrMXAKC53wv9HfcSHx6i7uWTS1awkAo5i-jtGzi2JPdkYdkLEQG6ljGxXYs6vY1mi0c-btiAXut8q8POb6BRJL169CI1Y5p45gPJ5jBM3kJTx9hkXcEmkok7O4s_nr4sTxDIdrV1QM29A-1Db1Y5M_NDq_7xLuHn9yXrzuJPkq85d34sNbeOJlSRkMsSloT8pesMTfzD1wW6QzR8bPHAQhWdmtYab-_pzi4xG8p-htx5DBTrLcEtzfwexlDlEWrQcBJNM" style="max-width: 100px; filter: contrast(1.1);"/>
-</div>
-<div class="flex items-center gap-3">
-<button class="relative p-2 text-gray-600">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-<span class="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border-2 border-white"></span>
-</button>
-<div class="h-8 w-8 rounded-full bg-teal-100 flex items-center justify-center overflow-hidden">
-<img alt="Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaSiDX3Qi0O4kGIz-5GXxPZMufUKUPPtt1ESf0dlVOSa8qcbgyZj_g-509MVYnt0pWGJZYpWDfmirjbhsCjaJ-iIV6eU2LIVHFhbiqmQ7ka51J3UC_ctWgeQ9fa8ECOzB6WZomzXFpOlJ2QaAL6MrGvxaF8A_F5JV8BOywteoxcOaOaWAFHG2dRNHPvOFXi8FWXivMRYviglWq9tYpM7nMroEWI-EO2wI46vExkkJPBWfB-wGqFhyKhAFHH3uPXjIFAwHx6aW0j4WM"/>
-</div>
-</div>
-</header>
-<!-- END: Mobile Header -->
-<main class="p-4 space-y-6">
-<!-- BEGIN: Page Title -->
-<section data-purpose="page-title">
-<h1 class="text-2xl font-bold text-slate-900">Bookings</h1>
-<p class="text-sm text-slate-500">View and manage all your service bookings</p>
-</section>
-<!-- END: Page Title -->
-<!-- BEGIN: Summary Cards Slider -->
-<section class="relative" data-purpose="summary-stats">
-<div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x">
-<!-- Total Bookings -->
-<div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
-<div class="p-2 bg-blue-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
-<svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<p class="text-xs text-gray-500 uppercase font-medium">Total</p>
-<p class="text-xl font-bold text-gray-900">18</p>
-<p class="text-[10px] text-gray-400">All time</p>
-</div>
-<!-- Active Bookings -->
-<div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
-<div class="p-2 bg-green-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
-<svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<p class="text-xs text-gray-500 uppercase font-medium">Active</p>
-<p class="text-xl font-bold text-gray-900">5</p>
-<p class="text-[10px] text-gray-400">In progress</p>
-</div>
-<!-- Upcoming Bookings -->
-<div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
-<div class="p-2 bg-sky-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
-<svg class="h-6 w-6 text-sky-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<p class="text-xs text-gray-500 uppercase font-medium">Upcoming</p>
-<p class="text-xl font-bold text-gray-900">6</p>
-<p class="text-[10px] text-gray-400">Scheduled</p>
-</div>
-<!-- Completed Bookings -->
-<div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
-<div class="p-2 bg-purple-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
-<svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<p class="text-xs text-gray-500 uppercase font-medium">Completed</p>
-<p class="text-xl font-bold text-gray-900">7</p>
-<p class="text-[10px] text-gray-400">Finished</p>
-</div>
-</div>
-</section>
-<!-- END: Summary Cards Slider -->
-<!-- BEGIN: Search and Filters -->
-<section class="space-y-3" data-purpose="filters">
-<div class="relative">
-<span class="absolute inset-y-0 left-0 flex items-center pl-3">
-<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</span>
-<input class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 text-sm" placeholder="Search by name or ID" type="text"/>
-</div>
-<div class="grid grid-cols-2 gap-3">
-<select class="text-sm border-gray-300 rounded-lg focus:ring-teal-500">
-<option>All Status</option>
-<option>Active</option>
-<option>Upcoming</option>
-</select>
-<select class="text-sm border-gray-300 rounded-lg focus:ring-teal-500">
-<option>All Services</option>
-<option>Home Nursing</option>
-</select>
-</div>
-<div class="flex items-center justify-between pt-2">
-<div class="flex gap-4 border-b border-gray-200 flex-1">
-<button class="pb-2 border-b-2 border-teal-600 text-teal-600 font-semibold text-xs whitespace-nowrap">All Bookings</button>
-<button class="pb-2 border-b-2 border-transparent text-gray-500 text-xs whitespace-nowrap">Active</button>
-<button class="pb-2 border-b-2 border-transparent text-gray-500 text-xs whitespace-nowrap">Upcoming</button>
-</div>
-<button class="ml-4 bg-teal-800 text-white p-2 rounded-lg">
-<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-</section>
-<!-- END: Search and Filters -->
-<!-- BEGIN: Bookings List -->
-<section class="space-y-4" data-purpose="bookings-list">
-<!-- Booking Card: Active -->
-<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm space-y-4">
-<div class="flex items-start justify-between">
-<div class="flex gap-3">
-<div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center">
-<svg class="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<div>
-<h3 class="font-bold text-gray-900 leading-tight">Home Nursing — Package #CGP-992</h3>
-<span class="inline-block mt-1 px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Active</span>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-y-2 text-sm">
-<div class="text-gray-500">Patient:</div>
-<div class="text-gray-900 font-medium">Mrs. Tahmina Begum</div>
-<div class="text-gray-500">Age:</div>
-<div class="text-gray-900 font-medium">68 Years</div>
-<div class="text-gray-500">Service:</div>
-<div class="text-gray-900 font-medium">Post Stroke Care</div>
-<div class="text-gray-500">Booking ID:</div>
-<div class="text-gray-900 font-mono text-xs">BK-2026-0604-001</div>
-</div>
-<div class="flex items-center gap-2 text-gray-500 text-xs">
-<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-          House 12, Road 5, Dhanmondi, Dhaka
+<!-- BEGIN: MobileHeader -->
+<header class="bg-white border-b border-gray-100 p-4 sticky top-0 z-50 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+        <div class="text-[#102C57] font-bold text-xl flex items-center">
+            CareGo<span class="text-[#0D9488] text-2xl ml-0.5">+</span>
         </div>
-<button class="w-full bg-red-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-red-100 active:bg-red-600">
-          End Session
+    </div>
+    <div class="flex items-center gap-3">
+        <button class="relative p-2 text-gray-500">
+            <i class="fa-regular fa-bell text-xl"></i>
+            <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
         </button>
-</div>
-<!-- Booking Card: Upcoming -->
-<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm space-y-4">
-<div class="flex items-start justify-between">
-<div class="flex gap-3">
-<div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center">
-<svg class="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<div>
-<h3 class="font-bold text-gray-900 leading-tight">Home Nursing — Package #CGP-992</h3>
-<span class="inline-block mt-1 px-2 py-0.5 bg-orange-100 text-orange-700 text-[10px] font-bold rounded-full uppercase">Upcoming</span>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-y-2 text-sm">
-<div class="text-gray-500">Patient:</div>
-<div class="text-gray-900 font-medium">Mrs. Tahmina Begum</div>
-<div class="text-gray-500">Date:</div>
-<div class="text-gray-900 font-medium">05 June, 2026</div>
-<div class="text-gray-500">Booking ID:</div>
-<div class="text-gray-900 font-mono text-xs">BK-2026-0605-002</div>
-</div>
-<button class="w-full border border-teal-600 text-teal-600 font-bold py-3 rounded-xl active:bg-teal-50">
-          View Details
-        </button>
-</div>
-<!-- Booking Card: Completed -->
-<div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm opacity-80 space-y-4">
-<div class="flex items-start justify-between">
-<div class="flex gap-3">
-<div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
-<svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</div>
-<div>
-<h3 class="font-bold text-gray-600 leading-tight">Home Nursing — Package #CGP-992</h3>
-<span class="inline-block mt-1 px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-bold rounded-full uppercase">Completed</span>
-</div>
-</div>
-</div>
-<div class="text-xs text-gray-400">Booking ID: BK-2026-0607-004</div>
-</div>
-</section>
-<!-- END: Bookings List -->
-<!-- BEGIN: Pagination Info -->
-<div class="flex flex-col items-center gap-4 py-4">
-<p class="text-xs text-gray-500">Showing 1 to 10 of 18 bookings</p>
-<div class="flex gap-2">
-<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-400">
-<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-<button class="w-8 h-8 flex items-center justify-center rounded bg-teal-600 text-white font-bold text-xs">1</button>
-<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 text-xs">2</button>
-<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-400">
-<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</button>
-</div>
-</div>
-<!-- END: Pagination Info -->
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-gray-200">
+            <img alt="Afia Islam" class="w-full h-full object-cover object-top scale-[3] translate-y-2"
+                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK0Y924gNM4_m_cLgIHixaOkOU4EE4nu32TyfA2LWywN1l-mU-pV4OO-R1Fz--j0Zve67Vwlp8oqLNV5Qahn00Hx5Qocqw9424jvNiBfi37vE9gg4DSa3WVsERmuXqSE-sscR_X9MneHENN4XvU_Skeegua2v7rY6szZfYe83U9NZppoBoemZybTKrN1jkXO5I2LzGYwGSsjcVnHFSQMewEHaOLUpjPudZdf6E5ahQ4VTDcZqPKFjE5p0keFGRZ_Qmlbku_MhFKXMG"/>
+        </div>
+    </div>
+</header>
+<!-- END: MobileHeader -->
+<main class="p-4 space-y-6">
+    <!-- BEGIN: Page Title -->
+    <section data-purpose="page-title">
+        <h1 class="text-2xl font-bold text-slate-900">Bookings</h1>
+        <p class="text-sm text-slate-500">View and manage all your service bookings</p>
+    </section>
+    <!-- END: Page Title -->
+    <!-- BEGIN: Summary Cards Slider -->
+    <section class="relative" data-purpose="summary-stats">
+        <div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x">
+            <!-- Total Bookings -->
+            <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
+                <div class="p-2 bg-blue-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
+                    <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <p class="text-xs text-gray-500 uppercase font-medium">Total</p>
+                <p class="text-xl font-bold text-gray-900">18</p>
+                <p class="text-[10px] text-gray-400">All time</p>
+            </div>
+            <!-- Active Bookings -->
+            <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
+                <div class="p-2 bg-green-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
+                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2"></path>
+                    </svg>
+                </div>
+                <p class="text-xs text-gray-500 uppercase font-medium">Active</p>
+                <p class="text-xl font-bold text-gray-900">5</p>
+                <p class="text-[10px] text-gray-400">In progress</p>
+            </div>
+            <!-- Upcoming Bookings -->
+            <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
+                <div class="p-2 bg-sky-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
+                    <svg class="h-6 w-6 text-sky-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                              stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <p class="text-xs text-gray-500 uppercase font-medium">Upcoming</p>
+                <p class="text-xl font-bold text-gray-900">6</p>
+                <p class="text-[10px] text-gray-400">Scheduled</p>
+            </div>
+            <!-- Completed Bookings -->
+            <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start">
+                <div class="p-2 bg-purple-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3">
+                    <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <p class="text-xs text-gray-500 uppercase font-medium">Completed</p>
+                <p class="text-xl font-bold text-gray-900">7</p>
+                <p class="text-[10px] text-gray-400">Finished</p>
+            </div>
+        </div>
+    </section>
+    <!-- END: Summary Cards Slider -->
+    <!-- BEGIN: Search and Filters -->
+    <section class="space-y-3" data-purpose="filters">
+        <div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3">
+<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"
+        stroke-width="2"></path></svg>
+</span>
+            <input class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 text-sm"
+                   placeholder="Search by name or ID" type="text"/>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+            <select class="text-sm border-gray-300 rounded-lg focus:ring-teal-500">
+                <option>All Status</option>
+                <option>Active</option>
+                <option>Upcoming</option>
+            </select>
+            <select class="text-sm border-gray-300 rounded-lg focus:ring-teal-500">
+                <option>All Services</option>
+                <option>Home Nursing</option>
+            </select>
+        </div>
+        <div class="flex items-center justify-between pt-2">
+            <div class="flex gap-4 border-b border-gray-200 flex-1">
+                <button class="pb-2 border-b-2 border-teal-600 text-teal-600 font-semibold text-xs whitespace-nowrap">
+                    All Bookings
+                </button>
+                <button class="pb-2 border-b-2 border-transparent text-gray-500 text-xs whitespace-nowrap">Active
+                </button>
+                <button class="pb-2 border-b-2 border-transparent text-gray-500 text-xs whitespace-nowrap">Upcoming
+                </button>
+            </div>
+            <button class="ml-4 bg-teal-800 text-white p-2 rounded-lg">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+        </div>
+    </section>
+    <!-- END: Search and Filters -->
+    <!-- BEGIN: Bookings List -->
+    <section class="space-y-4" data-purpose="bookings-list">
+        <!-- Booking Card: Active -->
+        <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm space-y-4">
+            <div class="flex items-start justify-between">
+                <div class="flex gap-3">
+                    <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 leading-tight">Home Nursing — Package #CGP-992</h3>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full uppercase">Active</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-y-2 text-sm">
+                <div class="text-gray-500">Patient:</div>
+                <div class="text-gray-900 font-medium">Mrs. Tahmina Begum</div>
+                <div class="text-gray-500">Age:</div>
+                <div class="text-gray-900 font-medium">68 Years</div>
+                <div class="text-gray-500">Service:</div>
+                <div class="text-gray-900 font-medium">Post Stroke Care</div>
+                <div class="text-gray-500">Booking ID:</div>
+                <div class="text-gray-900 font-mono text-xs">BK-2026-0604-001</div>
+            </div>
+            <div class="flex items-center gap-2 text-gray-500 text-xs">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"></path>
+                </svg>
+                House 12, Road 5, Dhanmondi, Dhaka
+            </div>
+            <button class="w-full bg-red-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-red-100 active:bg-red-600">
+                End Session
+            </button>
+        </div>
+        <!-- Booking Card: Upcoming -->
+        <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm space-y-4">
+            <div class="flex items-start justify-between">
+                <div class="flex gap-3">
+                    <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 leading-tight">Home Nursing — Package #CGP-992</h3>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-orange-100 text-orange-700 text-[10px] font-bold rounded-full uppercase">Upcoming</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-y-2 text-sm">
+                <div class="text-gray-500">Patient:</div>
+                <div class="text-gray-900 font-medium">Mrs. Tahmina Begum</div>
+                <div class="text-gray-500">Date:</div>
+                <div class="text-gray-900 font-medium">05 June, 2026</div>
+                <div class="text-gray-500">Booking ID:</div>
+                <div class="text-gray-900 font-mono text-xs">BK-2026-0605-002</div>
+            </div>
+            <button class="w-full border border-teal-600 text-teal-600 font-bold py-3 rounded-xl active:bg-teal-50">
+                <a href="booking_details_mobile.html">View Details</a>
+            </button>
+        </div>
+        <!-- Booking Card: Completed -->
+        <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm opacity-80 space-y-4">
+            <div class="flex items-start justify-between">
+                <div class="flex gap-3">
+                    <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-600 leading-tight">Home Nursing — Package #CGP-992</h3>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-bold rounded-full uppercase">Completed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-xs text-gray-400">Booking ID: BK-2026-0607-004</div>
+        </div>
+    </section>
+    <!-- END: Bookings List -->
+    <!-- BEGIN: Pagination Info -->
+    <div class="flex flex-col items-center gap-4 py-4">
+        <p class="text-xs text-gray-500">Showing 1 to 10 of 18 bookings</p>
+        <div class="flex gap-2">
+            <button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-400">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded bg-teal-600 text-white font-bold text-xs">
+                1
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-600 text-xs">
+                2
+            </button>
+            <button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-400">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!-- END: Pagination Info -->
 </main>
-<!-- BEGIN: Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-3 flex justify-between items-center z-50">
-<button class="flex flex-col items-center gap-1 text-gray-400">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px]">Dashboard</span>
-</button>
-<button class="flex flex-col items-center gap-1 text-teal-600">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px] font-bold">Bookings</span>
-</button>
-<button class="flex flex-col items-center gap-1 text-gray-400">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px]">Earnings</span>
-</button>
-<button class="flex flex-col items-center gap-1 text-gray-400">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-<span class="text-[10px]">Account</span>
-</button>
+<!-- BEGIN: BottomNavigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-2 flex justify-between items-center z-50">
+    <a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+        <i class="fa-solid fa-grip text-lg"></i>
+        <span class="text-[10px]">Home</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-gray-400" href="my_schedule_mobile.html">
+        <i class="fa-solid fa-calendar-days text-lg"></i>
+        <span class="text-[10px] font-bold">Schedule</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-[#0D9488]" href="bookings_list_mobile.html">
+        <i class="fa-solid fa-briefcase text-lg"></i>
+        <span class="text-[10px]">Bookings</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+        <i class="fa-solid fa-wallet text-lg"></i>
+        <span class="text-[10px]">Earning</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-gray-400" href="#">
+        <i class="fa-solid fa-user-gear text-lg"></i>
+        <span class="text-[10px]">Account</span>
+    </a>
 </nav>
-<!-- END: Bottom Navigation Bar -->
-</body></html>
+<!-- END: BottomNavigation -->
+</body>
+</html>

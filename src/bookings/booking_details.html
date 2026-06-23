@@ -94,72 +94,78 @@
         .card-shadow {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
         }
+        .sidebar-item-active {
+            background-color: #ECFDF5;
+            color: #059669;
+            border-right: 4px solid #059669;
+        }
     </style>
 </head>
 <body class="font-sans text-slate-800">
 <!-- BEGIN: Main Dashboard Wrapper -->
 <div class="flex min-h-screen">
 
-    <!-- BEGIN: Left Sidebar Navigation -->
-    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col fixed h-full z-10" data-purpose="sidebar">
+    <!-- BEGIN: Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-border-light flex flex-col fixed h-full z-10" data-purpose="sidebar">
         <div class="p-6">
-            <div class="flex items-center gap-2">
-                <span class="text-2xl font-bold text-carego-primary">CareGo<span
-                        class="text-emerald-400">+</span></span>
+            <div class="flex items-center gap-2 mb-10">
+                <img src="../../assets/cg-logo.png" width="140" alt="">
             </div>
+            <nav class="space-y-1">
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg" href="#">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Dashboard
+                </a>
+                <a class="flex items-center gap-3 p-3 sidebar-item-active font-medium rounded-r-none"
+                   href="../dashboards/my_bookings.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    My Bookings
+                </a>
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+                   href="../dashboards/my_patients.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+                              stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    My Patients
+                </a>
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+                   href="../patients/payment_billing_overview.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Payment &amp; Billing
+                </a>
+                <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg"
+                   href="../home/contact.html">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                        <path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    Support
+                </a>
+            </nav>
         </div>
-        <nav class="flex-1 mt-4 px-4 space-y-2">
-            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50" href="#">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                Dashboard
-            </a>
-            <a class="sidebar-link-active flex items-center gap-3 px-4 py-3 rounded-lg" href="#">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                My Bookings
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50" href="#">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                My Patients
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50" href="#">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                Payment &amp; Billing
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 hover:bg-slate-50" href="#">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                </svg>
-                Support
-            </a>
-        </nav>
-        <!-- User Profile at Bottom of Sidebar -->
-        <div class="p-4 border-t border-slate-100">
-            <div class="bg-slate-50 rounded-xl p-3 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-full bg-slate-300 overflow-hidden">
-                        <img alt="Irfan Hossain" class="w-full h-full object-cover"
-                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEYk--_6TxUijAYPtNyIFh88KT19gqYLXa21OgJbUYZAbjrcXW5-BrRo7BjU1EJCMQWNu-vVq0LkxtKNfaCSrQxDK3ZM8QNmrzV2-WqM8VJjiOmO7WW5dIr91J1OLZeaoKP9atMDXtGuV6d8GLScxdKDlZkmgEUdt5decQItg0mgbevz88mmJ-RzQYMWemqLNDkRExVzgwfnYkdIJ8sGK1aqNwA5T4V11u7hp_uTpQ_EIlCgOvZvaqtxLVQqLAPzBbAuPg9S3siKI"/>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-slate-900 leading-tight">Irfan Hossain</p>
-                        <p class="text-[10px] text-slate-500">View Profile</p>
-                    </div>
+        <!-- User Profile in Sidebar Footer -->
+        <div class="mt-auto p-4 border-t border-border-light bg-gray-50" data-purpose="user-footer">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-600 overflow-hidden">
+                    <img alt="Irfan Hossain"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy5_sgd6JTlK9FJfBJ0CRfHWK9P04IIlq8P21-TQ2tWGZgqn4JhzCEMQ-nsAZ8eM-8kSYbDzyYLi9fnKvliDlpD31RAqcq5394nVkKEEoM-V31fu7Lmtr6yRQlAEAGOwv2J2ZDyhbjst6m54nqi3bU4gxty7vhw72kwBYMTQYNl6czRZEiElbQOcrNe10Xm0ZPuZAy9l2imDTW307-CenGWrRITSVV6kZGw97ayv2O2bsu7fNUIboapnv9snhFXIOjsQaXQNZeXC4"/>
                 </div>
-                <button class="text-slate-400 hover:text-slate-600">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-1">
+                    <p class="text-sm font-semibold text-gray-900">Irfan Hossain</p>
+                    <a class="text-xs text-gray-500 hover:underline" href="#">View Profile</a>
+                </div>
+                <button class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
                         <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
                               stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                         <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
@@ -169,7 +175,7 @@
             </div>
         </div>
     </aside>
-    <!-- END: Left Sidebar Navigation -->
+    <!-- END: Sidebar Navigation -->
 
     <!-- BEGIN: Main Content Area -->
     <main class="flex-1 ml-64 p-6 overflow-y-auto">
@@ -177,7 +183,7 @@
         <!-- BEGIN: Top Header -->
         <header class="flex items-center justify-between mb-8">
             <div class="flex items-center gap-4">
-                <a class="flex items-center text-slate-600 hover:text-carego-primary" href="#">
+                <a class="flex items-center text-slate-600 hover:text-carego-primary" href="../dashboards/my_bookings.html">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round"
                               stroke-width="2"></path>
@@ -188,7 +194,7 @@
             <div class="flex items-center gap-8">
                 <nav class="flex gap-6 text-sm font-medium text-slate-600">
                     <a class="hover:text-carego-primary" href="#">Services</a>
-                    <a class="hover:text-carego-primary" href="#">Become a Caregiver</a>
+                    <a class="hover:text-carego-primary" href="../Caregiver/my_schedule_mobile.html">Become a Caregiver</a>
                 </nav>
                 <button class="relative text-slate-500">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -647,8 +653,8 @@
                             <div class="w-32">
                                 <span class="bg-green-50 text-green-600 text-[10px] font-bold px-2 py-0.5 rounded mb-3 block w-max">Primary Caregiver</span>
                                 <div class="w-32 h-32 rounded-xl overflow-hidden bg-gray-100">
-                                    <img alt="Farhana Akter" class="w-full h-full object-cover"
-                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpyDwd3b-QiUWdsIPIOYsbB1j7JhEl6Bw1M-A_yVbNKRB9Pq3LFB7Lzr_zEV6oHnmgAS0rCZubpTT1W6ISN5oXMZmP97Jhp5CAaoBI3ZM06oIeLXWTkaE62XRYEqrjta_irQLropffm8Opm6aoDdYenrm-1teyIKGiwpEq9uNtPiFB7Gkvmn6ntf67Le-yiqH408A6m6IMgcmVwngVswFTO8AAR2VF3dYmu4XMQt3A-zfkqHeFEUq3hVPeR61fZGKbLEI54obAtF4"/>
+                                    <img alt="Farhana Akter" class="w-full h-full object-cover object-top"
+                                         src="https://img.magnific.com/free-photo/portrait-woman-working-as-medical-assistant-desk-doctors-office-nurse-looking-camera-smiling-while-preparing-work-computer-healthcare-specialist-uniform_482257-35922.jpg?t=st=1782139444~exp=1782143044~hmac=df1f3600becbc6b699626a97de4a34f166534f2fc7eaeb0afe75b92a9ec1508b&w=480"/>
                                 </div>
                             </div>
                             <div class="flex-1">
@@ -704,7 +710,7 @@
                                 <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-0.5 rounded mb-3 block w-max">Assistant Caregiver</span>
                                 <div class="w-32 h-32 rounded-xl overflow-hidden bg-gray-100">
                                     <img alt="Sharmin Akter" class="w-full h-full object-cover"
-                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjVjDorwpJbZk_APAvpRshIewuZdNHCR5VfNOSduBm9YLUUMJfleYAV_Rbe86pOzxQnapICKAcx1iR_6JA7JzSo52xGpsQd4JbxaC_gJK4GErMbiUIIR5zJCoelOrVqCkat6dWtmU0asGmjuC4MJPZpc72M-yDRZv2RgJXNGEJ94REigWCJLFWBCgJsZADRGHTxJZRe-S_9K5n9vcrxeeFyBNMliaN7h9U4eQ4VNvruug4JtNWhEQcehqFWYQ1V9ntYVU6RmRRYrY"/>
+                                         src="https://img.magnific.com/free-photo/close-up-veterinary-doctor-office_23-2149267950.jpg?t=st=1782139595~exp=1782143195~hmac=b765cc46f7c41809c15bbd6de6c3dde3b0487788ad4de79f3a7b7a448c1f4896&w=480"/>
                                 </div>
                             </div>
                             <div class="flex-1">
