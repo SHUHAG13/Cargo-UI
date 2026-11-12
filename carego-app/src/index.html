@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CareGo+ | Professional Care, Right at Home</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+  <!-- Tailwind CSS v3 CDN (same runtime the prototype used); one merged theme for every page -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            'headline-lg': ['Inter', 'sans-serif'], 'headline-md': ['Inter', 'sans-serif'],
+            'body-lg': ['Inter', 'sans-serif'], 'body-md': ['Inter', 'sans-serif'],
+            'label-caps': ['Inter', 'sans-serif'], 'display-earnings': ['Inter', 'sans-serif']
+          },
+          colors: {
+            /* public site / brand */
+            brand: {
+              teal: '#008561', 'teal-light': '#E6F3F0', 'teal-dark': '#006B4D', orange: '#FF8A00', dark: '#1F2937',
+              green: '#006B44', lightGreen: '#f0f9f6', borderGreen: '#d1e7dd'
+            },
+            primary: '#008561', 'primary-dark': '#006D50', secondary: '#E6F3F0', accent: '#FF8A00',
+            'accent-dark': '#E67E00', dark: '#1F2937',
+            primaryLight: '#E6F3F0', primaryDark: '#006B4D', neutralDark: '#1F2937', accentPurple: '#714B9D',
+            'carego-teal': '#006B44', 'carego-light-teal': '#E6F3F0', 'carego-dark': '#1A2E35',
+            'carego-gray': '#6B7280', 'carego-orange': '#FFA500',
+            /* user dashboard */
+            'carego-green': '#008148', 'carego-light-green': '#EBF7F2', 'carego-sidebar': '#FFFFFF',
+            carego: {
+              primary: '#0F5A3E', 'primary-dark': '#006b3c', secondary: '#EDF7F2', accent: '#F97316',
+              border: '#E5E7EB', muted: '#6B7280', bg: '#F9FAFB'
+            },
+            'mb-green': '#00A859',
+            'pt-primary': '#108548', 'pt-secondary': '#F0FDF4', 'pt-accent': '#0D9488',
+            'status-pending': '#F59E0B', 'status-confirmed': '#10B981', 'status-progress': '#3B82F6',
+            'status-completed': '#10B981', 'status-cancelled': '#EF4444',
+            'border-light': '#E5E7EB', 'bg-light': '#F9FAFB',
+            /* caregiver desktop portal (material tokens, prefixed cg-) */
+            'cg-inverse-on-surface': '#f0f1f2', 'cg-text-muted': '#6C757D', 'cg-on-surface-variant': '#43474f',
+            'cg-on-surface': '#191c1d', 'cg-surface-container-high': '#e7e8e9', 'cg-surface-container-low': '#f3f4f5',
+            'cg-on-tertiary-fixed': '#341100', 'cg-surface-container-highest': '#e1e3e4', 'cg-tertiary-container': '#592300',
+            'cg-primary-fixed-dim': '#a7c8ff', 'cg-on-secondary': '#ffffff', 'cg-error-container': '#ffdad6',
+            'cg-inverse-primary': '#a7c8ff', 'cg-on-primary-fixed-variant': '#1f477b', 'cg-tertiary-fixed': '#ffdbca',
+            'cg-surface-dim': '#d9dadb', 'cg-error': '#ba1a1a', 'cg-outline': '#737780', 'cg-on-error-container': '#93000a',
+            'cg-surface-card': '#FFFFFF', 'cg-secondary-fixed-dim': '#4edf9f', 'cg-secondary': '#006c47',
+            'cg-border-subtle': '#E9ECEF', 'cg-surface-bright': '#f8f9fa', 'cg-primary-container': '#003366',
+            'cg-on-primary': '#ffffff', 'cg-surface-variant': '#e1e3e4', 'cg-on-secondary-fixed-variant': '#005234',
+            'cg-primary': '#001e40', 'cg-primary-fixed': '#d5e3ff', 'cg-on-background': '#191c1d',
+            'cg-surface-container-lowest': '#ffffff', 'cg-secondary-fixed': '#6efcb9', 'cg-on-tertiary-container': '#d8885c',
+            'cg-on-primary-fixed': '#001b3c', 'cg-inverse-surface': '#2e3132', 'cg-secondary-container': '#6efcb9',
+            'cg-on-primary-container': '#799dd6', 'cg-tertiary': '#381300', 'cg-surface-tint': '#3a5f94',
+            'cg-outline-variant': '#c3c6d1', 'cg-on-error': '#ffffff', 'cg-surface-container': '#edeeef',
+            'cg-tertiary-fixed-dim': '#ffb690', 'cg-on-secondary-container': '#00734c', 'cg-surface': '#f8f9fa',
+            'cg-on-secondary-fixed': '#002113', 'cg-on-tertiary': '#ffffff', 'cg-background': '#f8f9fa',
+            'cg-on-tertiary-fixed-variant': '#723610', 'cg-text-main': '#061540'
+          },
+          borderRadius: { cg: '0.125rem', cglg: '0.25rem', cgxl: '0.5rem', cgfull: '0.75rem' },
+          spacing: {
+            'margin-mobile': '16px', gutter: '24px', 'container-max': '1200px', 'stack-md': '16px',
+            'sidebar-width': '280px', 'stack-sm': '8px', 'stack-lg': '32px'
+          },
+          fontSize: {
+            'headline-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+            'label-caps': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '700' }],
+            'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+            'headline-lg': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+            'display-earnings': ['36px', { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' }],
+            'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

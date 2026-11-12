@@ -1,0 +1,23 @@
+:host {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #F8F9FA;
+        }
+
+        .sidebar-item-active {
+            background-color: #ECFDF5;
+            color: #059669;
+            border-right: 4px solid #059669;
+        }
+
+        .booking-card {
+            transition: box-shadow 0.2s;
+        }
+
+        .booking-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hide scrollbar for cleaner look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }

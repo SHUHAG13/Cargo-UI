@@ -1,0 +1,19 @@
+:host {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .text-carego-teal {
+            color: #007D5A;
+        }
+
+        .bg-carego-teal {
+            background-color: #007D5A;
+        }
+
+        .border-carego-teal {
+            border-color: #007D5A;
+        }
+
+        .text-carego-orange {
+            color: #FFA500;
+        }

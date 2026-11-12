@@ -1,0 +1,250 @@
+<header class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="text-brand-teal font-bold text-2xl flex items-center gap-1">
+          <img src="assets/cg-logo.png" width=124 alt="">
+        </div>
+      </div>
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a class="hover:text-brand-teal py-5" routerLink="/" routerLinkActive="text-brand-teal border-b-2 border-brand-teal" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="hover:text-brand-teal py-5" routerLink="/services" routerLinkActive="text-brand-teal border-b-2 border-brand-teal">Services</a>
+        <a class="hover:text-brand-teal py-5" routerLink="/about" routerLinkActive="text-brand-teal border-b-2 border-brand-teal">About Us</a>
+        <!-- <a class="cursor-pointer hover:text-brand-teal">How It Works</a>
+            <a class="cursor-pointer hover:text-brand-teal">For Providers</a> -->
+        <a class="hover:text-brand-teal py-5" routerLink="/contact" routerLinkActive="text-brand-teal border-b-2 border-brand-teal">Contact Us</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <!-- <div class="hidden md:flex items-center gap-1 text-sm font-medium">
+              <span class="text-gray-400">🌐</span> English ▾
+            </div> -->
+        <!-- <button class="p-2 text-gray-500 hidden md:block">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+              </svg>
+            </button> -->
+        <a routerLink="/auth/login"
+          class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign
+          In</a>
+        <a routerLink="/auth/register"
+          class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign
+          Up</a>
+      </div>
+    </div>
+  </header>
+<router-outlet />
+<footer class="text-white pt-16 pb-8 px-4 bg-brand-teal-dark" data-purpose="site-footer">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+
+      <!-- About Footer -->
+      <div class="space-y-6">
+        <img alt="CareGo+ Footer Logo" width="160" src="assets/cg-logo-w.png" />
+
+        <p class="text-sm leading-relaxed text-white">
+          <strong>CareGo+</strong> is a leading caregiver provider agency delivering trusted and professional home
+          care services in Dhaka and throughout Bangladesh. We provide highly trained caregivers, nurses, and
+          patient attendants.
+        </p>
+
+        <div class="flex gap-3">
+
+          <a
+            class="cursor-pointer w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-white">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <a
+            class="cursor-pointer w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-white">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+
+          <a
+            class="cursor-pointer w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-white">
+            <i class="fab fa-instagram"></i>
+          </a>
+
+          <a
+            class="cursor-pointer w-10 h-10 rounded-full bg-white text-zinc-900 flex items-center justify-center transition-all duration-200 hover:text-white hover:bg-brand-white">
+            <i class="fab fa-youtube"></i>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-white pl-4 uppercase text-sm">
+          Quick Links
+        </h4>
+
+        <ul class="space-y-3 text-sm">
+
+          <li>
+            <a routerLink="/" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Home
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/services" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Our Services
+            </a>
+          </li>
+
+          <li>
+            <a class="cursor-pointer inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Our Gallery
+            </a>
+          </li>
+
+          <li>
+            <a class="cursor-pointer inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Service Areas
+            </a>
+          </li>
+
+          <li>
+            <a class="cursor-pointer inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Blog
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/about" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              About Us
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/contact" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Contact Us
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h4 class="text-white font-bold mb-6 border-l-4 border-white pl-4 uppercase text-sm">
+          Services
+        </h4>
+
+        <ul class="space-y-3 text-sm">
+
+          <li>
+            <a routerLink="/services/nursing" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Home Nursing Care
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/services/caregiver" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Caregiver Service
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/services/nanny" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Baby Care at Home
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/services" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Doctor Home Visit
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/services" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Physiotherapy Service
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/services" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-location-dot"></i>
+              Oxygen Cylinder Services
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+
+        <h4 class="text-white font-bold mb-6 border-l-4 border-white pl-4 uppercase text-sm">
+          Contact Us
+        </h4>
+
+        <ul class="space-y-5 text-sm">
+
+          <li class="flex items-center gap-3">
+            <i class="fa-solid fa-phone text-brand-white text-lg"></i>
+            <span>
+              +8801315-092095<br>
+              +8801739-508350
+            </span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-brand-white text-lg mt-1"></i>
+            <span>
+              Office: Ka/7, Jagannathpur, Super Market, Bashundhara Rd, Dhaka 1229
+            </span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-building text-brand-white text-lg mt-1"></i>
+            <span>
+              Head Office: Ka-38, J. B. Tower, Pragati Sarani Rd, Dhaka 1229
+            </span>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom Footer -->
+    <div
+      class="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs gap-4">
+
+      <p class="text-white">
+        © Copyright 2026 CareGo+. All rights reserved. | CareGo+
+      </p>
+
+      <div class="flex gap-5">
+
+        <a class="cursor-pointer hover:-translate-y-1 transition-transform duration-200">
+          Terms of Services
+        </a>
+
+        <a class="cursor-pointer hover:-translate-y-1 transition-transform duration-200">
+          Privacy Policy
+        </a>
+
+      </div>
+
+      <p class="text-white">
+        Designed by: Team_Frontier
+      </p>
+
+    </div>
+
+  </footer>

@@ -1,0 +1,8 @@
+    :host {
+      font-family: 'Inter', sans-serif;
+    }
+  
+
+    .nav-link {
+      @apply text-sm font-medium text-gray-700 hover:text-primary transition-colors duration-200;
+    }

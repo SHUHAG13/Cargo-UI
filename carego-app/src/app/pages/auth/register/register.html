@@ -1,0 +1,194 @@
+<!-- BEGIN: MainHeader -->
+    
+    <!-- END: MainHeader -->
+    <!-- BEGIN: Main Content Container -->
+    <main class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-10">
+  <div class="max-w-6xl w-full grid lg:grid-cols-2 gap-10 items-center">
+
+    <!-- LEFT SIDE -->
+    <section class="space-y-6 text-center lg:text-left">
+
+      <div class="space-y-3">
+        <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 leading-tight">
+          Create your<br />
+          <span class="text-brand-teal">
+            CareGo<span class="text-brand-teal-dark">+</span>
+          </span>
+          account
+        </h1>
+
+        <p class="text-gray-600 text-base lg:text-lg max-w-md mx-auto lg:mx-0">
+          Join thousands of families accessing quality care with ease. Start your journey in minutes.
+        </p>
+      </div>
+
+      <!-- Image -->
+      <div class="flex justify-center lg:justify-start">
+        <img
+          src="registration.png"
+          alt="Healthcare professional with elderly person"
+          class="w-full max-w-md rounded-xl shadow-md object-cover"
+        />
+      </div>
+    </section>
+
+    <!-- RIGHT SIDE -->
+    <section class="flex justify-center">
+
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-lg border border-gray-100 p-6 lg:p-8 space-y-6">
+
+        <!-- Header -->
+        <div class="space-y-1">
+          <h2 class="text-2xl font-bold text-gray-900">Sign Up</h2>
+          <p class="text-sm text-gray-500">Create your account to get started</p>
+        </div>
+
+        <!-- FORM -->
+        <form class="space-y-4" (ngSubmit)="submit()">
+
+          <!-- Input -->
+          <div>
+            <label class="text-sm font-medium text-gray-700">Phone / Email</label>
+            <input
+              type="text" name="identifier" [(ngModel)]="identifier"
+              placeholder="Enter phone or email"
+              class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700">Full Name</label>
+            <input
+              type="text" name="fullName" [(ngModel)]="fullName"
+              placeholder="Your name"
+              class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password" name="password" [(ngModel)]="password"
+              placeholder="Min 8 characters"
+              class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm font-medium text-gray-700">Confirm Password</label>
+            <input
+              type="password" name="confirm" [(ngModel)]="confirm"
+              placeholder="Repeat password"
+              class="mt-1 w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm"
+            />
+          </div>
+
+          <!-- Checkbox -->
+          <label class="flex items-start gap-2 text-sm text-gray-600">
+            <input type="checkbox" name="agree" [(ngModel)]="agree" class="mt-1 text-brand-teal" />
+            <span>
+              I agree to the
+              <a class="text-brand-teal font-medium hover:underline">Terms</a>
+              and
+              <a class="text-brand-teal font-medium hover:underline">Privacy Policy</a>
+            </span>
+          </label>
+
+          <!-- Button -->
+          @if (error()) { <p class="text-sm text-red-500">{{ error() }}</p> }
+          <button type="submit"
+            class="w-full bg-brand-teal-dark text-white font-semibold py-3 rounded-xl transition"
+          >
+              Create Account
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-3">
+          <div class="h-px bg-gray-200 flex-1"></div>
+          <span class="text-xs text-gray-400">or continue with</span>
+          <div class="h-px bg-gray-200 flex-1"></div>
+        </div>
+
+        <!-- Social -->
+        <div class="grid grid-cols-3 gap-3">
+          <button type="button" (click)="social()" class="border rounded-xl py-2 text-sm hover:bg-gray-50"> <i class="fab fa-google text-red-500"></i> Google</button>
+          <button type="button" (click)="social()" class="border rounded-xl py-2 text-sm hover:bg-gray-50"> <i class="fab fa-facebook text-blue-600"></i> Facebook</button>
+          <button type="button" (click)="social()" class="border rounded-xl py-2 text-sm hover:bg-gray-50"> <i class="fab fa-apple text-gray-800"></i> Apple</button>
+        </div>
+
+        <!-- Footer -->
+        <p class="text-center text-sm text-gray-500">
+          Already have an account?
+          <a routerLink="/auth/login" class="text-teal-600 font-semibold hover:underline">Sign in</a>
+        </p>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+    <!-- END: Main Content Container -->
+    <!-- BEGIN: Bottom Features Strip -->
+    <section class="bg-white py-12 px-4 border-t border-gray-50">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- 24/7 Support -->
+            <div class="flex items-center space-x-4 bg-gray-50 p-6 rounded-2xl">
+                <div class="bg-white p-3 rounded-full text-carego-teal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800">24/7 Support</h4>
+                    <p class="text-gray-500 text-sm">We're here to help you anytime, anywhere.</p>
+                </div>
+            </div>
+            <!-- Privacy First -->
+            <div class="flex items-center space-x-4 bg-gray-50 p-6 rounded-2xl">
+                <div class="bg-white p-3 rounded-full text-carego-teal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800">Privacy First</h4>
+                    <p class="text-gray-500 text-sm">Your privacy is our top priority.</p>
+                </div>
+            </div>
+            <!-- Trusted by Thousands -->
+            <div class="flex items-center space-x-4 bg-gray-50 p-6 rounded-2xl">
+                <div class="bg-white p-3 rounded-full text-carego-teal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M14 10h2m-2 4h2m7-4a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800">Trusted by Thousands</h4>
+                    <p class="text-gray-500 text-sm">Thousands of families trust CareGo+ every day.</p>
+                </div>
+            </div>
+            <!-- Easy Booking -->
+            <div class="flex items-center space-x-4 bg-gray-50 p-6 rounded-2xl">
+                <div class="bg-white p-3 rounded-full text-carego-teal">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800">Easy Booking</h4>
+                    <p class="text-gray-500 text-sm">Book services in just a few simple steps.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END: Bottom Features Strip -->
+    <!-- BEGIN: Footer -->
+    
+    <!-- END: Footer -->

@@ -1,0 +1,10 @@
+/* Hero image shape overlay effect */
+    .hero-mask {
+      clip-path: ellipse(80% 100% at 90% 50%);
+    }
+
+    .process-step-number {
+      position: absolute;
+      top: -12px;
+      left: -12px;
+    }

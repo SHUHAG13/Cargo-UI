@@ -1,0 +1,21 @@
+:host {
+      font-family: 'Inter', sans-serif;
+    }
+  
+
+    .sidebar-width { width: 260px; }
+    .main-content-calc { width: calc(100% - 260px); }
+    /* Timeline connector line */
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: -30px;
+      width: 2px;
+      background-color: #E5E7EB;
+      z-index: 0;
+    }
+    .timeline-item:last-child .timeline-line::before {
+      display: none;
+    }

@@ -1,0 +1,47 @@
+:host {
+            background-color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .sidebar-item-active {
+            background-color: #EBF7F2;
+            color: #059669;
+            border-right: 4px solid #059669;
+        }
+
+        .tab-active {
+            color: #059669;
+            border-bottom: 2px solid #059669;
+        }
+
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .progress-line {
+            height: 2px;
+            background-color: #e5e7eb;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }
+
+        .progress-line-active {
+            height: 2px;
+            background-color: #10b981;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 60%;
+            z-index: 0;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
