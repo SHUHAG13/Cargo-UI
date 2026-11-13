@@ -1,0 +1,71 @@
+<div class="p-8 max-w-7xl mx-auto space-y-6">
+  <header class="flex flex-wrap items-end justify-between gap-4">
+    <div><h1 class="text-2xl font-bold text-slate-900">Payments &amp; payouts</h1><p class="text-sm text-slate-500">Verify cash, pay out caregivers and watch platform balances.</p></div>
+    <div class="flex gap-4 text-right">
+      <div><p class="text-xs text-slate-400 font-bold uppercase">Collected (verified)</p><p class="text-xl font-extrabold text-emerald-700">{{ total() | bdt }}</p></div>
+      <div><p class="text-xs text-slate-400 font-bold uppercase">Cash held by caregivers</p><p class="text-xl font-extrabold text-amber-600">{{ cashTotal() | bdt }}</p></div>
+    </div>
+  </header>
+
+  <div class="border-b border-slate-200 flex gap-8">
+    @for (t of [['cash', 'Cash to verify', cash().length], ['payouts', 'Payout requests', payouts().length], ['all', 'All transactions', 0], ['holdings', 'Caregiver balances', 0]]; track t[0]) {
+      <button type="button" (click)="tab.set($any(t[0]))" class="pb-3 text-sm font-semibold border-b-2" [class.border-emerald-600]="tab() === t[0]" [class.text-emerald-700]="tab() === t[0]" [class.border-transparent]="tab() !== t[0]" [class.text-slate-500]="tab() !== t[0]">
+        {{ t[1] }} @if ($any(t[2]) > 0) { <span class="ml-1 text-[10px] font-bold bg-orange-500 text-white rounded-full px-1.5 py-0.5">{{ t[2] }}</span> }
+      </button>
+    }
+  </div>
+
+  @switch (tab()) {
+  @case ('cash') {
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <table class="w-full text-sm"><thead class="bg-slate-50 text-xs text-slate-500 uppercase"><tr><th class="p-4 text-left">Invoice</th><th class="p-4 text-left">Booking</th><th class="p-4 text-left">Received by</th><th class="p-4 text-left">When</th><th class="p-4 text-right">Amount</th><th class="p-4"></th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          @for (p of cash(); track p.id) {
+            <tr><td class="p-4 font-mono text-xs">{{ p.id }}</td><td class="p-4"><a [routerLink]="['/admin/bookings', p.bookingId]" class="font-semibold text-slate-800 hover:underline">{{ p.bookingId }}</a></td><td class="p-4">{{ p.collectedBy ? data.caregiverName(p.collectedBy) : 'Paid to CareGo+ staff' }}</td><td class="p-4">{{ p.at | dt }}</td><td class="p-4 text-right font-bold">{{ p.amount | bdt }}</td>
+              <td class="p-4 text-right whitespace-nowrap"><button type="button" (click)="verify(p.id, true)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg mr-2">Verify</button><button type="button" (click)="verify(p.id, false)" class="px-3 py-1.5 border border-red-200 text-red-500 text-xs font-bold rounded-lg">Reject</button></td></tr>
+          } @empty { <tr><td colspan="6" class="p-10 text-center text-slate-400">No cash payments are waiting for verification.</td></tr> }
+        </tbody></table>
+    </section>
+  }
+  @case ('payouts') {
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <table class="w-full text-sm"><thead class="bg-slate-50 text-xs text-slate-500 uppercase"><tr><th class="p-4 text-left">Reference</th><th class="p-4 text-left">Caregiver</th><th class="p-4 text-left">Type</th><th class="p-4 text-left">Requested</th><th class="p-4 text-right">Amount</th><th class="p-4"></th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          @for (l of payouts(); track l.id) {
+            <tr><td class="p-4 font-mono text-xs">{{ l.ref }}</td><td class="p-4">{{ data.caregiverName(l.caregiverId) }}</td><td class="p-4">{{ l.kind === 'withdrawal' ? 'Withdrawal to ' + l.method : 'Cash settlement via ' + l.method }}</td><td class="p-4">{{ l.at | dt }}</td><td class="p-4 text-right font-bold">{{ l.amount | bdt }}</td>
+              <td class="p-4 text-right whitespace-nowrap"><button type="button" (click)="payout(l.id, true)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg mr-2">{{ l.kind === 'withdrawal' ? 'Mark paid' : 'Confirm received' }}</button><button type="button" (click)="payout(l.id, false)" class="px-3 py-1.5 border border-red-200 text-red-500 text-xs font-bold rounded-lg">Reject</button></td></tr>
+          } @empty { <tr><td colspan="6" class="p-10 text-center text-slate-400">No payouts waiting.</td></tr> }
+        </tbody></table>
+      @if (processed().length) {
+        <div class="p-4 bg-slate-50 border-t border-slate-100"><p class="text-xs font-bold text-slate-500 uppercase mb-2">Recently processed</p>
+          @for (l of processed(); track l.id) { <p class="text-xs text-slate-500 py-0.5">{{ l.at | dt }} · {{ data.caregiverName(l.caregiverId) }} · {{ l.description }} · {{ l.amount | bdt }} · <span class="font-semibold">{{ l.status }}</span></p> }
+        </div>
+      }
+    </section>
+  }
+  @case ('all') {
+    <div class="flex gap-3">
+      <select class="border-slate-200 rounded-lg text-sm px-3 py-2" name="ps" [ngModel]="status()" (ngModelChange)="status.set($event)"><option>All</option><option>Success</option><option>Pending Verification</option><option>Failed / Disputed</option></select>
+      <select class="border-slate-200 rounded-lg text-sm px-3 py-2" name="pm" [ngModel]="method()" (ngModelChange)="method.set($event)"><option>All</option><option>bKash</option><option>Nagad</option><option>Rocket</option><option>Card</option><option>Cash to Staff</option></select>
+    </div>
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <table class="w-full text-sm"><thead class="bg-slate-50 text-xs text-slate-500 uppercase"><tr><th class="p-4 text-left">Invoice</th><th class="p-4 text-left">Booking</th><th class="p-4 text-left">When</th><th class="p-4 text-left">Method</th><th class="p-4 text-left">Status</th><th class="p-4 text-right">Amount</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          @for (p of all(); track p.id) {
+            <tr><td class="p-4 font-mono text-xs">{{ p.id }}</td><td class="p-4"><a [routerLink]="['/admin/bookings', p.bookingId]" class="hover:underline">{{ p.bookingId }}</a></td><td class="p-4">{{ p.at | dt }}</td><td class="p-4">{{ p.method }} <span class="text-xs text-slate-400">{{ p.reference }}</span></td><td class="p-4"><span [class]="payUi[p.status].chip + ' text-[10px] font-bold px-2 py-0.5 rounded'">{{ payUi[p.status].label }}</span></td><td class="p-4 text-right font-bold">{{ p.amount | bdt }}</td></tr>
+          } @empty { <tr><td colspan="6" class="p-10 text-center text-slate-400">No transactions match.</td></tr> }
+        </tbody></table>
+    </section>
+  }
+  @case ('holdings') {
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <table class="w-full text-sm"><thead class="bg-slate-50 text-xs text-slate-500 uppercase"><tr><th class="p-4 text-left">Caregiver</th><th class="p-4 text-right">Cash in hand (owed to us)</th><th class="p-4 text-right">Earnings held</th><th class="p-4 text-right">Pending clearance</th><th class="p-4 text-right">Net standing</th><th class="p-4 text-right">Withdrawn</th></tr></thead>
+        <tbody class="divide-y divide-slate-100">
+          @for (h of holdings(); track h.c.id) {
+            <tr><td class="p-4 font-semibold">{{ h.c.name }} <span class="text-xs font-normal text-slate-400">{{ h.c.kind }}</span></td><td class="p-4 text-right" [class.text-amber-600]="h.b.cashInHand > 0">{{ h.b.cashInHand | bdt }}</td><td class="p-4 text-right">{{ h.b.digitalHeld | bdt }}</td><td class="p-4 text-right text-slate-500">{{ h.b.pendingClearance | bdt }}</td><td class="p-4 text-right font-bold" [class.text-emerald-700]="h.b.netStanding >= 0" [class.text-red-500]="h.b.netStanding < 0">{{ h.b.netStanding | bdt }}</td><td class="p-4 text-right text-slate-500">{{ h.b.withdrawn | bdt }}</td></tr>
+          } @empty { <tr><td colspan="6" class="p-10 text-center text-slate-400">No balances yet.</td></tr> }
+        </tbody></table>
+    </section>
+  }
+  }
+</div>

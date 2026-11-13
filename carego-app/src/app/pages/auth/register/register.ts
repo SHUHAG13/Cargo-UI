@@ -2,7 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { AuthService } from '../../../core/auth.service';
+import { AuthService } from '../../../core/auth';
+import { DomainError } from '../../../core/domain/engine';
 
 @Component({
   selector: 'app-register',
@@ -27,13 +28,16 @@ export class RegisterPage {
   }
 
   protected submit(): void {
-    if (this.fullName.trim().length < 2) return this.error.set('Please enter your full name.');
-    if (this.identifier.trim().length < 3) return this.error.set('Enter a valid phone number or email.');
-    if (this.password.length < 8) return this.error.set('Password must be at least 8 characters.');
     if (this.password !== this.confirm) return this.error.set('Passwords do not match.');
     if (!this.agree) return this.error.set('Please accept the Terms and Privacy Policy.');
-    this.auth.register(this.fullName.trim(), this.identifier.trim());
-    this.router.navigateByUrl('/app/book');
+    try {
+      this.auth.register(this.fullName, this.identifier, this.password);
+    } catch (e) {
+      if (e instanceof DomainError) return this.error.set(e.message);
+      throw e;
+    }
+    // Identity verification (NID + selfie) is mandatory before the first booking.
+    this.router.navigate(['/app/profile'], { queryParams: { verify: 1 } });
   }
 
   /** Social sign-up is not connected in this build. */

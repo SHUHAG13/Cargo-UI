@@ -1,0 +1,116 @@
+@if (booking(); as b) {
+  <div class="fixed inset-0 z-[90] flex items-center justify-center bg-slate-900/50 p-4" (click)="closed.emit()" role="dialog" aria-modal="true" aria-label="Make a payment">
+    <div class="bg-white rounded-2xl w-full max-w-xl max-h-[92vh] overflow-y-auto shadow-2xl" (click)="$event.stopPropagation()">
+      <div class="p-6 border-b border-slate-100 flex items-start justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-slate-800">Make a payment</h2>
+          <p class="text-xs text-slate-500 mt-1">Booking {{ b.id }} · {{ b.categoryName }} ({{ b.packageName }})</p>
+        </div>
+        <button type="button" class="text-slate-400 hover:text-slate-600 p-1" (click)="closed.emit()" aria-label="Close"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <div class="p-6 space-y-6">
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="bg-slate-50 rounded-xl p-3"><p class="text-[10px] uppercase font-bold text-slate-400">Total</p><p class="font-bold text-slate-800 text-sm">{{ b.breakdown.total | bdt }}</p></div>
+          <div class="bg-emerald-50 rounded-xl p-3"><p class="text-[10px] uppercase font-bold text-emerald-500">Paid</p><p class="font-bold text-emerald-700 text-sm">{{ data.paid(b) | bdt }}</p></div>
+          <div class="bg-orange-50 rounded-xl p-3"><p class="text-[10px] uppercase font-bold text-orange-400">Payable</p><p class="font-bold text-orange-600 text-sm">{{ payable() | bdt }}</p></div>
+        </div>
+
+        <!-- Amount -->
+        <div>
+          <p class="text-sm font-bold text-slate-800 mb-3">How much would you like to pay?</p>
+          <div class="space-y-2">
+            @if (nextI(); as ni) {
+              <label class="flex items-center justify-between gap-3 border rounded-xl p-3 cursor-pointer" [class.border-emerald-500]="mode() === 'next'" [class.bg-emerald-50]="mode() === 'next'" [class.border-slate-200]="mode() !== 'next'">
+                <span class="flex items-center gap-3">
+                  <input type="radio" name="amt" class="text-emerald-600" [checked]="mode() === 'next'" (change)="mode.set('next')" />
+                  <span class="text-sm"><span class="font-semibold text-slate-800">{{ ni.seq === 0 ? 'Upfront deposit (30%)' : ni.label }}</span>
+                    <span class="block text-[11px] text-slate-500">{{ ni.dueDate ? ('Due ' + ni.dueDate) : 'Due now, within 24 hours of confirmation' }}</span></span>
+                </span>
+                <span class="font-bold text-slate-800">{{ nextAmount() | bdt }}</span>
+              </label>
+            }
+            @if (payable() - nextAmount() > 0.005) {
+              <label class="flex items-center justify-between gap-3 border rounded-xl p-3 cursor-pointer" [class.border-emerald-500]="mode() === 'all'" [class.bg-emerald-50]="mode() === 'all'" [class.border-slate-200]="mode() !== 'all'">
+                <span class="flex items-center gap-3">
+                  <input type="radio" name="amt" class="text-emerald-600" [checked]="mode() === 'all'" (change)="mode.set('all')" />
+                  <span class="text-sm font-semibold text-slate-800">Pay the full outstanding balance</span>
+                </span>
+                <span class="font-bold text-slate-800">{{ payable() | bdt }}</span>
+              </label>
+            }
+            <label class="flex items-center justify-between gap-3 border rounded-xl p-3 cursor-pointer" [class.border-emerald-500]="mode() === 'custom'" [class.bg-emerald-50]="mode() === 'custom'" [class.border-slate-200]="mode() !== 'custom'">
+              <span class="flex items-center gap-3">
+                <input type="radio" name="amt" class="text-emerald-600" [checked]="mode() === 'custom'" (change)="mode.set('custom')" />
+                <span class="text-sm font-semibold text-slate-800">Other amount</span>
+              </span>
+              @if (mode() === 'custom') {
+                <input type="number" min="1" [max]="payable()" step="0.01" [(ngModel)]="customAmount" name="custom" class="w-32 border-slate-200 rounded-lg text-sm text-right p-2" placeholder="৳" />
+              }
+            </label>
+          </div>
+        </div>
+
+        <!-- Method -->
+        <div>
+          <p class="text-sm font-bold text-slate-800 mb-3">Payment method</p>
+          @if (data.myMethods().length) {
+            <p class="text-[11px] font-semibold uppercase text-slate-400 mb-2">Saved</p>
+            <div class="grid grid-cols-2 gap-2 mb-4">
+              @for (s of data.myMethods(); track s.id) {
+                <button type="button" (click)="pickSaved(s.id, s.type)" class="text-left border rounded-xl p-3 text-sm"
+                        [class.border-emerald-500]="savedId() === s.id" [class.bg-emerald-50]="savedId() === s.id" [class.border-slate-200]="savedId() !== s.id">
+                  <span class="font-semibold text-slate-800 block">{{ s.type }}</span><span class="text-[11px] text-slate-500">{{ s.masked }}</span>
+                </button>
+              }
+            </div>
+            <p class="text-[11px] font-semibold uppercase text-slate-400 mb-2">Or use another</p>
+          }
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            @for (m of methods; track m.id) {
+              <button type="button" (click)="pickMethod(m.id)" class="border rounded-xl p-3 text-left"
+                      [class.border-emerald-500]="!savedId() && method() === m.id" [class.bg-emerald-50]="!savedId() && method() === m.id" [class.border-slate-200]="savedId() || method() !== m.id">
+                <i [class]="m.icon + ' text-emerald-600'"></i>
+                <span class="block text-sm font-semibold text-slate-800 mt-1">{{ m.label }}</span>
+                <span class="block text-[10px] text-slate-500">{{ m.hint }}</span>
+              </button>
+            }
+          </div>
+
+          @if (!savedId()) {
+            <div class="mt-4 space-y-3">
+              @switch (method()) {
+                @case ('Card') {
+                  <input class="w-full border-slate-200 rounded-lg text-sm p-3" placeholder="Card number" inputmode="numeric" autocomplete="cc-number" [(ngModel)]="cardNumber" name="card" />
+                  <div class="grid grid-cols-2 gap-3">
+                    <input class="border-slate-200 rounded-lg text-sm p-3" placeholder="MM/YY" autocomplete="cc-exp" [(ngModel)]="expiry" name="exp" />
+                    <input class="border-slate-200 rounded-lg text-sm p-3" placeholder="CVC" inputmode="numeric" autocomplete="cc-csc" [(ngModel)]="cvc" name="cvc" />
+                  </div>
+                  <p class="text-[11px] text-slate-400">Demo gateway: any valid test card works. <span class="font-mono">4000 0000 0000 0002</span> is declined.</p>
+                }
+                @case ('Cash to Staff') {
+                  <p class="text-xs text-slate-600 bg-amber-50 border border-amber-100 rounded-lg p-3">Hand the cash to a CareGo+ staff member or your caregiver and keep the receipt. The payment stays <strong>pending verification</strong> until our team confirms it.</p>
+                }
+                @default {
+                  <input class="w-full border-slate-200 rounded-lg text-sm p-3" [placeholder]="method() + ' mobile number (01XXXXXXXXX)'" inputmode="tel" [(ngModel)]="mobile" name="mobile" />
+                }
+              }
+            </div>
+          }
+        </div>
+
+        @if (error()) { <p class="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg p-3">{{ error() }}</p> }
+      </div>
+
+      <div class="p-6 border-t border-slate-100 flex items-center justify-between gap-4">
+        <div><p class="text-[11px] text-slate-400 uppercase font-bold">You pay</p><p class="text-xl font-extrabold text-emerald-700">{{ amount() | bdt }}</p></div>
+        <div class="flex gap-3">
+          <button type="button" (click)="closed.emit()" class="px-5 py-2.5 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600">Cancel</button>
+          <button type="button" (click)="submit()" [disabled]="busy() || !(amount() > 0)" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-bold disabled:opacity-40">
+            {{ method() === 'Cash to Staff' && !savedId() ? 'Record cash payment' : 'Pay now' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

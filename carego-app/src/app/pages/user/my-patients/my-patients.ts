@@ -2,42 +2,52 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { PatientService } from '../../../core/patient.service';
-import { BookingService } from '../../../core/booking.service';
+import { Data } from '../../../core/data';
+import { Store } from '../../../core/store';
+import { AuthService } from '../../../core/auth';
+import { FORMAT_PIPES } from '../../../core/format.pipes';
+import { Patient } from '../../../core/models';
+import { createPatient, DomainError, PatientInput, sessionsOf } from '../../../core/domain/engine';
+import { fmtDay } from '../../../core/domain/catalog';
+import { Avatar } from '../../../shared/avatar/avatar';
+import { ToastService } from '../../../core/toast';
 
-const PATIENT_PHOTOS: Record<string, string> = {
-  'PT-1001': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCLdsZnEvaRLCDmzGKZ-RL2Ooj1_wH4luJ5l6bfAN1F8eXCA3PdzkotDiNO8wjtWR-kU9f0Ym5lQj8DtE3UqsjoBqh__zM8LWBEEO5LI1qKmul9xLCHMsHSc5KtW72P3oXM4C6sDhB8ytQysgVVi27CHtEp-34KCvD-NU8FUrsYY0cMeJFm_oIKMTu9DQ-T_oosWFOm5kfTBVwS-kYrnt4jndv0-0ZwELC1dGewLUsSLp_269Bz3S2C65LEj3GTaJPp8mPaLOF59EI',
-  'PT-1002': 'https://lh3.googleusercontent.com/aida-public/AB6AXuDVTEdj1VyASSE0Vw0ULcmCVCNfMN-fz0PF85D9iX-Bx2G-0OmTMMBYAoAmE0mn0aTiOo9fg7mPLOgg8CLuiDnxPLG2Sq55aPXl31qYKohg9cByQ_pcyZV-uBweKt7-5zQkDgd1fRkAd79ARvsMQxa2CGGofYAyiYraOG5KkDAwDMaqslXrk8teVhzFiY-YVIPW6mh5EzvQntlSVwa8f7WFoz-INclmqPDUrRgQyLcs1N2ugob86ww5Uf0i0j_gF_Njv1DbgkBIEeo',
-  'PT-1003': 'https://lh3.googleusercontent.com/aida-public/AB6AXuC_z6hejmc16ORRFhJpgciZIvBVHkWBzsiIY77WqUeuMykpfdlu4-LmSgRmT8yKmAW5l_m9-hjVri0zAnaxltxB4nozbWtpPWEhWcwi0-XddZcWSL-lkWl-xamot_Ry6H5LXXiNiZAfevML8jwlvrPDwqKe8_Ah8JjRB0_qP5YiV4ZWXWpjwD_F_iDbtHMzKQBXE6bOEVOSQkEBt0jL_jG9vicsTvGTHU4CTHsQiEBS14FbVWTOkTrjwM2tGnB40C7Pm9ibcODAxoo',
-};
+const blank = (): PatientInput => ({
+  fullName: '', age: null, gender: '', weightKg: null, address: '', medicalCondition: '', mobility: 'Mobile',
+  attendantName: '', attendantRelation: '', attendantMobile: '', secondaryName: '', secondaryRelation: '', secondaryMobile: '',
+});
 
 @Component({
   selector: 'app-my-patients',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, Avatar, ...FORMAT_PIPES],
   templateUrl: './my-patients.html',
   styleUrl: './my-patients.css',
   host: { class: 'bg-gray-50 text-slate-800 font-sans antialiased' },
 })
 export class MyPatientsPage {
-  protected readonly patients = inject(PatientService);
-  private readonly bookings = inject(BookingService);
+  protected readonly data = inject(Data);
+  private readonly store = inject(Store);
+  private readonly auth = inject(AuthService);
+  private readonly toasts = inject(ToastService);
 
   protected readonly search = signal('');
   protected readonly status = signal<'All Status' | 'Active' | 'Inactive'>('All Status');
   protected readonly sort = signal<'Recently Added' | 'Name (A-Z)'>('Recently Added');
   protected readonly showAdd = signal(false);
-  protected readonly draft = signal({ name: '', gender: 'Male' as 'Male' | 'Female', age: null as number | null, mobile: '' });
+  protected draft: PatientInput = blank();
+  protected readonly formError = signal('');
 
   protected readonly stats = computed(() => {
-    const c = this.bookings.counts();
-    return { total: this.patients.patients().length, active: c.confirmed + c['in-progress'], upcoming: c.pending, completed: c.completed };
+    const bs = this.data.myBookings();
+    const n = (s: string) => bs.filter((b) => b.status === s).length;
+    return { active: n('in-progress'), upcoming: n('pending') + n('confirmed'), completed: n('completed') };
   });
 
   protected readonly visible = computed(() => {
     const q = this.search().trim().toLowerCase();
     const st = this.status();
-    const list = this.patients.patients().filter((p) =>
-      (!q || p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q)) && (st === 'All Status' || p.status === st));
+    const list = this.data.myPatients().filter((p) =>
+      (!q || p.name.toLowerCase().includes(q) || p.id.toLowerCase().includes(q)) && (st === 'All Status' || this.data.patientStatus(p.id) === st));
     return this.sort() === 'Name (A-Z)' ? [...list].sort((a, b) => a.name.localeCompare(b.name)) : list;
   });
 
@@ -45,22 +55,47 @@ export class MyPatientsPage {
     title.setTitle('CareGo+ | My Patients');
   }
 
-  protected photo(id: string): string {
-    return PATIENT_PHOTOS[id] ?? 'assets/patient.jpg';
+  /** What to show under a patient: their current booking (and when it next runs), or their last one. */
+  protected summary(p: Patient): { label: string; service: string; pkg: string; bookingId: string; past: boolean; nextLabel: string; next: string } {
+    const bs = this.data.bookingsOfPatient(p.id);
+    const current = bs.find((b) => b.status === 'in-progress') ?? bs.find((b) => b.status === 'confirmed') ?? bs.find((b) => b.status === 'pending');
+    if (current) {
+      const nextSession = sessionsOf(this.data.db(), current.id).find((s) => s.status === 'scheduled' || s.status === 'active');
+      return {
+        label: current.status === 'pending' || current.status === 'confirmed' ? 'Upcoming Booking' : 'Active Booking',
+        service: current.categoryName, pkg: current.packageName, bookingId: current.id, past: false, nextLabel: 'Next Service',
+        next: current.status === 'pending'
+          ? `${fmtDay(current.startDate)}, ${current.startTime} (awaiting confirmation)`
+          : nextSession ? `${fmtDay(nextSession.date)}, ${nextSession.startTime}` : '—',
+      };
+    }
+    const last = bs[0];
+    if (last) {
+      const when = last.completedAt ?? last.cancelledAt ?? last.bookedAt;
+      return {
+        label: 'Last Booking', service: last.categoryName, pkg: last.packageName, bookingId: last.id, past: true,
+        nextLabel: last.status === 'cancelled' ? 'Cancelled on' : 'Completed on',
+        next: new Date(when).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
+      };
+    }
+    return { label: 'Bookings', service: '', pkg: '', bookingId: '', past: false, nextLabel: 'Next Service', next: 'Not scheduled' };
   }
 
-  protected updateDraft(patch: Partial<{ name: string; gender: 'Male' | 'Female'; age: number | null; mobile: string }>): void {
-    this.draft.update((d) => ({ ...d, ...patch }));
+  protected copy(id: string): void {
+    navigator.clipboard?.writeText(id).then(() => this.toasts.info(`Copied ${id}`)).catch(() => undefined);
   }
 
   protected addPatient(): void {
-    const d = this.draft();
-    if (d.name.trim().length < 2 || !d.age) return;
-    this.patients.add({
-      name: d.name.trim(), gender: d.gender, age: d.age, status: 'Active', mobile: d.mobile || '—',
-      bookingLabel: 'Upcoming Booking', bookingService: 'No booking yet', bookingId: '—', nextServiceLabel: 'Next Service', nextService: 'Not scheduled',
-    });
-    this.draft.set({ name: '', gender: 'Male', age: null, mobile: '' });
-    this.showAdd.set(false);
+    const owner = this.auth.account()?.id ?? '';
+    try {
+      const p = this.store.actOrThrow((db, now) => createPatient(db, owner, this.draft, now));
+      this.toasts.success(`${p.name} was added as ${p.id}.`);
+      this.draft = blank();
+      this.formError.set('');
+      this.showAdd.set(false);
+    } catch (e) {
+      if (e instanceof DomainError) this.formError.set(e.message);
+      else throw e;
+    }
   }
 }

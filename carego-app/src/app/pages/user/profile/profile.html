@@ -1,0 +1,61 @@
+<main class="ml-64 min-h-screen bg-gray-50 p-8">
+  <div class="max-w-3xl mx-auto space-y-6">
+    <header class="flex items-center justify-between">
+      <div><h1 class="text-2xl font-bold text-gray-900">My Profile</h1><p class="text-sm text-gray-500">Your account and identity verification</p></div>
+      <a routerLink="/app/bookings" class="text-sm font-semibold text-emerald-700 hover:underline">Back to My Bookings</a>
+    </header>
+
+    @if (auth.account(); as acc) {
+    <section class="bg-white rounded-2xl border border-gray-100 p-6 flex items-center gap-5 shadow-sm">
+      <app-avatar class="w-20 h-20 !text-2xl" [photo]="acc.photo" [name]="acc.name" />
+      <div class="flex-1">
+        <h2 class="text-xl font-bold text-gray-900">{{ acc.name }}</h2>
+        <p class="text-sm text-gray-500">{{ acc.identifier }}</p>
+        <p class="text-xs text-gray-400 mt-1">Member since {{ acc.createdAt | dateOnly }} · {{ acc.roles.join(', ') }}</p>
+      </div>
+      <button type="button" (click)="auth.logout()" class="px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50">Sign out</button>
+    </section>
+
+    <section class="bg-white rounded-2xl border p-6 shadow-sm" [class.border-amber-300]="highlight && acc.kyc.status !== 'verified'" [class.border-gray-100]="!(highlight && acc.kyc.status !== 'verified')">
+      <div class="flex items-start justify-between gap-4 mb-5">
+        <div>
+          <h3 class="text-lg font-bold text-gray-900">Identity verification (KYC)</h3>
+          <p class="text-sm text-gray-500 mt-1">A National ID and a selfie are required before your first booking. It keeps patients and caregivers safe.</p>
+        </div>
+        <span class="text-[11px] font-bold px-3 py-1 rounded-full" [class.bg-emerald-100]="acc.kyc.status === 'verified'" [class.text-emerald-700]="acc.kyc.status === 'verified'" [class.bg-amber-100]="acc.kyc.status !== 'verified'" [class.text-amber-700]="acc.kyc.status !== 'verified'">{{ acc.kyc.status === 'verified' ? 'VERIFIED' : 'NOT VERIFIED' }}</span>
+      </div>
+
+      @if (acc.kyc.status === 'verified') {
+        <div class="grid grid-cols-2 gap-6 text-sm">
+          <div><p class="text-xs font-bold text-gray-400 uppercase">National ID</p><p class="font-semibold text-gray-800">{{ acc.kyc.nid!.slice(0, 3) }}••••{{ acc.kyc.nid!.slice(-3) }}</p></div>
+          <div><p class="text-xs font-bold text-gray-400 uppercase">Verified on</p><p class="font-semibold text-gray-800">{{ acc.kyc.verifiedAt | dt }}</p></div>
+        </div>
+        <a routerLink="/app/book" class="mt-6 inline-block px-6 py-2.5 bg-emerald-600 text-white rounded-lg text-sm font-bold hover:bg-emerald-700">Book a service</a>
+      } @else {
+        <form (ngSubmit)="verify()" class="space-y-5">
+          <label class="block"><span class="text-sm font-semibold text-gray-700">National ID number</span>
+            <input class="mt-1 w-full border-gray-200 rounded-lg p-3 text-sm" placeholder="10, 13 or 17 digits" inputmode="numeric" name="nid" [(ngModel)]="nid" /></label>
+          <div>
+            <span class="text-sm font-semibold text-gray-700">Selfie</span>
+            <div class="mt-1 flex items-center gap-4">
+              <div class="w-20 h-20 rounded-xl bg-gray-100 overflow-hidden flex items-center justify-center text-gray-300">
+                @if (preview(); as p) { <img [src]="p" alt="Selfie preview" class="w-full h-full object-cover" /> } @else { <i class="fa-solid fa-camera text-2xl"></i> }
+              </div>
+              <input type="file" accept="image/*" capture="user" class="text-sm" (change)="pick($event)" />
+            </div>
+            <p class="text-[11px] text-gray-400 mt-2">Demo build: the photo is not uploaded or matched against the NID; a real deployment would call a face-match / NID verification service.</p>
+          </div>
+          @if (error()) { <p class="text-sm text-red-500 bg-red-50 border border-red-100 rounded-lg p-3">{{ error() }}</p> }
+          <button type="submit" class="px-6 py-2.5 bg-emerald-600 text-white rounded-lg text-sm font-bold hover:bg-emerald-700">Verify my identity</button>
+        </form>
+      }
+    </section>
+
+    <section class="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+      <h3 class="text-lg font-bold text-gray-900">Demo data</h3>
+      <p class="text-sm text-gray-500 mt-1">All data lives in this browser. Reset to restore the original sample bookings, patients and payments.</p>
+      <button type="button" (click)="reset()" class="mt-4 px-4 py-2 border border-red-200 text-red-600 rounded-lg text-sm font-semibold hover:bg-red-50">Reset demo data</button>
+    </section>
+    }
+  </div>
+</main>

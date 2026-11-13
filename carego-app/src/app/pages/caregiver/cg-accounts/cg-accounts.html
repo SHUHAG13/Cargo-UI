@@ -1,238 +1,105 @@
-<!-- Sidebar Navigation -->
+<main class="lg:ml-sidebar-width min-h-screen flex flex-col pb-20 lg:pb-0">
+  <header class="h-16 flex items-center justify-between px-gutter bg-cg-surface/80 backdrop-blur-md border-b border-cg-border-subtle sticky top-0 z-40">
+    <a routerLink="/" class="flex items-center gap-2 text-cg-primary font-medium hover:text-cg-secondary transition-colors"><span class="material-symbols-outlined text-xl">arrow_back</span><span class="font-body-md text-body-md">Back to Home</span></a>
+    <div class="flex items-center gap-6">
+      @if (auth.canSwitchTo('user')) { <button type="button" (click)="auth.switchRole('user')" class="bg-cg-primary text-cg-on-primary px-6 py-2 rounded-cgxl font-label-caps text-xs shadow-sm hover:shadow-md transition-all active:opacity-80">SWITCH TO USER</button> }
+    </div>
+  </header>
 
-<!-- Main Content Shell -->
-<main class="ml-sidebar-width min-h-screen flex flex-col">
-<!-- Top Navigation -->
-<header class="h-16 flex items-center justify-between px-gutter bg-cg-surface/80 backdrop-blur-md border-b border-cg-border-subtle sticky top-0 z-40">
-<a class="cursor-pointer flex items-center gap-2 text-cg-primary font-medium hover:text-cg-secondary transition-colors">
-<span class="material-symbols-outlined text-xl" data-icon="arrow_back">arrow_back</span>
-<span class="font-body-md text-body-md">Back to Home</span>
-</a>
-<div class="flex items-center gap-6">
-<div class="relative cursor-pointer group">
-<span class="material-symbols-outlined text-cg-on-surface-variant group-hover:text-cg-primary transition-colors" data-icon="notifications">notifications</span>
-<span class="absolute top-0 right-0 w-2.5 h-2.5 bg-cg-error rounded-cgfull border-2 border-cg-surface"></span>
-</div>
-<button routerLink="/app/bookings" class="bg-cg-primary text-cg-on-primary px-6 py-2 rounded-cgxl font-label-caps text-xs shadow-sm hover:shadow-md transition-all active:opacity-80">
-                    SWITCH TO USER
-                </button>
-</div>
-</header>
-<!-- Main Workspace -->
-<div class="flex-1 p-gutter max-w-container-max mx-auto w-full">
-<!-- Page Header -->
-<div class="mb-stack-lg">
-<h2 class="font-headline-lg text-headline-lg text-cg-text-main">Accounts &amp; Ledger</h2>
-<p class="text-cg-text-muted font-body-md">Real-time financial reconciliation and platform settlement logs.</p>
-</div>
-<!-- Bento Grid Summary Cards -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md mb-stack-lg">
-<!-- Card 1: Cash in Hand -->
-<div class="bg-cg-surface-card rounded-cgxl p-stack-md border border-cg-border-subtle shadow-sm relative overflow-hidden group hover:shadow-md transition-all border-l-4 border-l-amber-500">
-<div class="flex justify-between items-start mb-2">
-<span class="font-label-caps text-label-caps text-cg-text-muted">CASH IN HAND (OWED)</span>
-<span class="material-symbols-outlined text-amber-500" data-icon="warning">warning</span>
-</div>
-<div class="font-display-earnings text-display-earnings text-cg-text-main">৳4,200.00</div>
-<div class="mt-4 flex items-center justify-between">
-<span class="text-xs text-amber-600 font-medium">Pending platform settlement</span>
-<a class="cursor-pointer text-cg-primary text-xs font-bold hover:underline">Pay Now</a>
-</div>
-</div>
-<!-- Card 2: Digital Earnings -->
-<div class="bg-cg-surface-card rounded-cgxl p-stack-md border border-cg-border-subtle shadow-sm relative overflow-hidden group hover:shadow-md transition-all border-l-4 border-l-blue-500">
-<div class="flex justify-between items-start mb-2">
-<span class="font-label-caps text-label-caps text-cg-text-muted">DIGITAL EARNINGS (HELD)</span>
-<span class="material-symbols-outlined text-blue-500" data-icon="account_balance">account_balance</span>
-</div>
-<div class="font-display-earnings text-display-earnings text-cg-text-main">৳14,500.00</div>
-<div class="mt-4 flex items-center justify-between text-xs text-cg-text-muted">
-<span>Cleared for withdrawal</span>
-<span class="text-cg-secondary font-bold">+12% vs last month</span>
-</div>
-</div>
-<!-- Card 3: Net Balance -->
-<div class="bg-cg-surface-card rounded-cgxl p-stack-md border border-cg-border-subtle shadow-sm relative overflow-hidden group hover:shadow-md transition-all border-l-4 border-l-secondary">
-<div class="flex justify-between items-start mb-2">
-<span class="font-label-caps text-label-caps text-cg-text-muted">NET STANDING BALANCE</span>
-<span class="material-symbols-outlined text-cg-secondary" data-icon="trending_up">trending_up</span>
-</div>
-<div class="font-display-earnings text-display-earnings text-cg-secondary">+৳10,300.00</div>
-<div class="mt-4 flex items-center justify-between text-xs text-cg-text-muted">
-<span>Available for payout</span>
-<button class="bg-cg-secondary text-cg-on-secondary px-3 py-1 rounded-cgfull text-[10px] font-bold">WITHDRAW</button>
-</div>
-</div>
-</div>
-<!-- Settlement Center -->
-<div class="bg-white rounded-cgxl border border-cg-border-subtle p-6 mb-stack-lg shadow-sm">
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-<div>
-<h3 class="font-headline-md text-headline-md mb-1">Settlement Center</h3>
-<p class="text-cg-text-muted text-body-md">Clear your platform commission via earnings deduction or direct payment.</p>
-</div>
-<div class="flex flex-wrap items-center gap-4">
-<button class="bg-cg-primary-container text-cg-on-primary-container px-6 py-3 rounded-cgxl font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
-<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
-                            Auto-Deduct From Earnings
-                        </button>
-<div class="flex items-center gap-3 bg-cg-surface p-2 rounded-cgxl border border-cg-border-subtle">
-<span class="text-xs font-bold text-cg-text-muted px-2">DIRECT PAY:</span>
-<div class="flex gap-2">
-<div class="bg-[#e2136e] text-white px-3 py-1.5 rounded-cglg text-xs font-bold flex items-center gap-1 cursor-pointer hover:brightness-110">
-<div class="w-2 h-2 bg-white rounded-cgfull"></div> bKash
-                                </div>
-<div class="bg-[#f04a23] text-white px-3 py-1.5 rounded-cglg text-xs font-bold flex items-center gap-1 cursor-pointer hover:brightness-110">
-<div class="w-2 h-2 bg-white rounded-cgfull"></div> Nagad
-                                </div>
-<div class="bg-[#8c3494] text-white px-3 py-1.5 rounded-cglg text-xs font-bold flex items-center gap-1 cursor-pointer hover:brightness-110">
-<div class="w-2 h-2 bg-white rounded-cgfull"></div> Rocket
-                                </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Ledger Table Section -->
-<div class="bg-white rounded-cgxl border border-cg-border-subtle shadow-sm overflow-hidden">
-<div class="p-6 border-b border-cg-border-subtle flex justify-between items-center bg-cg-surface/50">
-<h3 class="font-headline-md text-headline-md">Account Statement &amp; Reconciliation Logs</h3>
-<div class="flex gap-2">
-<button class="p-2 border border-cg-border-subtle rounded-cglg text-cg-text-muted hover:bg-cg-surface transition-colors">
-<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
-</button>
-<button class="p-2 border border-cg-border-subtle rounded-cglg text-cg-text-muted hover:bg-cg-surface transition-colors">
-<span class="material-symbols-outlined" data-icon="download">download</span>
-</button>
-</div>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-cg-surface-container-low">
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted">DATE &amp; TIME</th>
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted">DESCRIPTION &amp; REF ID</th>
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted">FLOW</th>
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-right">DEBIT (DR)</th>
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-right">CREDIT (CR)</th>
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-right">BALANCE</th>
-<th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-center">STATUS</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-cg-border-subtle">
-<!-- Row 1 -->
-<tr class="hover:bg-cg-surface transition-colors">
-<td class="px-6 py-4">
-<div class="text-body-md font-medium">Oct 24, 2023</div>
-<div class="text-[10px] text-cg-text-muted uppercase">14:20 PM</div>
-</td>
-<td class="px-6 py-4">
-<div class="text-body-md font-bold text-cg-text-main">Home Care Visit - Mr. Kamal</div>
-<div class="text-xs text-cg-text-muted">#CG-BOK-99231</div>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 rounded-cg bg-blue-100 text-blue-700 text-[10px] font-bold uppercase tracking-wider">Cash Collected</span>
-</td>
-<td class="px-6 py-4 text-right font-medium text-cg-error">৳1,500.00</td>
-<td class="px-6 py-4 text-right font-medium text-cg-text-muted">-</td>
-<td class="px-6 py-4 text-right font-bold text-cg-text-main">৳8,800.00</td>
-<td class="px-6 py-4 text-center">
-<span class="flex items-center justify-center gap-1 text-cg-secondary text-xs font-bold">
-<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span> Reconciled
-                                    </span>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="hover:bg-cg-surface transition-colors">
-<td class="px-6 py-4">
-<div class="text-body-md font-medium">Oct 23, 2023</div>
-<div class="text-[10px] text-cg-text-muted uppercase">09:15 AM</div>
-</td>
-<td class="px-6 py-4">
-<div class="text-body-md font-bold text-cg-text-main">Digital Payout to bKash</div>
-<div class="text-xs text-cg-text-muted">#CG-PAY-11002</div>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 rounded-cg bg-purple-100 text-purple-700 text-[10px] font-bold uppercase tracking-wider">Withdrawal</span>
-</td>
-<td class="px-6 py-4 text-right font-medium text-cg-error">৳5,000.00</td>
-<td class="px-6 py-4 text-right font-medium text-cg-text-muted">-</td>
-<td class="px-6 py-4 text-right font-bold text-cg-text-main">৳10,300.00</td>
-<td class="px-6 py-4 text-center">
-<span class="flex items-center justify-center gap-1 text-amber-600 text-xs font-bold">
-<span class="material-symbols-outlined text-[14px]" data-icon="pending">pending</span> Pending Sync
-                                    </span>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="hover:bg-cg-surface transition-colors">
-<td class="px-6 py-4">
-<div class="text-body-md font-medium">Oct 22, 2023</div>
-<div class="text-[10px] text-cg-text-muted uppercase">18:45 PM</div>
-</td>
-<td class="px-6 py-4">
-<div class="text-body-md font-bold text-cg-text-main">Platform Commission Adj.</div>
-<div class="text-xs text-cg-text-muted">#CG-ADJ-2210</div>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 rounded-cg bg-orange-100 text-orange-700 text-[10px] font-bold uppercase tracking-wider">Internal Flow</span>
-</td>
-<td class="px-6 py-4 text-right font-medium text-cg-text-muted">-</td>
-<td class="px-6 py-4 text-right font-medium text-cg-secondary">৳450.00</td>
-<td class="px-6 py-4 text-right font-bold text-cg-text-main">৳15,300.00</td>
-<td class="px-6 py-4 text-center">
-<span class="flex items-center justify-center gap-1 text-cg-secondary text-xs font-bold">
-<span class="material-symbols-outlined text-[14px]" data-icon="verified">verified</span> Settled
-                                    </span>
-</td>
-</tr>
-<!-- Row 4 -->
-<tr class="hover:bg-cg-surface transition-colors">
-<td class="px-6 py-4">
-<div class="text-body-md font-medium">Oct 22, 2023</div>
-<div class="text-[10px] text-cg-text-muted uppercase">11:00 AM</div>
-</td>
-<td class="px-6 py-4">
-<div class="text-body-md font-bold text-cg-text-main">Digital Booking: Mrs. Rahima</div>
-<div class="text-xs text-cg-text-muted">#CG-BOK-99182</div>
-</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 rounded-cg bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">Digital Credit</span>
-</td>
-<td class="px-6 py-4 text-right font-medium text-cg-text-muted">-</td>
-<td class="px-6 py-4 text-right font-medium text-cg-secondary">৳2,800.00</td>
-<td class="px-6 py-4 text-right font-bold text-cg-text-main">৳14,850.00</td>
-<td class="px-6 py-4 text-center">
-<span class="flex items-center justify-center gap-1 text-cg-secondary text-xs font-bold">
-<span class="material-symbols-outlined text-[14px]" data-icon="check_circle">check_circle</span> Reconciled
-                                    </span>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="p-4 bg-cg-surface-container-low flex justify-center">
-<button class="text-cg-primary font-bold text-xs flex items-center gap-1 hover:gap-2 transition-all">
-                        Load More Entries <span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
-</button>
-</div>
-</div>
-<!-- Quick Action Help -->
-<div class="mt-stack-lg flex flex-col md:flex-row gap-6 items-center justify-between p-6 bg-cg-primary-container rounded-2xl text-cg-on-primary-container relative overflow-hidden">
-<div class="relative z-10">
-<h4 class="font-headline-md text-headline-md">Having trouble with a specific transaction?</h4>
-<p class="opacity-80 text-body-md">Our reconciliation team is available 24/7 to help you resolve ledger mismatches.</p>
-</div>
-<button routerLink="/contact" class="relative z-10 bg-white text-cg-primary-container px-8 py-3 rounded-cgxl font-bold hover:bg-opacity-90 transition-all">
-                    Contact Support
-                </button>
-<!-- Decorative background elements -->
-<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-cgfull blur-2xl"></div>
-<div class="absolute -left-10 -top-10 w-40 h-40 bg-cg-secondary-container/10 rounded-cgfull blur-2xl"></div>
-</div>
-</div>
-<!-- Footer -->
-<footer class="mt-auto p-gutter border-t border-cg-border-subtle bg-white text-center">
-<p class="text-xs text-cg-text-muted">© 2023 CareGo+ Health Systems. All financial records are digitally signed and encrypted for your security.</p>
-</footer>
+  <div class="flex-1 p-gutter max-w-container-max mx-auto w-full">
+    <div class="mb-stack-lg"><h2 class="font-headline-lg text-headline-lg text-cg-text-main">Accounts &amp; Ledger</h2><p class="text-cg-text-muted font-body-md">Real-time financial reconciliation and platform settlement logs.</p></div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md mb-stack-lg">
+      <div class="bg-cg-surface-card rounded-cgxl p-stack-md border border-cg-border-subtle shadow-sm border-l-4 border-l-amber-500">
+        <div class="flex justify-between items-start mb-2"><span class="font-label-caps text-label-caps text-cg-text-muted">CASH IN HAND (OWED)</span><span class="material-symbols-outlined text-amber-500">warning</span></div>
+        <div class="font-display-earnings text-display-earnings text-cg-text-main">{{ data.myBalances().cashInHand | bdt:{space:false} }}</div>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-xs text-amber-600 font-medium">{{ data.myBalances().cashInHand > 0 ? 'Pending platform settlement' : 'Nothing to settle' }} · limit {{ limit() | bdt:{space:false} }}</span>
+          @if (data.myBalances().cashInHand > 0) { <a class="cursor-pointer text-cg-primary text-xs font-bold hover:underline" (click)="settle.set({ mode: 'direct', method: 'bKash' })">Pay Now</a> }
+        </div>
+      </div>
+      <div class="bg-cg-surface-card rounded-cgxl p-stack-md border border-cg-border-subtle shadow-sm border-l-4 border-l-blue-500">
+        <div class="flex justify-between items-start mb-2"><span class="font-label-caps text-label-caps text-cg-text-muted">DIGITAL EARNINGS (HELD)</span><span class="material-symbols-outlined text-blue-500">account_balance</span></div>
+        <div class="font-display-earnings text-display-earnings text-cg-text-main">{{ data.myBalances().digitalHeld | bdt:{space:false} }}</div>
+        <div class="mt-4 flex items-center justify-between text-xs text-cg-text-muted"><span>Cleared for withdrawal</span><span>+{{ data.myBalances().pendingClearance | bdt:{space:false} }} clearing</span></div>
+      </div>
+      <div class="bg-cg-surface-card rounded-cgxl p-stack-md border border-cg-border-subtle shadow-sm border-l-4 border-l-cg-secondary">
+        <div class="flex justify-between items-start mb-2"><span class="font-label-caps text-label-caps text-cg-text-muted">NET STANDING BALANCE</span><span class="material-symbols-outlined text-cg-secondary">trending_up</span></div>
+        <div class="font-display-earnings text-display-earnings" [class.text-cg-secondary]="data.myBalances().netStanding >= 0" [class.text-cg-error]="data.myBalances().netStanding < 0">{{ data.myBalances().netStanding | bdt:{sign:true, space:false} }}</div>
+        <div class="mt-4 flex items-center justify-between text-xs text-cg-text-muted"><span>{{ data.myBalances().netStanding < 0 ? 'You owe CareGo+' : 'Available for payout' }}</span>
+          <button type="button" (click)="withdraw.set(true)" [disabled]="data.myBalances().netStanding < 500" class="bg-cg-secondary text-cg-on-secondary px-3 py-1 rounded-cgfull text-[10px] font-bold disabled:opacity-40">WITHDRAW</button></div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-cgxl border border-cg-border-subtle p-6 mb-stack-lg shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div><h3 class="font-headline-md text-headline-md mb-1">Settlement Center</h3><p class="text-cg-text-muted text-body-md">Clear the cash you hold for CareGo+ via earnings deduction or direct payment.</p></div>
+        <div class="flex flex-wrap items-center gap-4">
+          <button type="button" (click)="settle.set({ mode: 'deduct', method: '' })" [disabled]="!canDeduct()" class="bg-cg-primary-container text-cg-on-primary-container px-6 py-3 rounded-cgxl font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed">
+            <span class="material-symbols-outlined">auto_awesome</span>Auto-Deduct From Earnings</button>
+          <div class="flex items-center gap-3 bg-cg-surface p-2 rounded-cgxl border border-cg-border-subtle">
+            <span class="text-xs font-bold text-cg-text-muted px-2">DIRECT PAY:</span>
+            <div class="flex gap-2">
+              @for (m of [['bKash', '#e2136e'], ['Nagad', '#f04a23'], ['Rocket', '#8c3494']]; track m[0]) {
+                <button type="button" (click)="data.myBalances().cashInHand > 0 && settle.set({ mode: 'direct', method: m[0] })" [disabled]="data.myBalances().cashInHand <= 0" [style.background]="m[1]" class="text-white px-3 py-1.5 rounded-cglg text-xs font-bold flex items-center gap-1 hover:brightness-110 disabled:opacity-40"><span class="w-2 h-2 bg-white rounded-cgfull"></span> {{ m[0] }}</button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-cgxl border border-cg-border-subtle shadow-sm overflow-hidden">
+      <div class="p-6 border-b border-cg-border-subtle flex flex-wrap gap-3 justify-between items-center bg-cg-surface/50">
+        <h3 class="font-headline-md text-headline-md">Account Statement &amp; Reconciliation Logs</h3>
+        <div class="flex gap-2">
+          <select class="px-3 py-2 border border-cg-border-subtle rounded-cglg text-sm" [ngModel]="filter()" (ngModelChange)="setFilter($event)" name="lf"><option value="All">All flows</option><option value="cash-collected">Cash Collected</option><option value="earning">Digital Credit</option><option value="withdrawal">Withdrawal</option><option value="settle-direct">Cash Settlement</option><option value="settle-deduct">Internal Flow</option></select>
+          <button type="button" (click)="exportCsv()" class="p-2 border border-cg-border-subtle rounded-cglg text-cg-text-muted hover:bg-cg-surface" title="Download CSV"><span class="material-symbols-outlined">download</span></button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead><tr class="bg-cg-surface-container-low">
+            <th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted">DATE &amp; TIME</th><th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted">DESCRIPTION &amp; REF ID</th><th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted">FLOW</th><th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-right">DEBIT (DR)</th><th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-right">CREDIT (CR)</th><th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-right">BALANCE</th><th class="px-6 py-4 font-label-caps text-label-caps text-cg-text-muted text-center">STATUS</th>
+          </tr></thead>
+          <tbody class="divide-y divide-cg-border-subtle">
+            @for (r of visible(); track r.id) {
+            <tr class="hover:bg-cg-surface transition-colors" [class.opacity-50]="r.shownStatus === 'Voided'" [class.line-through]="r.shownStatus === 'Voided'">
+              <td class="px-6 py-4"><div class="text-body-md font-medium">{{ dateLabel(r.at) }}</div><div class="text-[10px] text-cg-text-muted uppercase">{{ timeLabel(r.at) }}</div></td>
+              <td class="px-6 py-4"><div class="text-body-md font-bold text-cg-text-main">{{ r.description }}</div><div class="text-xs text-cg-text-muted">{{ r.ref }}</div></td>
+              <td class="px-6 py-4"><span [class]="flow[r.kind].chip + ' px-2 py-1 rounded-cg text-[10px] font-bold uppercase tracking-wider'">{{ flow[r.kind].label }}</span></td>
+              <td class="px-6 py-4 text-right font-medium" [class.text-cg-error]="r.kind !== 'commission' && r.kind !== 'settle-deduct'" [class.text-cg-text-muted]="r.kind === 'commission' || r.kind === 'settle-deduct'">{{ debit(r) !== null ? (debit(r) | bdt:{space:false}) : '-' }}</td>
+              <td class="px-6 py-4 text-right font-medium text-cg-secondary">{{ credit(r) !== null ? (credit(r) | bdt:{space:false}) : '-' }}</td>
+              <td class="px-6 py-4 text-right font-bold text-cg-text-main">{{ r.balance | bdt:{space:false} }}</td>
+              <td class="px-6 py-4 text-center">
+                <span class="flex items-center justify-center gap-1 text-xs font-bold" [class.text-cg-secondary]="r.shownStatus === 'Reconciled' || r.shownStatus === 'Settled'" [class.text-amber-600]="r.shownStatus === 'Pending Sync'" [class.text-cg-text-muted]="r.shownStatus === 'Voided'">
+                  <span class="material-symbols-outlined text-[14px]">{{ r.shownStatus === 'Reconciled' ? 'check_circle' : r.shownStatus === 'Settled' ? 'verified' : r.shownStatus === 'Voided' ? 'block' : 'pending' }}</span> {{ r.shownStatus }}</span>
+              </td>
+            </tr>
+            } @empty {
+            <tr><td colspan="7" class="px-6 py-10 text-center text-cg-text-muted">No ledger entries yet.</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="p-4 border-t border-cg-border-subtle bg-cg-surface-container-low flex items-center justify-between text-sm text-cg-text-muted">
+        <span>Page {{ page() }} of {{ pageCount() }} · {{ rows().length }} entries</span>
+        <div class="flex gap-2">
+          <button type="button" class="px-3 py-1 border border-cg-border-subtle rounded-cglg bg-white disabled:opacity-40" [disabled]="page() === 1" (click)="page.set(page() - 1)">Previous</button>
+          <button type="button" class="px-3 py-1 border border-cg-border-subtle rounded-cglg bg-white disabled:opacity-40" [disabled]="page() === pageCount()" (click)="page.set(page() + 1)">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-stack-lg flex flex-col md:flex-row gap-6 items-center justify-between p-6 bg-cg-primary-container text-cg-on-primary-container rounded-cgxl">
+      <div class="flex items-center gap-4"><span class="material-symbols-outlined text-3xl">support_agent</span>
+        <div><h4 class="font-bold text-lg">Having trouble with a specific transaction?</h4><p class="text-sm opacity-80">Our reconciliation team is available 24/7 to help you resolve ledger mismatches.</p></div></div>
+      <a routerLink="/contact" class="bg-white text-cg-primary px-6 py-3 rounded-cgxl font-bold text-sm hover:opacity-90">Contact Support</a>
+    </div>
+  </div>
+
+  <footer class="mt-auto p-gutter border-t border-cg-border-subtle bg-white text-center"><p class="text-xs text-cg-text-muted">© 2026 CareGo+ Health Systems. All financial records are digitally signed and encrypted for your security.</p></footer>
 </main>
+
+@if (withdraw()) { <app-withdraw-dialog (closed)="withdraw.set(false)" /> }
+@if (settle(); as s) { <app-settle-dialog [mode]="s.mode" [method]="s.method" (closed)="settle.set(null)" /> }

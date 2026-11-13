@@ -30,3 +30,10 @@ app-root, app-public-layout, app-user-layout, app-caregiver-layout {
 [routerLink] {
   cursor: pointer;
 }
+
+/* Invoices and statements print cleanly: hide chrome, drop the sidebar offset. */
+@media print {
+  app-user-layout aside, .no-print { display: none !important; }
+  app-user-layout main, app-billing-details main { margin-left: 0 !important; }
+  body { background: #fff !important; }
+}

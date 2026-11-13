@@ -1,0 +1,30 @@
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+  <header><h1 class="text-2xl font-bold text-slate-900">Caregivers</h1><p class="text-sm text-slate-500">Directory, availability and new applications.</p></header>
+
+  <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+    <div class="p-5 border-b border-slate-100 flex justify-between items-center"><h2 class="font-bold text-slate-800">Applications</h2><span class="text-xs font-bold text-slate-600 bg-slate-100 rounded-full px-2 py-0.5">{{ pending().length }} pending</span></div>
+    <div class="divide-y divide-slate-100">
+      @for (a of pending(); track a.id) {
+        <div class="p-5 flex items-start justify-between gap-4">
+          <div class="min-w-0"><p class="font-bold text-slate-800">{{ a.name }} <span class="text-xs font-normal text-slate-500">{{ a.kind }} · {{ a.experienceYears }} yrs</span></p>
+            <p class="text-xs text-slate-500">{{ a.phone }} · {{ a.email }} · NID {{ a.nid }} · applied {{ a.at | dateOnly }}</p><p class="text-sm text-slate-600 mt-1">{{ a.notes || 'No notes.' }}</p></div>
+          <div class="flex gap-2 shrink-0"><button type="button" (click)="decide(a.id, true)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg">Approve &amp; onboard</button><button type="button" (click)="decide(a.id, false)" class="px-3 py-1.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-lg">Decline</button></div>
+        </div>
+      } @empty { <p class="p-6 text-sm text-slate-400">No applications waiting.</p> }
+      @if (decided().length) { <div class="p-4 bg-slate-50 text-xs text-slate-500">Recent: @for (a of decided(); track a.id) { <span class="mr-3">{{ a.name }} — {{ a.status }}</span> }</div> }
+    </div>
+  </section>
+
+  <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="p-5 border-b border-slate-100"><h2 class="font-bold text-slate-800">Directory</h2></div>
+    <table class="w-full text-sm"><thead class="bg-slate-50 text-xs text-slate-500 uppercase"><tr><th class="p-4 text-left">Caregiver</th><th class="p-4 text-left">Role</th><th class="p-4 text-left">Experience</th><th class="p-4 text-left">Rating</th><th class="p-4 text-right">Active jobs</th><th class="p-4 text-right">Cash held</th><th class="p-4 text-right">Net standing</th><th class="p-4 text-left">Status</th></tr></thead>
+      <tbody class="divide-y divide-slate-100">
+        @for (s of staff(); track s.c.id) {
+          <tr><td class="p-4"><div class="flex items-center gap-3"><app-avatar class="w-9 h-9" [photo]="s.c.photo" [name]="s.c.name" /><div><p class="font-semibold text-slate-800">{{ s.c.name }}</p><p class="text-xs text-slate-400">{{ s.c.id }} · {{ s.c.phone }}</p></div></div></td>
+            <td class="p-4">{{ s.c.kind }}</td><td class="p-4">{{ s.c.experienceYears }} yrs</td><td class="p-4">★ {{ s.c.rating || '—' }} <span class="text-xs text-slate-400">({{ s.c.reviews }})</span></td><td class="p-4 text-right">{{ s.jobs }}</td>
+            <td class="p-4 text-right" [class.text-amber-600]="s.b.cashInHand > 0">{{ s.b.cashInHand | bdt }}</td><td class="p-4 text-right font-semibold">{{ s.b.netStanding | bdt }}</td>
+            <td class="p-4"><button type="button" (click)="toggle(s.c.id, !s.c.active)" class="text-xs font-bold px-3 py-1 rounded-full" [class.bg-emerald-50]="s.c.active" [class.text-emerald-700]="s.c.active" [class.bg-slate-100]="!s.c.active" [class.text-slate-500]="!s.c.active">{{ s.c.active ? 'Active' : 'Inactive' }}</button></td></tr>
+        }
+      </tbody></table>
+  </section>
+</div>

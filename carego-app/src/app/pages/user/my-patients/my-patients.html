@@ -3,7 +3,7 @@
         <header class="flex items-center justify-end px-8 py-4 bg-white border-b border-gray-100 gap-8">
             <nav class="flex items-center gap-8 font-semibold text-sm">
                 <a class="text-gray-800 hover:text-pt-primary" routerLink="/services">Services</a>
-                <a class="text-gray-800 hover:text-pt-primary" routerLink="/caregiver/schedule">Become a Caregiver</a>
+                <a class="text-gray-800 hover:text-pt-primary" routerLink="/become-caregiver">Become a Caregiver</a>
             </nav>
             <div class="relative">
                 <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full relative">
@@ -28,26 +28,22 @@
             </div>
 
             @if (showAdd()) {
-                @let d = draft();
-                <form (ngSubmit)="addPatient()" class="bg-white p-6 rounded-2xl border border-green-200 shadow-sm mb-10 grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-bold text-gray-500 mb-1">Full Name *</label>
-                        <input class="w-full border-gray-200 rounded-lg text-sm p-2.5" placeholder="Patient name" name="name" [ngModel]="d.name" (ngModelChange)="updateDraft({ name: $event })"/>
+                <form (ngSubmit)="addPatient()" class="bg-white p-6 rounded-2xl border border-green-200 shadow-sm mb-10 space-y-4">
+                    <h3 class="font-bold text-gray-900">Add a new patient</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div class="md:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">Full name *</label><input class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="name" [(ngModel)]="draft.fullName" /></div>
+                        <div><label class="block text-xs font-bold text-gray-500 mb-1">Age *</label><input type="number" min="0" max="120" class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="age" [(ngModel)]="draft.age" /></div>
+                        <div><label class="block text-xs font-bold text-gray-500 mb-1">Gender *</label><select class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="gender" [(ngModel)]="draft.gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+                        <div><label class="block text-xs font-bold text-gray-500 mb-1">Weight (kg)</label><input type="number" min="0" class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="wt" [(ngModel)]="draft.weightKg" /></div>
+                        <div><label class="block text-xs font-bold text-gray-500 mb-1">Status</label><select class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="mob" [(ngModel)]="draft.mobility"><option>Mobile</option><option>Bedridden</option></select></div>
+                        <div class="md:col-span-3"><label class="block text-xs font-bold text-gray-500 mb-1">Current address *</label><input class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="addr" [(ngModel)]="draft.address" /></div>
+                        <div class="md:col-span-3"><label class="block text-xs font-bold text-gray-500 mb-1">Existing medical condition</label><input class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="cond" [(ngModel)]="draft.medicalCondition" /></div>
+                        <div class="md:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">Primary attendant *</label><input class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="an" [(ngModel)]="draft.attendantName" /></div>
+                        <div class="md:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">Relationship *</label><input class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="ar" [(ngModel)]="draft.attendantRelation" /></div>
+                        <div class="md:col-span-2"><label class="block text-xs font-bold text-gray-500 mb-1">Mobile (WhatsApp) *</label><input class="w-full border-gray-200 rounded-lg text-sm p-2.5" placeholder="01XXXXXXXXX" name="am" [(ngModel)]="draft.attendantMobile" /></div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-1">Gender</label>
-                        <select class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="gender" [ngModel]="d.gender" (ngModelChange)="updateDraft({ gender: $event })">
-                            <option>Male</option><option>Female</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 mb-1">Age *</label>
-                        <input type="number" min="0" class="w-full border-gray-200 rounded-lg text-sm p-2.5" name="age" [ngModel]="d.age" (ngModelChange)="updateDraft({ age: $event })"/>
-                    </div>
-                    <div class="flex gap-2">
-                        <button type="submit" class="flex-1 bg-pt-primary text-white rounded-lg text-sm font-bold py-2.5 disabled:opacity-40" [disabled]="d.name.trim().length < 2 || !d.age">Save</button>
-                        <button type="button" (click)="showAdd.set(false)" class="px-4 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600">Cancel</button>
-                    </div>
+                    @if (formError()) { <p class="text-sm text-red-500">{{ formError() }}</p> }
+                    <div class="flex gap-3"><button type="submit" class="bg-pt-primary text-white rounded-lg text-sm font-bold px-6 py-2.5">Save patient</button><button type="button" (click)="showAdd.set(false)" class="px-5 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600">Cancel</button></div>
                 </form>
             }
 
@@ -57,7 +53,7 @@
                     <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center text-pt-primary">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                     </div>
-                    <div><p class="text-sm font-semibold text-gray-500">Total Patients</p><p class="text-2xl font-bold">{{ stats().total }}</p></div>
+                    <div><p class="text-sm font-semibold text-gray-500">Total Patients</p><p class="text-2xl font-bold">{{ data.myPatients().length }}</p></div>
                 </div>
                 <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center gap-5 shadow-sm">
                     <div class="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-500">
@@ -106,50 +102,45 @@
             <!-- Patients Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @for (p of visible(); track p.id) {
+                    @let sm = summary(p);
+                    @let st = data.patientStatus(p.id);
                     <div class="bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div class="relative h-48">
-                            <img [alt]="p.name" class="w-full h-full object-cover" [src]="photo(p.id)"/>
+                        <div class="relative h-48 bg-emerald-50">
+                            <app-avatar class="w-full h-full !rounded-none !text-5xl" [photo]="p.photo" [name]="p.name" />
                             <span class="absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full border"
-                                  [class]="(p.status === 'Active' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-gray-100 text-gray-500 border-gray-200') + ' absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full border'">{{ p.status }}</span>
+                                  [class]="(st === 'Active' ? 'bg-green-100 text-green-700 border-green-200' : 'bg-gray-100 text-gray-500 border-gray-200') + ' absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full border'">{{ st }}</span>
                         </div>
                         <div class="p-6">
-                            <div class="flex justify-between items-start mb-1">
-                                <h3 class="text-xl font-bold text-gray-900">{{ p.name }}</h3>
-                                <button class="text-gray-400 hover:text-gray-600">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
-                                </button>
-                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">{{ p.name }}</h3>
                             <p class="text-sm text-gray-500 mb-2">{{ p.gender }}, {{ p.age }} Years</p>
                             <div class="flex items-center gap-2 mb-4">
                                 <p class="text-sm font-semibold text-gray-600">Patient ID: <span class="text-gray-800">{{ p.id }}</span></p>
-                                <button class="text-gray-400 hover:text-pt-primary">
+                                <button type="button" (click)="copy(p.id)" class="text-gray-400 hover:text-pt-primary" title="Copy patient ID">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                                 </button>
                             </div>
-                            <p class="text-[12px] text-gray-400 mb-6 font-medium">Added on {{ p.addedOn }}</p>
+                            <p class="text-[12px] text-gray-400 mb-6 font-medium">Added on {{ p.addedOn | day }}</p>
                             <div class="space-y-4 border-t border-gray-50 pt-6 mb-8">
                                 <div class="flex items-start gap-3">
-                                    <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                                    </div>
+                                    <div class="p-2 bg-indigo-50 rounded-lg text-indigo-500"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
                                     <div>
-                                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">{{ p.bookingLabel }}</p>
-                                        <div class="flex items-center gap-2 mt-1">
-                                            <span class="text-sm font-bold text-gray-800">{{ p.bookingService }}</span>
-                                            @if (p.bookingPackage) {
-                                                <span class="text-[10px] px-2 py-0.5 rounded font-bold" [class]="(p.bookingLabel === 'Last Booking' ? 'bg-blue-100 text-blue-700' : 'bg-indigo-100 text-indigo-700') + ' text-[10px] px-2 py-0.5 rounded font-bold'">{{ p.bookingPackage }}</span>
-                                            }
-                                        </div>
-                                        <p class="text-xs text-gray-500 mt-1">{{ p.bookingId }}</p>
+                                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">{{ sm.label }}</p>
+                                        @if (sm.bookingId) {
+                                            <div class="flex items-center gap-2 mt-1 flex-wrap">
+                                                <span class="text-sm font-bold text-gray-800">{{ sm.service }}</span>
+                                                <span [class]="(sm.past ? 'bg-blue-100 text-blue-700' : 'bg-indigo-100 text-indigo-700') + ' text-[10px] px-2 py-0.5 rounded font-bold'">{{ sm.pkg }}</span>
+                                            </div>
+                                            <a [routerLink]="['/app/bookings', sm.bookingId]" class="text-xs text-gray-500 mt-1 inline-block hover:underline hover:text-pt-primary">{{ sm.bookingId }}</a>
+                                        } @else {
+                                            <p class="text-sm text-gray-500 mt-1">No bookings yet</p>
+                                        }
                                     </div>
                                 </div>
                                 <div class="flex items-start gap-3">
-                                    <div class="p-2 bg-blue-50 rounded-lg text-blue-500">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-                                    </div>
+                                    <div class="p-2 bg-blue-50 rounded-lg text-blue-500"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></div>
                                     <div>
-                                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">{{ p.nextServiceLabel }}</p>
-                                        <p class="text-sm font-bold text-gray-800 mt-1">{{ p.nextService }}</p>
+                                        <p class="text-[10px] uppercase tracking-wider text-gray-400 font-bold">{{ sm.nextLabel }}</p>
+                                        <p class="text-sm font-bold text-gray-800 mt-1">{{ sm.next }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +157,7 @@
 
             <!-- Pagination -->
             <div class="mt-12 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-sm text-gray-500 font-medium">Showing {{ visible().length ? 1 : 0 }} to {{ visible().length }} of {{ patients.patients().length }} patients</p>
+                <p class="text-sm text-gray-500 font-medium">Showing {{ visible().length ? 1 : 0 }} to {{ visible().length }} of {{ data.myPatients().length }} patients</p>
                 <div class="flex items-center gap-2">
                     <button class="p-2 border border-gray-200 rounded-lg hover:bg-gray-100 disabled:opacity-50" disabled>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>

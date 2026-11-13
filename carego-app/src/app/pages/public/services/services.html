@@ -179,19 +179,13 @@
                 <tr class="bg-gray-50/30">
                     <td class="sticky-col border-b-0"></td>
                     <td class="text-center border-b-0 py-6">
-                        <button routerLink="/app/book" class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition">
-                            <a routerLink="/auth/register" class="text-white">Book Now</a>
-                        </button>
+                        <a routerLink="/app/book" [queryParams]="{ category: 'caregiver', tier: 'basic' }" class="inline-block w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition">Book Now</a>
                     </td>
                     <td class="text-center border-b-0 py-6">
-                        <button routerLink="/app/book" class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition">
-                            <a routerLink="/auth/register" class="text-white">Book Now</a>
-                        </button>
+                        <a routerLink="/app/book" [queryParams]="{ category: 'caregiver', tier: 'standard' }" class="inline-block w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition">Book Now</a>
                     </td>
                     <td class="text-center border-b-0 py-6">
-                        <button routerLink="/app/book" class="w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition">
-                            <a routerLink="/auth/register" class="text-white">Book Now</a>
-                        </button>
+                        <a routerLink="/app/book" [queryParams]="{ category: 'caregiver', tier: 'premium' }" class="inline-block w-full max-w-[180px] bg-carego-teal text-white font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition">Book Now</a>
                     </td>
                 </tr>
                 </tbody>
@@ -375,13 +369,13 @@
                     <tr class="bg-white">
                         <td class="p-4"></td>
                         <td class="p-6 text-center">
-                            <button routerLink="/app/book" class="w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</button>
+                            <a routerLink="/app/book" [queryParams]="{ category: 'nursing', tier: 'basic' }" class="inline-block w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</a>
                         </td>
                         <td class="p-6 text-center">
-                            <button routerLink="/app/book" class="w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</button>
+                            <a routerLink="/app/book" [queryParams]="{ category: 'nursing', tier: 'standard' }" class="inline-block w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</a>
                         </td>
                         <td class="p-6 text-center">
-                            <button routerLink="/app/book" class="w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</button>
+                            <a routerLink="/app/book" [queryParams]="{ category: 'nursing', tier: 'premium' }" class="inline-block w-full bg-brand-teal text-white py-3 rounded-lg font-bold hover:bg-brand-teal-dark transition-colors shadow-sm">Book Now</a>
                         </td>
                     </tr>
                     </tbody>
@@ -780,13 +774,13 @@
                         <span class="font-bold text-brand-green">ACTION</span>
                     </td>
                     <td class="p-4 text-center border-r border-gray-100">
-                        <button routerLink="/app/book" class="w-full bg-brand-green text-white py-2.5 rounded-lg text-sm font-bold shadow-sm hover:bg-opacity-90 transition-all">Configure and Book</button>
+                        <a routerLink="/app/book" [queryParams]="{ category: 'nanny', tier: 'basic' }" class="inline-block w-full bg-brand-green text-white py-2.5 rounded-lg text-sm font-bold shadow-sm hover:bg-opacity-90 transition-all">Configure and Book</a>
                     </td>
                     <td class="p-4 text-center border-r border-gray-100">
-                        <button routerLink="/app/book" class="w-full bg-brand-green text-white py-2.5 rounded-lg text-sm font-bold shadow-sm hover:bg-opacity-90 transition-all">Configure and Book</button>
+                        <a routerLink="/app/book" [queryParams]="{ category: 'nanny', tier: 'standard' }" class="inline-block w-full bg-brand-green text-white py-2.5 rounded-lg text-sm font-bold shadow-sm hover:bg-opacity-90 transition-all">Configure and Book</a>
                     </td>
                     <td class="p-4 text-center">
-                        <button routerLink="/app/book" class="w-full bg-brand-green text-white py-2.5 rounded-lg text-sm font-bold shadow-sm hover:bg-opacity-90 transition-all">Configure and Book</button>
+                        <a routerLink="/app/book" [queryParams]="{ category: 'nanny', tier: 'premium' }" class="inline-block w-full bg-brand-green text-white py-2.5 rounded-lg text-sm font-bold shadow-sm hover:bg-opacity-90 transition-all">Configure and Book</a>
                     </td>
                 </tr>
                 </tbody>

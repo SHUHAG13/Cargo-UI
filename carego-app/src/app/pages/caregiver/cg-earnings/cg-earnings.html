@@ -1,240 +1,121 @@
-<!-- SideNavBar -->
+<main class="lg:ml-sidebar-width min-h-screen flex flex-col pb-20 lg:pb-0">
+  <header class="flex justify-end items-center h-16 px-gutter bg-cg-surface/80 backdrop-blur-md border-b border-cg-border-subtle sticky top-0 z-40">
+    <div class="flex items-center gap-stack-md">
+      @if (auth.canSwitchTo('user')) {
+        <button type="button" (click)="auth.switchRole('user')" class="px-4 py-2 rounded-cglg bg-cg-primary text-cg-on-primary font-label-caps text-label-caps hover:opacity-90">Switch to User</button>
+      }
+    </div>
+  </header>
 
-<!-- Main Content Wrapper -->
-<main class="ml-[280px] min-h-screen flex flex-col">
-<!-- TopNavBar -->
-<header class="flex justify-end items-center h-16 px-gutter bg-cg-surface/80 backdrop-blur-md border-b border-cg-border-subtle sticky top-0 z-40">
-<div class="flex items-center gap-stack-md">
-<button class="relative p-2 text-cg-text-muted hover:text-cg-primary transition-colors">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-cg-error rounded-cgfull"></span>
-</button>
-<div class="h-6 w-[1px] bg-cg-border-subtle mx-2"></div>
-<button routerLink="/app/bookings" class="px-4 py-2 rounded-cglg bg-cg-primary text-cg-on-primary font-label-caps text-label-caps hover:opacity-90 transition-all active:opacity-80">
-                    Switch to User
-                </button>
-</div>
-</header>
-<!-- Page Content -->
-<div class="p-stack-lg max-w-[1200px] w-full mx-auto">
-<!-- Header Section -->
-<div class="mb-stack-lg">
-<h2 class="font-headline-lg text-headline-lg text-cg-text-main">My Earnings</h2>
-<p class="text-body-md text-cg-text-muted mt-1">Track your completed shifts, payouts, and pending balances.</p>
-</div>
-<!-- Summary Cards Row -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
-<!-- Available to Withdraw -->
-<div class="bg-cg-surface-card p-stack-md rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between min-h-[160px]">
-<div>
-<p class="font-label-caps text-label-caps text-cg-text-muted uppercase">Available to Withdraw</p>
-<p class="font-display-earnings text-display-earnings text-cg-secondary mt-2">৳12,500.00</p>
-</div>
-<button class="w-full mt-4 py-3 bg-cg-secondary text-cg-on-secondary rounded-cglg font-label-caps text-label-caps font-bold hover:brightness-110 transition-all active:scale-[0.98]">
-                        Withdraw Funds
-                    </button>
-</div>
-<!-- Pending Clearance -->
-<div class="bg-cg-surface-card p-stack-md rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] min-h-[160px] relative">
-<div class="absolute top-4 right-4 text-cg-tertiary-container bg-cg-tertiary-fixed-dim/20 p-2 rounded-cgfull">
-<span class="material-symbols-outlined">schedule</span>
-</div>
-<p class="font-label-caps text-label-caps text-cg-text-muted uppercase">Pending Clearance</p>
-<p class="font-display-earnings text-display-earnings text-cg-text-main mt-2">৳4,830.00</p>
-<p class="text-body-md text-cg-text-muted mt-4">Expected in 3-5 business days</p>
-</div>
-<!-- Total Earnings (Month) -->
-<div class="bg-cg-surface-card p-stack-md rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] min-h-[160px] relative overflow-hidden">
-<div class="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 bg-cg-secondary-container/30 text-cg-on-secondary-container rounded-cgfull text-[12px] font-bold">
-<span class="material-symbols-outlined text-[14px]">trending_up</span>
-                        12%
-                    </div>
-<p class="font-label-caps text-label-caps text-cg-text-muted uppercase">Total Earnings (This Month)</p>
-<p class="font-display-earnings text-display-earnings text-cg-text-main mt-2">৳34,200.00</p>
-<a class="cursor-pointer inline-block text-body-md text-cg-primary font-semibold mt-4 hover:underline">View Monthly Report</a>
-</div>
-</div>
-<!-- Analytics Section -->
-<div class="bg-cg-surface-card p-stack-lg rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] mb-stack-lg">
-<div class="flex justify-between items-center mb-8">
-<div>
-<h3 class="font-headline-md text-headline-md text-cg-text-main">Earnings Overview</h3>
-<p class="text-body-md text-cg-text-muted">Net earnings growth over the last 6 months</p>
-</div>
-<div class="flex gap-2">
-<button class="px-4 py-2 border border-cg-border-subtle rounded-cglg text-body-md bg-cg-background hover:bg-cg-surface-container transition-colors">Line</button>
-<button class="px-4 py-2 border border-cg-border-subtle rounded-cglg text-body-md bg-cg-primary text-cg-on-primary transition-colors">Bar</button>
-</div>
-</div>
-<div class="h-64 flex items-end justify-between gap-4 px-4 relative">
-<!-- Simple CSS Bar Chart Representation -->
-<div class="flex-1 flex flex-col items-center gap-2 group">
-<div class="w-full bg-cg-primary-container/10 rounded-t-cglg relative group-hover:bg-cg-primary-container/20 transition-all h-[40%]">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg opacity-0 group-hover:opacity-100 transition-opacity">৳18k</div>
-</div>
-<span class="font-label-caps text-label-caps text-cg-text-muted">JAN</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-2 group">
-<div class="w-full bg-cg-primary-container/10 rounded-t-cglg relative group-hover:bg-cg-primary-container/20 transition-all h-[55%]">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg opacity-0 group-hover:opacity-100 transition-opacity">৳22k</div>
-</div>
-<span class="font-label-caps text-label-caps text-cg-text-muted">FEB</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-2 group">
-<div class="w-full bg-cg-primary-container/10 rounded-t-cglg relative group-hover:bg-cg-primary-container/20 transition-all h-[70%]">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg opacity-0 group-hover:opacity-100 transition-opacity">৳28k</div>
-</div>
-<span class="font-label-caps text-label-caps text-cg-text-muted">MAR</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-2 group">
-<div class="w-full bg-cg-primary-container/10 rounded-t-cglg relative group-hover:bg-cg-primary-container/20 transition-all h-[65%]">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg opacity-0 group-hover:opacity-100 transition-opacity">৳26k</div>
-</div>
-<span class="font-label-caps text-label-caps text-cg-text-muted">APR</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-2 group">
-<div class="w-full bg-cg-primary-container/10 rounded-t-cglg relative group-hover:bg-cg-primary-container/20 transition-all h-[85%]">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg opacity-0 group-hover:opacity-100 transition-opacity">৳32k</div>
-</div>
-<span class="font-label-caps text-label-caps text-cg-text-muted">MAY</span>
-</div>
-<div class="flex-1 flex flex-col items-center gap-2 group">
-<div class="w-full bg-cg-secondary rounded-t-cglg relative h-[95%] shadow-[0_-4px_12px_rgba(0,182,122,0.2)]">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg opacity-100">৳34.2k</div>
-</div>
-<span class="font-label-caps text-label-caps text-cg-text-main font-bold">JUN</span>
-</div>
-<!-- Y-Axis Grid Lines -->
-<div class="absolute inset-0 flex flex-col justify-between pointer-events-none pb-8">
-<div class="border-b border-cg-border-subtle w-full h-0 opacity-50"></div>
-<div class="border-b border-cg-border-subtle w-full h-0 opacity-50"></div>
-<div class="border-b border-cg-border-subtle w-full h-0 opacity-50"></div>
-<div class="border-b border-cg-border-subtle w-full h-0 opacity-50"></div>
-</div>
-</div>
-</div>
-<!-- Recent Transactions Table -->
-<div class="bg-cg-surface-card rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] overflow-hidden">
-<div class="p-stack-md border-b border-cg-border-subtle flex justify-between items-center">
-<h3 class="font-headline-md text-headline-md text-cg-text-main">Recent Transactions &amp; Completed Shifts</h3>
-<div class="flex gap-stack-sm">
-<button class="px-3 py-1.5 border border-cg-border-subtle rounded-cglg text-body-md flex items-center gap-2 hover:bg-cg-background transition-colors">
-<span class="material-symbols-outlined text-[18px]">filter_list</span>
-                            Filter
-                        </button>
-<button class="px-3 py-1.5 border border-cg-border-subtle rounded-cglg text-body-md flex items-center gap-2 hover:bg-cg-background transition-colors">
-<span class="material-symbols-outlined text-[18px]">download</span>
-                            Export CSV
-                        </button>
-</div>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left">
-<thead>
-<tr class="bg-cg-surface-container-low border-b border-cg-border-subtle">
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Date</th>
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Service &amp; Booking ID</th>
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Duration / Shift</th>
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Gross Earning</th>
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">CareGo+ Fee</th>
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Net Earning</th>
-<th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Status</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-cg-border-subtle">
-<!-- Row 1 -->
-<tr class="hover:bg-cg-surface-container-lowest transition-colors">
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">Jun 04, 2026</td>
-<td class="px-gutter py-4">
-<p class="font-body-md text-body-md text-cg-text-main font-semibold">Caregiver Service</p>
-<p class="text-[12px] text-cg-text-muted">BK-2026-0604-001</p>
-</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">24 Hours</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">৳3,500.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-error">-৳350.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-secondary font-bold">৳3,150.00</td>
-<td class="px-gutter py-4">
-<span class="px-2 py-1 rounded-cgfull text-[11px] font-bold bg-cg-secondary-container/30 text-cg-on-secondary-container uppercase">Completed</span>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="hover:bg-cg-surface-container-lowest transition-colors">
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">Jun 02, 2026</td>
-<td class="px-gutter py-4">
-<p class="font-body-md text-body-md text-cg-text-main font-semibold">Senior Home Support</p>
-<p class="text-[12px] text-cg-text-muted">BK-2026-0602-014</p>
-</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">12 Hours</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">৳1,800.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-error">-৳180.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-secondary font-bold">৳1,620.00</td>
-<td class="px-gutter py-4">
-<span class="px-2 py-1 rounded-cgfull text-[11px] font-bold bg-cg-secondary-container/30 text-cg-on-secondary-container uppercase">Completed</span>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="hover:bg-cg-surface-container-lowest transition-colors">
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">May 28, 2026</td>
-<td class="px-gutter py-4">
-<p class="font-body-md text-body-md text-cg-text-main font-semibold">Post-Surgery Care</p>
-<p class="text-[12px] text-cg-text-muted">BK-2026-0528-092</p>
-</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">30 Days</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">৳45,000.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-error">-৳4,500.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-secondary font-bold">৳40,500.00</td>
-<td class="px-gutter py-4">
-<span class="px-2 py-1 rounded-cgfull text-[11px] font-bold bg-cg-surface-container-highest text-cg-text-muted uppercase">Withdrawn</span>
-</td>
-</tr>
-<!-- Row 4 -->
-<tr class="hover:bg-cg-surface-container-lowest transition-colors">
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">Jun 06, 2026</td>
-<td class="px-gutter py-4">
-<p class="font-body-md text-body-md text-cg-text-main font-semibold">Emergency Night Shift</p>
-<p class="text-[12px] text-cg-text-muted">BK-2026-0606-102</p>
-</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">8 Hours</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">৳2,000.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-error">-৳200.00</td>
-<td class="px-gutter py-4 font-body-md text-body-md text-cg-secondary font-bold">৳1,800.00</td>
-<td class="px-gutter py-4">
-<span class="px-2 py-1 rounded-cgfull text-[11px] font-bold bg-cg-tertiary-fixed text-cg-on-tertiary-fixed-variant uppercase">Pending</span>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="p-stack-md bg-cg-surface-container-low flex justify-between items-center border-t border-cg-border-subtle">
-<p class="text-body-md text-cg-text-muted">Showing 4 of 28 transactions</p>
-<div class="flex gap-2">
-<button class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-white text-cg-text-muted disabled:opacity-50" disabled="">
-<span class="material-symbols-outlined text-[18px]">chevron_left</span>
-</button>
-<button class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-cg-primary text-cg-on-primary">1</button>
-<button class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-white text-cg-text-main hover:bg-cg-background transition-colors">2</button>
-<button class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-white text-cg-text-main hover:bg-cg-background transition-colors">3</button>
-<button class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-white text-cg-text-main hover:bg-cg-background transition-colors">
-<span class="material-symbols-outlined text-[18px]">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<footer class="mt-auto p-gutter border-t border-cg-border-subtle bg-white">
-<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-<div class="flex items-center gap-4">
-<p class="text-body-md text-cg-text-muted">© 2024 CareGo+ Caregiver Portal. All rights reserved.</p>
-<div class="h-4 w-[1px] bg-cg-border-subtle hidden md:block"></div>
-<a class="cursor-pointer text-body-md text-cg-primary hover:underline">Privacy Policy</a>
-<a class="cursor-pointer text-body-md text-cg-primary hover:underline">Terms of Service</a>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-cg-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
-<span class="text-body-md font-semibold text-cg-text-main">Secured &amp; Encrypted Payments</span>
-</div>
-</div>
-</footer>
+  <div class="p-stack-lg max-w-[1200px] w-full mx-auto">
+    <div class="mb-stack-lg">
+      <h2 class="font-headline-lg text-headline-lg text-cg-text-main">My Earnings</h2>
+      <p class="text-body-md text-cg-text-muted mt-1">Track your completed shifts, payouts, and pending balances.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+      <div class="bg-cg-surface-card p-stack-md rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex flex-col justify-between min-h-[160px]">
+        <div><p class="font-label-caps text-label-caps text-cg-text-muted uppercase">Available to Withdraw</p>
+          <p class="font-display-earnings text-display-earnings text-cg-secondary mt-2">{{ (data.myBalances().netStanding > 0 ? data.myBalances().netStanding : 0) | bdt:{space:false} }}</p>
+          @if (data.myBalances().cashInHand > 0) { <p class="text-[12px] text-cg-text-muted mt-1">After {{ data.myBalances().cashInHand | bdt:{space:false} }} cash owed to CareGo+</p> }</div>
+        <button type="button" (click)="withdraw.set(true)" [disabled]="data.myBalances().netStanding < 500" class="w-full mt-4 py-3 bg-cg-secondary text-cg-on-secondary rounded-cglg font-label-caps text-label-caps font-bold hover:brightness-110 transition-all active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed">Withdraw Funds</button>
+      </div>
+      <div class="bg-cg-surface-card p-stack-md rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] min-h-[160px] relative">
+        <div class="absolute top-4 right-4 text-cg-tertiary-container bg-cg-tertiary-fixed-dim/20 p-2 rounded-cgfull"><span class="material-symbols-outlined">schedule</span></div>
+        <p class="font-label-caps text-label-caps text-cg-text-muted uppercase">Pending Clearance</p>
+        <p class="font-display-earnings text-display-earnings text-cg-text-main mt-2">{{ data.myBalances().pendingClearance | bdt:{space:false} }}</p>
+        <p class="text-body-md text-cg-text-muted mt-4">Each shift clears {{ clearance }} days after check-out</p>
+      </div>
+      <div class="bg-cg-surface-card p-stack-md rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] min-h-[160px] relative overflow-hidden">
+        @if (growth() !== null) {
+          <div class="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-cgfull text-[12px] font-bold" [class]="growth()! >= 0 ? 'bg-cg-secondary-container/30 text-cg-on-secondary-container' : 'bg-cg-error-container text-cg-on-error-container'"><span class="material-symbols-outlined text-[14px]">{{ growth()! >= 0 ? 'trending_up' : 'trending_down' }}</span>{{ growth() }}%</div>
+        }
+        <p class="font-label-caps text-label-caps text-cg-text-muted uppercase">Total Earnings (This Month)</p>
+        <p class="font-display-earnings text-display-earnings text-cg-text-main mt-2">{{ monthTotal() | bdt:{space:false} }}</p>
+        <a class="cursor-pointer inline-block text-body-md text-cg-primary font-semibold mt-4 hover:underline" (click)="monthOnly.set(!monthOnly()); page.set(1)">{{ monthOnly() ? 'Show all months' : 'View Monthly Report' }}</a>
+      </div>
+    </div>
+
+    <div class="bg-cg-surface-card p-stack-lg rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] mb-stack-lg">
+      <div class="flex justify-between items-center mb-8">
+        <div><h3 class="font-headline-md text-headline-md text-cg-text-main">Earnings Overview</h3><p class="text-body-md text-cg-text-muted">Net earnings over the last 6 months</p></div>
+        <div class="flex gap-2">
+          <button type="button" (click)="chartMode.set('line')" class="px-4 py-2 border border-cg-border-subtle rounded-cglg text-body-md transition-colors" [class.bg-cg-primary]="chartMode() === 'line'" [class.text-cg-on-primary]="chartMode() === 'line'" [class.bg-cg-background]="chartMode() !== 'line'">Line</button>
+          <button type="button" (click)="chartMode.set('bar')" class="px-4 py-2 border border-cg-border-subtle rounded-cglg text-body-md transition-colors" [class.bg-cg-primary]="chartMode() === 'bar'" [class.text-cg-on-primary]="chartMode() === 'bar'" [class.bg-cg-background]="chartMode() !== 'bar'">Bar</button>
+        </div>
+      </div>
+      <div class="h-64 relative px-4">
+        <div class="absolute inset-x-4 inset-y-0 flex flex-col justify-between pointer-events-none pb-8">
+          @for (i of [1,2,3,4]; track i) { <div class="border-b border-cg-border-subtle w-full h-0 opacity-50"></div> }
+        </div>
+        @if (chartMode() === 'bar') {
+          <div class="h-full flex items-end justify-between gap-4 relative">
+            @for (m of months(); track m.label) {
+              <div class="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
+                <div class="w-full rounded-t-cglg relative transition-all" [class]="m.current ? 'bg-cg-secondary shadow-[0_-4px_12px_rgba(0,182,122,0.2)]' : 'bg-cg-primary-container/10 group-hover:bg-cg-primary-container/20'" [style.height.%]="m.pct">
+                  <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-cg-on-background text-white text-[10px] py-1 px-2 rounded-cg transition-opacity whitespace-nowrap" [class.opacity-100]="m.current" [class.opacity-0]="!m.current" [class.group-hover:opacity-100]="!m.current">{{ kLabel(m.total) }}</div>
+                </div>
+                <span class="font-label-caps text-label-caps" [class.text-cg-text-main]="m.current" [class.font-bold]="m.current" [class.text-cg-text-muted]="!m.current">{{ m.label }}</span>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="h-full pb-8 relative">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full overflow-visible">
+              <polyline fill="none" stroke="#006c47" stroke-width="1.5" vector-effect="non-scaling-stroke" [attr.points]="linePoints()"></polyline>
+            </svg>
+            <div class="absolute bottom-0 inset-x-0 flex justify-between">@for (m of months(); track m.label) { <span class="font-label-caps text-label-caps text-cg-text-muted">{{ m.label }}</span> }</div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bg-cg-surface-card rounded-cgxl border border-cg-border-subtle shadow-[0px_4px_20px_rgba(0,0,0,0.05)] overflow-hidden">
+      <div class="p-stack-md border-b border-cg-border-subtle flex flex-wrap gap-3 justify-between items-center">
+        <h3 class="font-headline-md text-headline-md text-cg-text-main">Recent Transactions &amp; Completed Shifts</h3>
+        <div class="flex gap-stack-sm">
+          <select class="px-3 py-1.5 border border-cg-border-subtle rounded-cglg text-body-md" [ngModel]="status()" (ngModelChange)="setStatus($event)" name="est"><option>All</option><option>Completed</option><option>Withdrawn</option><option>Pending</option></select>
+          <button type="button" (click)="exportCsv()" class="px-3 py-1.5 border border-cg-border-subtle rounded-cglg text-body-md flex items-center gap-2 hover:bg-cg-background"><span class="material-symbols-outlined text-[18px]">download</span>Export CSV</button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead><tr class="bg-cg-surface-container-low border-b border-cg-border-subtle">
+            <th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Date</th><th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Service &amp; Booking ID</th><th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Duration / Shift</th><th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Gross Earning</th><th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">CareGo+ Fee</th><th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Net Earning</th><th class="px-gutter py-4 font-label-caps text-label-caps text-cg-text-muted">Status</th>
+          </tr></thead>
+          <tbody class="divide-y divide-cg-border-subtle">
+            @for (r of visible(); track r.e.id) {
+            <tr class="hover:bg-cg-surface-container-lowest transition-colors">
+              <td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">{{ dateLabel(r.e.at) }}</td>
+              <td class="px-gutter py-4"><p class="font-body-md text-body-md text-cg-text-main font-semibold">{{ r.service }}</p><p class="text-[12px] text-cg-text-muted">{{ r.e.sessionId }}</p></td>
+              <td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">{{ r.e.hours }} Hours</td>
+              <td class="px-gutter py-4 font-body-md text-body-md text-cg-text-main">{{ r.e.gross | bdt:{space:false} }}</td>
+              <td class="px-gutter py-4 font-body-md text-body-md text-cg-error">-{{ r.e.fee | bdt:{space:false} }}</td>
+              <td class="px-gutter py-4 font-body-md text-body-md text-cg-secondary font-bold">{{ r.e.amount | bdt:{space:false} }}</td>
+              <td class="px-gutter py-4"><span class="px-2 py-1 rounded-cgfull text-[11px] font-bold uppercase" [class]="r.status === 'Completed' ? 'bg-cg-secondary-container/30 text-cg-on-secondary-container' : r.status === 'Withdrawn' ? 'bg-cg-surface-container-highest text-cg-text-muted' : 'bg-cg-tertiary-fixed text-cg-on-tertiary-fixed-variant'">{{ r.status }}</span></td>
+            </tr>
+            } @empty {
+            <tr><td colspan="7" class="px-gutter py-10 text-center text-cg-text-muted">No earnings yet. Completed shifts appear here.</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="p-stack-md bg-cg-surface-container-low flex justify-between items-center border-t border-cg-border-subtle">
+        <p class="text-body-md text-cg-text-muted">Showing {{ visible().length }} of {{ filtered().length }} transactions</p>
+        <div class="flex gap-2">
+          <button type="button" class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-white text-cg-text-muted disabled:opacity-50" [disabled]="page() === 1" (click)="page.set(page() - 1)"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+          @for (n of pages(); track n) { <button type="button" (click)="page.set(n)" class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle" [class.bg-cg-primary]="page() === n" [class.text-cg-on-primary]="page() === n" [class.bg-white]="page() !== n">{{ n }}</button> }
+          <button type="button" class="w-8 h-8 flex items-center justify-center rounded-cglg border border-cg-border-subtle bg-white text-cg-text-muted disabled:opacity-50" [disabled]="page() === pageCount()" (click)="page.set(page() + 1)"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto p-gutter border-t border-cg-border-subtle bg-white">
+    <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-body-md text-cg-text-muted">© 2026 CareGo+ Caregiver Portal. All rights reserved.</p>
+      <div class="flex items-center gap-2"><span class="material-symbols-outlined text-cg-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified_user</span><span class="text-body-md font-semibold text-cg-text-main">Secured &amp; Encrypted Payments</span></div>
+    </div>
+  </footer>
 </main>
-<!-- Micro-interaction Scripts -->
+@if (withdraw()) { <app-withdraw-dialog (closed)="withdraw.set(false)" /> }

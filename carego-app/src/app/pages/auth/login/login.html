@@ -59,7 +59,7 @@
 
       <!-- Image -->
       <div class="hidden lg:block">
-        <img src="login.png" class="rounded-2xl shadow-lg w-full max-w-md" />
+        <img src="assets/img/login-illustration.png" class="rounded-2xl shadow-lg w-full max-w-md" />
       </div>
 
     </section>
@@ -73,7 +73,7 @@
         <p class="text-gray-500 mt-2 mb-8">Welcome back! Please login to continue</p>
 
         <!-- FORM -->
-        <form class="space-y-5" (ngSubmit)="submit()">
+        <form class="space-y-5" (ngSubmit)="submit()" novalidate>
 
           <!-- Email -->
           <div>
@@ -127,6 +127,19 @@
           </button>
 
         </form>
+
+        <!-- Demo accounts -->
+        <div class="mt-6 rounded-xl border border-dashed border-emerald-200 bg-emerald-50/50 p-4">
+          <p class="text-xs font-bold text-emerald-800 mb-2"><i class="fa-solid fa-flask mr-1"></i> Demo accounts (password: demo1234)</p>
+          <div class="grid grid-cols-3 gap-2">
+            @for (a of demoAccounts; track a.role) {
+              <button type="button" (click)="fill(a)" class="text-left bg-white border border-emerald-100 rounded-lg px-3 py-2 hover:border-emerald-400" [title]="a.note">
+                <span class="block text-xs font-bold text-gray-800">{{ a.role }}</span>
+                <span class="block text-[10px] text-gray-500 truncate">{{ a.identifier }}</span>
+              </button>
+            }
+          </div>
+        </div>
 
         <!-- Divider -->
         <div class="my-6 flex items-center gap-4">

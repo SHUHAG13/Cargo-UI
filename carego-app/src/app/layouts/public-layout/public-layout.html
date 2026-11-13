@@ -23,12 +23,17 @@
                 <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
               </svg>
             </button> -->
-        <a routerLink="/auth/login"
-          class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign
-          In</a>
-        <a routerLink="/auth/register"
-          class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign
-          Up</a>
+        @if (auth.isLoggedIn()) {
+          <a [routerLink]="auth.home(auth.role()!)"
+            class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">{{ auth.role() === 'admin' ? 'Admin Console' : auth.role() === 'caregiver' ? 'Caregiver Portal' : 'My Account' }}</a>
+          <button type="button" (click)="auth.logout()"
+            class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign Out</button>
+        } @else {
+          <a routerLink="/auth/login"
+            class="px-4 py-2 border border-brand-teal text-brand-teal rounded-md text-sm font-semibold hover:bg-brand-teal-light transition">Sign In</a>
+          <a routerLink="/auth/register"
+            class="px-4 py-2 bg-brand-teal text-white rounded-md text-sm font-semibold hover:bg-brand-teal-dark transition">Sign Up</a>
+        }
       </div>
     </div>
   </header>

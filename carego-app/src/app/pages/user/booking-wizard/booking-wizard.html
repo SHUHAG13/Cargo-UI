@@ -9,7 +9,7 @@
             <div class="flex items-center gap-8">
                 <nav class="flex gap-6 text-sm font-semibold text-slate-600">
                     <a class="hover:text-emerald-600" routerLink="/services">Services</a>
-                    <a class="hover:text-emerald-600" routerLink="/caregiver/schedule">Become a Caregiver</a>
+                    <a class="hover:text-emerald-600" routerLink="/become-caregiver">Become a Caregiver</a>
                 </nav>
                 <div class="relative">
                     <svg class="w-6 h-6 text-slate-600 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,6 +43,12 @@
             <section class="step-panel is-active">
                 <div class="grid grid-cols-12 gap-8">
                     <div class="col-span-8 space-y-8">
+                        @if (!store.kycOk()) {
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900 flex items-center gap-3">
+                            <i class="fa-solid fa-id-card"></i>
+                            <span>Identity verification (NID + selfie) is required before you can place a booking. <a routerLink="/app/profile" [queryParams]="{ verify: 1 }" class="font-bold underline">Verify now</a> — it takes about two minutes.</span>
+                        </div>
+                        }
                         <div>
                             <h3 class="text-xl font-bold text-slate-800">1. Service &amp; Package</h3>
                             <p class="text-sm text-gray-500 mt-1">Choose the type of service and package that best suits your needs.</p>
@@ -50,7 +56,7 @@
                         <div data-purpose="service-category-selection">
                             <h4 class="text-sm font-bold text-slate-800 mb-4">Select Service Category</h4>
                             <div class="grid grid-cols-3 gap-4">
-                                @for (cat of catalog.categories; track cat.id) {
+                                @for (cat of categories; track cat.id) {
                                     @let selected = store.categoryId() === cat.id;
                                     <div class="p-4 rounded-xl cursor-pointer relative" (click)="store.selectCategory(cat.id)"
                                          [class.card-selected]="selected" [class.card-unselected]="!selected" [class.hover:border-emerald-200]="!selected">
@@ -83,7 +89,7 @@
                             <div class="grid grid-cols-3 gap-4">
                                 @for (p of store.category().packages; track p.tier) {
                                     @let sel = store.tier() === p.tier;
-                                    <div class="p-6 rounded-xl relative cursor-pointer" (click)="store.tier.set(p.tier)"
+                                    <div class="p-6 rounded-xl relative cursor-pointer" (click)="store.selectTier(p.tier)"
                                          [class.card-selected]="sel" [class.card-unselected]="!sel">
                                         <div class="flex justify-between items-start mb-4">
                                             <h5 class="font-bold text-sm">{{ p.name }}</h5>
@@ -98,7 +104,8 @@
                                                 }
                                             </div>
                                         </div>
-                                        <p class="text-[11px] text-gray-500 mb-4">{{ p.description }}</p>
+                                        <p class="text-[11px] text-gray-500 mb-3">{{ p.description }}</p>
+                                        <p class="text-[10px] text-gray-400 mb-4"><i class="fa-regular fa-calendar mr-1"></i>{{ p.allowedDays.join(' / ') }} days · {{ p.allowedHours.join(' / ') }} h/day{{ p.hasAssistant ? ' · primary + assistant' : '' }}</p>
                                         <ul class="space-y-2 mb-8">
                                             @for (f of p.features; track f) {
                                                 <li class="flex items-center gap-2 text-[11px] text-gray-700">
@@ -166,13 +173,13 @@
                                 <div class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold mr-3 mt-1">1</div>
                                 <div>
                                     <h4 class="font-bold text-gray-900">Service Duration (Total Days)</h4>
-                                    <p class="text-xs text-gray-500">Select how many days you would like to book this service for.</p>
+                                    <p class="text-xs text-gray-500">Select how many days you would like to book this service for.@if (store.pkg()) { <span class="text-emerald-700 font-semibold"> {{ store.pkg()!.name }}: {{ store.pkg()!.allowedDays.join(', ') }} days.</span> }</p>
                                 </div>
                             </div>
                             <div class="grid grid-cols-4 gap-4">
-                                @for (d of catalog.dayOptions; track d) {
+                                @for (d of dayOptions; track d) {
                                     @let on = store.totalDays() === d;
-                                    <button type="button" (click)="pickDays(d)" class="py-3 px-4 rounded-lg transition-all relative"
+                                    <button type="button" (click)="store.pickDays(d)" [disabled]="!daysAllowed(d)" [title]="daysAllowed(d) ? '' : 'Not available for ' + store.pkg()?.name" class="py-3 px-4 rounded-lg transition-all relative disabled:opacity-40 disabled:cursor-not-allowed"
                                             [class.border]="!on" [class.border-gray-200]="!on" [class.text-gray-700]="!on" [class.hover:border-carego-green]="!on"
                                             [class.border-2]="on" [class.border-carego-green]="on" [class.bg-carego-light-green]="on" [class.text-gray-900]="on">
                                         {{ d }} {{ d === 1 ? 'Day' : 'Days' }}
@@ -191,13 +198,13 @@
                                 <div class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold mr-3 mt-1">2</div>
                                 <div>
                                     <h4 class="font-bold text-gray-900">Duration Per Day</h4>
-                                    <p class="text-xs text-gray-500">Select the number of hours of service required per day.</p>
+                                    <p class="text-xs text-gray-500">Select the number of hours of service required per day.@if (store.pkg()) { <span class="text-emerald-700 font-semibold"> {{ store.pkg()!.name }}: {{ store.pkg()!.allowedHours.join(', ') }} hours.</span> }</p>
                                 </div>
                             </div>
                             <div class="grid grid-cols-3 gap-4">
-                                @for (h of catalog.hourOptions; track h) {
+                                @for (h of hourOptions; track h) {
                                     @let on = store.hoursPerDay() === h;
-                                    <button type="button" (click)="pickHours(h)" class="py-3 px-4 rounded-lg transition-all relative"
+                                    <button type="button" (click)="store.pickHours(h)" [disabled]="!hoursAllowed(h)" [title]="hoursAllowed(h) ? '' : 'Not available for ' + store.pkg()?.name" class="py-3 px-4 rounded-lg transition-all relative disabled:opacity-40 disabled:cursor-not-allowed"
                                             [class.border]="!on" [class.border-gray-200]="!on" [class.text-gray-700]="!on" [class.hover:border-carego-green]="!on"
                                             [class.border-2]="on" [class.border-carego-green]="on" [class.bg-carego-light-green]="on" [class.text-gray-900]="on">
                                         {{ h }} Hours
@@ -222,7 +229,7 @@
                             <div class="flex gap-8">
                                 <div class="w-1/2 p-4 border border-gray-100 rounded-xl">
                                     <div class="flex justify-between items-center mb-4">
-                                        <button type="button" class="p-1" (click)="shiftMonth(-1)">
+                                        <button type="button" class="p-1 disabled:opacity-30" [disabled]="!canGoBackMonth()" (click)="shiftMonth(-1)">
                                             <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                                         </button>
                                         <span class="text-sm font-bold">{{ calTitle() }}</span>
@@ -234,7 +241,7 @@
                                         <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
                                     </div>
                                     <div class="grid grid-cols-7 text-center text-xs gap-y-3">
-                                        @for (c of calCells(); track c.date.getTime()) {
+                                        @for (c of calCells(); track c.iso) {
                                             <button type="button" (click)="pickDate(c)" [disabled]="c.past"
                                                     class="w-6 h-6 rounded-full flex items-center justify-center mx-auto"
                                                     [class.bg-carego-green]="c.selected" [class.text-white]="c.selected"
@@ -249,7 +256,7 @@
                                 <div class="w-1/2">
                                     <p class="text-sm font-semibold mb-3">Select Start Time</p>
                                     <div class="grid grid-cols-2 gap-3">
-                                        @for (t of catalog.startTimes; track t) {
+                                        @for (t of startTimes; track t) {
                                             @let on = store.startTime() === t;
                                             <button type="button" (click)="store.startTime.set(t)"
                                                     class="flex items-center justify-between p-2.5 rounded-lg text-xs font-medium relative"
@@ -292,14 +299,38 @@
 
         <!-- ============================ STEP 3: PATIENT INFORMATION ============================ -->
         @if (step === 3) {
-            @let p = store.patient();
+            @let p = store.newPatient();
             <section class="step-panel is-active">
                 <div class="grid grid-cols-12 gap-8">
                     <div class="col-span-8">
                         <div class="mb-6">
                             <h3 class="text-xl font-bold text-gray-900">3. Patient Information</h3>
-                            <p class="text-sm text-gray-500 mt-1">Please provide the patient's basic information and emergency contact details.</p>
+                            <p class="text-sm text-gray-500 mt-1">Who will receive the care? Choose someone you have already added, or add a new patient.</p>
                         </div>
+                        @if (data.myPatients().length) {
+                        <div class="mb-6 grid grid-cols-2 gap-3">
+                            <button type="button" (click)="store.patientMode.set('existing')" class="text-left p-4 rounded-xl border-2" [class.border-emerald-500]="store.patientMode() === 'existing'" [class.bg-emerald-50]="store.patientMode() === 'existing'" [class.border-gray-200]="store.patientMode() !== 'existing'"><span class="font-bold text-sm">Existing patient</span><span class="block text-xs text-gray-500">Pick from {{ data.myPatients().length }} saved patient{{ data.myPatients().length > 1 ? 's' : '' }}</span></button>
+                            <button type="button" (click)="store.patientMode.set('new')" class="text-left p-4 rounded-xl border-2" [class.border-emerald-500]="store.patientMode() === 'new'" [class.bg-emerald-50]="store.patientMode() === 'new'" [class.border-gray-200]="store.patientMode() !== 'new'"><span class="font-bold text-sm">New patient</span><span class="block text-xs text-gray-500">Enter their details now</span></button>
+                        </div>
+                        }
+                        @if (store.patientMode() === 'existing' && data.myPatients().length) {
+                        <div class="space-y-3 mb-8">
+                            @for (ep of data.myPatients(); track ep.id) {
+                            <button type="button" (click)="store.patientId.set(ep.id)" class="w-full text-left bg-white rounded-2xl p-5 border-2 flex items-center gap-4" [class.border-emerald-500]="store.patientId() === ep.id" [class.border-gray-100]="store.patientId() !== ep.id">
+                                <span class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center">{{ ep.name[0] }}</span>
+                                <span class="flex-1"><span class="block font-bold text-gray-900">{{ ep.name }} <span class="text-xs font-normal text-gray-400">{{ ep.id }}</span></span><span class="block text-sm text-gray-500">{{ ep.gender }}, {{ ep.age }} years · {{ ep.address }}</span><span class="block text-xs text-gray-400">Attendant: {{ ep.primaryContact.name }} ({{ ep.primaryContact.relation }})</span></span>
+                                @if (store.patientId() === ep.id) { <i class="fa-solid fa-circle-check text-emerald-600 text-xl"></i> }
+                            </button>
+                            }
+                            <div class="flex justify-between items-center pt-6">
+                                <button type="button" (click)="store.back()" class="flex items-center gap-2 px-8 py-3 border border-gray-200 rounded-lg font-semibold text-gray-700 hover:bg-gray-50"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                                <div class="flex items-center gap-4">
+                                    @if (store.patientError()) { <span class="text-xs text-gray-400">{{ store.patientError() }}</span> }
+                                    <button type="button" (click)="store.next()" [disabled]="!store.step3Valid()" class="flex items-center gap-2 px-8 py-2.5 bg-emerald-700 text-white rounded-lg text-sm font-bold hover:bg-emerald-800 disabled:opacity-40 disabled:cursor-not-allowed">Next <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        } @else {
                         <form class="space-y-8" (ngSubmit)="store.step3Valid() && store.next()">
                             <section class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm" data-purpose="form-section-basic">
                                 <div class="flex items-center gap-3 mb-6">
@@ -312,17 +343,17 @@
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Full Name <span class="text-red-500">*</span></label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Enter full name" type="text"
-                                               name="fullName" [ngModel]="p.fullName" (ngModelChange)="store.updatePatient({ fullName: $event })"/>
+                                               name="fullName" [ngModel]="p.fullName" (ngModelChange)="store.updateNewPatient({ fullName: $event })"/>
                                     </div>
                                     <div class="col-span-2">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Age <span class="text-red-500">*</span></label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Enter age" type="number" min="0" max="120"
-                                               name="age" [ngModel]="p.age" (ngModelChange)="store.updatePatient({ age: $event })"/>
+                                               name="age" [ngModel]="p.age" (ngModelChange)="store.updateNewPatient({ age: $event })"/>
                                     </div>
                                     <div class="col-span-3">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Gender <span class="text-red-500">*</span></label>
                                         <select class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" [class.text-gray-500]="!p.gender"
-                                                name="gender" [ngModel]="p.gender" (ngModelChange)="store.updatePatient({ gender: $event })">
+                                                name="gender" [ngModel]="p.gender" (ngModelChange)="store.updateNewPatient({ gender: $event })">
                                             <option value="">Select gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -332,29 +363,29 @@
                                     <div class="col-span-3">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Enter weight" type="number" min="0"
-                                               name="weight" [ngModel]="p.weightKg" (ngModelChange)="store.updatePatient({ weightKg: $event })"/>
+                                               name="weight" [ngModel]="p.weightKg" (ngModelChange)="store.updateNewPatient({ weightKg: $event })"/>
                                     </div>
                                     <div class="col-span-12">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Current Address <span class="text-red-500">*</span></label>
                                         <textarea class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Enter current address" rows="2"
-                                                  name="address" [ngModel]="p.address" (ngModelChange)="store.updatePatient({ address: $event })"></textarea>
+                                                  name="address" [ngModel]="p.address" (ngModelChange)="store.updateNewPatient({ address: $event })"></textarea>
                                     </div>
                                     <div class="col-span-12">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Existing Medical Condition of Patient <span class="text-red-500">*</span></label>
                                         <textarea class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Describe existing medical conditions (if any)" rows="2"
-                                                  name="condition" [ngModel]="p.medicalCondition" (ngModelChange)="store.updatePatient({ medicalCondition: $event })"></textarea>
+                                                  name="condition" [ngModel]="p.medicalCondition" (ngModelChange)="store.updateNewPatient({ medicalCondition: $event })"></textarea>
                                     </div>
                                     <div class="col-span-12">
                                         <label class="block text-sm font-medium text-gray-700 mb-4">Current Patient's Status <span class="text-red-500">*</span></label>
                                         <div class="flex items-center gap-8">
                                             <label class="inline-flex items-center">
                                                 <input class="w-4 h-4 text-emerald-600 border-gray-300 focus:ring-emerald-500" name="status" type="radio" value="Mobile"
-                                                       [ngModel]="p.mobility" (ngModelChange)="store.updatePatient({ mobility: $event })"/>
+                                                       [ngModel]="p.mobility" (ngModelChange)="store.updateNewPatient({ mobility: $event })"/>
                                                 <span class="ml-2 text-sm text-gray-700">Mobile</span>
                                             </label>
                                             <label class="inline-flex items-center">
                                                 <input class="w-4 h-4 text-emerald-600 border-gray-300 focus:ring-emerald-500" name="status" type="radio" value="Bedridden"
-                                                       [ngModel]="p.mobility" (ngModelChange)="store.updatePatient({ mobility: $event })"/>
+                                                       [ngModel]="p.mobility" (ngModelChange)="store.updateNewPatient({ mobility: $event })"/>
                                                 <span class="ml-2 text-sm text-gray-700">Bedridden</span>
                                             </label>
                                         </div>
@@ -372,19 +403,19 @@
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Name of Primary Attendant <span class="text-red-500">*</span></label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Enter name" type="text"
-                                               name="attendantName" [ngModel]="p.attendantName" (ngModelChange)="store.updatePatient({ attendantName: $event })"/>
+                                               name="attendantName" [ngModel]="p.attendantName" (ngModelChange)="store.updateNewPatient({ attendantName: $event })"/>
                                     </div>
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Relationship with Patient <span class="text-red-500">*</span></label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="e.g., Son, Daughter, Spouse" type="text"
-                                               name="attendantRelation" [ngModel]="p.attendantRelation" (ngModelChange)="store.updatePatient({ attendantRelation: $event })"/>
+                                               name="attendantRelation" [ngModel]="p.attendantRelation" (ngModelChange)="store.updateNewPatient({ attendantRelation: $event })"/>
                                     </div>
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Mobile Number (WhatsApp Preferred) <span class="text-red-500">*</span></label>
                                         <div class="flex">
                                             <span class="flex items-center gap-2 px-3 border border-r-0 border-gray-200 rounded-l-lg bg-gray-50 text-sm"><span class="w-5 h-3 bg-red-600"></span> BD +880</span>
                                             <input class="flex-1 border-gray-200 rounded-r-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="1XXXXXXXXX" type="tel"
-                                                   name="attendantMobile" [ngModel]="p.attendantMobile" (ngModelChange)="store.updatePatient({ attendantMobile: $event })"/>
+                                                   name="attendantMobile" [ngModel]="p.attendantMobile" (ngModelChange)="store.updateNewPatient({ attendantMobile: $event })"/>
                                         </div>
                                     </div>
                                 </div>
@@ -393,19 +424,19 @@
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-500 mb-2">Name</label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="Enter name" type="text"
-                                               name="secondaryName" [ngModel]="p.secondaryName" (ngModelChange)="store.updatePatient({ secondaryName: $event })"/>
+                                               name="secondaryName" [ngModel]="p.secondaryName" (ngModelChange)="store.updateNewPatient({ secondaryName: $event })"/>
                                     </div>
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-500 mb-2">Relationship</label>
                                         <input class="w-full border-gray-200 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="e.g., Brother, Friend" type="text"
-                                               name="secondaryRelation" [ngModel]="p.secondaryRelation" (ngModelChange)="store.updatePatient({ secondaryRelation: $event })"/>
+                                               name="secondaryRelation" [ngModel]="p.secondaryRelation" (ngModelChange)="store.updateNewPatient({ secondaryRelation: $event })"/>
                                     </div>
                                     <div class="col-span-4">
                                         <label class="block text-sm font-medium text-gray-500 mb-2">Mobile Number (WhatsApp Preferred)</label>
                                         <div class="flex">
                                             <span class="flex items-center gap-2 px-3 border border-r-0 border-gray-200 rounded-l-lg bg-gray-50 text-sm"><span class="w-5 h-3 bg-red-600"></span> BD +880</span>
                                             <input class="flex-1 border-gray-200 rounded-r-lg focus:ring-emerald-500 focus:border-emerald-500 p-3" placeholder="1XXXXXXXXX" type="tel"
-                                                   name="secondaryMobile" [ngModel]="p.secondaryMobile" (ngModelChange)="store.updatePatient({ secondaryMobile: $event })"/>
+                                                   name="secondaryMobile" [ngModel]="p.secondaryMobile" (ngModelChange)="store.updateNewPatient({ secondaryMobile: $event })"/>
                                         </div>
                                     </div>
                                 </div>
@@ -416,7 +447,7 @@
                                     Back
                                 </button>
                                 <div class="flex items-center gap-4">
-                                    @if (!store.step3Valid()) { <span class="text-xs text-gray-400">Fill in all required (*) fields</span> }
+                                    @if (store.patientError()) { <span class="text-xs text-gray-400">{{ store.patientError() }}</span> }
                                     <button type="submit" [disabled]="!store.step3Valid()"
                                             class="flex items-center gap-2 px-8 py-2.5 bg-emerald-700 text-white rounded-lg text-sm font-bold hover:bg-emerald-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                                         Next
@@ -425,6 +456,7 @@
                                 </div>
                             </div>
                         </form>
+                        }
                     </div>
                     <aside class="col-span-4"><app-booking-summary /></aside>
                 </div>
@@ -455,12 +487,13 @@
                                                 {{ group.label }}
                                             </div>
                                             <div class="space-y-3 pl-10">
-                                                @for (a of catalog.addOnsBy(group.key); track a.id) {
+                                                @for (a of addOnsBy(group.key); track a.id) {
                                                     @let on = store.addOnIds().has(a.id);
-                                                    <div class="flex items-center justify-between group" [class.bg-emerald-50]="on" [class.-mx-4]="on" [class.px-4]="on" [class.py-3]="on" [class.rounded-lg]="on" [class.border]="on" [class.border-emerald-200]="on">
+                                                    @let why = store.blockedReason(a);
+                                                    <div class="flex items-center justify-between group" [class.opacity-50]="!!why" [title]="why ?? ''" [class.bg-emerald-50]="on" [class.-mx-4]="on" [class.px-4]="on" [class.py-3]="on" [class.rounded-lg]="on" [class.border]="on" [class.border-emerald-200]="on">
                                                         <label class="flex items-center gap-3 cursor-pointer">
-                                                            <input class="w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500" type="checkbox" [checked]="on" (change)="store.toggleAddOn(a.id)"/>
-                                                            <span class="text-sm" [class.font-semibold]="on" [class.text-gray-900]="on" [class.text-gray-700]="!on">{{ a.name }}</span>
+                                                            <input class="w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500" type="checkbox" [checked]="on" [disabled]="!!why" (change)="store.toggleAddOn(a.id)"/>
+                                                            <span class="text-sm" [class.font-semibold]="on" [class.text-gray-900]="on" [class.text-gray-700]="!on">{{ a.name }}@if (a.needsPrescription) { <span class="text-red-500"> *</span> }@if (why) { <span class="block text-[10px] text-orange-600 font-normal">{{ why }}</span> }</span>
                                                             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase" [class.bg-emerald-200]="on" [class.text-emerald-800]="on" [class.bg-emerald-100]="!on" [class.text-emerald-700]="!on">{{ a.provider }}</span>
                                                         </label>
                                                         <span class="text-sm" [class.font-bold]="on" [class.text-gray-900]="on" [class.font-medium]="!on" [class.text-gray-600]="!on">{{ a.pricePerDay | bdt }} / day</span>
@@ -471,6 +504,7 @@
                                     }
                                 </div>
                             </div>
+                            <p class="text-[11px] text-gray-400 -mt-2"><span class="text-red-500">*</span> Requires a doctor's prescription. Add-ons are charged per day for the whole booking.</p>
                             <div class="flex items-center justify-between pt-6">
                                 <button type="button" (click)="store.back()" class="flex items-center gap-2 px-8 py-3 border border-gray-300 rounded-lg text-gray-700 font-bold hover:bg-gray-50 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
@@ -625,9 +659,9 @@
                                 <p class="text-sm font-bold mb-3">Choose How You Want to Pay the Remaining Amount (70%)</p>
                                 <p class="text-[11px] font-medium text-gray-400 uppercase mb-4">Payment Frequency</p>
                                 <div class="grid grid-cols-3 gap-4">
-                                    @for (o of store.installmentOptions(); track o.frequency) {
+                                    @for (o of store.frequencyOptions(); track o.frequency) {
                                         @let on = store.frequency() === o.frequency;
-                                        <div (click)="store.frequency.set(o.frequency)" class="p-4 rounded-xl cursor-pointer relative transition-colors"
+                                        <div (click)="setFrequency(o.frequency, o.allowed)" [title]="o.allowed ? '' : 'Needs a longer booking'" class="p-4 rounded-xl relative transition-colors" [class.cursor-pointer]="o.allowed" [class.opacity-40]="!o.allowed" [class.cursor-not-allowed]="!o.allowed"
                                              [class.bg-green-50]="on" [class.border-2]="on" [class.border-carego-green]="on"
                                              [class.bg-white]="!on" [class.border]="!on" [class.border-gray-200]="!on" [class.hover:border-gray-300]="!on">
                                             @if (on) {
@@ -683,7 +717,7 @@
 
         <!-- ============================ STEP 7: REVIEW & CONFIRM ============================ -->
         @if (step === 7) {
-            @let p = store.patient();
+            @let rp = reviewPatient();
             @let sched = store.schedule();
             <section class="step-panel is-active">
                 <div class="grid grid-cols-12 gap-8">
@@ -716,7 +750,7 @@
                                 <div class="space-y-3 text-xs">
                                     <div class="flex justify-between"><span class="text-gray-500">Total Days</span><span class="font-medium">{{ store.totalDays() }} Days</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">Duration per Day</span><span class="font-medium">{{ store.hoursPerDay() }} Hours</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">Service Start Date</span><span class="font-medium">{{ store.startDateLabel() }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">Service Start Date</span><span class="font-medium">{{ store.startDate() | day }}</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">Start Time</span><span class="font-medium">{{ store.startTime() }}</span></div>
                                 </div>
                             </div>
@@ -728,12 +762,12 @@
                                     <h4 class="font-bold text-sm">3. Patient Information</h4>
                                 </div>
                                 <div class="space-y-3 text-xs">
-                                    <div class="flex justify-between"><span class="text-gray-500">Name</span><span class="font-medium">{{ p.fullName }}</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">Age / Gender</span><span class="font-medium">{{ p.age }} Years / {{ p.gender }}</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">Weight</span><span class="font-medium">{{ p.weightKg ? p.weightKg + ' kg' : '—' }}</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">Status</span><span class="font-medium">{{ p.mobility }}</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500 shrink-0">Address</span><span class="font-medium text-right ml-4">{{ p.address }}</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">Primary Attendant</span><span class="font-medium">{{ p.attendantName }} ({{ p.attendantRelation }}) · +880 {{ p.attendantMobile }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">Name</span><span class="font-medium">{{ rp.name }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">Age / Gender</span><span class="font-medium">{{ rp.age }} Years / {{ rp.gender }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">Weight</span><span class="font-medium">{{ rp.weight ? rp.weight + ' kg' : '—' }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">Status</span><span class="font-medium">{{ rp.mobility }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500 shrink-0">Address</span><span class="font-medium text-right ml-4">{{ rp.address }}</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">Primary Attendant</span><span class="font-medium">{{ rp.attendant }} ({{ rp.relation }}) · {{ rp.mobile }}</span></div>
                                     <div class="text-right mt-2"><a class="cursor-pointer text-brand-green font-bold hover:underline" (click)="store.goTo(3)">Edit</a></div>
                                 </div>
                             </div>
@@ -811,7 +845,7 @@
                                         @for (row of sched.slice(1); track $index) {
                                             <div class="flex justify-between items-center text-xs">
                                                 <span class="text-gray-700">{{ row.label.replace('Remaining Balance – ', '') }}</span>
-                                                <span class="text-gray-500">{{ row.dueLabel.replace('Due on ', '') }}</span>
+                                                <span class="text-gray-500">{{ row.dueDate | day }}</span>
                                                 <span class="font-bold">{{ row.amount | bdt }}</span>
                                             </div>
                                         }
@@ -829,7 +863,7 @@
                             <div class="flex gap-16">
                                 <div>
                                     <p class="text-[10px] text-gray-500">Service Start Date</p>
-                                    <p class="text-xs font-bold">{{ store.startDateLabel() }}, {{ store.startTime() }}</p>
+                                    <p class="text-xs font-bold">{{ store.startDate() | day }}, {{ store.startTime() }}</p>
                                 </div>
                                 <div>
                                     <p class="text-[10px] text-gray-500">Service Duration</p>
@@ -847,6 +881,7 @@
                                 Back
                             </button>
                             <div class="flex flex-col items-end gap-3">
+                                @if (stepError()) { <p class="text-sm text-red-500">{{ stepError() }} <a routerLink="/app/profile" [queryParams]="{ verify: 1 }" class="font-bold underline">Verify now</a></p> }
                                 <button type="button" (click)="confirm()" class="flex items-center gap-2 px-8 py-2.5 bg-emerald-700 text-white rounded-lg text-sm font-bold hover:bg-emerald-800 transition-colors">
                                     Book Service
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
@@ -864,7 +899,7 @@
         }
 
         <!-- ============================ STEP 8: BOOKING PLACED ============================ -->
-        @if (step === 8 && store.placedBooking(); as placed) {
+        @if (step === 8 && store.placed(); as placed) {
             <section class="step-panel is-active">
                 <div class="grid grid-cols-12 gap-8">
                     <section class="col-span-8" data-purpose="booking-status-view">
@@ -933,7 +968,7 @@
                                         </div>
                                         <div>
                                             <h5 class="font-bold text-sm text-slate-800 mb-2">Receive Caregiver</h5>
-                                            <p class="text-[11px] text-gray-500 leading-relaxed">Our caregiver will arrive on <span class="text-emerald-600 font-bold">{{ placed.startDate }}</span> at <span class="text-emerald-600 font-bold">{{ placed.startTime }}</span> as scheduled.</p>
+                                            <p class="text-[11px] text-gray-500 leading-relaxed">Our caregiver will arrive on <span class="text-emerald-600 font-bold">{{ placed.startDate | day }}</span> at <span class="text-emerald-600 font-bold">{{ placed.startTime }}</span> as scheduled.</p>
                                         </div>
                                     </div>
                                 </div>

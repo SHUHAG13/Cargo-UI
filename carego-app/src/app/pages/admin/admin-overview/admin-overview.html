@@ -1,0 +1,101 @@
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+  <header>
+    <h1 class="text-2xl font-bold text-slate-900">Operations overview</h1>
+    <p class="text-sm text-slate-500">Everything that needs a decision from CareGo+ staff, in one place.</p>
+  </header>
+
+  <section class="grid grid-cols-2 lg:grid-cols-6 gap-4">
+    @for (k of kpis(); track k.label) {
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" [class]="'bg-' + k.tone + '-50 text-' + k.tone + '-600 w-10 h-10 rounded-xl flex items-center justify-center mb-3'"><i [class]="'fa-solid ' + k.icon"></i></div>
+        <p class="text-2xl font-extrabold text-slate-900">{{ k.value }}</p>
+        <p class="text-xs text-slate-500 font-medium">{{ k.label }}</p>
+      </div>
+    }
+  </section>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    <!-- Bookings awaiting confirmation -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between"><h2 class="font-bold text-slate-800">Bookings awaiting confirmation</h2><span class="text-xs font-bold text-orange-600 bg-orange-50 rounded-full px-2 py-0.5">{{ pending().length }}</span></div>
+      <div class="divide-y divide-slate-100">
+        @for (b of pending(); track b.id) {
+          <div class="p-5 flex items-center justify-between gap-4">
+            <div class="min-w-0"><a [routerLink]="['/admin/bookings', b.id]" class="font-bold text-slate-800 hover:underline">{{ b.id }}</a>
+              <p class="text-xs text-slate-500">{{ b.categoryName }} · {{ b.packageName }} · {{ b.totalDays }}d × {{ b.hoursPerDay }}h · {{ b.breakdown.total | bdt }}</p>
+              <p class="text-xs text-slate-400">Patient {{ patientName(b.id) }} · starts {{ b.startDate | day }} {{ b.startTime }}</p></div>
+            <div class="flex gap-2 shrink-0"><button type="button" (click)="confirm(b.id)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg">Confirm</button><button type="button" (click)="decline(b.id)" class="px-3 py-1.5 border border-red-200 text-red-500 text-xs font-bold rounded-lg">Decline</button></div>
+          </div>
+        } @empty { <p class="p-6 text-sm text-slate-400">Nothing waiting. 🎉</p> }
+      </div>
+    </section>
+
+    <!-- Need caregivers -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between"><h2 class="font-bold text-slate-800">Deposit paid · assign caregivers</h2><span class="text-xs font-bold text-blue-600 bg-blue-50 rounded-full px-2 py-0.5">{{ needsCrew().length }}</span></div>
+      <div class="divide-y divide-slate-100">
+        @for (b of needsCrew(); track b.id) {
+          <div class="p-5 flex items-center justify-between gap-4">
+            <div class="min-w-0"><a [routerLink]="['/admin/bookings', b.id]" class="font-bold text-slate-800 hover:underline">{{ b.id }}</a><p class="text-xs text-slate-500">{{ b.categoryName }} · {{ b.packageName }} · starts {{ b.startDate | day }}</p></div>
+            <a [routerLink]="['/admin/bookings', b.id]" class="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg shrink-0">Assign</a>
+          </div>
+        } @empty { <p class="p-6 text-sm text-slate-400">Every paid booking has a care team.</p> }
+        @if (awaitingDeposit().length) { <p class="p-4 text-xs text-slate-400 bg-slate-50">{{ awaitingDeposit().length }} confirmed booking{{ awaitingDeposit().length > 1 ? 's are' : ' is' }} still waiting for the customer's deposit.</p> }
+      </div>
+    </section>
+
+    <!-- Cash verification -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between"><h2 class="font-bold text-slate-800">Cash payments to verify</h2><span class="text-xs font-bold text-amber-600 bg-amber-50 rounded-full px-2 py-0.5">{{ cash().length }}</span></div>
+      <div class="divide-y divide-slate-100">
+        @for (p of cash(); track p.id) {
+          <div class="p-5 flex items-center justify-between gap-4">
+            <div class="min-w-0"><p class="font-bold text-slate-800">{{ p.amount | bdt }} <span class="text-xs font-normal text-slate-500">on {{ p.bookingId }}</span></p>
+              <p class="text-xs text-slate-500">{{ p.collectedBy ? 'Collected by ' + data.caregiverName(p.collectedBy) : 'Paid to staff' }} · {{ p.at | dt }}</p></div>
+            <div class="flex gap-2 shrink-0"><button type="button" (click)="verify(p.id, true)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg">Verify</button><button type="button" (click)="verify(p.id, false)" class="px-3 py-1.5 border border-red-200 text-red-500 text-xs font-bold rounded-lg">Reject</button></div>
+          </div>
+        } @empty { <p class="p-6 text-sm text-slate-400">No cash waiting for verification.</p> }
+      </div>
+    </section>
+
+    <!-- Payouts -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between"><h2 class="font-bold text-slate-800">Payout &amp; settlement requests</h2><span class="text-xs font-bold text-purple-600 bg-purple-50 rounded-full px-2 py-0.5">{{ payouts().length }}</span></div>
+      <div class="divide-y divide-slate-100">
+        @for (l of payouts(); track l.id) {
+          <div class="p-5 flex items-center justify-between gap-4">
+            <div class="min-w-0"><p class="font-bold text-slate-800">{{ l.amount | bdt }} <span class="text-xs font-normal text-slate-500">· {{ l.description }}</span></p><p class="text-xs text-slate-500">{{ data.caregiverName(l.caregiverId) }} · {{ l.ref }} · {{ l.at | dt }}</p></div>
+            <div class="flex gap-2 shrink-0"><button type="button" (click)="payout(l.id, true)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg">{{ l.kind === 'withdrawal' ? 'Mark paid' : 'Confirm received' }}</button><button type="button" (click)="payout(l.id, false)" class="px-3 py-1.5 border border-red-200 text-red-500 text-xs font-bold rounded-lg">Reject</button></div>
+          </div>
+        } @empty { <p class="p-6 text-sm text-slate-400">No payouts pending.</p> }
+      </div>
+    </section>
+
+    <!-- Handovers -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between"><h2 class="font-bold text-slate-800">Handover requests</h2><span class="text-xs font-bold text-rose-600 bg-rose-50 rounded-full px-2 py-0.5">{{ handovers().length }}</span></div>
+      <div class="divide-y divide-slate-100">
+        @for (s of handovers(); track s.id) {
+          <div class="p-5 flex items-center justify-between gap-4">
+            <div class="min-w-0"><p class="font-bold text-slate-800">{{ data.caregiverName(s.handover!.requestedBy) }} → {{ data.caregiverName(s.handover!.to) }}</p><p class="text-xs text-slate-500">{{ s.bookingId }} · session {{ s.index }} · {{ s.date | day }} {{ s.startTime }}</p></div>
+            <div class="flex gap-2 shrink-0"><button type="button" (click)="handover(s.id, true)" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg">Approve</button><button type="button" (click)="handover(s.id, false)" class="px-3 py-1.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-lg">Decline</button></div>
+          </div>
+        } @empty { <p class="p-6 text-sm text-slate-400">No handovers requested.</p> }
+      </div>
+    </section>
+
+    <!-- Messages & applications -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm">
+      <div class="p-5 border-b border-slate-100 flex items-center justify-between"><h2 class="font-bold text-slate-800">Inbox</h2><span class="text-xs font-bold text-slate-600 bg-slate-100 rounded-full px-2 py-0.5">{{ messages().length }} messages · {{ applications().length }} applications</span></div>
+      <div class="divide-y divide-slate-100">
+        @for (m of messages(); track m.id) {
+          <div class="p-5 flex items-start justify-between gap-4">
+            <div class="min-w-0"><p class="font-bold text-slate-800 text-sm">{{ m.name }} <span class="text-xs font-normal text-slate-500">{{ m.email || m.phone }}</span></p><p class="text-sm text-slate-600 mt-1">{{ m.message }}</p><p class="text-[11px] text-slate-400 mt-1">{{ m.at | dt }}</p></div>
+            <button type="button" (click)="done(m.id)" class="px-3 py-1.5 border border-slate-200 text-slate-600 text-xs font-bold rounded-lg shrink-0">Handled</button>
+          </div>
+        } @empty { <p class="p-6 text-sm text-slate-400">No new messages.</p> }
+        @if (applications().length) { <a routerLink="/admin/caregivers" class="block p-4 text-xs font-bold text-emerald-700 bg-emerald-50 hover:underline">Review {{ applications().length }} caregiver application{{ applications().length > 1 ? 's' : '' }} →</a> }
+      </div>
+    </section>
+  </div>
+</div>

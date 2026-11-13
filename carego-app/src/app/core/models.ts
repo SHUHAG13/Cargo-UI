@@ -1,35 +1,86 @@
-/** Domain model for CareGo+ (see carego.md for the business rules these encode). */
+/**
+ * Domain model for CareGo+ (see carego.md for the business rules these encode).
+ * Everything persisted is plain JSON: dates are ISO strings (YYYY-MM-DD for days, full ISO for instants).
+ */
 
+export type Role = 'user' | 'caregiver' | 'admin';
 export type ServiceCategoryId = 'caregiver' | 'nursing' | 'nanny';
 export type PackageTier = 'basic' | 'standard' | 'premium';
 export type HoursPerDay = 8 | 12 | 24;
 export type TotalDays = 1 | 7 | 15 | 30;
 export type PaymentFrequency = 'together' | 'weekly' | 'daily';
-export type PatientMobility = 'Mobile' | 'Bedridden';
+export type StaffKind = 'Caregiver' | 'Nurse' | 'Nanny';
+export type AddOnProvider = 'Doctor' | 'Nurse' | 'Caregiver';
+export type PayMethod = 'bKash' | 'Nagad' | 'Rocket' | 'Card' | 'Cash to Staff';
 
 export type BookingStatus = 'pending' | 'confirmed' | 'in-progress' | 'completed' | 'cancelled';
-export type PaymentStatus = 'paid' | 'partial' | 'due' | 'upcoming' | 'pending' | 'scheduled' | 'failed';
+export type InstallmentState = 'paid' | 'pending-verification' | 'due' | 'overdue' | 'upcoming';
 
-export interface ServiceCategory {
-  id: ServiceCategoryId;
-  name: string;
-  tagline: string;
-  packages: ServicePackage[];
+// ───────────────────────── Accounts ─────────────────────────
+
+export interface Kyc {
+  status: 'unverified' | 'verified';
+  nid?: string;
+  selfieName?: string;
+  verifiedAt?: string;
 }
+
+export interface Account {
+  id: string;
+  name: string;
+  /** Email or phone used to sign in. */
+  identifier: string;
+  /** Demo-only: a real backend must store a salted hash, never the password. */
+  password: string;
+  roles: Role[];
+  caregiverId?: string;
+  kyc: Kyc;
+  photo?: string;
+  createdAt: string;
+}
+
+export interface Caregiver {
+  id: string;
+  name: string;
+  kind: StaffKind;
+  photo?: string;
+  age: number;
+  gender: 'Male' | 'Female';
+  languages: string[];
+  nationality: string;
+  experienceYears: number;
+  rating: number;
+  reviews: number;
+  verified: boolean;
+  phone: string;
+  active: boolean;
+}
+
+// ───────────────────────── Catalogue ─────────────────────────
 
 export interface ServicePackage {
   tier: PackageTier;
   name: string;
   description: string;
-  /** Price in BDT for one day of service at BASE_HOURS_PER_DAY coverage. */
+  /** BDT for one day of service at BASE_HOURS_PER_DAY coverage. */
   pricePerDay: number;
   features: string[];
   popular?: boolean;
   allowedDays: TotalDays[];
   allowedHours: HoursPerDay[];
+  /** Standard and Premium pair a primary with an assistant. */
+  hasAssistant: boolean;
 }
 
-export type AddOnProvider = 'Doctor' | 'Nurse' | 'Caregiver';
+export interface ServiceCategory {
+  id: ServiceCategoryId;
+  name: string;
+  tagline: string;
+  icon: string;
+  /** Kind of staff that serves as the primary (RN for nursing, nanny for nanny...). */
+  primaryKind: StaffKind;
+  packages: ServicePackage[];
+}
 
 export interface AddOn {
   id: string;
@@ -38,32 +89,67 @@ export interface AddOn {
   /** BDT per day. */
   pricePerDay: number;
   description?: string;
+  /** Minimum booking length in days (e.g. doctor follow-up needs 15). */
+  minDays?: number;
+  needsPrescription?: boolean;
 }
 
-export interface PatientInfo {
-  fullName: string;
-  age: number | null;
-  gender: '' | 'Male' | 'Female' | 'Other';
+// ───────────────────────── Patients ─────────────────────────
+
+export interface Contact {
+  name: string;
+  relation: string;
+  mobile: string;
+}
+
+export type DocumentCategory = 'Discharge Summary' | 'Prescriptions' | 'Investigation Reports' | 'ID Proofs' | 'Others';
+
+export interface PatientDocument {
+  id: string;
+  category: DocumentCategory;
+  name: string;
+  size: number;
+  mime: string;
+  uploadedAt: string;
+}
+
+export interface PatientNote {
+  id: string;
+  title: string;
+  text: string;
+  by: string;
+  at: string;
+}
+
+export interface Patient {
+  id: string;
+  ownerId: string;
+  name: string;
+  gender: 'Male' | 'Female' | 'Other';
+  age: number;
   weightKg: number | null;
+  bloodGroup: string;
+  nidNumber: string;
+  mobile: string;
+  altMobile: string;
   address: string;
-  medicalCondition: string;
-  mobility: PatientMobility;
-  attendantName: string;
-  attendantRelation: string;
-  attendantMobile: string;
-  secondaryName: string;
-  secondaryRelation: string;
-  secondaryMobile: string;
+  photo?: string;
+  addedOn: string;
+  mobility: 'Mobile' | 'Bedridden';
+  diagnosis: string;
+  conditions: string[];
+  infection: { hepatitis: boolean; tb: boolean; covid: boolean; contagious: boolean };
+  allergies: string;
+  functional: { mobility: string; toilet: string; feeding: string; mental: string; behavioral: string; notes: string };
+  primaryContact: Contact;
+  secondaryContact: Contact | null;
+  treatingDoctor: string;
+  hospital: string;
+  documents: PatientDocument[];
+  notes: PatientNote[];
 }
 
-export interface Installment {
-  label: string;
-  dueDate: Date | null;
-  dueLabel: string;
-  amount: number;
-  percent: number;
-  status: PaymentStatus;
-}
+// ───────────────────────── Bookings ─────────────────────────
 
 export interface PriceBreakdown {
   basePricePerDay: number;
@@ -84,113 +170,195 @@ export interface PriceBreakdown {
   remaining: number;
 }
 
+export interface Installment {
+  seq: number;
+  label: string;
+  /** null for the deposit: it falls due when the admin confirms the booking. */
+  dueDate: string | null;
+  amount: number;
+  percent: number;
+  /** Money that has been verified as received. */
+  paidAmount: number;
+  /** Cash handed to staff that is waiting for admin verification. */
+  pendingAmount: number;
+}
+
+export type TimelineKind =
+  | 'placed' | 'confirmed' | 'payment' | 'cash' | 'assigned' | 'started' | 'session' | 'handover' | 'completed' | 'cancelled' | 'info';
+
+export interface TimelineEvent {
+  id: string;
+  at: string;
+  kind: TimelineKind;
+  title: string;
+  text: string;
+  amount?: number;
+}
+
+export interface AssignedCaregiver {
+  caregiverId: string;
+  role: 'Primary' | 'Assistant';
+}
+
 export interface Booking {
   id: string;
-  patientId?: string;
+  ownerId: string;
+  patientId: string;
   category: ServiceCategoryId;
   categoryName: string;
+  tier: PackageTier;
   packageName: string;
   status: BookingStatus;
-  statusNote: string;
-  bookedOn: string;
+  bookedAt: string;
+  confirmedAt?: string;
+  /** Deposit must be paid before this instant or the booking lapses. */
+  depositDueBy?: string;
+  startedAt?: string;
+  completedAt?: string;
+  cancelledAt?: string;
+  cancelReason?: string;
   startDate: string;
   startTime: string;
-  endDate?: string;
   totalDays: number;
   hoursPerDay: number;
-  amount: number;
-  paid: number;
-  paidNote?: string;
-  installments: Installment[];
-  sessionsCompleted: number;
-  paymentsReceived: number;
-  paymentsTotal: number;
+  addOns: { id: string; name: string; provider: AddOnProvider; pricePerDay: number }[];
   frequency: PaymentFrequency;
-  addOns: { name: string; provider: AddOnProvider; pricePerDay: number }[];
   breakdown: PriceBreakdown;
-  patient: { name: string; mobile: string; age: number; gender: string; weightKg: number; address: string };
+  installments: Installment[];
+  assigned: AssignedCaregiver[];
+  consentAcceptedAt: string;
+  serviceAddress: string;
+  instructions: string[];
+  backupContact: Contact | null;
+  timeline: TimelineEvent[];
 }
 
-export interface Patient {
+export interface Attendance {
+  caregiverId: string;
+  role: 'Primary' | 'Assistant';
+  checkInAt?: string;
+  checkOutAt?: string;
+  geo?: { lat: number; lng: number };
+}
+
+export interface SessionNote {
   id: string;
-  name: string;
-  gender: 'Male' | 'Female';
-  age: number;
-  status: 'Active' | 'Inactive';
-  addedOn: string;
-  mobile: string;
-  bookingLabel: 'Active Booking' | 'Upcoming Booking' | 'Last Booking';
-  bookingService: string;
-  bookingPackage?: string;
+  text: string;
+  at: string;
+  by: string;
+}
+
+export interface HandoverRequest {
+  requestedBy: string;
+  to: string;
+  requestedAt: string;
+  status: 'requested' | 'approved' | 'declined';
+}
+
+export interface Session {
+  id: string;
   bookingId: string;
-  nextServiceLabel: 'Next Service' | 'Completed on';
-  nextService: string;
+  index: number;
+  date: string;
+  startTime: string;
+  hours: number;
+  status: 'scheduled' | 'active' | 'completed' | 'missed' | 'cancelled';
+  attendance: Attendance[];
+  cashLogged: number;
+  notes: SessionNote[];
+  vitals?: { bp: string; pulse: number; spo2: number; at: string };
+  handover?: HandoverRequest;
 }
 
-export interface PaymentMethod {
+// ───────────────────────── Payments & money ─────────────────────────
+
+export interface Payment {
   id: string;
+  bookingId: string;
+  at: string;
+  method: PayMethod;
+  amount: number;
+  status: 'success' | 'pending-verification' | 'failed';
+  reference?: string;
+  allocations: { seq: number; amount: number }[];
+  collectedBy?: string;
+  note?: string;
+}
+
+export type LedgerKind = 'earning' | 'commission' | 'cash-collected' | 'settle-deduct' | 'settle-direct' | 'withdrawal';
+export type LedgerStatus = 'Reconciled' | 'Pending Sync' | 'Settled' | 'Voided';
+
+export interface LedgerEntry {
+  id: string;
+  caregiverId: string;
+  at: string;
+  kind: LedgerKind;
+  description: string;
+  ref: string;
+  amount: number;
+  status: LedgerStatus;
+  /** Earnings only count as withdrawable once this instant has passed. */
+  clearAt?: string;
+  bookingId?: string;
+  sessionId?: string;
+  paymentId?: string;
+  method?: string;
+  hours?: number;
+  gross?: number;
+  fee?: number;
+}
+
+// ───────────────────────── Misc records ─────────────────────────
+
+export interface SavedMethod {
+  id: string;
+  ownerId: string;
   type: 'bKash' | 'Nagad' | 'Visa Card' | 'Mastercard';
   masked: string;
 }
 
-export interface ActiveService {
+export interface CaregiverApplication {
   id: string;
-  title: string;
-  subject: string;
-  nextPayment: string;
-  amount: number;
-  status: 'Paid' | 'Upcoming' | 'Pending' | 'Completed';
-  period: string;
+  name: string;
+  phone: string;
+  email: string;
+  kind: StaffKind;
+  experienceYears: number;
+  nid: string;
+  notes: string;
+  status: 'pending' | 'approved' | 'rejected';
+  at: string;
 }
 
-export interface Transaction {
+export interface ContactMessage {
   id: string;
-  date: string;
-  time: string;
-  service: string;
-  pkg: string;
-  method: string;
-  amount: number;
-  status: 'Success' | 'Pending Verification' | 'Failed / Disputed';
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  at: string;
+  handled: boolean;
 }
 
-export interface CaregiverShift {
-  bookingId: string;
-  packageId: string;
-  service: string;
-  patient: string;
-  age: number;
-  diagnosis: string;
-  address: string;
-  date: string;
-  start: string;
-  end: string;
-  hours: number;
-  status: 'Active' | 'Upcoming' | 'Completed';
-  checkedInAt?: string;
-  coPresentWith?: string;
-  handoverTo?: string;
+export interface Settings {
+  /** Lets caregivers check in before the scheduled day so the whole flow can be demoed. */
+  demoEarlyCheckIn: boolean;
+  /** Maximum cash a caregiver may hold for the platform before they must settle. */
+  cashLimit: number;
 }
 
-export interface EarningRow {
-  date: string;
-  service: string;
-  bookingId: string;
-  duration: string;
-  gross: number;
-  fee: number;
-  net: number;
-  status: 'Completed' | 'Withdrawn' | 'Pending';
-}
-
-export interface LedgerEntry {
-  date: string;
-  time: string;
-  description: string;
-  ref: string;
-  flow: 'Cash Collected' | 'Withdrawal' | 'Internal Flow' | 'Digital Credit';
-  debit: number | null;
-  credit: number | null;
-  balance: number;
-  status: 'Reconciled' | 'Pending Sync' | 'Settled';
+export interface Db {
+  version: number;
+  accounts: Account[];
+  caregivers: Caregiver[];
+  patients: Patient[];
+  bookings: Booking[];
+  sessions: Session[];
+  payments: Payment[];
+  ledger: LedgerEntry[];
+  savedMethods: SavedMethod[];
+  applications: CaregiverApplication[];
+  messages: ContactMessage[];
+  settings: Settings;
+  counters: Record<string, number>;
 }

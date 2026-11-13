@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../core/auth';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 /** Marketing site + auth pages: sticky header, page, site footer. */
@@ -8,4 +9,6 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './public-layout.html',
   host: { class: 'bg-slate-50 text-brand-dark overflow-x-hidden' },
 })
-export class PublicLayout {}
+export class PublicLayout {
+  protected readonly auth = inject(AuthService);
+}
