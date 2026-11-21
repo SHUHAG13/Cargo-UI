@@ -1,70 +1,79 @@
 <app-cg-header />
-<main class="p-4 space-y-6">
-  <section><h1 class="text-2xl font-bold text-slate-900">Bookings</h1><p class="text-sm text-slate-500">View and manage all your service bookings</p></section>
+<main class="p-4 lg:p-8 space-y-6 max-w-xl lg:max-w-6xl mx-auto">
+  <section>
+    <h1 class="text-2xl font-bold text-carego-dark mb-1">Bookings</h1>
+    <p class="text-sm text-carego-gray">View and manage all your service bookings</p>
+  </section>
 
-  <section class="relative" data-purpose="summary-stats">
-    <div class="flex overflow-x-auto gap-4 hide-scrollbar snap-x">
-      <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start"><div class="p-2 bg-blue-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3"><i class="fa-regular fa-calendar text-blue-600"></i></div><p class="text-xs text-gray-500 uppercase font-medium">Total</p><p class="text-xl font-bold text-gray-900">{{ stats().total }}</p><p class="text-[10px] text-gray-400">All time</p></div>
-      <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start"><div class="p-2 bg-green-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3"><i class="fa-solid fa-bolt text-green-600"></i></div><p class="text-xs text-gray-500 uppercase font-medium">Active</p><p class="text-xl font-bold text-gray-900">{{ stats().active }}</p><p class="text-[10px] text-gray-400">In progress</p></div>
-      <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start"><div class="p-2 bg-sky-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3"><i class="fa-regular fa-clock text-sky-600"></i></div><p class="text-xs text-gray-500 uppercase font-medium">Upcoming</p><p class="text-xl font-bold text-gray-900">{{ stats().upcoming }}</p><p class="text-[10px] text-gray-400">Scheduled</p></div>
-      <div class="flex-shrink-0 w-40 p-4 bg-white border border-gray-100 rounded-xl shadow-sm snap-start"><div class="p-2 bg-purple-50 rounded-lg w-10 h-10 flex items-center justify-center mb-3"><i class="fa-solid fa-check text-purple-600"></i></div><p class="text-xs text-gray-500 uppercase font-medium">Completed</p><p class="text-xl font-bold text-gray-900">{{ stats().completed }}</p><p class="text-[10px] text-gray-400">Finished</p></div>
-    </div>
+  <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4" data-purpose="summary-stats">
+    @for (c of statCards(); track c.label) {
+      <div class="p-4 bg-white border border-gray-200 rounded-xl shadow-sm">
+        <div [class]="c.tile + ' rounded-lg w-10 h-10 flex items-center justify-center mb-3'"><i [class]="c.icon"></i></div>
+        <p class="text-xs font-bold uppercase tracking-wider text-carego-gray">{{ c.label }}</p>
+        <p class="text-2xl font-bold text-carego-dark">{{ c.value }}</p>
+        <p class="text-xs text-carego-gray">{{ c.hint }}</p>
+      </div>
+    }
   </section>
 
   <section class="space-y-3" data-purpose="filters">
-    <div class="relative"><i class="fa-solid fa-magnifying-glass absolute inset-y-0 left-3 my-auto h-4 text-gray-400 flex items-center"></i>
-      <input class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm" placeholder="Search by name or ID" type="text" [ngModel]="search()" (ngModelChange)="search.set($event); page.set(1)" name="q" /></div>
-    <div class="grid grid-cols-2 gap-3">
-      <select class="text-sm border-gray-300 rounded-lg" [ngModel]="tab()" (ngModelChange)="setTab($event)" name="status"><option value="All Bookings">All Status</option><option value="Active">Active</option><option value="Upcoming">Upcoming</option><option value="Completed">Completed</option></select>
-      <select class="text-sm border-gray-300 rounded-lg" [ngModel]="service()" (ngModelChange)="service.set($event); page.set(1)" name="svc">@for (s of services(); track s) { <option>{{ s }}</option> }</select>
-    </div>
-    <div class="flex items-center justify-between pt-2">
-      <div class="flex gap-4 border-b border-gray-200 flex-1">
-        @for (t of tabs; track t) { <button type="button" (click)="setTab(t)" class="pb-2 border-b-2 text-xs whitespace-nowrap" [class.border-teal-600]="tab() === t" [class.text-teal-600]="tab() === t" [class.font-semibold]="tab() === t" [class.border-transparent]="tab() !== t" [class.text-gray-500]="tab() !== t">{{ t }}</button> }
+    <div class="grid gap-3 lg:grid-cols-[1fr_16rem]">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-sm text-carego-gray"></i>
+        <input class="w-full pl-10 pr-4 py-2.5 border-gray-200 rounded-lg text-sm text-carego-dark focus:border-carego-teal focus:ring-carego-teal" placeholder="Search by name or ID" type="text" [ngModel]="search()" (ngModelChange)="search.set($event); page.set(1)" name="q" />
       </div>
-      <button type="button" (click)="exportCsv()" class="ml-4 bg-teal-800 text-white p-2 rounded-lg" title="Export CSV"><i class="fa-solid fa-download"></i></button>
+      <select class="w-full py-2.5 text-sm text-carego-dark border-gray-200 rounded-lg focus:border-carego-teal focus:ring-carego-teal" [ngModel]="service()" (ngModelChange)="service.set($event); page.set(1)" name="svc">@for (s of services(); track s) { <option>{{ s }}</option> }</select>
+    </div>
+    <div class="flex items-center justify-between gap-4 pt-2">
+      <div class="flex gap-5 border-b border-gray-200 flex-1 overflow-x-auto hide-scrollbar">
+        @for (t of tabs; track t) { <button type="button" (click)="setTab(t)" class="pb-2 -mb-px border-b-2 text-sm whitespace-nowrap transition-colors" [class.border-carego-teal]="tab() === t" [class.text-carego-teal]="tab() === t" [class.font-bold]="tab() === t" [class.border-transparent]="tab() !== t" [class.text-carego-gray]="tab() !== t">{{ t }}</button> }
+      </div>
+      <button type="button" (click)="exportCsv()" class="w-10 h-10 flex-shrink-0 bg-carego-teal text-white rounded-lg hover:bg-opacity-90 transition" title="Export CSV" aria-label="Export CSV"><i class="fa-solid fa-download"></i></button>
     </div>
   </section>
 
-  <section class="space-y-4" data-purpose="bookings-list">
+  <section class="grid gap-4 lg:grid-cols-2 items-start" data-purpose="bookings-list">
     @for (b of visible(); track b.id) {
       @let p = patient(b);
       @let st = statusLabel(b);
       @let run = running(b);
-      <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm space-y-4" [class.opacity-80]="b.status === 'completed'">
-        <div class="flex items-start justify-between">
-          <div class="flex gap-3">
-            <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center"><i class="fa-solid fa-house-chimney text-teal-600"></i></div>
-            <div><h3 class="font-bold text-gray-900 leading-tight">{{ b.categoryName }} — {{ b.id }}</h3><span [class]="st.cls + ' inline-block mt-1 px-2 py-0.5 text-[10px] font-bold rounded-full uppercase'">{{ st.text }}</span></div>
+      <div [class]="st.border + ' bg-white border border-gray-200 border-l-4 rounded-xl shadow-sm p-4 space-y-4'">
+        <div class="flex justify-between items-start gap-3">
+          <div class="flex gap-3 min-w-0">
+            <div class="w-12 h-12 bg-carego-light-teal rounded-xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-house-chimney text-carego-teal text-xl"></i></div>
+            <div class="min-w-0">
+              <h3 class="text-base font-bold text-carego-dark leading-tight">{{ b.categoryName }} — {{ b.id }}</h3>
+              <p class="text-sm text-carego-gray mt-1">Patient: {{ p?.name }} • Age: {{ p?.age }}</p>
+            </div>
           </div>
+          <span [class]="st.chip + ' flex-shrink-0 text-xs font-bold px-2.5 py-1 rounded-full'">{{ st.text }}</span>
         </div>
-        <div class="grid grid-cols-2 gap-y-2 text-sm">
-          <div class="text-gray-500">Patient:</div><div class="text-gray-900 font-medium">{{ p?.name }}</div>
-          <div class="text-gray-500">Age:</div><div class="text-gray-900 font-medium">{{ p?.age }} Years</div>
-          <div class="text-gray-500">Service:</div><div class="text-gray-900 font-medium">{{ p?.diagnosis }}</div>
-          <div class="text-gray-500">Booking ID:</div><div class="text-gray-900 font-mono text-xs">{{ b.id }}</div>
-          <div class="text-gray-500">Next shift:</div><div class="text-gray-900 text-xs">{{ nextShift(b) }}</div>
+        <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm bg-gray-50 p-3 rounded-lg">
+          <span class="text-carego-gray">Diagnosis</span><span class="text-carego-dark font-medium">{{ p?.diagnosis }}</span>
+          <span class="text-carego-gray">Booking ID</span><span class="text-carego-dark font-mono">{{ b.id }}</span>
+          <span class="text-carego-gray">Next shift</span><span class="text-carego-dark font-medium">{{ nextShift(b) }}</span>
+          <span class="text-carego-gray">Address</span><span class="text-carego-dark"><i class="fa-solid fa-location-dot text-carego-teal mr-1"></i>{{ b.serviceAddress }}</span>
         </div>
-        <div class="flex items-center gap-2 text-gray-500 text-xs"><i class="fa-solid fa-location-dot"></i>{{ b.serviceAddress }}</div>
-        @if (run) {
-          <button type="button" (click)="end(run)" class="w-full bg-red-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-red-100 active:bg-red-600">End Session</button>
-        }
-        <a [routerLink]="['/caregiver/bookings', b.id]" class="block text-center w-full border border-gray-200 text-gray-700 font-semibold py-2.5 rounded-xl text-sm">View Details</a>
+        <div class="flex gap-2">
+          <a [routerLink]="['/caregiver/bookings', b.id]" class="flex-1 text-center py-3 text-sm font-bold text-carego-teal border border-carego-teal rounded-lg hover:bg-carego-light-teal transition">View Details</a>
+          @if (run) {
+            <button type="button" (click)="end(run)" class="flex-1 py-3 text-sm font-bold text-white bg-red-600 rounded-lg hover:bg-red-700 transition">End Session</button>
+          }
+        </div>
       </div>
     } @empty {
-      <div class="bg-white rounded-xl border border-dashed border-gray-200 p-8 text-center text-sm text-gray-400">No bookings match.</div>
+      <div class="lg:col-span-2 bg-white rounded-xl border border-dashed border-gray-300 p-8 text-center text-sm text-carego-gray">No bookings match.</div>
     }
   </section>
 
   <div class="flex flex-col items-center gap-4 py-4">
-    <p class="text-xs text-gray-500">Showing {{ filtered().length ? (page() - 1) * 10 + 1 : 0 }} to {{ (page() - 1) * 10 + visible().length }} of {{ filtered().length }} bookings</p>
+    <p class="text-sm text-carego-gray">Showing {{ filtered().length ? (page() - 1) * 10 + 1 : 0 }} to {{ (page() - 1) * 10 + visible().length }} of {{ filtered().length }} bookings</p>
     @if (pageCount() > 1) {
     <div class="flex gap-2">
-      <button type="button" class="w-8 h-8 border border-gray-200 rounded-lg text-gray-400 disabled:opacity-40" [disabled]="page() === 1" (click)="page.set(page() - 1)"><i class="fa-solid fa-chevron-left text-xs"></i></button>
-      @for (n of pages(); track n) { <button type="button" (click)="page.set(n)" class="w-8 h-8 rounded-lg text-xs" [class.bg-teal-600]="page() === n" [class.text-white]="page() === n" [class.border]="page() !== n" [class.border-gray-100]="page() !== n">{{ n }}</button> }
-      <button type="button" class="w-8 h-8 border border-gray-200 rounded-lg text-gray-400 disabled:opacity-40" [disabled]="page() === pageCount()" (click)="page.set(page() + 1)"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+      <button type="button" class="w-8 h-8 border border-gray-200 rounded-lg text-carego-gray disabled:opacity-40" [disabled]="page() === 1" (click)="page.set(page() - 1)" aria-label="Previous page"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+      @for (n of pages(); track n) { <button type="button" (click)="page.set(n)" class="w-8 h-8 border rounded-lg text-sm font-semibold" [class.bg-carego-teal]="page() === n" [class.border-carego-teal]="page() === n" [class.text-white]="page() === n" [class.border-gray-200]="page() !== n" [class.text-carego-dark]="page() !== n">{{ n }}</button> }
+      <button type="button" class="w-8 h-8 border border-gray-200 rounded-lg text-carego-gray disabled:opacity-40" [disabled]="page() === pageCount()" (click)="page.set(page() + 1)" aria-label="Next page"><i class="fa-solid fa-chevron-right text-xs"></i></button>
     </div>
     }
   </div>
 </main>
-<app-cg-bottom-nav active="bookings" />

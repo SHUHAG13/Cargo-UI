@@ -123,7 +123,7 @@
                                 }
                             </div>
                         </div>
-                        <div class="bg-[#f0fdf4] border border-emerald-100 rounded-xl p-6 flex justify-between items-center" data-purpose="help-callout">
+                        <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-6 flex justify-between items-center" data-purpose="help-callout">
                             <div class="flex items-start gap-4">
                                 <div class="text-emerald-600 mt-1">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +145,7 @@
                         <div class="flex justify-end items-center gap-4 pt-4">
                             @if (!store.step1Valid()) { <span class="text-xs text-gray-400">Select a package to continue</span> }
                             <button type="button" (click)="store.next()" [disabled]="!store.step1Valid()"
-                                    class="bg-[#065f46] text-white px-8 py-2.5 rounded-lg font-bold flex items-center gap-2 hover:bg-emerald-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                                    class="bg-emerald-800 text-white px-8 py-2.5 rounded-lg font-bold flex items-center gap-2 hover:bg-emerald-800 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                                 Next
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
@@ -974,7 +974,7 @@
                                 </div>
                             </div>
                             <div class="pt-6 space-y-4">
-                                <a routerLink="/app/bookings" (click)="startNew()" class="cursor-pointer bg-[#059669] hover:bg-emerald-700 w-80 justify-center text-white px-10 py-4 rounded-lg font-bold flex items-center gap-3 mx-auto shadow-lg shadow-emerald-100 transition-all">
+                                <a routerLink="/app/bookings" (click)="startNew()" class="cursor-pointer bg-[#006B44] hover:bg-emerald-700 w-80 justify-center text-white px-10 py-4 rounded-lg font-bold flex items-center gap-3 mx-auto shadow-lg shadow-emerald-100 transition-all">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
                                     Go to All Bookings
                                 </a>

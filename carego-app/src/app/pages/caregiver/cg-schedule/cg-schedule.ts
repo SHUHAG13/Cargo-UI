@@ -4,18 +4,27 @@ import { Title } from '@angular/platform-browser';
 import { Data } from '../../../core/data';
 import { AuthService } from '../../../core/auth';
 import { ShiftActions } from '../../../core/shift-actions';
-import { describeShift, ShiftView } from '../../../core/shift-view';
+import { describeShift, ShiftTone, ShiftView } from '../../../core/shift-view';
 import { addDays, fmtDay, isoDay, parseDay } from '../../../core/domain/catalog';
-import { CgBottomNav, CgHeader, HandoverDialog } from '../../../shared/cg-parts/cg-parts';
+import { CgHeader, HandoverDialog } from '../../../shared/cg-parts/cg-parts';
 
 const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+/** Card accent and status chip per tone; same palette as the status chips on the bookings page. */
+const TONES: Record<ShiftTone, { border: string; chip: string }> = {
+  active: { border: 'border-l-carego-teal', chip: 'bg-carego-light-teal text-carego-teal' },
+  today: { border: 'border-l-amber-400', chip: 'bg-amber-50 text-amber-700' },
+  upcoming: { border: 'border-l-sky-400', chip: 'bg-sky-50 text-sky-700' },
+  done: { border: 'border-l-gray-300', chip: 'bg-gray-100 text-gray-600' },
+  missed: { border: 'border-l-red-400', chip: 'bg-red-50 text-red-600' },
+};
+
 @Component({
   selector: 'app-cg-schedule',
-  imports: [RouterLink, CgBottomNav, CgHeader, HandoverDialog],
+  imports: [RouterLink, CgHeader, HandoverDialog],
   templateUrl: './cg-schedule.html',
   styleUrl: './cg-schedule.css',
-  host: { class: 'block max-w-xl mx-auto min-h-screen pb-24' },
+  host: { class: 'block min-h-screen lg:ml-sidebar-width pb-24 lg:pb-8' },
 })
 export class CgSchedulePage {
   protected readonly data = inject(Data);
@@ -58,6 +67,8 @@ export class CgSchedulePage {
   protected pretty(iso: string): string {
     return parseDay(iso).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
   }
+
+  protected tone(v: ShiftView) { return TONES[v.tone]; }
 
   protected rel(iso: string): string {
     return iso === this.data.today() ? 'Today' : iso === addDays(this.data.today(), 1) ? 'Tomorrow' : fmtDay(iso);

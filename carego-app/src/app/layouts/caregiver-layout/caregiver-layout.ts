@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../core/auth';
 import { Avatar } from '../../shared/avatar/avatar';
 
-/** Caregiver desktop portal shell (Earnings, Accounts & Ledger). */
+/** Caregiver portal shell: sidebar on desktop, bottom tab bar on mobile. */
 @Component({
   selector: 'app-caregiver-layout',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, Avatar],

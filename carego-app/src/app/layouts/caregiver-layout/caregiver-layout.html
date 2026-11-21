@@ -1,37 +1,36 @@
-<aside class="hidden lg:flex fixed left-0 top-0 h-full w-sidebar-width text-cg-on-primary-container border-r border-cg-border-subtle shadow-sm flex-col py-stack-lg z-50 bg-cg-primary-container">
-  <div class="px-gutter mb-12">
-    <h1 class="font-headline-lg text-headline-lg font-bold text-cg-on-primary-container">CareGo+</h1>
-    <p class="font-label-caps text-label-caps opacity-70 tracking-wider">CAREGIVER PORTAL</p>
+<aside class="hidden lg:flex fixed left-0 top-0 h-full w-sidebar-width bg-white border-r border-border-light flex-col z-50">
+  <div class="p-6">
+    <a routerLink="/" class="block"><img src="assets/cg-logo.png" width="140" alt="CareGo+" /></a>
+    <p class="mt-2 text-[10px] font-bold tracking-widest text-carego-gray">CAREGIVER PORTAL</p>
   </div>
-  <nav class="flex-1 flex flex-col space-y-1">
+  <nav class="flex-1 px-6 space-y-1">
     @for (l of links; track l.path) {
-      <a class="flex items-center gap-stack-md text-cg-on-primary-container/60 hover:text-cg-on-primary-container px-gutter py-stack-md transition-colors hover:bg-cg-primary/20"
-         [routerLink]="l.path" routerLinkActive="!text-cg-on-primary-container font-bold border-l-4 border-cg-secondary-container bg-cg-surface-container-highest/10">
-        <span class="material-symbols-outlined">{{ l.icon }}</span>
-        <span class="font-body-md text-body-md">{{ l.label }}</span>
+      <a class="flex items-center gap-3 p-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+         [routerLink]="l.path" routerLinkActive="font-semibold !text-carego-teal !bg-carego-light-teal !rounded-r-none border-r-4 border-carego-teal">
+        <span class="material-symbols-outlined text-[20px]">{{ l.icon }}</span>
+        <span>{{ l.label }}</span>
       </a>
     }
   </nav>
-  <div class="px-gutter pt-8 mt-auto flex flex-col gap-4 border-t border-white/10">
+  <div class="mt-auto p-4 border-t border-border-light bg-gray-50 space-y-3">
     @if (auth.canSwitchTo('user')) {
-      <button type="button" (click)="auth.switchRole('user')" class="bg-cg-secondary-container text-cg-on-secondary-container px-4 py-2 rounded-cgxl font-label-caps text-[10px] hover:opacity-90 transition-all active:scale-95">
-        SWITCH TO USER
-      </button>
+      <button type="button" (click)="auth.switchRole('user')" class="w-full text-[11px] font-bold tracking-wide border border-carego-teal text-carego-teal rounded-lg py-2 hover:bg-carego-light-teal">SWITCH TO USER</button>
     }
     <div class="flex items-center gap-3">
-      <app-avatar class="w-10 h-10 border border-white/20" [photo]="auth.caregiver()?.photo ?? auth.account()?.photo" [name]="auth.account()?.name ?? ''" />
-      <div class="flex flex-col min-w-0">
-        <span class="text-cg-on-primary-container text-body-md font-bold truncate">{{ auth.account()?.name }}</span>
-        <button type="button" (click)="auth.logout()" class="text-left text-cg-on-primary-container/60 text-xs flex items-center gap-1 hover:text-cg-on-primary-container">
-          <span class="material-symbols-outlined text-xs">logout</span> Sign out
-        </button>
+      <app-avatar class="w-10 h-10" [photo]="auth.caregiver()?.photo ?? auth.account()?.photo" [name]="auth.account()?.name ?? ''" />
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-semibold text-gray-900 truncate">{{ auth.account()?.name }}</p>
+        <a class="text-xs text-gray-500 hover:underline" routerLink="/caregiver/accounts">View Account</a>
       </div>
+      <button type="button" (click)="auth.logout()" class="text-gray-400 hover:text-gray-600" title="Sign out" aria-label="Sign out">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
     </div>
   </div>
 </aside>
 <router-outlet />
 <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-2 flex justify-between items-center z-50">
   @for (l of mobileLinks; track l.path) {
-    <a [routerLink]="l.path" routerLinkActive="!text-[#0D9488] font-bold" class="flex flex-col items-center gap-1 text-gray-400"><i [class]="'fa-solid text-lg ' + l.icon"></i><span class="text-[10px]">{{ l.label }}</span></a>
+    <a [routerLink]="l.path" routerLinkActive="!text-carego-teal font-bold" class="flex flex-col items-center gap-1 text-gray-400"><i [class]="'fa-solid text-lg ' + l.icon"></i><span class="text-[10px]">{{ l.label }}</span></a>
   }
 </nav>

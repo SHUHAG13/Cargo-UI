@@ -1,10 +1,5 @@
 <main class="lg:ml-sidebar-width min-h-screen flex flex-col pb-20 lg:pb-0">
-  <header class="h-16 flex items-center justify-between px-gutter bg-cg-surface/80 backdrop-blur-md border-b border-cg-border-subtle sticky top-0 z-40">
-    <a routerLink="/" class="flex items-center gap-2 text-cg-primary font-medium hover:text-cg-secondary transition-colors"><span class="material-symbols-outlined text-xl">arrow_back</span><span class="font-body-md text-body-md">Back to Home</span></a>
-    <div class="flex items-center gap-6">
-      @if (auth.canSwitchTo('user')) { <button type="button" (click)="auth.switchRole('user')" class="bg-cg-primary text-cg-on-primary px-6 py-2 rounded-cgxl font-label-caps text-xs shadow-sm hover:shadow-md transition-all active:opacity-80">SWITCH TO USER</button> }
-    </div>
-  </header>
+  <app-cg-header />
 
   <div class="flex-1 p-gutter max-w-container-max mx-auto w-full">
     <div class="mb-stack-lg"><h2 class="font-headline-lg text-headline-lg text-cg-text-main">Accounts &amp; Ledger</h2><p class="text-cg-text-muted font-body-md">Real-time financial reconciliation and platform settlement logs.</p></div>

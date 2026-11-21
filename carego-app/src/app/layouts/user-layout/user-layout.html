@@ -5,7 +5,7 @@
     </div>
     <nav class="space-y-1">
       @for (l of links; track l.path) {
-        <a class="flex items-center gap-3 p-3 text-gray-600 hover:bg-gray-50 rounded-lg" [routerLink]="l.path"
+        <a class="flex items-center gap-3 p-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg" [routerLink]="l.path"
            routerLinkActive="sidebar-item-active font-medium !rounded-r-none !text-emerald-600 !bg-emerald-50">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path [attr.d]="l.icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
           {{ l.label }}

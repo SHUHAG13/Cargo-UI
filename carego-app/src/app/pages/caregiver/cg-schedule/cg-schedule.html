@@ -1,99 +1,93 @@
 <app-cg-header />
+<main class="p-4 lg:p-8 space-y-6 max-w-xl lg:max-w-6xl mx-auto">
+  <section>
+    <h1 class="text-2xl font-bold text-carego-dark mb-1">My Schedule</h1>
+    <p class="text-sm text-carego-gray">View and manage your daily schedule</p>
+  </section>
 
-<section class="p-4 bg-white">
-  <div class="flex justify-between items-end mb-1"><h1 class="text-xl font-bold text-gray-900">My Schedule</h1></div>
-  <p class="text-xs text-gray-500">View and manage your daily schedule</p>
-</section>
-
-<!-- Calendar navigation -->
-<section class="p-4">
-  <div class="flex items-center justify-between bg-white border border-gray-100 rounded-xl p-3 shadow-sm">
+  <!-- Calendar navigation -->
+  <section class="flex items-center justify-between bg-white border border-gray-200 rounded-xl p-3 shadow-sm">
     <div class="flex items-center gap-4">
-      <button type="button" (click)="shiftWeek(-1)" class="text-gray-400 hover:text-gray-600" aria-label="Previous week"><i class="fa-solid fa-chevron-left"></i></button>
-      <div class="flex items-center gap-2 font-semibold text-gray-700"><i class="fa-regular fa-calendar text-[#0D9488]"></i><span>{{ monthLabel() }}</span></div>
-      <button type="button" (click)="shiftWeek(1)" class="text-gray-400 hover:text-gray-600" aria-label="Next week"><i class="fa-solid fa-chevron-right"></i></button>
+      <button type="button" (click)="shiftWeek(-1)" class="w-8 h-8 text-carego-gray hover:text-carego-dark" aria-label="Previous week"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="flex items-center gap-2 text-base font-semibold text-carego-dark"><i class="fa-regular fa-calendar text-carego-teal"></i><span>{{ monthLabel() }}</span></div>
+      <button type="button" (click)="shiftWeek(1)" class="w-8 h-8 text-carego-gray hover:text-carego-dark" aria-label="Next week"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
-    <button type="button" (click)="selected.set(data.today())" class="text-xs font-medium text-[#0D9488] bg-[#E6F4F1] px-4 py-1.5 rounded-lg">Today</button>
-  </div>
-</section>
+    <button type="button" (click)="selected.set(data.today())" class="text-sm font-bold text-carego-teal bg-carego-light-teal px-4 py-1.5 rounded-lg hover:bg-opacity-70 transition">Today</button>
+  </section>
 
-<!-- Day strip -->
-<section class="px-4 mb-6">
-  <div class="flex gap-3 overflow-x-auto no-scrollbar py-2">
+  <!-- Day strip -->
+  <section class="flex gap-3 overflow-x-auto hide-scrollbar py-1 -my-1 md:grid md:grid-cols-7">
     @for (d of strip(); track d.iso) {
       <button type="button" (click)="selected.set(d.iso)"
-              class="flex-shrink-0 w-16 h-24 flex flex-col items-center justify-center rounded-xl border shadow-sm relative"
-              [class]="(d.selected ? 'bg-[#0D9488] border-[#0D9488] text-white shadow-md' : d.handover ? 'bg-[#FFF9F2] border-[#FFE4C4]' : 'bg-white border-gray-200') + ' flex-shrink-0 w-16 h-24 flex flex-col items-center justify-center rounded-xl border shadow-sm relative'">
-        <span class="text-[10px] uppercase font-semibold" [class.opacity-80]="d.selected" [class.text-gray-500]="!d.selected">{{ d.dow }}</span>
-        <span class="text-lg font-bold" [class.text-gray-800]="!d.selected">{{ d.num }}</span>
-        @if (d.today) { <span class="absolute top-1 right-1 text-[8px] font-bold px-1 rounded" [class]="d.selected ? 'bg-white/20' : 'bg-[#E6F4F1] text-[#0D9488]'">TODAY</span> }
-        @if (d.hasShift && !d.selected) { <div class="absolute bottom-2 w-1.5 h-1.5 rounded-full" [class]="d.handover ? 'bg-orange-500' : 'bg-[#0D9488]'"></div> }
-        @if (d.hasShift && d.selected) { <div class="absolute bottom-2 w-1.5 h-1.5 rounded-full bg-white"></div> }
+              [class]="(d.selected ? 'bg-carego-teal border-carego-teal text-white shadow-md' : d.handover ? 'bg-orange-50 border-orange-200' : 'bg-white border-gray-200 hover:border-carego-teal') + ' flex-shrink-0 w-16 md:w-auto h-24 flex flex-col items-center justify-center rounded-xl border shadow-sm relative transition'">
+        <span class="text-xs uppercase font-bold tracking-wider" [class.opacity-80]="d.selected" [class.text-carego-gray]="!d.selected">{{ d.dow }}</span>
+        <span class="text-lg font-bold" [class.text-carego-dark]="!d.selected">{{ d.num }}</span>
+        @if (d.today) { <span [class]="(d.selected ? 'bg-white/20' : 'bg-carego-light-teal text-carego-teal') + ' absolute top-1 right-1 text-[8px] font-bold px-1 rounded'">TODAY</span> }
+        @if (d.hasShift) { <div [class]="(d.selected ? 'bg-white' : d.handover ? 'bg-orange-500' : 'bg-carego-teal') + ' absolute bottom-2 w-1.5 h-1.5 rounded-full'"></div> }
       </button>
     }
-  </div>
-</section>
+  </section>
 
-<main class="px-4 space-y-4">
-  <p class="text-xs font-bold text-gray-500 uppercase tracking-wider">{{ pretty(selected()) }}</p>
+  <div class="grid gap-6 lg:grid-cols-3 items-start">
+  <section class="space-y-4 lg:col-span-2">
+    <p class="text-xs font-bold text-carego-teal uppercase tracking-wider">{{ pretty(selected()) }}</p>
 
-  @for (v of dayViews(); track v.s.id) {
-    <div class="bg-white border-l-4 rounded-xl shadow-sm overflow-hidden" [class]="(v.tone === 'active' ? 'border-l-[#0D9488]' : v.tone === 'today' ? 'border-l-[#0D9488]' : v.tone === 'done' ? 'border-l-gray-300' : v.tone === 'missed' ? 'border-l-red-400' : 'border-l-orange-400') + ' bg-white border-l-4 rounded-xl shadow-sm overflow-hidden'">
-      <div class="p-4">
-        <div class="flex justify-between items-start mb-3">
-          <div><p class="text-sm font-bold" [class]="(v.s.date === data.today() ? 'text-[#0D9488]' : 'text-gray-700') + ' text-sm font-bold'">{{ rel(v.s.date) }}</p><p class="text-xs text-gray-500">{{ pretty(v.s.date) }} · {{ v.s.startTime }} – {{ v.endsAt }}</p></div>
-          <span class="text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1"
-                [class]="(v.tone === 'active' ? 'bg-[#E6F4F1] text-[#0D9488]' : v.tone === 'today' ? 'bg-sky-50 text-sky-700' : v.tone === 'done' ? 'bg-gray-100 text-gray-500' : v.tone === 'missed' ? 'bg-red-50 text-red-600' : 'bg-orange-50 text-orange-600') + ' text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1'">
-            @if (v.tone === 'active') { <span class="w-1.5 h-1.5 bg-[#0D9488] rounded-full animate-pulse"></span> }
+    @for (v of dayViews(); track v.s.id) {
+      @let t = tone(v);
+      <div [class]="t.border + ' bg-white border border-gray-200 border-l-4 rounded-xl shadow-sm p-4 space-y-4'">
+        <div class="flex justify-between items-start gap-3">
+          <div><p class="text-sm font-bold" [class.text-carego-teal]="v.s.date === data.today()" [class.text-carego-dark]="v.s.date !== data.today()">{{ rel(v.s.date) }}</p><p class="text-sm text-carego-gray">{{ pretty(v.s.date) }} · {{ v.s.startTime }} – {{ v.endsAt }}</p></div>
+          <span [class]="t.chip + ' flex-shrink-0 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1'">
+            @if (v.tone === 'active') { <span class="w-1.5 h-1.5 bg-carego-teal rounded-full animate-pulse"></span> }
             {{ v.label }}
           </span>
         </div>
-        <div class="flex gap-3 mb-4">
-          <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100 flex-shrink-0"><i class="fa-solid fa-house-chimney text-[#0D9488] text-xl"></i></div>
+        <div class="flex gap-3">
+          <div class="w-12 h-12 bg-carego-light-teal rounded-xl flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-house-chimney text-carego-teal text-xl"></i></div>
           <div class="flex-1 min-w-0">
-            <h3 class="text-sm font-bold text-gray-800 truncate">{{ v.b.categoryName }} — {{ v.b.id }}</h3>
-            <p class="text-xs text-gray-500 mt-1">Patient: {{ v.p?.name }} • Age: {{ v.p?.age }}</p>
-            <p class="text-xs text-gray-500">Diagnosis: {{ v.p?.diagnosis }}</p>
+            <h3 class="text-base font-bold text-carego-dark leading-tight truncate">{{ v.b.categoryName }} — {{ v.b.id }}</h3>
+            <p class="text-sm text-carego-gray mt-1">Patient: {{ v.p?.name }} • Age: {{ v.p?.age }}</p>
+            <p class="text-sm text-carego-gray">Diagnosis: {{ v.p?.diagnosis }}</p>
           </div>
         </div>
-        <div class="grid grid-cols-1 gap-3 bg-gray-50 p-3 rounded-lg mb-4">
-          <div class="flex flex-col"><span class="text-[10px] uppercase font-bold text-gray-400">Care Directives</span><p class="text-xs text-gray-700">{{ v.directives }}</p></div>
-          <div class="flex flex-col border-t border-gray-200 pt-2">
-            <span class="text-[10px] uppercase font-bold text-gray-400">Team Status</span>
-            <p class="text-xs text-gray-700">{{ v.teamText }}</p>
-            @if (v.others.length) { <p class="text-xs text-[#0D9488] font-medium italic mt-0.5">With {{ v.others.join(', ') }}</p> }
-            @if (v.s.handover; as h) { <p class="text-xs font-medium mt-0.5" [class]="h.status === 'requested' ? 'text-orange-600' : h.status === 'approved' ? 'text-emerald-600' : 'text-gray-400'">Handover to {{ data.caregiverName(h.to) }}: {{ h.status }}</p> }
+        <div class="bg-gray-50 p-3 rounded-lg space-y-2">
+          <div><span class="text-xs uppercase font-bold tracking-wider text-carego-gray">Care Directives</span><p class="text-sm text-carego-dark">{{ v.directives }}</p></div>
+          <div class="border-t border-gray-200 pt-2">
+            <span class="text-xs uppercase font-bold tracking-wider text-carego-gray">Team Status</span>
+            <p class="text-sm text-carego-dark">{{ v.teamText }}</p>
+            @if (v.others.length) { <p class="text-sm text-carego-teal font-medium italic mt-0.5">With {{ v.others.join(', ') }}</p> }
+            @if (v.s.handover; as h) { <p class="text-sm font-medium mt-0.5" [class]="h.status === 'requested' ? 'text-orange-600' : h.status === 'approved' ? 'text-carego-teal' : 'text-carego-gray'">Handover to {{ data.caregiverName(h.to) }}: {{ h.status }}</p> }
           </div>
         </div>
         <div class="flex gap-2">
-          <a [routerLink]="['/caregiver/shifts', v.s.id]" class="flex-1 text-center py-2 text-xs font-bold text-[#0D9488] border border-[#0D9488] rounded-lg">Details</a>
+          <a [routerLink]="['/caregiver/shifts', v.s.id]" class="flex-1 text-center py-3 text-sm font-bold text-carego-teal border border-carego-teal rounded-lg hover:bg-carego-light-teal transition">Details</a>
           @if (canCheckIn(v)) {
-            <button type="button" (click)="checkIn(v)" [disabled]="busy() === v.s.id" class="flex-1 py-2 text-xs font-bold text-white bg-[#0D9488] rounded-lg disabled:opacity-50">{{ busy() === v.s.id ? 'Checking in…' : 'Check In' }}</button>
+            <button type="button" (click)="checkIn(v)" [disabled]="busy() === v.s.id" class="flex-1 py-3 text-sm font-bold text-white bg-carego-teal rounded-lg hover:bg-opacity-90 transition disabled:opacity-50">{{ busy() === v.s.id ? 'Checking in…' : 'Check In' }}</button>
           } @else if (canHandover(v)) {
-            <button type="button" (click)="handoverFor.set(v.s.id)" class="flex-1 py-2 text-xs font-bold text-white bg-[#0D9488] rounded-lg">Request Handover</button>
+            <button type="button" (click)="handoverFor.set(v.s.id)" class="flex-1 py-3 text-sm font-bold text-white bg-carego-teal rounded-lg hover:bg-opacity-90 transition">Request Handover</button>
           }
         </div>
       </div>
-    </div>
-  } @empty {
-    <div class="bg-white rounded-xl border border-dashed border-gray-200 p-8 text-center text-sm text-gray-400">No shifts on this day.</div>
-  }
+    } @empty {
+      <div class="bg-white rounded-xl border border-dashed border-gray-300 p-8 text-center text-sm text-carego-gray">No shifts on this day.</div>
+    }
+  </section>
 
   @if (comingUp().length) {
-    <p class="text-xs font-bold text-gray-500 uppercase tracking-wider pt-4">Coming up</p>
-    @for (v of comingUp(); track v.s.id) {
-      <div class="bg-white border-l-4 border-l-orange-400 rounded-xl shadow-sm overflow-hidden">
-        <div class="p-4 flex items-center gap-3">
+    <section class="space-y-3 lg:sticky lg:top-24">
+      <p class="text-xs font-bold text-carego-teal uppercase tracking-wider">Coming up</p>
+      @for (v of comingUp(); track v.s.id) {
+        <div [class]="tone(v).border + ' bg-white border border-gray-200 border-l-4 rounded-xl shadow-sm p-4 flex items-center gap-3'">
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-bold text-gray-700">{{ rel(v.s.date) }} <span class="text-xs font-normal text-gray-400">· {{ v.s.startTime }}</span></p>
-            <h3 class="text-xs text-gray-600 truncate">{{ v.b.categoryName }} — {{ v.p?.name }}</h3>
+            <p class="text-sm font-bold text-carego-dark">{{ rel(v.s.date) }} <span class="font-normal text-carego-gray">· {{ v.s.startTime }}</span></p>
+            <h3 class="text-sm text-carego-gray truncate">{{ v.b.categoryName }} — {{ v.p?.name }}</h3>
           </div>
-          <button type="button" (click)="selected.set(v.s.date)" class="py-2 px-4 text-xs font-bold text-[#0D9488] border border-gray-200 rounded-lg">View</button>
+          <button type="button" (click)="selected.set(v.s.date)" class="py-2 px-4 text-sm font-bold text-carego-teal border border-carego-teal rounded-lg hover:bg-carego-light-teal transition">View</button>
         </div>
-      </div>
-    }
+      }
+    </section>
   }
+  </div>
 </main>
 
 @if (handoverFor(); as sid) { <app-handover-dialog [sessionId]="sid" (closed)="handoverFor.set(null)" /> }
-<app-cg-bottom-nav active="schedule" />

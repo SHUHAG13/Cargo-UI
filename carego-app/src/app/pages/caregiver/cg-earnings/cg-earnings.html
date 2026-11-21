@@ -1,11 +1,5 @@
 <main class="lg:ml-sidebar-width min-h-screen flex flex-col pb-20 lg:pb-0">
-  <header class="flex justify-end items-center h-16 px-gutter bg-cg-surface/80 backdrop-blur-md border-b border-cg-border-subtle sticky top-0 z-40">
-    <div class="flex items-center gap-stack-md">
-      @if (auth.canSwitchTo('user')) {
-        <button type="button" (click)="auth.switchRole('user')" class="px-4 py-2 rounded-cglg bg-cg-primary text-cg-on-primary font-label-caps text-label-caps hover:opacity-90">Switch to User</button>
-      }
-    </div>
-  </header>
+  <app-cg-header />
 
   <div class="p-stack-lg max-w-[1200px] w-full mx-auto">
     <div class="mb-stack-lg">

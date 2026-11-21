@@ -7,14 +7,14 @@ import { BdtPipe } from '../../../core/money.pipe';
 import { LedgerEntry } from '../../../core/models';
 import { earningStatus } from '../../../core/domain/engine';
 import { CLEARANCE_DAYS } from '../../../core/domain/catalog';
-import { WithdrawDialog } from '../../../shared/cg-parts/cg-parts';
+import { CgHeader, WithdrawDialog } from '../../../shared/cg-parts/cg-parts';
 
 type Status = 'All' | 'Completed' | 'Withdrawn' | 'Pending';
 const PAGE = 8;
 
 @Component({
   selector: 'app-cg-earnings',
-  imports: [FormsModule, BdtPipe, WithdrawDialog],
+  imports: [FormsModule, BdtPipe, CgHeader, WithdrawDialog],
   templateUrl: './cg-earnings.html',
   styleUrl: './cg-earnings.css',
   host: { class: 'block' },

@@ -1,5 +1,6 @@
 <app-cg-header title="Shift Details" back="/caregiver/schedule" />
 
+<div class="max-w-3xl mx-auto lg:py-4">
 @if (view(); as v) {
 <main class="p-4 space-y-4">
   <header class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
@@ -9,7 +10,7 @@
         <div>
           <h2 class="text-base font-bold text-slate-900 leading-tight">Shift Details</h2>
           <p class="text-xs text-slate-500 mt-1">{{ prettyDate(v.s.date) }}</p>
-          <div class="mt-2"><span class="status-badge" [class.!bg-orange-100]="v.tone === 'upcoming'" [class.!text-orange-700]="v.tone === 'upcoming'" [class.!bg-slate-100]="v.tone === 'done'" [class.!text-slate-600]="v.tone === 'done'" [class.!bg-red-100]="v.tone === 'missed'" [class.!text-red-700]="v.tone === 'missed'" [class.!bg-sky-100]="v.tone === 'today'" [class.!text-sky-700]="v.tone === 'today'">{{ v.label }}</span></div>
+          <div class="mt-2"><span class="status-badge" [class.!bg-sky-50]="v.tone === 'upcoming'" [class.!text-sky-700]="v.tone === 'upcoming'" [class.!bg-slate-100]="v.tone === 'done'" [class.!text-slate-600]="v.tone === 'done'" [class.!bg-red-100]="v.tone === 'missed'" [class.!text-red-700]="v.tone === 'missed'" [class.!bg-amber-50]="v.tone === 'today'" [class.!text-amber-700]="v.tone === 'today'">{{ v.label }}</span></div>
         </div>
       </div>
     </div>
@@ -125,7 +126,7 @@
     } @else if (v.tone === 'done') {
       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-600">You completed this shift at {{ v.mine?.checkOutAt | clock }}.</div>
     } @else if (canCheckIn()) {
-      <button type="button" (click)="checkIn()" [disabled]="busy()" class="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold disabled:opacity-50"><i class="fa-solid fa-location-crosshairs mr-2"></i>{{ busy() ? 'Checking in…' : 'Check In (GPS)' }}</button>
+      <button type="button" (click)="checkIn()" [disabled]="busy()" class="w-full bg-carego-teal text-white py-3 rounded-xl font-bold disabled:opacity-50"><i class="fa-solid fa-location-crosshairs mr-2"></i>{{ busy() ? 'Checking in…' : 'Check In (GPS)' }}</button>
       <p class="text-[10px] text-slate-400 italic">Your location is recorded when you check in. The shift still starts if location access is declined.</p>
     } @else if (checkInBlockedReason()) {
       <div class="bg-orange-50 border border-orange-100 rounded-lg p-3 text-xs text-orange-800">{{ checkInBlockedReason() }}</div>
@@ -138,6 +139,6 @@
 @if (showHandover()) { <app-handover-dialog [sessionId]="id()" (closed)="showHandover.set(false)" /> }
 @if (showCash()) { <app-cash-dialog [sessionId]="id()" (closed)="showCash.set(false)" /> }
 } @else {
-<main class="p-8 text-center text-slate-500"><p class="font-semibold text-slate-700">Shift not found.</p><a routerLink="/caregiver/schedule" class="text-sky-600 font-bold">Back to Schedule</a></main>
+<main class="p-8 text-center text-slate-500"><p class="font-semibold text-slate-700">Shift not found.</p><a routerLink="/caregiver/schedule" class="text-carego-teal font-bold">Back to Schedule</a></main>
 }
-<app-cg-bottom-nav active="schedule" />
+</div>

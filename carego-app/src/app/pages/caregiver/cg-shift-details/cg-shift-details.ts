@@ -9,15 +9,15 @@ import { BdtPipe } from '../../../core/money.pipe';
 import { FORMAT_PIPES } from '../../../core/format.pipes';
 import { describeShift } from '../../../core/shift-view';
 import { fmtDay } from '../../../core/domain/catalog';
-import { CashDialog, CgBottomNav, CgHeader, HandoverDialog } from '../../../shared/cg-parts/cg-parts';
+import { CashDialog, CgHeader, HandoverDialog } from '../../../shared/cg-parts/cg-parts';
 import { Avatar } from '../../../shared/avatar/avatar';
 
 @Component({
   selector: 'app-cg-shift-details',
-  imports: [RouterLink, FormsModule, BdtPipe, CgBottomNav, CgHeader, HandoverDialog, CashDialog, Avatar, ...FORMAT_PIPES],
+  imports: [RouterLink, FormsModule, BdtPipe, CgHeader, HandoverDialog, CashDialog, Avatar, ...FORMAT_PIPES],
   templateUrl: './cg-shift-details.html',
   styleUrl: './cg-shift-details.css',
-  host: { class: 'block max-w-xl mx-auto min-h-screen pb-24' },
+  host: { class: 'block min-h-screen lg:ml-sidebar-width pb-24 lg:pb-8' },
 })
 export class CgShiftDetailsPage {
   protected readonly data = inject(Data);

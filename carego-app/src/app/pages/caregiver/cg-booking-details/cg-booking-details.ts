@@ -18,7 +18,7 @@ type CgTab = 'responsibilities' | 'medical' | 'profile' | 'careplan' | 'payment'
   imports: [RouterLink, BdtPipe, CgHeader, Avatar, ...FORMAT_PIPES],
   templateUrl: './cg-booking-details.html',
   styleUrl: './cg-booking-details.css',
-  host: { class: 'block max-w-xl mx-auto min-h-screen pb-24' },
+  host: { class: 'block min-h-screen lg:ml-sidebar-width pb-24 lg:pb-8' },
 })
 export class CgBookingDetailsPage {
   protected readonly data = inject(Data);

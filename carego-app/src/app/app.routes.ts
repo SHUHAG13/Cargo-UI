@@ -46,15 +46,14 @@ export const routes: Routes = [
         path: '',
         component: CaregiverLayout,
         children: [
+          { path: 'schedule', loadComponent: () => import('./pages/caregiver/cg-schedule/cg-schedule').then((m) => m.CgSchedulePage) },
+          { path: 'bookings', loadComponent: () => import('./pages/caregiver/cg-bookings/cg-bookings').then((m) => m.CgBookingsPage) },
+          { path: 'bookings/:id', loadComponent: () => import('./pages/caregiver/cg-booking-details/cg-booking-details').then((m) => m.CgBookingDetailsPage) },
+          { path: 'shifts/:id', loadComponent: () => import('./pages/caregiver/cg-shift-details/cg-shift-details').then((m) => m.CgShiftDetailsPage) },
           { path: 'accounts', loadComponent: () => import('./pages/caregiver/cg-accounts/cg-accounts').then((m) => m.CgAccountsPage) },
           { path: 'earnings', loadComponent: () => import('./pages/caregiver/cg-earnings/cg-earnings').then((m) => m.CgEarningsPage) },
         ],
       },
-      // Mobile-first field pages carry their own header and bottom navigation.
-      { path: 'schedule', loadComponent: () => import('./pages/caregiver/cg-schedule/cg-schedule').then((m) => m.CgSchedulePage) },
-      { path: 'bookings', loadComponent: () => import('./pages/caregiver/cg-bookings/cg-bookings').then((m) => m.CgBookingsPage) },
-      { path: 'bookings/:id', loadComponent: () => import('./pages/caregiver/cg-booking-details/cg-booking-details').then((m) => m.CgBookingDetailsPage) },
-      { path: 'shifts/:id', loadComponent: () => import('./pages/caregiver/cg-shift-details/cg-shift-details').then((m) => m.CgShiftDetailsPage) },
     ],
   },
   {

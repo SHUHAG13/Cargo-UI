@@ -1,15 +1,16 @@
 <app-cg-header title="Booking Details" back="/caregiver/bookings" />
 
+<div class="max-w-3xl mx-auto lg:py-4">
 @if (booking(); as b) {
 @let p = patient();
 @let f = focus();
 <section class="p-4" data-purpose="booking-summary">
   <div class="bg-white rounded-xl shadow-sm border p-4">
     <div class="flex gap-4 mb-4">
-      <div class="bg-sky-50 p-3 rounded-lg flex items-center justify-center"><i class="fa-solid fa-house-chimney text-sky-600 text-2xl"></i></div>
+      <div class="bg-carego-light-teal p-3 rounded-lg flex items-center justify-center"><i class="fa-solid fa-house-chimney text-carego-teal text-2xl"></i></div>
       <div class="flex-1">
         <div class="flex items-center gap-2"><h2 class="font-bold text-slate-900">{{ b.categoryName }}</h2>
-          <span class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase" [class]="(b.status === 'in-progress' ? 'bg-green-100 text-green-700' : b.status === 'confirmed' ? 'bg-sky-100 text-sky-700' : 'bg-purple-100 text-purple-700') + ' text-[10px] px-2 py-0.5 rounded-full font-bold uppercase'">{{ b.status === 'in-progress' ? 'Active' : b.status === 'confirmed' ? 'Upcoming' : 'Completed' }}</span></div>
+          <span class="text-[10px] px-2 py-0.5 rounded-full font-bold uppercase" [class]="(b.status === 'in-progress' ? 'bg-carego-light-teal text-carego-teal' : b.status === 'confirmed' ? 'bg-sky-50 text-sky-700' : 'bg-gray-100 text-gray-600') + ' text-[10px] px-2 py-0.5 rounded-full font-bold uppercase'">{{ b.status === 'in-progress' ? 'Active' : b.status === 'confirmed' ? 'Upcoming' : 'Completed' }}</span></div>
         <p class="text-xs font-semibold text-slate-600">{{ b.packageName }} · {{ myRole() }}</p>
         <p class="text-xs text-slate-500 mt-1">Patient: {{ p?.name }} • {{ p?.age }} Years</p>
       </div>
@@ -25,7 +26,7 @@
       @if (running(); as r) {
         <button type="button" (click)="end()" class="flex-1 bg-red-500 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 active:bg-red-600"><div class="w-3 h-3 bg-white rounded-sm"></div>End Session</button>
       }
-      <a [routerLink]="['/caregiver/shifts', f.id]" class="flex-1 text-center border border-sky-500 text-sky-600 py-3 rounded-lg font-bold text-sm">{{ running() ? 'Shift Details' : 'Open Shift' }}</a>
+      <a [routerLink]="['/caregiver/shifts', f.id]" class="flex-1 text-center border border-carego-teal text-carego-teal py-3 rounded-lg font-bold text-sm">{{ running() ? 'Shift Details' : 'Open Shift' }}</a>
     </div>
     }
   </div>
@@ -45,7 +46,7 @@
     <section class="bg-white rounded-xl border p-4 shadow-sm">
       <div class="flex justify-between items-center mb-4">
         <div class="flex items-center gap-2"><i class="fa-regular fa-clipboard text-indigo-500"></i><h3 class="font-bold text-slate-900">Recent Observations</h3></div>
-        @if (notes().length > 2) { <button type="button" (click)="showAllNotes.set(!showAllNotes())" class="text-sky-500 text-xs font-bold">{{ showAllNotes() ? 'Show less' : 'View all' }}</button> }
+        @if (notes().length > 2) { <button type="button" (click)="showAllNotes.set(!showAllNotes())" class="text-carego-teal text-xs font-bold">{{ showAllNotes() ? 'Show less' : 'View all' }}</button> }
       </div>
       <div class="space-y-6 relative ml-2 border-l-2 border-slate-100 pl-6 py-2">
         @for (n of showAllNotes() ? notes() : notes().slice(0, 2); track n.id) {
@@ -94,14 +95,14 @@
       <div class="space-y-3 text-xs">
         <div class="flex justify-between"><span class="text-slate-400">Blood Group</span><span class="font-semibold text-slate-800">{{ p.bloodGroup || '—' }}</span></div>
         <div class="flex justify-between gap-6"><span class="text-slate-400 shrink-0">Address</span><span class="font-semibold text-slate-800 text-right">{{ b.serviceAddress }}</span></div>
-        <div class="flex justify-between"><span class="text-slate-400">Phone</span><a [href]="'tel:' + p.mobile" class="font-semibold text-sky-600">{{ p.mobile }}</a></div>
+        <div class="flex justify-between"><span class="text-slate-400">Phone</span><a [href]="'tel:' + p.mobile" class="font-semibold text-carego-teal">{{ p.mobile }}</a></div>
       </div>
     </section>
     <section class="bg-white rounded-xl border p-4 shadow-sm">
       <h3 class="font-bold text-slate-900 mb-3">Emergency Contacts</h3>
       <div class="space-y-3 text-xs">
-        <div class="flex justify-between"><span class="text-slate-700 font-semibold">{{ p.primaryContact.name }} ({{ p.primaryContact.relation }})</span><a [href]="'tel:' + p.primaryContact.mobile" class="text-sky-600 font-semibold">{{ p.primaryContact.mobile }}</a></div>
-        @if (p.secondaryContact; as sc) { <div class="flex justify-between"><span class="text-slate-700 font-semibold">{{ sc.name }} ({{ sc.relation }})</span><a [href]="'tel:' + sc.mobile" class="text-sky-600 font-semibold">{{ sc.mobile }}</a></div> }
+        <div class="flex justify-between"><span class="text-slate-700 font-semibold">{{ p.primaryContact.name }} ({{ p.primaryContact.relation }})</span><a [href]="'tel:' + p.primaryContact.mobile" class="text-carego-teal font-semibold">{{ p.primaryContact.mobile }}</a></div>
+        @if (p.secondaryContact; as sc) { <div class="flex justify-between"><span class="text-slate-700 font-semibold">{{ sc.name }} ({{ sc.relation }})</span><a [href]="'tel:' + sc.mobile" class="text-carego-teal font-semibold">{{ sc.mobile }}</a></div> }
       </div>
       <p class="mt-4 text-[11px] text-red-500 bg-red-50 rounded-lg p-3">In case of emergency, contact immediately and seek medical attention.</p>
     </section>
@@ -116,7 +117,7 @@
         <div><p class="text-slate-400">Start Date</p><p class="font-semibold text-slate-800">{{ b.startDate | day }}</p></div>
         <div><p class="text-slate-400">End Date</p><p class="font-semibold text-slate-800">{{ endDate() | day }}</p></div>
       </div>
-      <p class="mt-4 text-xs font-semibold text-sky-600">{{ daysLeft() }} Days Remaining</p>
+      <p class="mt-4 text-xs font-semibold text-carego-teal">{{ daysLeft() }} Days Remaining</p>
     </section>
     <section class="bg-white rounded-xl border p-4 shadow-sm">
       <h3 class="font-bold text-slate-900 mb-3">Special Instructions</h3>
@@ -131,7 +132,7 @@
     @if (pay(); as py) {
     <section class="bg-white rounded-xl border p-5 shadow-sm">
       <p class="text-[11px] text-slate-500 font-medium">Estimated to be Received</p>
-      <p class="text-3xl font-black text-sky-600 mt-1">{{ py.net | bdt }}</p>
+      <p class="text-2xl font-bold text-carego-teal mt-1">{{ py.net | bdt }}</p>
       <p class="text-[11px] text-slate-400 mt-1">After each completed session (net of the {{ rate * 100 }}% CareGo+ fee)</p>
     </section>
     <section class="bg-white rounded-xl border p-4 shadow-sm space-y-4">
@@ -140,18 +141,14 @@
       <div class="flex justify-between text-xs"><span class="text-slate-500">Hours This Session</span><span class="font-bold">{{ py.hours }} Hours</span></div>
       <div class="flex justify-between text-xs"><span class="text-slate-500">Gross for the Session</span><span class="font-bold">{{ py.gross | bdt }}</span></div>
       <div class="flex justify-between text-xs"><span class="text-slate-500">CareGo+ Fee (My Cut, {{ rate * 100 }}%)</span><span class="font-bold">− {{ py.fee | bdt }}</span></div>
-      <div class="mt-2 pt-4 border-t border-dashed border-slate-200"><div class="flex justify-between items-center bg-slate-50 p-3 rounded-lg"><p class="text-[11px] font-black text-slate-900 uppercase">Total You Will Receive</p><p class="text-lg font-black text-sky-600">{{ py.net | bdt }}</p></div></div>
+      <div class="mt-2 pt-4 border-t border-dashed border-slate-200"><div class="flex justify-between items-center bg-slate-50 p-3 rounded-lg"><p class="text-[11px] font-black text-slate-900 uppercase">Total You Will Receive</p><p class="text-lg font-black text-carego-teal">{{ py.net | bdt }}</p></div></div>
       <p class="text-[11px] text-slate-400">{{ py.left }} session{{ py.left === 1 ? '' : 's' }} left · about {{ py.remaining | bdt }} still to earn on this booking. Earnings clear after 3 days.</p>
     </section>
     }
   }
   }
 </main>
-
-<footer class="fixed bottom-0 left-0 right-0 max-w-xl mx-auto bg-white border-t p-3 flex items-center justify-between z-50 lg:hidden">
-  <div class="flex items-center gap-3"><app-avatar class="h-10 w-10 border-2 border-sky-100" [photo]="auth.caregiver()?.photo" [name]="auth.account()?.name ?? ''" /><div><p class="text-sm font-bold text-slate-900">{{ auth.account()?.name }}</p><a routerLink="/caregiver/accounts" class="text-[10px] text-sky-600 font-medium">View Profile</a></div></div>
-  <a routerLink="/caregiver/schedule" class="p-2 rounded-full bg-slate-50 text-slate-400"><i class="fa-solid fa-calendar-days"></i></a>
-</footer>
 } @else {
-<main class="p-8 text-center text-slate-500"><p class="font-semibold text-slate-700">Booking not found.</p><a routerLink="/caregiver/bookings" class="text-sky-600 font-bold">Back to Bookings</a></main>
+<main class="p-8 text-center text-slate-500"><p class="font-semibold text-slate-700">Booking not found.</p><a routerLink="/caregiver/bookings" class="text-carego-teal font-bold">Back to Bookings</a></main>
 }
+</div>

@@ -6,7 +6,7 @@ import { Data } from '../../../core/data';
 import { AuthService } from '../../../core/auth';
 import { BdtPipe } from '../../../core/money.pipe';
 import { LedgerKind } from '../../../core/models';
-import { SettleDialog, WithdrawDialog } from '../../../shared/cg-parts/cg-parts';
+import { CgHeader, SettleDialog, WithdrawDialog } from '../../../shared/cg-parts/cg-parts';
 
 const PAGE = 8;
 
@@ -21,7 +21,7 @@ const FLOW: Record<LedgerKind, { label: string; chip: string }> = {
 
 @Component({
   selector: 'app-cg-accounts',
-  imports: [FormsModule, RouterLink, BdtPipe, SettleDialog, WithdrawDialog],
+  imports: [FormsModule, RouterLink, BdtPipe, CgHeader, SettleDialog, WithdrawDialog],
   templateUrl: './cg-accounts.html',
   styleUrl: './cg-accounts.css',
   host: { class: 'block' },

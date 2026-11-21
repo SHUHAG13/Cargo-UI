@@ -5,13 +5,13 @@
 
         .sidebar-item-active {
             background-color: #EBF7F2;
-            color: #059669;
-            border-right: 4px solid #059669;
+            color: #006B44;
+            border-right: 4px solid #006B44;
         }
 
         .tab-active {
-            color: #059669;
-            border-bottom: 2px solid #059669;
+            color: #006B44;
+            border-bottom: 2px solid #006B44;
         }
 
         .card-shadow {
@@ -30,7 +30,7 @@
 
         .progress-line-active {
             height: 2px;
-            background-color: #10b981;
+            background-color: #007A4E;
             position: absolute;
             top: 50%;
             left: 0;

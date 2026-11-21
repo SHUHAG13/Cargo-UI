@@ -77,7 +77,7 @@
         }
 
         .tab-item.is-done .tab-circle {
-            background-color: #059669;
+            background-color: #006B44;
         }
 
         .tab-label {
@@ -112,7 +112,7 @@
         /* --- step_1_select_service.html --- */
         .sidebar-active {
             background-color: #f3f4f6;
-            border-right: 4px solid #059669;
+            border-right: 4px solid #006B44;
         }
 
         .progress-step-active {
@@ -126,7 +126,7 @@
         }
 
         .card-selected {
-            border: 2px solid #059669;
+            border: 2px solid #006B44;
             background-color: #f0fdf4;
         }
 
@@ -170,7 +170,7 @@
         }
 
         .step-line.active {
-            background-color: #10B981;
+            background-color: #007A4E;
         }
 
         .scrollbar-hide::-webkit-scrollbar {
@@ -237,7 +237,7 @@
 
         /* --- step_6_payment_structure.html --- */
 :host {
-            --carego-primary: #008148;
+            --carego-primary: #006B44;
             --carego-primary-dark: #006b3c;
             --carego-bg: #F9FAFB;
             --carego-sidebar: #FFFFFF;
@@ -263,15 +263,15 @@
         /* --- step_7_confirmation.html --- */
         /* Custom brand colors based on the image */
         .text-brand-green {
-            color: #008148;
+            color: #006B44;
         }
 
         .bg-brand-green {
-            background-color: #008148;
+            background-color: #006B44;
         }
 
         .border-brand-green {
-            border-color: #008148;
+            border-color: #006B44;
         }
 
         .text-brand-dark {
@@ -301,7 +301,7 @@
 
         .stepper-line {
             height: 2px;
-            background-color: #10B981;
+            background-color: #007A4E;
         }
 
         .booking-summary-panel {

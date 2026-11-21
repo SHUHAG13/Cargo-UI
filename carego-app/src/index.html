@@ -14,6 +14,17 @@
   <!-- Tailwind CSS v3 CDN (same runtime the prototype used); one merged theme for every page -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script>
+    /*
+     * One palette for the whole app. Every green (custom aliases and Tailwind's green / emerald / teal)
+     * resolves to the brand ramp below, so a "green" button looks the same on every page.
+     * BRAND = base action colour (#006B44, the /services colour), DARK = hover, LIGHT = tinted backgrounds.
+     */
+    const BRAND_RAMP = {
+      50: '#E6F3F0', 100: '#CCE1DA', 200: '#99C4B4', 300: '#66A68F', 400: '#338969', 500: '#007A4E',
+      600: '#006B44', 700: '#005A39', 800: '#00482E', 900: '#003722', 950: '#00261A'
+    };
+    const BRAND = BRAND_RAMP[600], DARK = BRAND_RAMP[700], LIGHT = BRAND_RAMP[50];
+    const INK = '#1F2937', MUTED = '#6B7280', LINE = '#E5E7EB';
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -25,57 +36,59 @@
             'label-caps': ['Inter', 'sans-serif'], 'display-earnings': ['Inter', 'sans-serif']
           },
           colors: {
+            green: BRAND_RAMP, emerald: BRAND_RAMP, teal: BRAND_RAMP,
             /* public site / brand */
             brand: {
-              teal: '#008561', 'teal-light': '#E6F3F0', 'teal-dark': '#006B4D', orange: '#FF8A00', dark: '#1F2937',
-              green: '#006B44', lightGreen: '#f0f9f6', borderGreen: '#d1e7dd'
+              teal: BRAND, 'teal-light': LIGHT, 'teal-dark': DARK, orange: '#FF8A00', dark: INK,
+              green: BRAND, lightGreen: LIGHT, borderGreen: BRAND_RAMP[100]
             },
-            primary: '#008561', 'primary-dark': '#006D50', secondary: '#E6F3F0', accent: '#FF8A00',
-            'accent-dark': '#E67E00', dark: '#1F2937',
-            primaryLight: '#E6F3F0', primaryDark: '#006B4D', neutralDark: '#1F2937', accentPurple: '#714B9D',
-            'carego-teal': '#006B44', 'carego-light-teal': '#E6F3F0', 'carego-dark': '#1A2E35',
-            'carego-gray': '#6B7280', 'carego-orange': '#FFA500',
+            primary: BRAND, 'primary-dark': DARK, secondary: LIGHT, accent: '#FF8A00',
+            'accent-dark': '#E67E00', dark: INK,
+            primaryLight: LIGHT, primaryDark: DARK, neutralDark: INK, accentPurple: '#714B9D',
+            'carego-teal': BRAND, 'carego-light-teal': LIGHT, 'carego-dark': INK,
+            'carego-gray': MUTED, 'carego-orange': '#FFA500',
             /* user dashboard */
-            'carego-green': '#008148', 'carego-light-green': '#EBF7F2', 'carego-sidebar': '#FFFFFF',
+            'carego-green': BRAND, 'carego-light-green': LIGHT, 'carego-sidebar': '#FFFFFF',
             carego: {
-              primary: '#0F5A3E', 'primary-dark': '#006b3c', secondary: '#EDF7F2', accent: '#F97316',
-              border: '#E5E7EB', muted: '#6B7280', bg: '#F9FAFB'
+              primary: BRAND, 'primary-dark': DARK, secondary: LIGHT, accent: '#F97316',
+              border: LINE, muted: MUTED, bg: '#F9FAFB'
             },
-            'mb-green': '#00A859',
-            'pt-primary': '#108548', 'pt-secondary': '#F0FDF4', 'pt-accent': '#0D9488',
-            'status-pending': '#F59E0B', 'status-confirmed': '#10B981', 'status-progress': '#3B82F6',
-            'status-completed': '#10B981', 'status-cancelled': '#EF4444',
-            'border-light': '#E5E7EB', 'bg-light': '#F9FAFB',
-            /* caregiver desktop portal (material tokens, prefixed cg-) */
-            'cg-inverse-on-surface': '#f0f1f2', 'cg-text-muted': '#6C757D', 'cg-on-surface-variant': '#43474f',
-            'cg-on-surface': '#191c1d', 'cg-surface-container-high': '#e7e8e9', 'cg-surface-container-low': '#f3f4f5',
-            'cg-on-tertiary-fixed': '#341100', 'cg-surface-container-highest': '#e1e3e4', 'cg-tertiary-container': '#592300',
-            'cg-primary-fixed-dim': '#a7c8ff', 'cg-on-secondary': '#ffffff', 'cg-error-container': '#ffdad6',
-            'cg-inverse-primary': '#a7c8ff', 'cg-on-primary-fixed-variant': '#1f477b', 'cg-tertiary-fixed': '#ffdbca',
-            'cg-surface-dim': '#d9dadb', 'cg-error': '#ba1a1a', 'cg-outline': '#737780', 'cg-on-error-container': '#93000a',
-            'cg-surface-card': '#FFFFFF', 'cg-secondary-fixed-dim': '#4edf9f', 'cg-secondary': '#006c47',
-            'cg-border-subtle': '#E9ECEF', 'cg-surface-bright': '#f8f9fa', 'cg-primary-container': '#003366',
-            'cg-on-primary': '#ffffff', 'cg-surface-variant': '#e1e3e4', 'cg-on-secondary-fixed-variant': '#005234',
-            'cg-primary': '#001e40', 'cg-primary-fixed': '#d5e3ff', 'cg-on-background': '#191c1d',
-            'cg-surface-container-lowest': '#ffffff', 'cg-secondary-fixed': '#6efcb9', 'cg-on-tertiary-container': '#d8885c',
-            'cg-on-primary-fixed': '#001b3c', 'cg-inverse-surface': '#2e3132', 'cg-secondary-container': '#6efcb9',
-            'cg-on-primary-container': '#799dd6', 'cg-tertiary': '#381300', 'cg-surface-tint': '#3a5f94',
-            'cg-outline-variant': '#c3c6d1', 'cg-on-error': '#ffffff', 'cg-surface-container': '#edeeef',
-            'cg-tertiary-fixed-dim': '#ffb690', 'cg-on-secondary-container': '#00734c', 'cg-surface': '#f8f9fa',
-            'cg-on-secondary-fixed': '#002113', 'cg-on-tertiary': '#ffffff', 'cg-background': '#f8f9fa',
-            'cg-on-tertiary-fixed-variant': '#723610', 'cg-text-main': '#061540'
+            'mb-green': BRAND,
+            'pt-primary': BRAND, 'pt-secondary': LIGHT, 'pt-accent': BRAND,
+            'status-pending': '#F59E0B', 'status-confirmed': BRAND, 'status-progress': '#3B82F6',
+            'status-completed': BRAND, 'status-cancelled': '#EF4444',
+            'border-light': LINE, 'bg-light': '#F9FAFB',
+            /* caregiver portal (material token names, prefixed cg-), mapped onto the same palette */
+            'cg-inverse-on-surface': '#f0f1f2', 'cg-text-muted': MUTED, 'cg-on-surface-variant': '#4B5563',
+            'cg-on-surface': INK, 'cg-surface-container-high': '#e7e8e9', 'cg-surface-container-low': '#F9FAFB',
+            'cg-on-tertiary-fixed': '#341100', 'cg-surface-container-highest': '#F3F4F6', 'cg-tertiary-container': '#B45309',
+            'cg-primary-fixed-dim': BRAND_RAMP[200], 'cg-on-secondary': '#ffffff', 'cg-error-container': '#FEE2E2',
+            'cg-inverse-primary': BRAND_RAMP[200], 'cg-on-primary-fixed-variant': DARK, 'cg-tertiary-fixed': '#FEF3C7',
+            'cg-surface-dim': '#d9dadb', 'cg-error': '#DC2626', 'cg-outline': MUTED, 'cg-on-error-container': '#991B1B',
+            'cg-surface-card': '#FFFFFF', 'cg-secondary-fixed-dim': BRAND_RAMP[300], 'cg-secondary': BRAND,
+            'cg-border-subtle': LINE, 'cg-surface-bright': '#F9FAFB', 'cg-primary-container': BRAND,
+            'cg-on-primary': '#ffffff', 'cg-surface-variant': '#F3F4F6', 'cg-on-secondary-fixed-variant': DARK,
+            'cg-primary': BRAND, 'cg-primary-fixed': LIGHT, 'cg-on-background': INK,
+            'cg-surface-container-lowest': '#ffffff', 'cg-secondary-fixed': BRAND_RAMP[100], 'cg-on-tertiary-container': '#FDE68A',
+            'cg-on-primary-fixed': BRAND_RAMP[900], 'cg-inverse-surface': INK, 'cg-secondary-container': LIGHT,
+            'cg-on-primary-container': '#ffffff', 'cg-tertiary': '#78350F', 'cg-surface-tint': BRAND,
+            'cg-outline-variant': '#D1D5DB', 'cg-on-error': '#ffffff', 'cg-surface-container': '#F3F4F6',
+            'cg-tertiary-fixed-dim': '#FCD34D', 'cg-on-secondary-container': BRAND, 'cg-surface': '#F9FAFB',
+            'cg-on-secondary-fixed': BRAND_RAMP[900], 'cg-on-tertiary': '#ffffff', 'cg-background': '#F9FAFB',
+            'cg-on-tertiary-fixed-variant': '#92400E', 'cg-text-main': INK
           },
-          borderRadius: { cg: '0.125rem', cglg: '0.25rem', cgxl: '0.5rem', cgfull: '0.75rem' },
+          borderRadius: { cg: '0.25rem', cglg: '0.5rem', cgxl: '0.75rem', cgfull: '9999px' },
           spacing: {
             'margin-mobile': '16px', gutter: '24px', 'container-max': '1200px', 'stack-md': '16px',
-            'sidebar-width': '280px', 'stack-sm': '8px', 'stack-lg': '32px'
+            'sidebar-width': '256px', 'stack-sm': '8px', 'stack-lg': '32px'
           },
+          /* Same scale as the user and admin dashboards: page title 24px, card title 18px, KPI figures 24px. */
           fontSize: {
-            'headline-md': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+            'headline-md': ['18px', { lineHeight: '28px', fontWeight: '700' }],
             'label-caps': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '700' }],
             'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
-            'headline-lg': ['28px', { lineHeight: '36px', fontWeight: '600' }],
-            'display-earnings': ['36px', { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' }],
+            'headline-lg': ['24px', { lineHeight: '32px', fontWeight: '700' }],
+            'display-earnings': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '700' }],
             'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }]
           }
         }

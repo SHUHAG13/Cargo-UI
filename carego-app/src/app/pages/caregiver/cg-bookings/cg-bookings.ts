@@ -7,17 +7,18 @@ import { AuthService } from '../../../core/auth';
 import { ShiftActions } from '../../../core/shift-actions';
 import { Booking } from '../../../core/models';
 import { activeSessionOf } from '../../../core/domain/engine';
-import { CgBottomNav, CgHeader } from '../../../shared/cg-parts/cg-parts';
+import { addDays, fmtDay } from '../../../core/domain/catalog';
+import { CgHeader } from '../../../shared/cg-parts/cg-parts';
 
 type Tab = 'All Bookings' | 'Active' | 'Upcoming' | 'Completed';
 const PAGE = 10;
 
 @Component({
   selector: 'app-cg-bookings',
-  imports: [RouterLink, FormsModule, CgBottomNav, CgHeader],
+  imports: [RouterLink, FormsModule, CgHeader],
   templateUrl: './cg-bookings.html',
   styleUrl: './cg-bookings.css',
-  host: { class: 'block max-w-xl mx-auto min-h-screen pb-24' },
+  host: { class: 'block min-h-screen lg:ml-sidebar-width pb-24 lg:pb-8' },
 })
 export class CgBookingsPage {
   protected readonly data = inject(Data);
@@ -35,6 +36,16 @@ export class CgBookingsPage {
     const m = this.mine();
     const n = (s: string) => m.filter((b) => b.status === s).length;
     return { total: m.length, active: n('in-progress'), upcoming: n('confirmed'), completed: n('completed') };
+  });
+  /** Tile colours match the status chips below (and the tones on the schedule page). */
+  protected readonly statCards = computed(() => {
+    const s = this.stats();
+    return [
+      { label: 'Total', value: s.total, hint: 'All time', icon: 'fa-regular fa-calendar text-carego-dark', tile: 'bg-slate-100' },
+      { label: 'Active', value: s.active, hint: 'In progress', icon: 'fa-solid fa-bolt text-carego-teal', tile: 'bg-carego-light-teal' },
+      { label: 'Upcoming', value: s.upcoming, hint: 'Scheduled', icon: 'fa-regular fa-clock text-sky-700', tile: 'bg-sky-50' },
+      { label: 'Completed', value: s.completed, hint: 'Finished', icon: 'fa-solid fa-check text-gray-500', tile: 'bg-gray-100' },
+    ];
   });
   protected readonly services = computed(() => ['All Services', ...new Set(this.mine().map((b) => b.categoryName))]);
 
@@ -69,16 +80,20 @@ export class CgBookingsPage {
 
   protected nextShift(b: Booking): string {
     const s = this.data.sessions(b.id).find((x) => x.status === 'scheduled' || x.status === 'active');
-    return s ? `${s.date} · ${s.startTime}` : '—';
+    if (!s) return '—';
+    const today = this.data.today();
+    const day = s.date === today ? 'Today' : s.date === addDays(today, 1) ? 'Tomorrow' : fmtDay(s.date);
+    return `${day} · ${s.startTime}`;
   }
 
   protected end(sessionId: string): void {
     if (confirm('End this shift now? Your earning for the shift will be credited.')) this.actions.checkOut(sessionId);
   }
 
-  protected statusLabel(b: Booking): { text: string; cls: string } {
-    return b.status === 'in-progress' ? { text: 'Active', cls: 'bg-green-100 text-green-700' }
-      : b.status === 'confirmed' ? { text: 'Upcoming', cls: 'bg-sky-100 text-sky-700' } : { text: 'Completed', cls: 'bg-purple-100 text-purple-700' };
+  protected statusLabel(b: Booking): { text: string; chip: string; border: string } {
+    return b.status === 'in-progress' ? { text: 'Active', chip: 'bg-carego-light-teal text-carego-teal', border: 'border-l-carego-teal' }
+      : b.status === 'confirmed' ? { text: 'Upcoming', chip: 'bg-sky-50 text-sky-700', border: 'border-l-sky-400' }
+      : { text: 'Completed', chip: 'bg-gray-100 text-gray-600', border: 'border-l-gray-300' };
   }
 
   protected exportCsv(): void {

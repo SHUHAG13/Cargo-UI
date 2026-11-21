@@ -10,48 +10,23 @@ import { BdtPipe } from '../../core/money.pipe';
 import { Avatar } from '../avatar/avatar';
 import { findSession, requestWithdrawal, settleCash } from '../../core/domain/engine';
 
-/** Bottom tab bar of the caregiver mobile pages. */
-@Component({
-  selector: 'app-cg-bottom-nav',
-  imports: [RouterLink],
-  template: `
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-2 flex justify-between items-center z-50 max-w-xl mx-auto lg:hidden">
-      @for (t of tabs; track t.key) {
-        <a [class]="(active() === t.key ? 'text-[#0D9488]' : 'text-gray-400') + ' flex flex-col items-center gap-1'" [routerLink]="t.path">
-          <i [class]="'fa-solid text-lg ' + t.icon"></i>
-          <span class="text-[10px]" [class.font-bold]="active() === t.key">{{ t.label }}</span>
-        </a>
-      }
-    </nav>
-  `,
-})
-export class CgBottomNav {
-  readonly active = input<'schedule' | 'bookings' | 'earnings' | 'accounts'>('schedule');
-  protected readonly tabs = [
-    { key: 'schedule', path: '/caregiver/schedule', icon: 'fa-calendar-days', label: 'Schedule' },
-    { key: 'bookings', path: '/caregiver/bookings', icon: 'fa-briefcase', label: 'Bookings' },
-    { key: 'earnings', path: '/caregiver/earnings', icon: 'fa-wallet', label: 'Earning' },
-    { key: 'accounts', path: '/caregiver/accounts', icon: 'fa-user-gear', label: 'Account' },
-  ];
-}
-
-/** Sticky top bar: brand + avatar on list pages, back link + title on detail pages. */
+/** Sticky top bar: brand + avatar on list pages (brand only on mobile; the sidebar shows it on desktop), back link + title on detail pages. */
 @Component({
   selector: 'app-cg-header',
   imports: [RouterLink, Avatar],
   template: `
-    <header class="bg-white border-b border-gray-100 px-4 py-3 sticky top-0 z-50 flex items-center justify-between max-w-xl mx-auto">
+    <header class="bg-white/80 backdrop-blur-md border-b border-gray-200 px-4 lg:px-8 h-16 sticky top-0 z-40 flex items-center justify-between">
       @if (back()) {
         <div class="flex items-center gap-3">
-          <a [routerLink]="back()" class="p-1 -ml-1 text-slate-600" aria-label="Go back"><i class="fa-solid fa-arrow-left"></i></a>
-          <h1 class="text-lg font-bold text-slate-800">{{ title() }}</h1>
+          <a [routerLink]="back()" class="p-1 -ml-1 text-carego-dark hover:text-carego-teal" aria-label="Go back"><i class="fa-solid fa-arrow-left"></i></a>
+          <h1 class="text-lg font-bold text-carego-dark">{{ title() }}</h1>
         </div>
       } @else {
-        <div class="text-[#102C57] font-bold text-xl flex items-center">CareGo<span class="text-[#0D9488] text-2xl ml-0.5">+</span></div>
+        <div class="text-carego-dark font-bold text-xl flex items-center lg:invisible">CareGo<span class="text-carego-teal text-2xl ml-0.5">+</span></div>
       }
       <div class="flex items-center gap-3">
         @if (auth.canSwitchTo('user')) {
-          <button type="button" (click)="auth.switchRole('user')" class="text-xs font-semibold text-[#102C57] border border-gray-200 px-3 py-1.5 rounded-lg"><i class="fa-solid fa-repeat mr-1"></i>Switch to User</button>
+          <button type="button" (click)="auth.switchRole('user')" class="text-xs font-semibold text-carego-dark border border-gray-200 px-3 py-1.5 rounded-lg hover:border-carego-teal hover:text-carego-teal transition"><i class="fa-solid fa-repeat mr-1"></i>Switch to User</button>
         }
         <a routerLink="/caregiver/accounts" aria-label="Account"><app-avatar class="w-8 h-8 border border-gray-200" [photo]="auth.caregiver()?.photo" [name]="auth.account()?.name ?? ''" /></a>
       </div>
@@ -75,15 +50,15 @@ export class CgHeader {
         <p class="text-xs text-slate-500 mt-1">Choose who will take over this shift. CareGo+ must approve the change.</p>
         <div class="mt-4 space-y-2 max-h-64 overflow-y-auto">
           @for (c of options(); track c.id) {
-            <label [class]="(to === c.id ? 'border-[#0D9488] bg-teal-50' : 'border-slate-200') + ' flex items-center gap-3 border rounded-xl p-3 cursor-pointer'">
-              <input type="radio" name="to" class="text-[#0D9488]" [value]="c.id" [(ngModel)]="to" />
+            <label [class]="(to === c.id ? 'border-carego-teal bg-carego-light-teal' : 'border-slate-200') + ' flex items-center gap-3 border rounded-xl p-3 cursor-pointer'">
+              <input type="radio" name="to" class="text-carego-teal focus:ring-carego-teal" [value]="c.id" [(ngModel)]="to" />
               <span class="text-sm"><strong class="text-slate-800">{{ c.name }}</strong><span class="block text-[11px] text-slate-500">{{ c.kind }} · {{ c.experienceYears }} yrs · ★ {{ c.rating }}</span></span>
             </label>
           } @empty { <p class="text-sm text-slate-400">No other caregiver of this kind is available.</p> }
         </div>
         <div class="mt-5 flex gap-3">
           <button type="button" (click)="closed.emit()" class="flex-1 py-2.5 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600">Cancel</button>
-          <button type="button" (click)="submit()" [disabled]="!to" class="flex-1 py-2.5 bg-[#0D9488] text-white rounded-lg text-sm font-bold disabled:opacity-40">Request handover</button>
+          <button type="button" (click)="submit()" [disabled]="!to" class="flex-1 py-2.5 bg-carego-teal text-white rounded-lg text-sm font-bold disabled:opacity-40">Request handover</button>
         </div>
       </div>
     </div>
@@ -122,7 +97,7 @@ export class HandoverDialog {
         <p class="text-[11px] text-slate-400 mt-2">Cash in hand now: {{ held() | bdt }} (limit {{ limit() | bdt }}).</p>
         <div class="mt-5 flex gap-3">
           <button type="button" (click)="closed.emit()" class="flex-1 py-2.5 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600">Cancel</button>
-          <button type="button" (click)="submit()" [disabled]="!(amount && amount > 0)" class="flex-1 py-2.5 bg-[#0D9488] text-white rounded-lg text-sm font-bold disabled:opacity-40">Record cash</button>
+          <button type="button" (click)="submit()" [disabled]="!(amount && amount > 0)" class="flex-1 py-2.5 bg-carego-teal text-white rounded-lg text-sm font-bold disabled:opacity-40">Record cash</button>
         </div>
       </div>
     </div>
