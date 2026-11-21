@@ -1,0 +1,63 @@
+<main class="ml-64 min-h-screen bg-carego-bg">
+  <header class="bg-white px-8 py-4 border-b border-gray-100 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">My Consultations</h1>
+      <p class="text-sm text-gray-500">Doctor appointments, video calls and prescriptions.</p>
+    </div>
+    <a routerLink="/doctors" class="bg-brand-teal text-white px-5 py-2.5 rounded-lg flex items-center gap-2 font-medium hover:bg-brand-teal-dark transition-colors"><i class="fa-solid fa-user-doctor"></i>Find a Doctor</a>
+  </header>
+
+  <div class="p-8 space-y-6">
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      @for (k of kpis(); track k.label) {
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-5 flex items-center gap-4">
+          <span [class]="k.tone + ' w-11 h-11 rounded-lg flex items-center justify-center'"><i [class]="k.icon"></i></span>
+          <div><p class="text-2xl font-bold text-gray-900">{{ k.value }}</p><p class="text-xs text-gray-500 font-medium">{{ k.label }}</p></div>
+        </div>
+      }
+    </section>
+
+    <div class="flex gap-2 bg-white border border-gray-200 rounded-xl p-1.5 w-fit shadow-sm">
+      @for (t of tabs(); track t.id) {
+        <button type="button" (click)="tab.set(t.id)" class="px-4 py-2 rounded-lg text-sm font-semibold transition" [class]="tab() === t.id ? 'bg-brand-teal text-white' : 'text-gray-600 hover:bg-gray-50'">{{ t.label }} <span class="ml-1 text-xs opacity-80">{{ t.n }}</span></button>
+      }
+    </div>
+
+    <section class="space-y-4">
+      @for (c of visible(); track c.id) {
+        @let d = doctor(c);
+        @let st = status[c.status];
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-5 flex flex-col lg:flex-row lg:items-center gap-5">
+          <div class="flex items-center gap-4 lg:w-80 shrink-0">
+            <app-avatar class="w-14 h-14" [photo]="d?.photo" [name]="d?.name ?? ''" />
+            <div class="min-w-0">
+              <span [class]="st.chip + ' text-[11px] font-bold px-2 py-0.5 rounded-full'">{{ st.label }}</span>
+              <p class="font-bold text-gray-900 mt-1 truncate">{{ doctorName(c) }}</p>
+              <p class="text-xs text-gray-500 truncate">{{ d?.designation }}</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-1 text-sm">
+            <div><p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Date & time</p><p class="font-semibold text-gray-900">{{ c.date | day }}</p><p class="text-xs text-gray-500">{{ c.time }}</p></div>
+            <div><p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Type</p><p class="font-semibold text-gray-900"><i class="fa-solid text-brand-teal mr-1" [class.fa-video]="c.mode === 'video'" [class.fa-house-medical]="c.mode === 'chamber'"></i>{{ c.mode === 'video' ? 'Video' : 'Chamber' }}</p><p class="text-xs text-gray-500 capitalize">{{ c.kind }}</p></div>
+            <div><p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Patient</p><p class="font-semibold text-gray-900 truncate">{{ c.patient.name }}</p><p class="text-xs text-gray-500">{{ c.patient.age }} yrs</p></div>
+            <div><p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Fee</p><p class="font-semibold text-gray-900">{{ c.fee ? '৳' + c.fee : 'Free' }}</p><p class="text-xs text-gray-500">{{ c.refund ? 'Refunded' : c.payment?.method ?? '' }}</p></div>
+          </div>
+          <div class="flex flex-wrap gap-2 lg:justify-end lg:w-72">
+            @if (joinable(c)) { <a [routerLink]="['/app/consultations', c.id]" [queryParams]="{ join: 1 }" class="px-4 py-2 rounded-lg bg-brand-teal text-white text-sm font-semibold hover:bg-brand-teal-dark"><i class="fa-solid fa-video mr-1.5"></i>Join call</a> }
+            @if (c.prescription) { <a [routerLink]="['/app/consultations', c.id]" fragment="prescription" class="px-4 py-2 rounded-lg border border-brand-teal text-brand-teal text-sm font-semibold hover:bg-brand-teal-light"><i class="fa-solid fa-file-prescription mr-1.5"></i>Prescription</a> }
+            @if (followUp(c)) { <a [routerLink]="['/doctors', c.doctorId]" [queryParams]="{ followUp: c.id }" class="px-4 py-2 rounded-lg border border-amber-300 text-amber-700 text-sm font-semibold hover:bg-amber-50">Book follow-up</a> }
+            @if (cancellable(c)) { <button type="button" (click)="cancel(c)" class="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 text-sm font-semibold hover:bg-gray-50">Cancel</button> }
+            <a [routerLink]="['/app/consultations', c.id]" class="px-4 py-2 rounded-lg bg-gray-50 border border-gray-200 text-gray-700 text-sm font-semibold hover:bg-gray-100">Details</a>
+          </div>
+        </div>
+      } @empty {
+        <div class="bg-white border border-dashed border-gray-300 rounded-xl p-12 text-center">
+          <i class="fa-solid fa-user-doctor text-4xl text-gray-300"></i>
+          <p class="mt-3 font-semibold text-gray-900">{{ tab() === 'upcoming' ? 'No upcoming consultations' : tab() === 'completed' ? 'No past consultations yet' : 'No cancelled consultations' }}</p>
+          <p class="text-sm text-gray-500">Talk to a doctor in minutes — instant consultations start at ৳149.</p>
+          <a routerLink="/doctors" class="mt-4 inline-block px-5 py-2.5 rounded-lg bg-brand-teal text-white text-sm font-semibold hover:bg-brand-teal-dark">Find a doctor</a>
+        </div>
+      }
+    </section>
+  </div>
+</main>

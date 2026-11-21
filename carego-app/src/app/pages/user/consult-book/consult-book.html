@@ -1,0 +1,142 @@
+<main class="ml-64 min-h-screen bg-carego-bg">
+  <header class="bg-white px-8 py-4 border-b border-gray-100 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">{{ kind === 'instant' ? 'Instant consultation' : kind === 'follow-up' ? 'Book a follow-up' : 'Book a consultation' }}</h1>
+      <p class="text-sm text-gray-500">Confirm the patient, describe the problem and pay securely.</p>
+    </div>
+    <a routerLink="/doctors" class="text-sm font-semibold text-brand-teal hover:underline"><i class="fa-solid fa-arrow-left mr-1"></i>All doctors</a>
+  </header>
+
+  @if (invalid || fee() === null) {
+    <div class="p-8">
+      <div class="max-w-xl mx-auto bg-white border border-gray-200 rounded-xl p-8 text-center shadow-sm">
+        <i class="fa-regular fa-calendar-xmark text-3xl text-gray-300"></i>
+        <p class="mt-3 font-bold text-gray-900">{{ fee() === null ? 'This follow-up is no longer available.' : offer ? 'No doctor is online for this offer right now.' : 'Pick a doctor and time first.' }}</p>
+        <p class="text-sm text-gray-500 mt-1">Choose a doctor and an available slot to continue.</p>
+        <a routerLink="/doctors" class="mt-4 inline-block px-5 py-2.5 rounded-lg bg-brand-teal text-white text-sm font-semibold hover:bg-brand-teal-dark">Find a doctor</a>
+      </div>
+    </div>
+  } @else {
+  @let d = doctor!;
+  <form class="p-8 grid xl:grid-cols-[1fr_360px] gap-6 items-start max-w-6xl" (ngSubmit)="submit()">
+    <div class="space-y-6">
+      <!-- Appointment -->
+      <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Appointment</h2>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <app-avatar class="w-16 h-16 !text-lg" [photo]="d.photo" [name]="d.name" />
+          <div class="flex-1 min-w-0">
+            <p class="font-bold text-gray-900">{{ name }}</p>
+            <p class="text-sm text-gray-500">{{ d.designation }} · {{ d.degrees.join(', ') }}</p>
+            <p class="text-xs text-gray-500 mt-0.5">{{ d.workplace }}</p>
+          </div>
+          @if (kind !== 'instant') { <a [routerLink]="['/doctors', d.id]" [queryParams]="followUpOf ? { followUp: followUpOf } : {}" class="text-sm font-semibold text-brand-teal hover:underline self-start sm:self-center">Change time</a> }
+        </div>
+        <div class="mt-5 grid sm:grid-cols-3 gap-3">
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-gray-500">Type</p><p class="text-sm font-semibold text-gray-900 mt-0.5"><i class="fa-solid mr-1.5 text-brand-teal" [class.fa-video]="mode === 'video'" [class.fa-house-medical]="mode === 'chamber'"></i>{{ mode === 'video' ? 'Video call' : 'Chamber visit' }}</p></div>
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-gray-500">Date</p><p class="text-sm font-semibold text-gray-900 mt-0.5">{{ kind === 'instant' ? 'Today' : dayLabel }}</p></div>
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-gray-500">Time</p><p class="text-sm font-semibold text-gray-900 mt-0.5">{{ kind === 'instant' ? 'Now — connects in minutes' : time }}</p></div>
+        </div>
+        @if (mode === 'chamber' && d.chamber) { <p class="mt-3 text-sm text-gray-600"><i class="fa-solid fa-location-dot text-brand-teal mr-1.5"></i>{{ d.chamber.name }}, {{ d.chamber.address }}</p> }
+      </section>
+
+      <!-- Patient -->
+      <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Who is this consultation for?</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <label class="flex items-center gap-3 border rounded-xl p-3 cursor-pointer" [class.border-brand-teal]="who() === 'self'" [class.bg-brand-teal-light]="who() === 'self'" [class.border-gray-200]="who() !== 'self'">
+            <input type="radio" name="who" class="text-brand-teal focus:ring-brand-teal" [checked]="who() === 'self'" (change)="who.set('self')" />
+            <span class="text-sm"><span class="font-semibold text-gray-900">Myself</span><span class="block text-xs text-gray-500">{{ data.myPatients().length ? 'Account holder' : 'No saved patients yet' }}</span></span>
+          </label>
+          @for (p of data.myPatients(); track p.id) {
+            <label class="flex items-center gap-3 border rounded-xl p-3 cursor-pointer" [class.border-brand-teal]="who() === p.id" [class.bg-brand-teal-light]="who() === p.id" [class.border-gray-200]="who() !== p.id">
+              <input type="radio" name="who" class="text-brand-teal focus:ring-brand-teal" [checked]="who() === p.id" (change)="who.set(p.id)" />
+              <app-avatar class="w-9 h-9" [photo]="p.photo" [name]="p.name" />
+              <span class="text-sm min-w-0"><span class="block font-semibold text-gray-900 truncate">{{ p.name }}</span><span class="block text-xs text-gray-500">{{ p.gender }}, {{ p.age }} yrs</span></span>
+            </label>
+          }
+        </div>
+        @if (who() === 'self') {
+          <div class="mt-4 grid grid-cols-2 gap-3 max-w-sm">
+            <label class="text-sm"><span class="text-xs font-bold text-gray-500">Your age</span><input type="number" min="0" max="120" name="age" [(ngModel)]="selfAge" class="mt-1 w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal" placeholder="e.g. 34" /></label>
+            <label class="text-sm"><span class="text-xs font-bold text-gray-500">Gender</span><select name="gender" [(ngModel)]="selfGender" class="mt-1 w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal"><option>Male</option><option>Female</option><option>Other</option></select></label>
+          </div>
+        }
+      </section>
+
+      <!-- Symptoms -->
+      <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-1">What is the problem?</h2>
+        <p class="text-sm text-gray-500 mb-3">Symptoms, how long they have lasted and any medicines being taken.</p>
+        <textarea name="symptoms" rows="4" [(ngModel)]="symptoms" class="w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal" placeholder="e.g. Fever for 2 days with sore throat. Took paracetamol last night."></textarea>
+        <div class="mt-3 flex flex-wrap gap-2">
+          @for (c of concerns; track c) { <button type="button" (click)="addConcern(c)" class="px-3 py-1.5 rounded-full border border-gray-200 text-xs text-gray-700 hover:border-brand-teal hover:text-brand-teal">+ {{ c }}</button> }
+        </div>
+      </section>
+
+      <!-- Payment -->
+      @if (fee()! > 0) {
+        <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+          <h2 class="text-lg font-bold text-gray-900 mb-4">Payment method</h2>
+          @if (data.myMethods().length) {
+            <p class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Saved</p>
+            <div class="grid sm:grid-cols-2 gap-2 mb-4">
+              @for (s of data.myMethods(); track s.id) {
+                <button type="button" (click)="pickSaved(s.id, s.type)" class="flex items-center gap-3 border rounded-xl p-3 text-left" [class.border-brand-teal]="savedId() === s.id" [class.bg-brand-teal-light]="savedId() === s.id" [class.border-gray-200]="savedId() !== s.id">
+                  <i class="text-brand-teal" [class]="s.type.includes('Card') || s.type === 'Mastercard' ? 'fa-regular fa-credit-card text-brand-teal' : 'fa-solid fa-mobile-screen text-brand-teal'"></i>
+                  <span class="text-sm"><span class="font-semibold text-gray-900">{{ s.type }}</span><span class="block text-xs text-gray-500">{{ s.masked }}</span></span>
+                </button>
+              }
+            </div>
+            <p class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Or pay with</p>
+          }
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            @for (m of methods; track m.id) {
+              <button type="button" (click)="pickMethod(m.id)" class="border rounded-xl p-3 text-left" [class.border-brand-teal]="!savedId() && method() === m.id" [class.bg-brand-teal-light]="!savedId() && method() === m.id" [class.border-gray-200]="savedId() || method() !== m.id">
+                <i [class]="m.icon + ' text-brand-teal'"></i><span class="block text-sm font-semibold text-gray-900 mt-1">{{ m.id }}</span><span class="block text-[11px] text-gray-500">{{ m.hint }}</span>
+              </button>
+            }
+          </div>
+          @if (!savedId()) {
+            @if (method() !== 'Card') {
+              <label class="block mt-4 max-w-sm"><span class="text-xs font-bold text-gray-500">{{ method() }} number</span>
+                <input type="tel" name="mobile" [(ngModel)]="mobile" class="mt-1 w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal" placeholder="01XXXXXXXXX" /></label>
+            } @else {
+              <div class="mt-4 grid grid-cols-3 gap-3 max-w-lg">
+                <label class="col-span-3"><span class="text-xs font-bold text-gray-500">Card number</span><input name="card" [(ngModel)]="cardNumber" class="mt-1 w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal" placeholder="4242 4242 4242 4242" /></label>
+                <label class="col-span-2"><span class="text-xs font-bold text-gray-500">Expiry (MM/YY)</span><input name="exp" [(ngModel)]="expiry" class="mt-1 w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal" placeholder="08/28" /></label>
+                <label><span class="text-xs font-bold text-gray-500">CVC</span><input name="cvc" [(ngModel)]="cvc" class="mt-1 w-full rounded-lg border-gray-200 text-sm focus:border-brand-teal focus:ring-brand-teal" placeholder="123" /></label>
+              </div>
+            }
+          }
+          <p class="mt-3 text-[11px] text-gray-400"><i class="fa-solid fa-lock mr-1"></i>Payments are simulated in this demo. Card 4000 0000 0000 0002 is always declined.</p>
+        </section>
+      }
+    </div>
+
+    <!-- Summary -->
+    <aside class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 xl:sticky xl:top-6 space-y-4">
+      <h2 class="text-lg font-bold text-gray-900">Summary</h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between"><span class="text-gray-500">{{ kind === 'follow-up' ? 'Follow-up fee' : offer ? offer.title : 'Consultation fee' }}</span><span class="font-semibold text-gray-900">৳{{ listFee() || fee() }}</span></div>
+        @if (listFee() && listFee() > fee()!) { <div class="flex justify-between text-emerald-700"><span>{{ offer ? '24/7 offer price' : 'Discount' }}</span><span class="font-semibold">-৳{{ listFee() - fee()! }}</span></div> }
+        <div class="flex justify-between"><span class="text-gray-500">Platform fee</span><span class="font-semibold text-gray-900">৳0</span></div>
+        <div class="flex justify-between pt-3 border-t border-gray-100 text-base"><span class="font-bold text-gray-900">Total</span><span class="font-bold text-brand-teal">{{ fee() ? '৳' + fee() : 'Free' }}</span></div>
+      </div>
+      <ul class="text-xs text-gray-500 space-y-1.5">
+        <li><i class="fa-solid fa-file-prescription text-brand-teal w-4"></i> Digital prescription after the visit</li>
+        <li><i class="fa-solid fa-rotate text-brand-teal w-4"></i> Follow-up {{ d.followUpFee ? '৳' + d.followUpFee : 'free' }} within {{ d.followUpDays }} days</li>
+        <li><i class="fa-solid fa-rotate-left text-brand-teal w-4"></i> Full refund if cancelled 1 hour before</li>
+      </ul>
+      <label class="flex items-start gap-2 text-xs text-gray-600 cursor-pointer">
+        <input type="checkbox" name="agree" [(ngModel)]="agree" class="mt-0.5 rounded text-brand-teal focus:ring-brand-teal" />
+        <span>I understand online consultation is not for emergencies. For chest pain, severe breathing difficulty or heavy bleeding, I will go to the nearest hospital or call 999.</span>
+      </label>
+      @if (error()) { <p class="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg p-3" role="alert">{{ error() }}</p> }
+      <button type="submit" [disabled]="busy()" class="w-full py-3 rounded-lg bg-brand-teal text-white text-sm font-bold hover:bg-brand-teal-dark transition disabled:opacity-50">
+        {{ busy() ? 'Processing…' : fee() ? 'Confirm & pay ৳' + fee() : 'Confirm booking' }}
+      </button>
+    </aside>
+  </form>
+  }
+</main>

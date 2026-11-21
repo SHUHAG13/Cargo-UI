@@ -23,6 +23,19 @@ export const MIN_WITHDRAWAL = 500;
 /** Share of a session's service value paid to each role when a package has an assistant. */
 export const PRIMARY_SHARE_WITH_ASSISTANT = 0.6;
 
+/** Card-number checksum; simulated card payments reject numbers that fail it. */
+export const luhn = (num: string): boolean => {
+  const d = num.replace(/\s/g, '');
+  if (!/^\d{13,19}$/.test(d)) return false;
+  let sum = 0;
+  [...d].reverse().forEach((ch, i) => {
+    let n = Number(ch);
+    if (i % 2 === 1) { n *= 2; if (n > 9) n -= 9; }
+    sum += n;
+  });
+  return sum % 10 === 0;
+};
+
 export const round2 = (n: number): number => Math.round((n + Number.EPSILON) * 100) / 100;
 
 const ALL_HOURS: HoursPerDay[] = [8, 12, 24];

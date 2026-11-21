@@ -6,21 +6,9 @@ import { ToastService } from '../../core/toast';
 import { BdtPipe } from '../../core/money.pipe';
 import { PayMethod } from '../../core/models';
 import { bookingPayable, isValidBdMobile, makePayment, nextInstallment } from '../../core/domain/engine';
-import { round2 } from '../../core/domain/catalog';
+import { luhn, round2 } from '../../core/domain/catalog';
 
 type AmountMode = 'next' | 'all' | 'custom';
-
-const luhn = (num: string): boolean => {
-  const d = num.replace(/\s/g, '');
-  if (!/^\d{13,19}$/.test(d)) return false;
-  let sum = 0;
-  [...d].reverse().forEach((ch, i) => {
-    let n = Number(ch);
-    if (i % 2 === 1) { n *= 2; if (n > 9) n -= 9; }
-    sum += n;
-  });
-  return sum % 10 === 0;
-};
 
 /** Modal payment sheet. Wallets and cards are simulated; use card 4000 0000 0000 0002 to see a declined payment. */
 @Component({

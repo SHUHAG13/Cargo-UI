@@ -2,6 +2,7 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Db } from './models';
 import { DomainError, tick } from './domain/engine';
 import { createSeedDb, DB_VERSION } from './domain/seed';
+import { tickConsultations } from './domain/consult';
 import { ToastService } from './toast';
 
 const KEY = 'carego.db';
@@ -55,7 +56,9 @@ export class Store {
 
   private housekeeping(): void {
     const copy = structuredClone(this._db());
-    if (tick(copy, new Date())) this._db.set(copy);
+    const now = new Date();
+    const booked = tick(copy, now);
+    if (tickConsultations(copy, now) || booked) this._db.set(copy);
   }
 
   /**

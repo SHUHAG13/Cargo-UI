@@ -1,0 +1,129 @@
+@if (doctor(); as d) {
+<main class="max-w-7xl mx-auto px-4 py-8">
+  <nav class="text-sm text-carego-gray mb-5 flex flex-wrap items-center gap-2">
+    <a routerLink="/doctors" class="hover:text-brand-teal">Doctor Consultation</a><i class="fa-solid fa-chevron-right text-[10px]"></i>
+    <a routerLink="/doctors" [queryParams]="{ specialty: d.specialtyId }" class="hover:text-brand-teal">{{ specialty()?.name }}</a><i class="fa-solid fa-chevron-right text-[10px]"></i>
+    <span class="text-carego-dark font-medium">{{ name() }}</span>
+  </nav>
+
+  @if (followUp) {
+    <div class="mb-5 bg-brand-teal-light border border-brand-teal/20 rounded-xl px-4 py-3 text-sm text-carego-dark"><i class="fa-solid fa-rotate text-brand-teal mr-2"></i>Booking a follow-up for consultation <strong>{{ followUp }}</strong> — {{ d.followUpFee ? 'follow-up fee ৳' + d.followUpFee : 'free of charge' }}.</div>
+  }
+
+  <div class="grid lg:grid-cols-[1fr_380px] gap-6 items-start">
+    <div class="space-y-6">
+      <!-- Profile -->
+      <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <div class="flex flex-col sm:flex-row gap-5">
+          <div class="relative self-start">
+            <app-avatar class="w-28 h-28 !text-3xl" [photo]="d.photo" [name]="d.name" />
+            @if (d.online) { <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded-full whitespace-nowrap">● Online now</span> }
+          </div>
+          <div class="flex-1 min-w-0">
+            <h1 class="text-2xl font-bold text-carego-dark">{{ name() }}</h1>
+            <p class="text-sm text-carego-gray mt-1">{{ d.degrees.join(', ') }}</p>
+            @if (d.headline) { <p class="mt-2 text-sm text-carego-dark leading-relaxed">{{ d.headline }}</p> }
+            <p class="mt-2 font-semibold text-brand-teal"><i class="fa-solid {{ specialty()?.icon }} mr-1.5"></i>{{ d.designation }}</p>
+            <p class="text-sm text-carego-dark mt-1"><i class="fa-regular fa-hospital text-brand-teal mr-1.5"></i>{{ d.workplace }}</p>
+            @if (d.bmdc) { <p class="text-xs text-carego-gray mt-1"><i class="fa-solid fa-shield-halved text-brand-teal mr-1.5"></i>BMDC Reg. No. {{ d.bmdc }}</p> }
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-carego-gray">Experience</p><p class="text-lg font-bold text-carego-dark">{{ d.experienceYears }}+ yrs</p></div>
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-carego-gray">Rating</p><p class="text-lg font-bold text-carego-dark"><i class="fa-solid fa-star text-amber-400 text-sm"></i> {{ d.rating }} <span class="text-xs font-normal text-carego-gray">({{ d.reviews | number }})</span></p></div>
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-carego-gray">Visits</p><p class="text-lg font-bold text-carego-dark">{{ d.visits | number }}</p></div>
+          <div class="bg-gray-50 rounded-lg p-3"><p class="text-xs font-bold uppercase tracking-wider text-carego-gray">Languages</p><p class="text-sm font-bold text-carego-dark mt-1">{{ d.languages.join(', ') }}</p></div>
+        </div>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <h2 class="text-lg font-bold text-carego-dark mb-2">About</h2>
+        <p class="text-sm text-carego-gray leading-relaxed">{{ d.about }}</p>
+      </section>
+
+      <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+        <h2 class="text-lg font-bold text-carego-dark mb-4">Consultation details</h2>
+        <div class="grid sm:grid-cols-2 gap-4 text-sm">
+          @if (d.video) {
+            <div class="flex gap-3"><span class="w-10 h-10 rounded-lg bg-brand-teal-light text-brand-teal flex items-center justify-center shrink-0"><i class="fa-solid fa-video"></i></span>
+              <div><p class="font-semibold text-carego-dark">Video consultation</p><p class="text-carego-gray">{{ hours('video') }}</p><p class="text-carego-gray">{{ d.video.slotMins }} min per visit</p></div></div>
+          }
+          @if (d.chamber; as ch) {
+            <div class="flex gap-3"><span class="w-10 h-10 rounded-lg bg-brand-teal-light text-brand-teal flex items-center justify-center shrink-0"><i class="fa-solid fa-house-medical"></i></span>
+              <div><p class="font-semibold text-carego-dark">Chamber · {{ ch.name }}</p><p class="text-carego-gray">{{ ch.address }}</p><p class="text-carego-gray">{{ hours('chamber') }}</p></div></div>
+          }
+          <div class="flex gap-3"><span class="w-10 h-10 rounded-lg bg-brand-teal-light text-brand-teal flex items-center justify-center shrink-0"><i class="fa-solid fa-rotate"></i></span>
+            <div><p class="font-semibold text-carego-dark">Follow-up</p><p class="text-carego-gray">{{ d.followUpFee ? '৳' + d.followUpFee : 'Free' }} within {{ d.followUpDays }} days of your consultation</p></div></div>
+          <div class="flex gap-3"><span class="w-10 h-10 rounded-lg bg-brand-teal-light text-brand-teal flex items-center justify-center shrink-0"><i class="fa-solid fa-file-prescription"></i></span>
+            <div><p class="font-semibold text-carego-dark">Digital prescription</p><p class="text-carego-gray">Available in My Consultations right after the visit</p></div></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Booking panel -->
+    <aside class="bg-white border border-gray-200 rounded-xl shadow-sm p-5 lg:sticky lg:top-20 space-y-5">
+      <div class="flex items-baseline justify-between">
+        <p class="text-xs font-bold uppercase tracking-wider text-carego-gray">{{ followUp ? 'Follow-up fee' : 'Consultation fee' }}</p>
+        <p class="text-2xl font-bold text-carego-dark">@if (!followUp && d.listFee) { <span class="text-sm font-normal text-carego-gray line-through mr-1">৳{{ d.listFee }}</span> }{{ fee() ? '৳' + fee() : 'Free' }}</p>
+      </div>
+
+      @if (d.online && !followUp && mode() === 'video') {
+        <a routerLink="/app/consultations/book" [queryParams]="{ doctor: d.id, instant: 1 }" class="flex items-center justify-center gap-2 py-3 rounded-lg bg-brand-teal text-white text-sm font-bold hover:bg-brand-teal-dark transition"><i class="fa-solid fa-video"></i>See Doctor Now</a>
+        <p class="text-center text-xs text-carego-gray -mt-3">or book a time below</p>
+      }
+
+      @if (d.modes.length > 1) {
+        <div class="grid grid-cols-2 gap-2 p-1 bg-gray-100 rounded-lg">
+          @for (m of d.modes; track m) {
+            <button type="button" (click)="setMode(m)" class="py-2 rounded-md text-sm font-semibold transition" [class.bg-white]="mode() === m" [class.shadow-sm]="mode() === m" [class.text-brand-teal]="mode() === m" [class.text-carego-gray]="mode() !== m"><i class="fa-solid mr-1.5" [class.fa-video]="m === 'video'" [class.fa-house-medical]="m === 'chamber'"></i>{{ m === 'video' ? 'Video call' : 'Chamber' }}</button>
+          }
+        </div>
+      }
+
+      <div>
+        <p class="text-sm font-bold text-carego-dark mb-2">Select date</p>
+        <div class="grid grid-cols-7 gap-1.5">
+          @for (x of days(); track x.date) {
+            <button type="button" (click)="pickDate(x.date)" [disabled]="!x.open" class="py-2 rounded-lg border text-center transition disabled:opacity-40 disabled:cursor-not-allowed"
+                    [class]="date() === x.date ? 'bg-brand-teal border-brand-teal text-white' : 'bg-white border-gray-200 text-carego-dark hover:border-brand-teal'">
+              <span class="block text-[10px] font-bold uppercase">{{ x.dow }}</span><span class="block text-sm font-bold">{{ x.num }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-bold text-carego-dark mb-2">Select time</p>
+        @if (slots().length) {
+          <div class="grid grid-cols-3 gap-2 max-h-56 overflow-y-auto pr-1">
+            @for (s of slots(); track s.time) {
+              <button type="button" (click)="time.set(s.time)" [disabled]="s.state !== 'open'" class="py-2 rounded-lg border text-xs font-semibold transition disabled:bg-gray-50 disabled:text-gray-300 disabled:border-gray-100 disabled:cursor-not-allowed disabled:line-through"
+                      [class]="time() === s.time ? 'bg-brand-teal border-brand-teal text-white' : 'bg-white border-gray-200 text-carego-dark hover:border-brand-teal'">{{ s.time }}</button>
+            }
+          </div>
+        } @else {
+          <p class="text-sm text-carego-gray bg-gray-50 rounded-lg p-3">No slots on this day. Try another date.</p>
+        }
+      </div>
+
+      <button type="button" (click)="continue()" [disabled]="!time()" class="w-full py-3 rounded-lg bg-brand-teal text-white text-sm font-bold hover:bg-brand-teal-dark transition disabled:opacity-40 disabled:cursor-not-allowed">{{ time() ? 'Continue · ' + time() : 'Pick a time to continue' }}</button>
+      <p class="text-[11px] text-carego-gray text-center">Free cancellation up to 1 hour before the appointment.</p>
+    </aside>
+  </div>
+
+  @if (others().length) {
+    <section class="mt-10">
+      <h2 class="text-xl font-bold text-carego-dark mb-4">Other {{ specialty()?.name }} doctors</h2>
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        @for (o of others(); track o.id) { <app-doctor-card [doctor]="o" /> }
+      </div>
+    </section>
+  }
+</main>
+} @else {
+<main class="max-w-3xl mx-auto px-4 py-20 text-center">
+  <p class="text-lg font-bold text-carego-dark">Doctor not found.</p>
+  <a routerLink="/doctors" class="mt-3 inline-block text-brand-teal font-semibold hover:underline">Browse all doctors</a>
+</main>
+}
+<div class="h-20 lg:hidden"></div>

@@ -2,11 +2,11 @@ import { computed, inject, Injectable } from '@angular/core';
 import { Store } from './store';
 import { AuthService } from './auth';
 import {
-  Booking, Caregiver, Patient, Payment, Session, SavedMethod,
+  Booking, Caregiver, Consultation, Patient, Payment, Session, SavedMethod,
 } from './models';
 import {
   bookingDue, bookingPaid, bookingPayable, bookingPendingCash, findBooking, findCaregiver, findPatient, patientStatus,
-  sessionsCompleted, sessionsOf, sessionsOfCaregiver, paymentsReceived, balances, ledgerRows,
+  sessionsCompleted, sessionsOf, sessionsOfCaregiver, paymentsReceived, balances, ledgerRows, atTime,
 } from './domain/engine';
 
 /** Read-side view of the store for the signed-in account. Components use this instead of filtering `db` themselves. */
@@ -31,6 +31,11 @@ export class Data {
   readonly myPayments = computed<Payment[]>(() => {
     const ids = new Set(this.myBookings().map((b) => b.id));
     return this.db().payments.filter((p) => ids.has(p.bookingId)).sort((a, b) => b.at.localeCompare(a.at));
+  });
+  /** Doctor consultations booked by this account, newest appointment first. */
+  readonly myConsultations = computed<Consultation[]>(() => {
+    const id = this.auth.account()?.id;
+    return this.db().consultations.filter((c) => c.ownerId === id).sort((a, b) => atTime(b.date, b.time).getTime() - atTime(a.date, a.time).getTime());
   });
   readonly myMethods = computed<SavedMethod[]>(() => {
     const id = this.auth.account()?.id;

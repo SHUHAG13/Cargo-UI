@@ -8,6 +8,7 @@
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
         <a class="hover:text-brand-teal py-5" routerLink="/" routerLinkActive="text-brand-teal border-b-2 border-brand-teal" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="hover:text-brand-teal py-5" routerLink="/doctors" routerLinkActive="text-brand-teal border-b-2 border-brand-teal">Doctor Consultation</a>
         <a class="hover:text-brand-teal py-5" routerLink="/services" routerLinkActive="text-brand-teal border-b-2 border-brand-teal">Services</a>
         <a class="hover:text-brand-teal py-5" routerLink="/about" routerLinkActive="text-brand-teal border-b-2 border-brand-teal">About Us</a>
         <!-- <a class="cursor-pointer hover:text-brand-teal">How It Works</a>
@@ -88,6 +89,13 @@
             <a routerLink="/" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
               <i class="fa-solid fa-circle-dot text-xs"></i>
               Home
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/doctors" class="inline-flex items-center gap-2 hover:-translate-y-1 transition-transform duration-200">
+              <i class="fa-solid fa-circle-dot text-xs"></i>
+              Doctor Consultation
             </a>
           </li>
 

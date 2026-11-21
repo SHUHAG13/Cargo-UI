@@ -340,6 +340,115 @@ export interface ContactMessage {
   handled: boolean;
 }
 
+// ───────────────────────── Doctor consultation ─────────────────────────
+
+export type ConsultMode = 'video' | 'chamber';
+export type ConsultKind = 'scheduled' | 'instant' | 'follow-up';
+export type ConsultStatus = 'upcoming' | 'completed' | 'cancelled' | 'missed';
+
+export interface Specialty {
+  id: string;
+  name: string;
+  /** Short line under the name, e.g. "Child health care". */
+  blurb: string;
+  icon: string;
+}
+
+export interface DoctorSchedule {
+  /** Weekdays (0 = Sunday) the slots below are offered. */
+  days: number[];
+  /** 24h "HH:MM". */
+  start: string;
+  end: string;
+  slotMins: number;
+}
+
+export interface Doctor {
+  id: string;
+  name: string;
+  /** Academic title shown before the name, e.g. "Asst. Prof.". */
+  title?: string;
+  photo?: string;
+  gender: 'Male' | 'Female';
+  degrees: string[];
+  specialtyId: string;
+  /** What the card says the doctor is, e.g. "Thoracic Surgeon". */
+  designation: string;
+  workplace: string;
+  /** One-line professional summary shown under the name on the profile. */
+  headline?: string;
+  experienceYears: number;
+  rating: number;
+  reviews: number;
+  visits: number;
+  /** BMDC registration number, shown when known. */
+  bmdc?: string;
+  languages: string[];
+  about: string;
+  /** BDT per consultation; `listFee` is the struck-through price when on offer. */
+  fee: number;
+  listFee?: number;
+  /** A follow-up within `followUpDays` of a completed consultation costs `followUpFee` (0 = free). */
+  followUpFee: number;
+  followUpDays: number;
+  modes: ConsultMode[];
+  /** Online now: can be seen instantly over video. */
+  online: boolean;
+  /** Spotlighted on the home and Doctor Consultation pages and listed first. */
+  featured?: boolean;
+  video?: DoctorSchedule;
+  chamber?: DoctorSchedule & { name: string; address: string };
+}
+
+export interface ConsultPatient {
+  /** A saved patient, or null when the account holder consults for themselves. */
+  id: string | null;
+  name: string;
+  age: number;
+  gender: 'Male' | 'Female' | 'Other';
+}
+
+export interface Medicine {
+  name: string;
+  dose: string;
+  duration: string;
+  note?: string;
+}
+
+export interface Prescription {
+  at: string;
+  complaints: string;
+  diagnosis: string;
+  medicines: Medicine[];
+  tests: string[];
+  advice: string[];
+  followUpBy: string;
+}
+
+export interface Consultation {
+  id: string;
+  ownerId: string;
+  doctorId: string;
+  patient: ConsultPatient;
+  mode: ConsultMode;
+  kind: ConsultKind;
+  date: string;
+  /** "08:00 PM" style, like booking start times. */
+  time: string;
+  symptoms: string;
+  status: ConsultStatus;
+  fee: number;
+  payment: { method: PayMethod; reference: string; at: string } | null;
+  bookedAt: string;
+  /** When the patient last joined the video room. */
+  joinedAt?: string;
+  completedAt?: string;
+  cancelledAt?: string;
+  refund?: { amount: number; method: string; at: string };
+  followUpOf?: string;
+  prescription?: Prescription;
+}
+
 export interface Settings {
   /** Lets caregivers check in before the scheduled day so the whole flow can be demoed. */
   demoEarlyCheckIn: boolean;
@@ -359,6 +468,7 @@ export interface Db {
   savedMethods: SavedMethod[];
   applications: CaregiverApplication[];
   messages: ContactMessage[];
+  consultations: Consultation[];
   settings: Settings;
   counters: Record<string, number>;
 }

@@ -5,8 +5,9 @@ import {
   findBooking, logCash, makePayment, placeBooking, requestHandover, requestWithdrawal, settleCash, sessionsOf, tick,
   addSessionNote, setVitals,
 } from './engine';
+import { bookConsultation, cancelConsultation, completeConsultation, joinCall } from './consult';
 
-export const DB_VERSION = 3;
+export const DB_VERSION = 4;
 
 const IMG = 'assets/img/';
 const mins = (d: Date, m: number): Date => new Date(d.getTime() + m * 60000);
@@ -111,7 +112,7 @@ export function createSeedDb(now: Date): Db {
       { id: 'm3', ownerId: 'acc-1', type: 'Visa Card', masked: '**** **** **** 4242' },
       { id: 'm4', ownerId: 'acc-1', type: 'Mastercard', masked: '**** **** **** 8888' },
     ],
-    applications: [], messages: [],
+    applications: [], messages: [], consultations: [],
     settings: { demoEarlyCheckIn: true, cashLimit: 10000 },
     counters: { booking: 123, patient: 4, account: 10, caregiverId: 8 },
   };
@@ -219,6 +220,21 @@ export function createSeedDb(now: Date): Db {
   db.counters['application'] = 2;
   db.messages.push({ id: 'MSG-001', name: 'Mahbubur Rahman', email: 'mahbub@example.com', phone: '', message: 'Do you provide night-only nursing for post-surgery patients in Uttara?', at: new Date(now.getTime() - 5 * 3600000).toISOString(), handled: false });
   db.counters['message'] = 1;
+
+  // ── Doctor consultations: a finished video visit with a prescription (follow-up still open), an upcoming one, a cancelled one ──
+  const rx = atTime(addDays(today, -3), '07:45 PM');
+  const done = bookConsultation(db, 'acc-1', { doctorId: 'DOC-01', mode: 'video', kind: 'scheduled', date: addDays(today, -2), time: '08:00 PM',
+    patient: { id: 'PT-1001', name: 'Abdul Karim', age: 72, gender: 'Male' }, symptoms: 'Fever for 2 days with sore throat and body ache.',
+    payment: { method: 'bKash', reference: '0187***468' } }, rx);
+  joinCall(db, 'acc-1', done.id, atTime(addDays(today, -2), '07:58 PM'));
+  completeConsultation(db, 'acc-1', done.id, atTime(addDays(today, -2), '08:14 PM'));
+  bookConsultation(db, 'acc-1', { doctorId: 'DOC-06', mode: 'video', kind: 'scheduled', date: addDays(today, 1), time: '08:20 PM',
+    patient: { id: 'PT-1002', name: 'Rokeya Begum', age: 68, gender: 'Female' }, symptoms: 'Cough for 3 weeks with chest discomfort and shortness of breath on climbing stairs.',
+    payment: { method: 'Card', reference: '**** 4242' } }, new Date(now.getTime() - 2 * 3600000));
+  const off = bookConsultation(db, 'acc-1', { doctorId: 'DOC-04', mode: 'video', kind: 'scheduled', date: addDays(today, -6), time: '05:00 PM',
+    patient: { id: null, name: 'Irfan Hossain', age: 34, gender: 'Male' }, symptoms: 'Itchy rash on both arms for a week.',
+    payment: { method: 'Nagad', reference: '0171***357' } }, atTime(addDays(today, -8), '10:00 AM'));
+  cancelConsultation(db, 'acc-1', off.id, atTime(addDays(today, -7), '09:30 AM'));
 
   tick(db, now);
   return db;

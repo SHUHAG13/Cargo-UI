@@ -11,6 +11,8 @@ export const routes: Routes = [
     component: PublicLayout,
     children: [
       { path: '', loadComponent: () => import('./pages/public/home/home').then((m) => m.HomePage) },
+      { path: 'doctors', loadComponent: () => import('./pages/public/doctors/doctors').then((m) => m.DoctorsPage) },
+      { path: 'doctors/:id', loadComponent: () => import('./pages/public/doctor-profile/doctor-profile').then((m) => m.DoctorProfilePage) },
       { path: 'services', loadComponent: () => import('./pages/public/services/services').then((m) => m.ServicesPage) },
       { path: 'services/:tab', loadComponent: () => import('./pages/public/services/services').then((m) => m.ServicesPage) },
       { path: 'about', loadComponent: () => import('./pages/public/about/about').then((m) => m.AboutPage) },
@@ -33,6 +35,9 @@ export const routes: Routes = [
       { path: 'patients/:id', loadComponent: () => import('./pages/user/patient-details/patient-details').then((m) => m.PatientDetailsPage) },
       { path: 'billing', loadComponent: () => import('./pages/user/billing-overview/billing-overview').then((m) => m.BillingOverviewPage) },
       { path: 'billing/:id', loadComponent: () => import('./pages/user/billing-details/billing-details').then((m) => m.BillingDetailsPage) },
+      { path: 'consultations', loadComponent: () => import('./pages/user/consultations/consultations').then((m) => m.ConsultationsPage) },
+      { path: 'consultations/book', loadComponent: () => import('./pages/user/consult-book/consult-book').then((m) => m.ConsultBookPage) },
+      { path: 'consultations/:id', loadComponent: () => import('./pages/user/consult-details/consult-details').then((m) => m.ConsultDetailsPage) },
       { path: 'book', loadComponent: () => import('./pages/user/booking-wizard/booking-wizard').then((m) => m.BookingWizardPage) },
       { path: 'profile', loadComponent: () => import('./pages/user/profile/profile').then((m) => m.ProfilePage) },
     ],
